@@ -16,6 +16,7 @@ public class PostController {
     }
 
     @GetMapping("api/posts")
+    @CrossOrigin(origins = "http://localhost:8080")
     public Iterable<Post> getTodoItems() {
         return dao.findAll();
     }

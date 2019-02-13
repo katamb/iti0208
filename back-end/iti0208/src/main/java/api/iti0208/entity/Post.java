@@ -17,17 +17,17 @@ public class Post {
     @Id
     @GeneratedValue
     private Long id;
-
-    private String header;
-
+    private String title;
     private String description;
+    private String rewardDescription;
+    //todo: upload files
 
-    public Post(String header) {
-        this.header = header;
+    public Post(String title) {
+        this.title = title;
     }
 
-    public Post(String header, String description) {
-        this.header = header;
+    public Post(String title, String description) {
+        this.title = title;
         this.description = description;
     }
 }
