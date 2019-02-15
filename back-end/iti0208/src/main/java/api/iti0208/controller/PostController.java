@@ -22,6 +22,7 @@ public class PostController {
     }
 
     @PostMapping("api/addpost")
+    @CrossOrigin(origins = "http://localhost:8080")
     public Post save(@RequestBody Post item) {
         return dao.save(item);
     }

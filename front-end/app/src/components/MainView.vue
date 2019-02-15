@@ -1,7 +1,7 @@
 <template>
-  <div class="hello">
+  <div>
+    <router-link to="/addpost">Add a post</router-link>
     <h2>Sample data</h2>
-    <button @click="retrieveMsg()">Click this to retrieve info from backend</button>
     <div class="items" v-for="(data, index) in response" :key='index'>
       <h3>{{data.title}}</h3>
       <p>{{data.description}}</p>
@@ -20,11 +20,11 @@ export default {
     };
   },
   methods: {
-    retrieveMsg() {
-      axios
-        .get('http://localhost:8090/api/posts')
-        .then((response) => { (this.response = response.data); });
-    },
+  },
+  mounted() {
+    axios
+      .get('http://localhost:8090/api/posts')
+      .then((response) => { (this.response = response.data); });
   },
 };
 </script>
@@ -32,6 +32,6 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
   .items {
-    background-color: #686868;
+    background-color: #a3a3a3;
   }
 </style>
