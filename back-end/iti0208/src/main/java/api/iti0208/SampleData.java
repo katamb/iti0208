@@ -21,7 +21,9 @@ public class SampleData implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        Stream.of(Arrays.asList("Developer", "Android developer."), Arrays.asList("Designer", "Web designer."), Arrays.asList("Spider", "Web designer."))
+        Stream.of(Arrays.asList("Developer", "Android developer."),
+                Arrays.asList("Designer", "Web designer."),
+                Arrays.asList("Spider", "Web designer."))
                 .forEach(title -> repo.save(new Post(title.get(0), title.get(1))));
 
         repo.findAll().forEach(System.out::println);
