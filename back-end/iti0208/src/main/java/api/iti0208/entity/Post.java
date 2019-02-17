@@ -22,9 +22,8 @@ public class Post {
     private String description;
     private String rewardDescription;
     private String fileLocation;
-
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "postId", cascade = CascadeType.ALL)
-    private List<Reply> answers = new ArrayList<>();
+    private List<Reply> answers;
 
     public Post(String title) {
         this.title = title;
