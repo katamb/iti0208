@@ -4,6 +4,8 @@
     <div class="items" v-for="(data, index) in response" :key='index'>
       <h3>{{data.title}}</h3>
       <p>{{data.description}}</p>
+      <p>{{data.rewardDescription}}</p>
+      <a v-if="data.fileLocation" v-bind:href=data.fileLocation>Extra information</a>
     </div>
   </div>
 </template>
@@ -13,13 +15,17 @@ import axios from 'axios';
 
 export default {
   name: 'ViewPosts',
-  props: {
-    response: []
+  data() {
+    return {
+      response: []
+    };
   },
   mounted() {
     axios
       .get('http://localhost:8090/api/posts')
-      .then((response) => { (this.response = response.data); });
+      .then((response) => {
+        (this.response = response.data);
+      });
   }
 }
 </script>

@@ -18,6 +18,5 @@ public class Reply {
     private String text;
     // todo: files?
 
-    // foreign key
     private Long postId;
 }
