@@ -1,5 +1,6 @@
 <template>
     <div>
+      <h3>{{return_msg}}</h3>
       <form id="post-form" @submit.prevent="processForm">
         Title:<br>
         <input type="text" name="title" placeholder="Title" v-model="title"><br>
@@ -27,40 +28,64 @@ export default {
       description: '',
       reward_description: '',
       file: null,
+      return_msg: ''
     };
   },
   methods: {
     loadTextFromFile(input) {
       this.file = input.target.files[0];
     },
+    emptyFields() {
+      this.title = '';
+      this.description = '';
+      this.reward_description = '';
+      this.file = null;
+    },
     processForm() {
+      if (this.title === '') {
+        return;
+      }
+
+      // IF NO FILE
       if (this.file === null) {
-        // IF NO FILE
-        axios.post('http://localhost:8090/api/addpost', {
-          title: this.title,
-          description: this.description,
-          rewardDescription: this.reward_description,
-        });
-        // LET USER KNOW UPLOAD WAS SUCCESSFUL
+        axios
+          .post('http://localhost:8090/api/addpost', {
+            title: this.title,
+            description: this.description,
+            rewardDescription: this.reward_description })
+          .then((response) => {
+            if (response.status === 200) {
+              this.return_msg = "Post successfully uploaded!";
+              this.emptyFields();
+            } else {
+              this.return_msg = "Sorry, there was a problem uploading Your post!";
+            }
+          });
+      // WITH FILE
       } else {
         const formData = new FormData();
         formData.append('file', this.file);
-        axios.post('http://localhost:8090/api/uploadFile', formData)
+        axios
+          .post('http://localhost:8090/api/uploadFile', formData)
           .then((response) => {
             if (response.status === 200) {
-              axios.post('http://localhost:8090/api/addpost', {
-                title: this.title,
-                description: this.description,
-                rewardDescription: this.reward_description,
-                fileLocation: response.data.fileDownloadUri,
+              axios
+                .post('http://localhost:8090/api/addpost', {
+                  title: this.title,
+                  description: this.description,
+                  rewardDescription: this.reward_description,
+                  fileLocation: response.data.fileDownloadUri })
+                  .then((response) => {
+                    if (response.status === 200) {
+                        this.return_msg = "Post successfully uploaded!";
+                        this.emptyFields();
+                    } else {
+                        this.return_msg = "Sorry, there was a problem uploading Your post!";
+                    }
               });
-              // LET USER KNOW UPLOAD WAS SUCCESSFUL
-            } else {
-              // ELSE LET USER KNOW UPLOAD WAS UNSUCCESSFUL
             }
           });
       }
-      // uploadSingleFile(files[0]);
     },
   },
 };
