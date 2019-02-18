@@ -3,16 +3,20 @@
       <h3>{{return_msg}}</h3>
       <form id="post-form" @submit.prevent="processForm">
         Title:<br>
-        <input type="text" name="title" placeholder="Title" v-model="title"><br>
+        <input type="text" name="title" placeholder="Title" v-model="title"  v-validate="{ required: true, min: 3 }"><br>
+        <div class="error" v-if=" submitted && errors.has('title')">{{errors.first('title')}}</div>
         Description:<br>
-        <input type="text" name="description" placeholder="Description" v-model="description"><br>
+        <input type="text" name="description" placeholder="Description" v-model="description" v-validate="{ required: true, min: 3 }"><br>
+        <div class="error" v-if=" submitted && errors.has('description')">{{errors.first('description')}}</div>
         Reward description:<br>
         <input type="text" name="reward_description" placeholder="Reward Description"
-               v-model="reward_description"><br>
+               v-model="reward_description" v-validate="{ required: true, min: 10
+                }"><br>
+        <div class="error" v-if="submitted && errors.has('reward_description')">{{errors.first('reward_description')}}</div>
         File:<br>
         <input id="singleFileUploadInput" type="file" name="file" class="file-input"
                @change="loadTextFromFile"/><br>
-        <input type="submit" value="Submit">
+        <input type="submit"  value="Submit">
       </form>
     </div>
 </template>
@@ -22,14 +26,19 @@ import axios from 'axios';
 
 export default {
   name: 'addpost',
+
   data() {
     return {
       title: '',
       description: '',
       reward_description: '',
       file: null,
-      return_msg: ''
+      return_msg: '',
+      submitted: false
+
+
     };
+
   },
   methods: {
     loadTextFromFile(input) {
@@ -40,8 +49,21 @@ export default {
       this.description = '';
       this.reward_description = '';
       this.file = null;
+
     },
+
+
+
     processForm() {
+      this.submitted = true;
+      this.$validator.validate().then(valid => {
+        if (valid) {
+          alert("Successful!");
+        } else {
+          alert("Fail to submit Form!");
+        }
+      });
+
       if (this.title === '') {
         return;
       }
@@ -90,6 +112,8 @@ export default {
   },
 };
 </script>
+
+
 
 <style scoped>
   label {
