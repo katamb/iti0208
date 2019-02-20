@@ -37,13 +37,12 @@
   }
   nav {
     background-color: #D6BDF3;
+    width: 82%;
+    margin: 0px auto;
   }
 
   input[type="search"]:hover {
     background-color: #fff;
-    /*width: 20%;
-    padding: 2px 20px;
-    margin: 8px 0;*/
     display: inline-block;
     border: 1px solid #333;
     border-radius: 4px;
@@ -72,9 +71,9 @@
   nav li:hover,
   nav li.router-link-active,
   nav li.router-link-exact-active {
-  text-align: center;
-  background-color: #fff;
-  cursor: pointer;
+    text-align: center;
+    background-color: #fff;
+    cursor: pointer;
     border:1px solid #333;
     border-radius: 4px;
 }
