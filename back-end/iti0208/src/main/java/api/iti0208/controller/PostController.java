@@ -17,8 +17,15 @@ public class PostController {
 
     @GetMapping("api/posts")
     @CrossOrigin(origins = "http://localhost:8080")
-    public Iterable<Post> getTodoItems() {
+    public Iterable<Post> getPostItems() {
         return dao.findAll();
+    }
+
+    @GetMapping("api/posts/{id}")
+    @CrossOrigin(origins = "http://localhost:8080")
+    public Post getPostItemById(@PathVariable Long id) {
+        // todo check if exists
+        return dao.findById(id).get();
     }
 
     @PostMapping("api/addpost")
