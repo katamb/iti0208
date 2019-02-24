@@ -9,7 +9,7 @@
     import axios from 'axios';
 
     export default {
-        response : [],
+        response: [],
         props: ['id'],
         computed: {
             post() {
@@ -20,7 +20,7 @@
 
         mounted() {
             axios
-                .get('http://localhost:8090/api/posts/'+ id)
+                .get('http://localhost:8090/api/posts/' + id)
                 .then((response) => {
                     (this.response = response.data);
                 });
