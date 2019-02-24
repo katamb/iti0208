@@ -20,7 +20,7 @@
 
         mounted() {
             axios
-                .get('http://localhost:8090/api/posts/' + id)
+                .get('http://localhost:8090/api/posts/' + this.id)
                 .then((response) => {
                     (this.response = response.data);
                 });
