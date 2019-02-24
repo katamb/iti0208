@@ -77,11 +77,14 @@
     border:1px solid #333;
     border-radius: 4px;
 }
+  li {
+    list-style-type: none;
+  }
 
 
-body {
-  font-family: Arial, Helvetica, sans-serif;
-  line-height: 1.4;
-  text-align: center;
-}
+  body {
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.4;
+    text-align: center;
+  }
 </style>
