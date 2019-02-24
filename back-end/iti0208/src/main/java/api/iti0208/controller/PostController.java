@@ -1,6 +1,7 @@
 package api.iti0208.controller;
 
 import api.iti0208.entity.Post;
+import api.iti0208.entity.PostResponse;
 import api.iti0208.exception.PageNotFoundException;
 import api.iti0208.repository.PostRepository;
 import api.iti0208.service.PagingService;
@@ -9,6 +10,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.Optional;
+
+// PS! PostResponse holds the response and the amount of pages!
 
 @RestController
 public class PostController {
@@ -24,8 +27,8 @@ public class PostController {
 
     @GetMapping("api/posts")
     @CrossOrigin(origins = "http://localhost:8080")
-    public Iterable<Post> getPosts(@RequestParam(value = "page", defaultValue = "0") int page,
-                                   @RequestParam(value = "size", defaultValue = "20") int size,
+    public PostResponse getPosts(@RequestParam(value = "page", defaultValue = "0") int page,
+                                   @RequestParam(value = "size", defaultValue = "15") int size,
                                    @RequestParam(value = "topic", defaultValue = "all") String topic) {
         if (topic.equals("all")) {
             return pagingService.getPosts(page, size);
@@ -47,9 +50,9 @@ public class PostController {
 
     @GetMapping("api/posts/find")
     @CrossOrigin(origins = "http://localhost:8080")
-    public Iterable<Post> findPosts(@RequestParam(value = "page", defaultValue = "0") int page,
-                                    @RequestParam(value = "size", defaultValue = "20") int size,
-                                    @RequestParam(value = "searchTerm", defaultValue = "") String searchTerm) {
+    public PostResponse findPosts(@RequestParam(value = "page", defaultValue = "0") int page,
+                                  @RequestParam(value = "size", defaultValue = "15") int size,
+                                  @RequestParam(value = "searchTerm", defaultValue = "") String searchTerm) {
         return pagingService.findPosts(page, size, searchTerm);
     }
 

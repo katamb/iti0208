@@ -18,23 +18,13 @@
       <nav class="navbar navbar-expand-lg navbar-light">
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
         <router-link tag="li" class="col" class-active="active" to="/" exact> Home </router-link>
+        <router-link tag="li" class="col" class-active="active" to="/mathematics" exact> Mathematics </router-link>
+        <router-link tag="li" class="col" class-active="active" to="/physics" exact> Physics </router-link>
+        <router-link tag="li" class="col" class-active="active" to="/chemistry" exact> Chemistry </router-link>
+        <router-link tag="li" class="col" class-active="active" to="/biology" exact> Biology </router-link>
+        <router-link tag="li" class="col" class-active="active" to="/cs" exact> Computer Science </router-link>
+        <router-link tag="li" class="col" class-active="active" to="/varia" exact> Varia </router-link>
         <router-link tag="li" class="col" class-active="active" to="/addpost" exact> Add a Post </router-link>
-
-          <li>
-            <a class="nav-item active nav-link" href="#">Mathematics</a>
-          </li>
-          <li>
-            <a class="nav-item active nav-link" href="#">Physics</a>
-          </li>
-          <li>
-            <a class="nav-item  active nav-link" href="#">Chemistry</a>
-          </li>
-          <li>
-            <a class="nav-item active nav-link" href="#">Biology</a>
-          </li>
-          <li>
-            <a class="nav-item active nav-link" href="#">Computer Science</a>
-          </li>
 
         </ul>
       <form class="form-inline my-2 my-lg-0">
@@ -58,6 +48,7 @@
     }
   }
 </script>
+
 <style>
   #login {
 
@@ -97,6 +88,7 @@
   div {
     text-align: center;
   }
+
   nav li {
     background-color: #D6BDF3;
     text-align: center;
@@ -112,15 +104,15 @@
     cursor: pointer;
     border:1px solid #333;
     border-radius: 4px;
-}
+  }
+
   li {
     list-style-type: none;
   }
 
-
-body, a {
-  font-family: Arial, Helvetica, sans-serif;
-  line-height: 1.4;
-  text-align: center;
-}
+  body, a {
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.4;
+    text-align: center;
+  }
 </style>
