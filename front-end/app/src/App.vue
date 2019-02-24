@@ -1,13 +1,42 @@
 <template>
   <div id="app">
+
+    <nav class="navbar navbar-expand-lg navbar-light">
+      <ul class="navbar-nav mr-auto mt-2 mt-lg-0 ml-auto">
+        <form class="form-inline my-2 my-lg-0">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Log in</button>
+        </form>
+      </ul>
+
+    </nav>
+
+
     <Header />
-    <div id="nav">
+
+    <div id="nav" >
       <p class="b">
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <nav class="navbar navbar-expand-lg navbar-light">
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
         <router-link tag="li" class="col" class-active="active" to="/" exact> Home </router-link>
         <router-link tag="li" class="col" class-active="active" to="/addpost" exact> Add a Post </router-link>
 
+          <li>
+            <a class="nav-item active nav-link" href="#">Mathematics</a>
+          </li>
+          <li>
+            <a class="nav-item active nav-link" href="#">Physics</a>
+          </li>
+          <li>
+            <a class="nav-item  active nav-link" href="#">Chemistry</a>
+          </li>
+          <li>
+            <a class="nav-item active nav-link" href="#">Biology</a>
+          </li>
+          <li>
+            <a class="nav-item active nav-link" href="#">Computer Science</a>
+          </li>
 
+        </ul>
       <form class="form-inline my-2 my-lg-0">
         <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
@@ -30,14 +59,20 @@
   }
 </script>
 <style>
+  #login {
 
+  }
+
+  .ml-auto {
+    margin-right: auto !important;
+  }
   p.b {
     border: 3px solid #333;
     border-radius: 0px;
+    background-color: #D6BDF3;
   }
   nav {
     background-color: #D6BDF3;
-    width: 82%;
     margin: 0px auto;
   }
 
@@ -56,6 +91,7 @@
     background-color: #333;
     color: white;
     cursor: pointer;
+
   }
 
   div {
@@ -79,7 +115,7 @@
 }
 
 
-body {
+body, a {
   font-family: Arial, Helvetica, sans-serif;
   line-height: 1.4;
   text-align: center;

@@ -5,6 +5,8 @@ import api.iti0208.repository.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 @RestController
 public class PostController {
 
@@ -31,5 +33,12 @@ public class PostController {
     @CrossOrigin(origins = "http://localhost:8080")
     public void delete(@PathVariable Long id) {
         dao.deleteById(id);
+    }
+
+
+    @GetMapping("api/posts/{id}")
+    @CrossOrigin(origins = "http://localhost:8080")
+    public Optional<Post> getPost(@PathVariable Long id) {
+        return dao.findById(id);
     }
 }
