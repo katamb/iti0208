@@ -5,6 +5,9 @@ import api.iti0208.repository.ReplyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.transaction.Transactional;
+import javax.validation.Valid;
+
 @RestController
 public class ReplyController {
 
@@ -15,9 +18,10 @@ public class ReplyController {
         this.dao = dao;
     }
 
-    @PostMapping("api/addreply")
+    @PostMapping("api/add/reply")
     @CrossOrigin(origins = "http://localhost:8080")
-    public Reply save(@RequestBody Reply item) {
+    @Transactional
+    public Reply save(@RequestBody @Valid Reply item) {
         return dao.save(item);
     }
 
