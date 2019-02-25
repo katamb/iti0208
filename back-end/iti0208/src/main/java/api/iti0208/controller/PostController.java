@@ -36,9 +36,11 @@ public class PostController {
     }
 
 
+
     @GetMapping("api/posts/{id}")
     @CrossOrigin(origins = "http://localhost:8080")
     public Optional<Post> getPost(@PathVariable Long id) {
         return dao.findById(id);
     }
+
 }

@@ -21,19 +21,19 @@
         <router-link tag="li" class="col" class-active="active" to="/addpost" exact> Add a Post </router-link>
 
           <li>
-            <a class="nav-item active nav-link" href="#">Mathematics</a>
+            <a class="nav-item active nav-link" >Mathematics</a>
           </li>
           <li>
-            <a class="nav-item active nav-link" href="#">Physics</a>
+            <a class="nav-item active nav-link" >Physics</a>
           </li>
           <li>
-            <a class="nav-item  active nav-link" href="#">Chemistry</a>
+            <a class="nav-item  active nav-link" >Chemistry</a>
           </li>
           <li>
-            <a class="nav-item active nav-link" href="#">Biology</a>
+            <a class="nav-item active nav-link" >Biology</a>
           </li>
           <li>
-            <a class="nav-item active nav-link" href="#">Computer Science</a>
+            <a class="nav-item active nav-link" >Computer Science</a>
           </li>
 
         </ul>
