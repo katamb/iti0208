@@ -2,8 +2,11 @@
     <div>
         <h2 v-if="topic === 'all'" >Last uploaded</h2>
         <div class="items" v-for="data in response" :key='data.id'>
+
+            <router-link :to="{path : '/viewpost/'+ data.id }" push>
             <h3>{{data.title}}</h3>
             <p>{{data.description}}</p>
+            </router-link>
             <!--p>{{data.rewardDescription}}</p>
             <a v-if="data.fileLocation" v-bind:href=data.fileLocation>Extra information</a-->
         </div>
