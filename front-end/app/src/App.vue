@@ -18,23 +18,13 @@
       <nav class="navbar navbar-expand-lg navbar-light">
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
         <router-link tag="li" class="col" class-active="active" to="/" exact> Home </router-link>
+        <router-link tag="li" class="col" class-active="active" to="/mathematics" exact> Mathematics </router-link>
+        <router-link tag="li" class="col" class-active="active" to="/physics" exact> Physics </router-link>
+        <router-link tag="li" class="col" class-active="active" to="/chemistry" exact> Chemistry </router-link>
+        <router-link tag="li" class="col" class-active="active" to="/biology" exact> Biology </router-link>
+        <router-link tag="li" class="col" class-active="active" to="/cs" exact> Computer Science </router-link>
+        <router-link tag="li" class="col" class-active="active" to="/varia" exact> Varia </router-link>
         <router-link tag="li" class="col" class-active="active" to="/addpost" exact> Add a Post </router-link>
-
-          <li>
-            <a class="nav-item active nav-link" >Mathematics</a>
-          </li>
-          <li>
-            <a class="nav-item active nav-link" >Physics</a>
-          </li>
-          <li>
-            <a class="nav-item  active nav-link" >Chemistry</a>
-          </li>
-          <li>
-            <a class="nav-item active nav-link" >Biology</a>
-          </li>
-          <li>
-            <a class="nav-item active nav-link" >Computer Science</a>
-          </li>
 
         </ul>
       <form class="form-inline my-2 my-lg-0">

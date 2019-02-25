@@ -2,7 +2,7 @@ package api.iti0208.service;
 
 import api.iti0208.config.FileStorageProperties;
 import api.iti0208.exception.FileStorageException;
-import api.iti0208.exception.FileNotFoundException;
+import api.iti0208.exception.PageNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
@@ -77,10 +77,10 @@ public class FileStorageService {
             if (resource.exists()) {
                 return resource;
             } else {
-                throw new FileNotFoundException("File not found " + fileName);
+                throw new PageNotFoundException("File not found " + fileName);
             }
         } catch (MalformedURLException ex) {
-            throw new FileNotFoundException("File not found " + fileName, ex);
+            throw new PageNotFoundException("File not found " + fileName, ex);
         }
     }
 }

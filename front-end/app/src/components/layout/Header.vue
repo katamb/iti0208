@@ -1,7 +1,7 @@
 <template>
     <header class="header">
         <img width="10%" src="../../assets/logo.png">
-        <h1>Find a solution to your problem</h1>
+        <h1>Find a solution to any problem</h1>
     </header>
 </template>
 

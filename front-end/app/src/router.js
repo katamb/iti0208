@@ -15,6 +15,36 @@ export default new Router({
       component: Home
     },
     {
+      path: '/mathematics',
+      name: 'Mathematics',
+      component: Home
+    },
+    {
+      path: '/physics',
+      name: 'Physics',
+      component: Home
+    },
+    {
+      path: '/chemistry',
+      name: 'Chemistry',
+      component: Home
+    },
+    {
+      path: '/biology',
+      name: 'Biology',
+      component: Home
+    },
+    {
+      path: '/cs',
+      name: 'Computer_Science',
+      component: Home
+    },
+    {
+      path: '/varia',
+      name: 'Varia',
+      component: Home
+    },
+    {
       path: '/addpost',
       name: 'addpost',
       component: AddPost

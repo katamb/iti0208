@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 @Data
@@ -15,8 +17,19 @@ public class Reply {
     @GeneratedValue
     private Long id;
 
+    @NotNull
+    @Size(min = 5)
     private String text;
-    // todo: files?
 
+    @NotNull
     private Long postId;
+
+    private String fileLocation;
+
+
+    public Reply(String text, Long postId) {
+        this.text = text;
+        this.postId = postId;
+    }
+
 }
