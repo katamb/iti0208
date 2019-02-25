@@ -115,4 +115,12 @@
     line-height: 1.4;
     text-align: center;
   }
+
+
+  .error {
+    margin-top: 0;
+    padding-top: 0;
+    color: red;
+    font-weight: bold;
+  }
 </style>

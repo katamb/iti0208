@@ -45,11 +45,11 @@
         name: 'addpost',
         data() {
             return {
-
                 topic: 'Varia',
                 title: '',
                 description: '',
                 reward_description: '',
+                file_location: '',
                 file: null,
                 return_msg: '',
             };
@@ -63,17 +63,18 @@
                 this.title = '';
                 this.description = '';
                 this.reward_description = '';
+                this.file_location = '';
                 this.file = null;
                 this.$nextTick(() => this.$validator.reset())
             },
             postInfo() {
                 axios
                     .post('http://localhost:8090/api/add/post', {
-
                         topic: this.topic,
                         title: this.title,
                         description: this.description,
-                        rewardDescription: this.reward_description
+                        rewardDescription: this.reward_description,
+                        fileLocation: this.file_location
                     })
                     .then((response) => {
                         if (response.status === 200) {
@@ -97,6 +98,7 @@
                                 .post('http://localhost:8090/api/uploadFile', formData)
                                 .then((response) => {
                                     if (response.status === 200) {
+                                        this.file_location = response.data.fileDownloadUri;
                                         this.postInfo();
                                     }
                                 });
@@ -163,10 +165,4 @@
     padding: 20px;
   }
 
-  .error {
-    margin-top: 0;
-    padding-top: 0;
-    color: red;
-    font-weight: bold;
-  }
 </style>

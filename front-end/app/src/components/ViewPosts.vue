@@ -1,8 +1,8 @@
 <template>
     <div>
         <h2 v-if="topic === 'all'" >Last uploaded</h2>
-        <div class="items" v-for="data in response" :key='data.id'>
-            <h3 @click="goTodetail(data.id)"> {{data.title}}</h3>
+        <div class="items" v-for="data in response" :key='data.id' @click="goToDetail(data.id)">
+            <h3> {{data.title}}</h3>
             <p>{{data.description}}</p>
 
             <!--p>{{data.rewardDescription}}</p>
@@ -23,7 +23,7 @@
         name: 'ViewPosts',
         methods: {
 
-            goTodetail(proId) {
+            goToDetail(proId) {
                 this.$router.push({name:'viewpost', params:{Pid:proId}})
             },
             loadContent() {
