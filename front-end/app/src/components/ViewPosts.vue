@@ -2,8 +2,9 @@
     <div>
         <h2 v-if="topic === 'all'" >Last uploaded</h2>
         <div class="items" v-for="data in response" :key='data.id'>
-            <h3>{{data.title}}</h3>
+            <h3 @click="goTodetail(data.id)"> {{data.title}}</h3>
             <p>{{data.description}}</p>
+
             <!--p>{{data.rewardDescription}}</p>
             <a v-if="data.fileLocation" v-bind:href=data.fileLocation>Extra information</a-->
         </div>
@@ -21,6 +22,10 @@
     export default {
         name: 'ViewPosts',
         methods: {
+
+            goTodetail(proId) {
+                this.$router.push({name:'viewpost', params:{Pid:proId}})
+            },
             loadContent() {
                 this.currentPageNum = 0;
                 const routeName = this.$route.name;

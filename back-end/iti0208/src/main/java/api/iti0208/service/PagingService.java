@@ -10,6 +10,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+
+
 @Service
 public class PagingService {
 
@@ -25,7 +27,7 @@ public class PagingService {
             throw new PageNotFoundException("This page does not exist!");
         }
 
-        return new PostResponse(posts.getContent(), posts.getTotalPages());
+        return  new PostResponse(posts.getContent(), posts.getTotalPages());
     }
 
     public PostResponse getPosts(int page, int size) {
