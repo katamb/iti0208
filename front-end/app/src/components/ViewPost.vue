@@ -45,7 +45,7 @@
         color: #333;
     }
     .item {
-        width: 1250px;
+        width: 80%;
         height: 600px;
         margin: 0px auto;
         background-color: lightgray;
@@ -57,10 +57,10 @@
 
     .description {
         font-family: Arial, Helvetica, sans-serif;
-        line-height: 1;
+        line-height: 0.2;
         font-size: medium;
         text-align: center;
-        width: 1150px;
+        width: 80%;
         height: 400px;
         margin: 0px auto;
         color: black;
