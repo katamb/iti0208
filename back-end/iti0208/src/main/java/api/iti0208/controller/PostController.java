@@ -4,6 +4,7 @@ import api.iti0208.entity.Post;
 import api.iti0208.entity.PostResponse;
 import api.iti0208.exception.PageNotFoundException;
 import api.iti0208.repository.PostRepository;
+import api.iti0208.repository.ReplyRepository;
 import api.iti0208.service.PagingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

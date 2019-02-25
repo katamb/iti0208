@@ -45,6 +45,7 @@
         name: 'addpost',
         data() {
             return {
+
                 topic: 'Varia',
                 title: '',
                 description: '',
@@ -68,6 +69,7 @@
             postInfo() {
                 axios
                     .post('http://localhost:8090/api/add/post', {
+
                         topic: this.topic,
                         title: this.title,
                         description: this.description,
