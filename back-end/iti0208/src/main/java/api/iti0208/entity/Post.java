@@ -39,11 +39,25 @@ public class Post {
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "postId", cascade = CascadeType.ALL)
     private List<Reply> answers = new LinkedList<>();
 
-
     public Post(String title, String description, String topic) {
         this.title = title;
         this.description = description;
         this.topic = topic;
+    }
+
+    public Post(String topic, String title, String description, String rewardDescription) {
+        this.title = title;
+        this.description = description;
+        this.topic = topic;
+        this.rewardDescription = rewardDescription;
+    }
+
+    public Post(String topic, String title, String description, String rewardDescription, String fileLocation) {
+        this.title = title;
+        this.description = description;
+        this.topic = topic;
+        this.rewardDescription = rewardDescription;
+        this.fileLocation = fileLocation;
     }
 
 }
