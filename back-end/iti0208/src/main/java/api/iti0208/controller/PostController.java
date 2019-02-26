@@ -62,12 +62,4 @@ public class PostController {
         return dao.save(item);
     }
 
-    /*@DeleteMapping("api/items/{id}")
-    @CrossOrigin(origins = "http://localhost:8080")
-    public void delete(@PathVariable Long id) {
-        dao.deleteById(id);
-    }
-
-
-
 }
