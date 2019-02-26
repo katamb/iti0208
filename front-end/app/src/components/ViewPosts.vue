@@ -1,23 +1,18 @@
 <template>
     <div>
-        <h2 v-if="topic === 'all'">Last uploaded</h2>
-        <div class="items" v-for="data in response" :key='data.id'>
-
-            <router-link :to="{path : '/viewpost/'+ data.id }" push>
-                <h3>{{data.title}}</h3>
-                <p>{{data.description}}</p>
-            </router-link>
+        <h2 v-if="topic === 'all'" >Last uploaded</h2>
+        <div class="items" v-for="data in response" :key='data.id' @click="goToDetail(data.id)">
+            <h3> {{data.title}}</h3>
+            <p>{{data.description}}</p>
 
             <!--p>{{data.rewardDescription}}</p>
             <a v-if="data.fileLocation" v-bind:href=data.fileLocation>Extra information</a-->
         </div>
-        <br>
+
         <button v-if="currentPageNum > 0" type="button"
-                v-on:click="prevPage()">Previous!
-        </button>
+                v-on:click="prevPage()">Previous!</button>
         <button v-if="currentPageNum < numOfPages" type="button"
-                v-on:click="nextPage()">Next!
-        </button>
+                v-on:click="nextPage()">Next!</button>
     </div>
 </template>
 
@@ -27,6 +22,10 @@
     export default {
         name: 'ViewPosts',
         methods: {
+
+            goToDetail(proId) {
+                this.$router.push({name:'viewpost', params:{Pid:proId}})
+            },
             loadContent() {
                 this.currentPageNum = 0;
                 const routeName = this.$route.name;

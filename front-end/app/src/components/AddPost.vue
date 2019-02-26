@@ -1,44 +1,44 @@
 <template>
-  <div>
-    <h3> {{ return_msg }} </h3>
-    <form id="post-form" @submit.prevent="processForm">
-      Topic:<br>
-      <select name="topic" v-model="topic"
-              v-validate="{ required: true }">
-        <option value="Mathematics">Mathematics</option>
-        <option value="Physics">Physics</option>
-        <option value="Chemistry">Chemistry</option>
-        <option value="Biology">Biology</option>
-        <option value="Computer_Science">Computer Science</option>
-        <option value="Varia" selected="selected">Varia</option>
-      </select><br>
-      <div class="error" v-if="errors.has('topic')">{{errors.first('topic')}}</div>
+    <div>
+        <h3> {{ return_msg }} </h3>
+        <form id="post-form" @submit.prevent="processForm">
+            Topic:<br>
+            <select name="topic" v-model="topic"
+                    v-validate="{ required: true }">
+                <option value="Mathematics">Mathematics</option>
+                <option value="Physics">Physics</option>
+                <option value="Chemistry">Chemistry</option>
+                <option value="Biology">Biology</option>
+                <option value="Computer_Science">Computer Science</option>
+                <option value="Varia" selected="selected">Varia</option>
+            </select><br>
+            <div class="error" v-if="errors.has('topic')">{{errors.first('topic')}}</div>
 
-      Title:<br>
-      <input type="text" name="title" placeholder="Title" v-model="title"
-             v-validate="{ required: true, min: 3, max: 128 }"><br>
-      <div class="error" v-if="errors.has('title')">{{errors.first('title')}}</div>
+            Title:<br>
+            <input type="text" name="title" placeholder="Title" v-model="title"
+                   v-validate="{ required: true, min: 3, max: 128 }"><br>
+            <div class="error" v-if="errors.has('title')">{{errors.first('title')}}</div>
 
-      Description:<br>
-      <input type="text" name="description" placeholder="Description" v-model="description"
-             v-validate="{ required: true, min: 5 }"><br>
-      <div class="error" v-if="errors.has('description')">{{errors.first('description')}}</div>
+            Description:<br>
+            <input type="text" name="description" placeholder="Description" v-model="description"
+                   v-validate="{ required: true, min: 5 }"><br>
+            <div class="error" v-if="errors.has('description')">{{errors.first('description')}}</div>
 
-      Reward description:<br>
-      <input type="text" name="reward_description" placeholder="Reward Description"
-             v-model="reward_description"><br>
-      <div class="error" v-if="errors.has('reward_description')">{{errors.first('reward_description')}}</div>
+            Reward description:<br>
+            <input type="text" name="reward_description" placeholder="Reward Description"
+                   v-model="reward_description"><br>
+            <div class="error" v-if="errors.has('reward_description')">{{errors.first('reward_description')}}</div>
 
-      File:<br>
-      <div class="upload-btn-wrapper">
-        <button class="btn">Upload a file</button>
-        <input id="singleFileUploadInput" type="file" name="file" class="file-input"
-               @change="loadTextFromFile"/>
-      </div>
-      <br>
-      <input type="submit" value="Submit">
-    </form>
-  </div>
+            File:<br>
+            <div class="upload-btn-wrapper">
+                <button class="btn">Upload a file</button>
+                <input id="singleFileUploadInput" type="file" name="file" class="file-input"
+                       @change="loadTextFromFile"/>
+            </div>
+            <br>
+            <input type="submit" value="Submit">
+        </form>
+    </div>
 </template>
 
 
@@ -119,78 +119,78 @@
 
 
 <style scoped>
-  .upload-btn-wrapper {
-    position: relative;
-    overflow: hidden;
-    display: inline-block;
-  }
+    .upload-btn-wrapper {
+        position: relative;
+        overflow: hidden;
+        display: inline-block;
+    }
 
-  .btn {
-    border: 2px solid gray;
-    color: gray;
-    background-color: white;
-    padding: 8px 20px;
-    border-radius: 8px;
-    font-size: 20px;
-    font-weight: bold;
-  }
+    .btn {
+        border: 2px solid gray;
+        color: gray;
+        background-color: white;
+        padding: 8px 20px;
+        border-radius: 8px;
+        font-size: 20px;
+        font-weight: bold;
+    }
 
-  .upload-btn-wrapper input[type=file] {
-    font-size: 100px;
-    position: absolute;
-    left: 0;
-    top: 0;
-    opacity: 0;
-  }
+    .upload-btn-wrapper input[type=file] {
+        font-size: 100px;
+        position: absolute;
+        left: 0;
+        top: 0;
+        opacity: 0;
+    }
 
-  label {
-    text-align: right;
-  }
+    label {
+        text-align: right;
+    }
 
-  form {
-    display: compact;
-  }
+    form {
+        display: compact;
+    }
 
-  input {
-    flex: 10;
-    padding: 5px;
-  }
+    input {
+        flex: 10;
+        padding: 5px;
+    }
 
-  input[type=text] {
-    width: 30%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-  }
+    input[type=text] {
+        width: 30%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
 
-  select {
-    width: 30%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-  }
+    select {
+        width: 30%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
 
-  input[type=submit] {
-    width: 30%;
-    background-color: #333;
-    color: white;
-    padding: 14px 20px;
-    margin: 8px 0;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
+    input[type=submit] {
+        width: 30%;
+        background-color: #333;
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
 
-  div {
-    border-radius: 5px;
-    background-color: #f2f2f2;
-    padding: 20px;
-  }
+    div {
+        border-radius: 5px;
+        background-color: #f2f2f2;
+        padding: 20px;
+    }
 
 </style>
