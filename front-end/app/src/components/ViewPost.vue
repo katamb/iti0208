@@ -1,41 +1,115 @@
 <template>
-    <div class="hello">
-        <div class="item">
-        <h2>{{response.title}}</h2>
-            <div class="description">
-                <h3>Description:</h3><br>
-        <p>{{response.description}}</p>
-                <h3>Reward description:</h3><br>
-        <p>{{response.rewardDescription}}</p>
-                <h3>File:</h3><br>
-        <a v-if="response.fileLocation" v-bind:href=response.fileLocation>Extra information</a>
-            </div>
-        </div>
+  <div>
+    <div class="item">
+
+    <h3>{{response.title}}</h3>
+      <div class="description">
+        <h5>Description: </h5>
+    <p>{{response.description}}</p>
+    <p>{{response.rewardDescription}}</p>
+    <a v-if="response.fileLocation" v-bind:href=response.fileLocation>Extra information</a>
+      </div>
+
+  <br>
+    <h3>Replies</h3>
+      <div class="description">
+    <div v-for="answer in response.answers" :key='answer.id'>
+      <h5>Reply :</h5><br>
+      {{answer.reply}}<br>
+      <a v-if="answer.fileLocation" v-bind:href=answer.fileLocation>Extra information</a>
     </div>
+
+
+    <h3> {{ return_msg }} </h3>
+    <form id="reply-form" @submit.prevent="replyInfo">
+      <h5>Your reply:</h5>
+      <input type="text" name="reply" placeholder="Reply" v-model="reply"
+             v-validate="{ required: true, min: 5 }"><br>
+      <div class="error" v-if="errors.has('reply')">{{errors.first('reply')}}</div>
+
+     <h5>File:</h5>
+      <input id="singleFileUploadInput" type="file" name="file" class="file-input"
+             @change="loadTextFromFile"/><br>
+
+      <input type="submit" value="Submit">
+    </form>
+      </div>
+      <br>
+    </div>
+    <br>
+  </div>
 </template>
 
 <script>
     import axios from 'axios';
 
     export default {
-        name: "ViewPost",
-        data () {
+        name: 'viewpost',
+        data() {
             return {
-                id : 0,
                 response: [],
+                return_msg: '',
+                reply: '',
+                file_location: '',
+                file: null
             };
         },
-        created() {
-            this.id = this.$route.params.id;
+        methods: {
+            loadTextFromFile(input) {
+                this.file = input.target.files[0];
+            },
+            resetFields() {
+                this.reply = '';
+                this.file_location = '';
+                this.file = null;
+                this.$nextTick(() => this.$validator.reset())
+            },
+            loadPost() {
+                axios
+                    .get('http://localhost:8090/api/posts/' + this.$route.params.Pid)
+                    .then((response) => {
+                        this.response = response.data;
+                    });
+            },
+            postReply() {
+                axios
+                    .post('http://localhost:8090/api/add/reply', {
+                        postId: this.$route.params.Pid,
+                        reply: this.reply,
+                        fileLocation: this.file_location
+                    })
+                    .then((response) => {
+                        if (response.status === 200) {
+                            this.loadPost();
+                            this.resetFields();
+                        } else {
+                            this.return_msg = "Sorry, there was a problem uploading Your reply!";
+                        }
+                    });
+            },
+            replyInfo() {
+                this.$validator.validate().then(valid => {
+                    if (valid) {
+                        if (this.file === null) {
+                            this.postReply();
+                        } else {
+                            const formData = new FormData();
+                            formData.append('file', this.file);
+                            axios
+                                .post('http://localhost:8090/api/uploadFile', formData)
+                                .then((response) => {
+                                    if (response.status === 200) {
+                                        this.file_location = response.data.fileDownloadUri;
+                                        this.postReply();
+                                    }
+                                });
+                        }
+                    }
+                })
+            }
         },
-
-
         mounted() {
-            axios
-                .get('http://localhost:8090/api/posts/'+ this.id)
-                .then((response) => {
-                    (this.response = response.data);
-                });
+            this.loadPost();
         }
     }
 </script>
@@ -46,7 +120,7 @@
     }
     .item {
         width: 80%;
-        height: 600px;
+        height: auto;
         margin: 0px auto;
         background-color: lightgray;
         color: black;
@@ -56,8 +130,8 @@
     }
 
     .description {
+      border-radius: 4px;
         font-family: Arial, Helvetica, sans-serif;
-        line-height: 0.2;
         font-size: medium;
         text-align: center;
         width: 80%;
@@ -66,4 +140,30 @@
         color: black;
         background-color: #fff;
     }
+
+    input[type=text] {
+      color: black;
+      width: 20%;
+      height: auto;
+      padding: 12px 20px;
+      margin: 0px auto;
+      display: inline-block;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+      background-color: #cccccc;
+    }
+
+    input[type="submit"] {
+      display: inline-block;
+      width: 80px;
+      height: 30px;
+      border: 1px solid #333;
+      border-radius: 4px;
+      background-color: #333;
+      color: white;
+      cursor: pointer;
+    }
+
+  
 </style>
