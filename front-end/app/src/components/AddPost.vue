@@ -30,8 +30,12 @@
       <div class="error" v-if="errors.has('reward_description')">{{errors.first('reward_description')}}</div>
 
       File:<br>
-      <input id="singleFileUploadInput" type="file" name="file" class="file-input"
-             @change="loadTextFromFile"/><br>
+      <div class="upload-btn-wrapper">
+        <button class="btn">Upload a file</button>
+        <input id="singleFileUploadInput" type="file" name="file" class="file-input"
+               @change="loadTextFromFile"/>
+      </div>
+      <br>
       <input type="submit" value="Submit">
     </form>
   </div>
@@ -49,6 +53,7 @@
                 title: '',
                 description: '',
                 reward_description: '',
+                file_location: '',
                 file: null,
                 return_msg: '',
             };
@@ -62,6 +67,7 @@
                 this.title = '';
                 this.description = '';
                 this.reward_description = '';
+                this.file_location = '';
                 this.file = null;
                 this.$nextTick(() => this.$validator.reset())
             },
@@ -71,7 +77,8 @@
                         topic: this.topic,
                         title: this.title,
                         description: this.description,
-                        rewardDescription: this.reward_description
+                        rewardDescription: this.reward_description,
+                        fileLocation: this.file_location
                     })
                     .then((response) => {
                         if (response.status === 200) {
@@ -95,6 +102,7 @@
                                 .post('http://localhost:8090/api/uploadFile', formData)
                                 .then((response) => {
                                     if (response.status === 200) {
+                                        this.file_location = response.data.fileDownloadUri;
                                         this.postInfo();
                                     }
                                 });
@@ -111,6 +119,30 @@
 
 
 <style scoped>
+  .upload-btn-wrapper {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+  }
+
+  .btn {
+    border: 2px solid gray;
+    color: gray;
+    background-color: white;
+    padding: 8px 20px;
+    border-radius: 8px;
+    font-size: 20px;
+    font-weight: bold;
+  }
+
+  .upload-btn-wrapper input[type=file] {
+    font-size: 100px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+  }
+
   label {
     text-align: right;
   }
@@ -161,10 +193,4 @@
     padding: 20px;
   }
 
-  .error {
-    margin-top: 0;
-    padding-top: 0;
-    color: red;
-    font-weight: bold;
-  }
 </style>
