@@ -4,6 +4,7 @@ import Home from './views/Home.vue'
 import AddPost from './components/AddPost.vue'
 import ViewPost from './components/ViewPost.vue'
 
+
 Vue.use(Router);
 
 export default new Router({
@@ -13,7 +14,6 @@ export default new Router({
       name: 'home',
       component: Home
     },
-
     {
       path: '/mathematics',
       name: 'Mathematics',
@@ -50,10 +50,9 @@ export default new Router({
       component: AddPost
     },
     {
-      path: '/viewpost/:Pid',
+      path: '/viewpost/:id',
       name: 'viewpost',
       component: ViewPost
     }
-
   ]
 })

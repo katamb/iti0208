@@ -8,11 +8,10 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-
+@Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
 public class Reply {
     @Id
     @GeneratedValue
@@ -20,7 +19,7 @@ public class Reply {
 
     @NotNull
     @Size(min = 5)
-    private String reply;
+    private String text;
 
     @NotNull
     private Long postId;
@@ -28,8 +27,8 @@ public class Reply {
     private String fileLocation;
 
 
-    public Reply(String reply, Long postId) {
-        this.reply = reply;
+    public Reply(String text, Long postId) {
+        this.text = text;
         this.postId = postId;
     }
 

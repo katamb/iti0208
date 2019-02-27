@@ -111,6 +111,19 @@
         cursor: pointer;
     }
 
+    button[type="button"] {
+        display: inline-block;
+        width: 100px;
+        height: 50px;
+        border: 1px solid #333;
+        border-radius: 4px;
+        background-color: #333;
+        color: white;
+        cursor: pointer;
+
+    }
+
+
     body {
         background-color: lightgray;
     }
