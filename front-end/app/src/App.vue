@@ -48,6 +48,7 @@
     }
   }
 </script>
+
 <style>
   #login {
 
@@ -87,6 +88,7 @@
   div {
     text-align: center;
   }
+
   nav li {
     background-color: #D6BDF3;
     text-align: center;
@@ -102,12 +104,23 @@
     cursor: pointer;
     border:1px solid #333;
     border-radius: 4px;
-}
+  }
+
+  li {
+    list-style-type: none;
+  }
+
+  body, a {
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.4;
+    text-align: center;
+  }
 
 
-body, a {
-  font-family: Arial, Helvetica, sans-serif;
-  line-height: 1.4;
-  text-align: center;
-}
+  .error {
+    margin-top: 0;
+    padding-top: 0;
+    color: red;
+    font-weight: bold;
+  }
 </style>
