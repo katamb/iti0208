@@ -50,7 +50,7 @@ export default new Router({
       component: AddPost
     },
     {
-      path: '/viewpost/:id',
+      path: '/viewpost/:Pid',
       name: 'viewpost',
       component: ViewPost
     }

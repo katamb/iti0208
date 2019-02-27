@@ -19,7 +19,7 @@ public class Reply {
 
     @NotNull
     @Size(min = 5)
-    private String text;
+    private String reply;
 
     @NotNull
     private Long postId;
@@ -27,8 +27,8 @@ public class Reply {
     private String fileLocation;
 
 
-    public Reply(String text, Long postId) {
-        this.text = text;
+    public Reply(String reply, Long postId) {
+        this.reply = reply;
         this.postId = postId;
     }
 
