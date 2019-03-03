@@ -2,19 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4f666b65-6f46-4ee5-815d-2b6d945d32c4" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/src/components/AddReply.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../back-end/iti0208/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../back-end/iti0208/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../back-end/iti0208/src/main/java/api/iti0208/controller/PostController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../back-end/iti0208/src/main/java/api/iti0208/controller/PostController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../back-end/iti0208/src/main/java/api/iti0208/entity/Post.java" beforeDir="false" afterPath="$PROJECT_DIR$/../back-end/iti0208/src/main/java/api/iti0208/entity/Post.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../back-end/iti0208/src/main/java/api/iti0208/entity/PostResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/../back-end/iti0208/src/main/java/api/iti0208/entity/PostResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../back-end/iti0208/src/main/java/api/iti0208/entity/Reply.java" beforeDir="false" afterPath="$PROJECT_DIR$/../back-end/iti0208/src/main/java/api/iti0208/entity/Reply.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../back-end/iti0208/src/main/java/api/iti0208/repository/ReplyRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../back-end/iti0208/src/main/java/api/iti0208/repository/ReplyRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../back-end/iti0208/src/main/java/api/iti0208/service/PagingService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../back-end/iti0208/src/main/java/api/iti0208/service/PagingService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/components/AddPost.vue" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/components/AddPost.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/components/ViewPost.vue" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/components/ViewPost.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/components/ViewPosts.vue" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/components/ViewPosts.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/router.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/router.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -76,7 +64,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/components/ViewPosts.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="901">
+            <state relative-caret-position="135">
               <caret line="53" column="14" lean-forward="true" selection-start-line="53" selection-start-column="14" selection-end-line="53" selection-end-column="14" />
             </state>
           </provider>
@@ -85,8 +73,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/components/ViewPost.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="237">
-              <caret line="59" column="64" lean-forward="true" selection-start-line="59" selection-start-column="64" selection-end-line="59" selection-end-column="64" />
+            <state relative-caret-position="305">
+              <caret line="63" column="35" lean-forward="true" selection-start-line="63" selection-start-column="35" selection-end-line="63" selection-end-column="35" />
             </state>
           </provider>
         </entry>
@@ -94,7 +82,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/router.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="816">
+            <state relative-caret-position="757">
               <caret line="53" column="23" selection-start-line="53" selection-start-column="23" selection-end-line="53" selection-end-column="23" />
               <folding>
                 <element signature="e#0#21#0" expanded="true" />
@@ -222,7 +210,7 @@
       <workItem from="1550497162632" duration="8929000" />
       <workItem from="1550516708626" duration="12432000" />
       <workItem from="1551089964155" duration="16030000" />
-      <workItem from="1551114879525" duration="7406000" />
+      <workItem from="1551114879525" duration="7666000" />
     </task>
     <task id="LOCAL-00001" summary="Post validation">
       <created>1550526494334</created>
@@ -235,12 +223,13 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="44797000" />
+    <option name="totallyTimeSpent" value="45057000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="14" y="28" width="1346" height="728" extended-state="1" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.26049766" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.26049766" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -257,7 +246,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="10" visible="true" weight="0.3305369" />
+      <window_info anchor="bottom" id="Terminal" order="10" visible="true" weight="0.3305369" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -351,16 +340,6 @@
     <entry file="file://$PROJECT_DIR$/app/src/views/Home.vue">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/router.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="816">
-          <caret line="53" column="23" selection-start-line="53" selection-start-column="23" selection-end-line="53" selection-end-column="23" />
-          <folding>
-            <element signature="e#0#21#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/package.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
@@ -375,13 +354,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/components/ViewPosts.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="901">
-          <caret line="53" column="14" lean-forward="true" selection-start-line="53" selection-start-column="14" selection-end-line="53" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/components/AddPost.vue">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="83">
@@ -389,10 +361,27 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/components/ViewPosts.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="53" column="14" lean-forward="true" selection-start-line="53" selection-start-column="14" selection-end-line="53" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/router.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="757">
+          <caret line="53" column="23" selection-start-line="53" selection-start-column="23" selection-end-line="53" selection-end-column="23" />
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/components/ViewPost.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="237">
-          <caret line="59" column="64" lean-forward="true" selection-start-line="59" selection-start-column="64" selection-end-line="59" selection-end-column="64" />
+        <state relative-caret-position="305">
+          <caret line="63" column="35" lean-forward="true" selection-start-line="63" selection-start-column="35" selection-end-line="63" selection-end-column="35" />
         </state>
       </provider>
     </entry>
