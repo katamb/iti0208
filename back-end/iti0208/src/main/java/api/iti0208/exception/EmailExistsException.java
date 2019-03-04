@@ -1,9 +1,9 @@
 package api.iti0208.exception;
 
 
-public class EmailExistsException extends Throwable {
+public class EmailExistsException extends RuntimeException {
 
-    public EmailExistsException(final String message) {
+    public EmailExistsException(String message) {
         super(message);
     }
 }

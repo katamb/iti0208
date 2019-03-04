@@ -26,7 +26,6 @@ public class PostController {
     }
 
     @GetMapping("api/posts")
-    @CrossOrigin(origins = "http://localhost:8080")
     public PostResponse getPosts(@RequestParam(value = "page", defaultValue = "0") int page,
                                    @RequestParam(value = "size", defaultValue = "15") int size,
                                    @RequestParam(value = "topic", defaultValue = "all") String topic) {
@@ -38,7 +37,6 @@ public class PostController {
     }
 
     @GetMapping("api/posts/{id}")
-    @CrossOrigin(origins = "http://localhost:8080")
     public Post getPostItemById(@PathVariable Long id) {
         Optional<Post> post = dao.findById(id);
         if (post.isPresent()) {
@@ -49,7 +47,6 @@ public class PostController {
     }
 
     @GetMapping("api/posts/find")
-    @CrossOrigin(origins = "http://localhost:8080")
     public PostResponse findPosts(@RequestParam(value = "page", defaultValue = "0") int page,
                                   @RequestParam(value = "size", defaultValue = "15") int size,
                                   @RequestParam(value = "searchTerm", defaultValue = "") String searchTerm) {
@@ -57,7 +54,6 @@ public class PostController {
     }
 
     @PostMapping("api/add/post")
-    @CrossOrigin(origins = "http://localhost:8080")
     public Post save(@RequestBody @Valid Post item) {
         return dao.save(item);
     }

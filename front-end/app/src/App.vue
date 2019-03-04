@@ -3,9 +3,9 @@
 
     <nav class="navbar navbar-expand-lg navbar-light">
       <ul class="navbar-nav mr-auto mt-2 mt-lg-0 ml-auto">
-        <form class="form-inline my-2 my-lg-0">
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Log in</button>
-        </form>
+        <router-link tag="button" class="btn btn-outline-success my-2 my-sm-0" to="/registration" exact> Register </router-link>
+        <router-link tag="button" class="btn btn-outline-success my-2 my-sm-0" to="/login" exact> Login </router-link>
+
       </ul>
 
     </nav>
