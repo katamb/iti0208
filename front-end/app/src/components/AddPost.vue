@@ -2,7 +2,7 @@
     <div>
         <h3> {{ return_msg }} </h3>
         <form id="post-form" @submit.prevent="processForm">
-            Topic:<br>
+            <h4>Topic:</h4><br>
             <select name="topic" v-model="topic"
                     v-validate="{ required: true }">
                 <option value="Mathematics">Mathematics</option>
@@ -14,22 +14,22 @@
             </select><br>
             <div class="error" v-if="errors.has('topic')">{{errors.first('topic')}}</div>
 
-            Title:<br>
+           <h4>Title:</h4><br>
             <input type="text" name="title" placeholder="Title" v-model="title"
                    v-validate="{ required: true, min: 3, max: 128 }"><br>
             <div class="error" v-if="errors.has('title')">{{errors.first('title')}}</div>
 
-            Description:<br>
+            <h4>Description:</h4><br>
             <input type="text" name="description" placeholder="Description" v-model="description"
                    v-validate="{ required: true, min: 5 }"><br>
             <div class="error" v-if="errors.has('description')">{{errors.first('description')}}</div>
 
-            Reward description:<br>
+            <h4>Reward description:</h4><br>
             <input type="text" name="reward_description" placeholder="Reward Description"
                    v-model="reward_description"><br>
             <div class="error" v-if="errors.has('reward_description')">{{errors.first('reward_description')}}</div>
 
-            File:<br>
+            <h4>File:</h4><br>
             <div class="upload-btn-wrapper">
                 <button class="btn">Upload a file</button>
                 <input id="singleFileUploadInput" type="file" name="file" class="file-input"
@@ -177,7 +177,7 @@
     }
 
     input[type=submit] {
-        width: 30%;
+        width: 10%;
         background-color: #333;
         color: white;
         padding: 14px 20px;

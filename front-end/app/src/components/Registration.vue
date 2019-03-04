@@ -3,27 +3,27 @@
         <h3> {{ return_msg }} </h3>
         <form id="post-form" @submit.prevent="processForm">
 
-            Firstname:<br>
+           <h4>Firstname:</h4><br>
             <input type="text" name="firstname" placeholder="Firstname" v-model="firstName"
                    v-validate="{ required: true, min: 3, max: 128 }"><br>
             <div class="error" v-if="errors.has('firstname')">{{errors.first('firstname')}}</div>
 
-            Lastname:<br>
+            <h4>Lastname:</h4><br>
             <input type="text" name="lastname" placeholder="Lastname" v-model="lastName"
                    v-validate="{ required: true, min: 5 }"><br>
             <div class="error" v-if="errors.has('lastname')">{{errors.first('lastname')}}</div>
 
-            Password:<br>
+            <h4>Password:</h4><br>
             <input type="text" name="password" placeholder="Password"
                    v-model="password" v-validate="{ required: true, min: 5 }"><br>
             <div class="error" v-if="errors.has('password')">{{errors.first('password')}}</div>
 
-            Password confrimation:<br>
+            <h4>Password confrimation:</h4><br>
             <input type="text" name="matchingPassword" placeholder="Password again"
                    v-model="matchingPassword" v-validate="{ required: true, min: 5 }"><br>
             <div class="error" v-if="errors.has('matchingPassword')">{{errors.first('matchingPassword')}}</div>
 
-            Email:<br>
+            <h4>Email:</h4><br>
             <input type="text" name="email" placeholder="Email"
                    v-model="email" v-validate="{ required: true, min: 5 }"><br>
             <div class="error" v-if="errors.has('email')">{{errors.first('email')}}</div>
@@ -102,5 +102,78 @@
 </script>
 
 <style scoped>
+    .upload-btn-wrapper {
+        position: relative;
+        overflow: hidden;
+        display: inline-block;
+    }
+
+    .btn {
+        border: 2px solid gray;
+        color: gray;
+        background-color: white;
+        padding: 8px 20px;
+        border-radius: 8px;
+        font-size: 20px;
+        font-weight: bold;
+    }
+
+    .upload-btn-wrapper input[type=file] {
+        font-size: 100px;
+        position: absolute;
+        left: 0;
+        top: 0;
+        opacity: 0;
+    }
+
+    label {
+        text-align: right;
+    }
+
+    form {
+        display: compact;
+    }
+
+    input {
+        flex: 10;
+        padding: 5px;
+    }
+
+    input[type=text] {
+        width: 30%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+    select {
+        width: 30%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+    input[type=submit] {
+        width: 10%;
+        background-color: #333;
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    div {
+        border-radius: 5px;
+        background-color: #f2f2f2;
+        padding: 20px;
+    }
 
 </style>
