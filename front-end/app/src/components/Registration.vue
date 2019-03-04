@@ -18,7 +18,7 @@
                    v-model="password" v-validate="{ required: true, min: 5 }"><br>
             <div class="error" v-if="errors.has('password')">{{errors.first('password')}}</div>
 
-            <h4>Password confrimation:</h4><br>
+            <h4>Password conformation:</h4><br>
             <input type="text" name="matchingPassword" placeholder="Password again"
                    v-model="matchingPassword" v-validate="{ required: true, min: 5 }"><br>
             <div class="error" v-if="errors.has('matchingPassword')">{{errors.first('matchingPassword')}}</div>
