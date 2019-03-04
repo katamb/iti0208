@@ -9,7 +9,9 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+
 public class PostResponse {
     private List<Post> posts;
     private int amountOfPages;
+
 }

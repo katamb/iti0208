@@ -2,11 +2,10 @@
   <div id="app">
 
     <nav class="navbar navbar-expand-lg navbar-light">
-      <ul class="navbar-nav mr-auto mt-2 mt-lg-0 ml-auto">
-        <form class="form-inline my-2 my-lg-0">
+
+        <div class="text-right">
           <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Log in</button>
-        </form>
-      </ul>
+        </div>
 
     </nav>
 

@@ -10,9 +10,10 @@ import javax.validation.constraints.Size;
 import java.util.LinkedList;
 import java.util.List;
 
+
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
 public class Post {
 
@@ -42,6 +43,21 @@ public class Post {
         this.title = title;
         this.description = description;
         this.topic = topic;
+    }
+
+    public Post(String topic, String title, String description, String rewardDescription) {
+        this.title = title;
+        this.description = description;
+        this.topic = topic;
+        this.rewardDescription = rewardDescription;
+    }
+
+    public Post(String topic, String title, String description, String rewardDescription, String fileLocation) {
+        this.title = title;
+        this.description = description;
+        this.topic = topic;
+        this.rewardDescription = rewardDescription;
+        this.fileLocation = fileLocation;
     }
 
 }
