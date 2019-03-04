@@ -10,10 +10,9 @@ import javax.validation.constraints.Size;
 import java.util.LinkedList;
 import java.util.List;
 
-
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Entity
 public class Post {
 
@@ -38,7 +37,6 @@ public class Post {
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "postId", cascade = CascadeType.ALL)
     private List<Reply> answers = new LinkedList<>();
-
 
     public Post(String title, String description, String topic) {
         this.title = title;
