@@ -2,8 +2,9 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
 import AddPost from './components/AddPost.vue'
-import AddReply from './components/AddReply.vue'
 import ViewPost from './components/ViewPost.vue'
+import Registration from './components/Registration.vue'
+
 
 Vue.use(Router);
 
@@ -14,7 +15,6 @@ export default new Router({
       name: 'home',
       component: Home
     },
-
     {
       path: '/mathematics',
       name: 'Mathematics',
@@ -51,15 +51,16 @@ export default new Router({
       component: AddPost
     },
     {
-      path: '/addreply/:Pid',
-      name: 'addreply',
-      component: AddReply
-    },
-    {
       path: '/viewpost/:Pid',
       name: 'viewpost',
       component: ViewPost
+    },
+    {
+      path: '/registration/',
+      name: 'registration',
+      component: Registration
     }
+
 
   ]
 })
