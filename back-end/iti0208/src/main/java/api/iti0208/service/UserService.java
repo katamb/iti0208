@@ -44,7 +44,7 @@ public class UserService implements UserDetailsService {
         appUser.setEmail(registration.getEmail());
         appUser.setUsername(registration.getUsername());
         appUser.setPassword(bCryptPasswordEncoder.encode(registration.getPassword()));
-        appUser.setRoles(Collections.singletonList(new Role("ROLE_USER")));
+        //appUser.setRoles(Collections.singletonList(new Role("ROLE_USER")));
         return userRepository.save(appUser);
     }
 

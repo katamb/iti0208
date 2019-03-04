@@ -20,31 +20,31 @@ public class AppUser {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(unique = true)
+    //@Column(unique = true)
     private String username;
 
     private String firstName;
 
     private String lastName;
 
-    @Column(unique = true)
+    //@Column(unique = true)
     private String email;
 
     private String password;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    /*@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
             name = "users_roles",
             joinColumns = @JoinColumn(
                     name = "user_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(
                     name = "role_id", referencedColumnName = "id"))
-    private Collection<Role> roles;
+    private Collection<Role> roles;*/
 
 
     public AppUser(String username, String password, Collection<Role> roles) {
         this.username = username;
         this.password = password;
-        this.roles = roles;
+        //this.roles = roles;
     }
 }
