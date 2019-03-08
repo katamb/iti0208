@@ -1,6 +1,6 @@
 package api.iti0208.repository;
 
-import api.iti0208.entity.AppUser;
+import api.iti0208.data.entity.AppUser;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

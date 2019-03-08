@@ -1,4 +1,4 @@
-package api.iti0208.entity;
+package api.iti0208.data.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

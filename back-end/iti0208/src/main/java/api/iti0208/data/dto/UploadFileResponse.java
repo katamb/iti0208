@@ -1,4 +1,4 @@
-package api.iti0208.response;
+package api.iti0208.data.dto;
 
 import lombok.Data;
 

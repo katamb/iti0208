@@ -1,6 +1,6 @@
-package api.iti0208.config;
+package api.iti0208.security;
 
-import api.iti0208.entity.AppUser;
+import api.iti0208.data.entity.AppUser;
 import com.auth0.jwt.JWT;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -8,6 +8,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.User;
+import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import javax.servlet.FilterChain;
@@ -18,15 +19,16 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 
-import static api.iti0208.config.SecurityConstants.*;
+import static api.iti0208.security.SecurityConstants.*;
 import static com.auth0.jwt.algorithms.Algorithm.HMAC512;
 
-public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
+public class JWTAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
 
 
     private AuthenticationManager authenticationManager;
 
-    public JWTAuthenticationFilter(AuthenticationManager authenticationManager) {
+    public JWTAuthenticationFilter(String newLoginUrl, AuthenticationManager authenticationManager) {
+        super(newLoginUrl);
         this.authenticationManager = authenticationManager;
     }
 
@@ -48,10 +50,9 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     }
 
     @Override
-    protected void successfulAuthentication(HttpServletRequest req,
-                                            HttpServletResponse res,
-                                            FilterChain chain,
-                                            Authentication auth) throws IOException, ServletException {
+    protected void successfulAuthentication(HttpServletRequest req, HttpServletResponse res,
+                                            FilterChain chain, Authentication auth)
+            throws IOException, ServletException {
 
         String token = JWT.create()
                 .withSubject(((User) auth.getPrincipal()).getUsername())

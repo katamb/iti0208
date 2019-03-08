@@ -1,8 +1,12 @@
 package api.iti0208.config;
 
+import api.iti0208.security.JWTAuthenticationFilter;
+import api.iti0208.security.JWTAuthorizationFilter;
+import api.iti0208.security.handler.ApiLogoutSuccessHandler;
 import api.iti0208.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
+import org.springframework.beans.factory.annotation.Configurable;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -11,12 +15,10 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.HttpStatusEntryPoint;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.CorsConfigurationSource;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.security.web.authentication.logout.LogoutFilter;
+import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
-import java.util.Collections;
-
+@Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
@@ -37,22 +39,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
             .antMatchers("/api/posts").permitAll()
             .antMatchers("/api/login").permitAll()
-            .antMatchers("/login").permitAll()
-            .antMatchers("/api/logout").permitAll()
+            //.antMatchers("/api/logout").permitAll() -> logout on front endis
             .antMatchers("/api/register").permitAll()
             .antMatchers("/api/**").authenticated();
 
-        http.addFilter(new JWTAuthenticationFilter(authenticationManager()))
+        http.addFilterAfter(new JWTAuthenticationFilter("/api/login", authenticationManager()),
+                BasicAuthenticationFilter.class)
             .addFilter(new JWTAuthorizationFilter(authenticationManager()))
-            // this disables session creation on Spring Security
+            // this disables session creation on Spring Security -> some kind of security issue otherwise
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
         http.exceptionHandling()
             .authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED));
-
-        //http.formLogin();
-
-        http.logout().logoutUrl("/logout");
     }
 
     @Override
@@ -60,17 +58,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         auth.userDetailsService(userService).passwordEncoder(bCryptPasswordEncoder);
     }
 
-
-
-
-    /*@Override
-    protected void configure(AuthenticationManagerBuilder builder) throws Exception {
-
-        builder.inMemoryAuthentication()
-                .passwordEncoder(new BCryptPasswordEncoder())
-                .withUser("user")
-                .password("$2a$10$fEa7rRKbc21Tq/BvY3TvJOulMqezkVwqY6uPVby.pQiOq59eea8xG")
-                .roles("USER");
-
-    }*/
 }

@@ -1,6 +1,6 @@
 package api.iti0208;
 
-import api.iti0208.entity.Post;
+import api.iti0208.data.entity.Post;
 import api.iti0208.repository.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;

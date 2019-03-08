@@ -1,4 +1,4 @@
-package api.iti0208.entity;
+package api.iti0208.data.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,7 +12,7 @@ import javax.validation.constraints.NotNull;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserDto {
+public class UserRegistrationInput {
 
     @Id
     @GeneratedValue

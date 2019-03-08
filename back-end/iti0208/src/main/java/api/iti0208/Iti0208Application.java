@@ -15,9 +15,7 @@ import org.springframework.web.filter.CorsFilter;
 import java.util.Collections;
 
 @SpringBootApplication
-@EnableConfigurationProperties({
-        FileStorageProperties.class
-})
+@EnableConfigurationProperties({ FileStorageProperties.class })
 public class Iti0208Application {
 
     public static void main(String[] args) {

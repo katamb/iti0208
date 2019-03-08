@@ -1,7 +1,7 @@
 package api.iti0208.service;
 
-import api.iti0208.entity.Post;
-import api.iti0208.entity.PostResponse;
+import api.iti0208.data.entity.Post;
+import api.iti0208.data.dto.PostResponse;
 import api.iti0208.exception.PageNotFoundException;
 import api.iti0208.repository.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;

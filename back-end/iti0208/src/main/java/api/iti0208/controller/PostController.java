@@ -1,7 +1,7 @@
 package api.iti0208.controller;
 
-import api.iti0208.entity.Post;
-import api.iti0208.entity.PostResponse;
+import api.iti0208.data.entity.Post;
+import api.iti0208.data.dto.PostResponse;
 import api.iti0208.exception.PageNotFoundException;
 import api.iti0208.repository.PostRepository;
 import api.iti0208.service.PagingService;
@@ -11,24 +11,27 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.Optional;
 
+import static api.iti0208.security.SecurityConstants.*;
+import static api.iti0208.service.UserService.getUsernameFromJwtToken;
+
 // PS! PostResponse holds the response and the amount of pages!
 
 @RestController
 public class PostController {
 
-    private final PostRepository dao;
+    private final PostRepository postRepo;
     private final PagingService pagingService;
 
     @Autowired
-    public PostController(PostRepository dao, PagingService pagingService) {
-        this.dao = dao;
+    public PostController(PostRepository postRepo, PagingService pagingService) {
+        this.postRepo = postRepo;
         this.pagingService = pagingService;
     }
 
     @GetMapping("api/posts")
     public PostResponse getPosts(@RequestParam(value = "page", defaultValue = "0") int page,
-                                   @RequestParam(value = "size", defaultValue = "15") int size,
-                                   @RequestParam(value = "topic", defaultValue = "all") String topic) {
+                                 @RequestParam(value = "size", defaultValue = "15") int size,
+                                 @RequestParam(value = "topic", defaultValue = "all") String topic) {
         if (topic.equals("all")) {
             return pagingService.getPosts(page, size);
         } else {
@@ -38,7 +41,7 @@ public class PostController {
 
     @GetMapping("api/posts/{id}")
     public Post getPostItemById(@PathVariable Long id) {
-        Optional<Post> post = dao.findById(id);
+        Optional<Post> post = postRepo.findById(id);
         if (post.isPresent()) {
             return post.get();
         } else {
@@ -54,8 +57,16 @@ public class PostController {
     }
 
     @PostMapping("api/add/post")
-    public Post save(@RequestBody @Valid Post item) {
-        return dao.save(item);
+    public Post save(@RequestBody @Valid Post item,
+                     @RequestHeader(value = HEADER_STRING) String header) {
+        String username = null;
+        if (header != null) {
+            username = getUsernameFromJwtToken(header);
+        }
+        if (username != null) {
+            item.setPostedBy(username);
+        }
+        return postRepo.save(item);
     }
 
 }
