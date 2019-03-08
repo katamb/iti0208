@@ -4,6 +4,7 @@ import api.iti0208.data.dto.PublicUserInfo;
 import api.iti0208.data.dto.UserRegistrationInput;
 import api.iti0208.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -24,6 +25,7 @@ public class UserController {
     }
 
     @GetMapping("api/user/{username}")
+    @PreAuthorize("#username == authentication.name || hasAuthority('ROLE_ADMIN')")
     public PublicUserInfo getUser(@PathVariable("username") String username) {
         return service.getPublicInfo(username);
     }

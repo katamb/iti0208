@@ -9,6 +9,7 @@ import api.iti0208.repository.UserRepository;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -16,9 +17,10 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.*;
+
 import static api.iti0208.security.SecurityConstants.SECRET;
 import static api.iti0208.security.SecurityConstants.TOKEN_PREFIX;
-import static java.util.Collections.emptyList;
 
 @Service
 public class UserService implements UserDetailsService {
@@ -48,7 +50,8 @@ public class UserService implements UserDetailsService {
         appUser.setEmail(registration.getEmail());
         appUser.setUsername(registration.getUsername());
         appUser.setPassword(bCryptPasswordEncoder.encode(registration.getPassword()));
-        //appUser.setRoles(Collections.singletonList(new Role("ROLE_USER")));
+        appUser.setGrantedAuthorities(
+                Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER")));
 
         userRepository.save(appUser);
     }
@@ -73,7 +76,16 @@ public class UserService implements UserDetailsService {
         return JWT.require(Algorithm.HMAC512(SECRET.getBytes()))
                 .build()
                 .verify(token.replace(TOKEN_PREFIX, ""))
-                .getSubject();
+                .getSubject().split(";")[0];
+    }
+
+    public static List<String> getAuthoritiesFromJwtToken(String token) {
+        String authoritiesString = JWT.require(Algorithm.HMAC512(SECRET.getBytes()))
+                .build()
+                .verify(token.replace(TOKEN_PREFIX, ""))
+                .getSubject().split(";")[1];
+
+        return new LinkedList<>(Arrays.asList(authoritiesString.split(",")));
     }
 
     @Override
@@ -82,7 +94,8 @@ public class UserService implements UserDetailsService {
         if (appUser == null) {
             throw new UsernameNotFoundException(username);
         }
-        return new User(appUser.getUsername(), appUser.getPassword(), emptyList());
+
+        return new User(appUser.getUsername(), appUser.getPassword(), appUser.getGrantedAuthorities());
 
     }
 

@@ -1,8 +1,14 @@
 package api.iti0208.security;
 
+import api.iti0208.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
 import javax.servlet.FilterChain;
@@ -11,8 +17,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 import static api.iti0208.security.SecurityConstants.*;
+import static api.iti0208.service.UserService.getAuthoritiesFromJwtToken;
 import static api.iti0208.service.UserService.getUsernameFromJwtToken;
 
 public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
@@ -41,10 +50,16 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
         String token = request.getHeader(HEADER_STRING);
         if (token != null) {
             // parse the token.
-            String user = getUsernameFromJwtToken(token);
+            String username = getUsernameFromJwtToken(token);
 
-            if (user != null) {
-                return new UsernamePasswordAuthenticationToken(user, null, new ArrayList<>());
+            List<String> authorities = getAuthoritiesFromJwtToken(token);
+            List<SimpleGrantedAuthority> allAuthorities = new LinkedList<>();
+            for (String authority : authorities) {
+                allAuthorities.add(new SimpleGrantedAuthority(authority));
+            }
+
+            if (username != null) {
+                return new UsernamePasswordAuthenticationToken(username, null, allAuthorities);
             }
         }
         return null;

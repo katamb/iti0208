@@ -4,9 +4,11 @@ package api.iti0208.data.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Data
@@ -31,6 +33,9 @@ public class AppUser {
 
     private String password;
 
+    @ElementCollection(fetch = FetchType.EAGER)
+    private List<GrantedAuthority> grantedAuthorities;
+
     /*@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
             name = "users_roles",
@@ -41,9 +46,9 @@ public class AppUser {
     private Collection<Role> roles;*/
 
 
-    public AppUser(String username, String password) {
+    public AppUser(String username, String password, List<GrantedAuthority> grantedAuthorities) {
         this.username = username;
         this.password = password;
-        //this.roles = roles;
+        this.grantedAuthorities = grantedAuthorities;
     }
 }

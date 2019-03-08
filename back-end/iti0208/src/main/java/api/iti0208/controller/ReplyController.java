@@ -22,7 +22,7 @@ public class ReplyController {
     }
 
     @PostMapping("api/add/reply")
-    @Transactional
+    //@Transactional
     public Reply save(@RequestBody @Valid Reply item,
                       @RequestHeader(value = HEADER_STRING) String header) {
         if (header != null) {

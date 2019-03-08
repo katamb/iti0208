@@ -2,24 +2,23 @@ package api.iti0208.config;
 
 import api.iti0208.security.JWTAuthenticationFilter;
 import api.iti0208.security.JWTAuthorizationFilter;
-import api.iti0208.security.handler.ApiLogoutSuccessHandler;
 import api.iti0208.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.HttpStatusEntryPoint;
-import org.springframework.security.web.authentication.logout.LogoutFilter;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private UserService userService;
@@ -37,20 +36,21 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable();
 
         http.authorizeRequests()
-            .antMatchers("/api/posts").permitAll()
-            .antMatchers("/api/login").permitAll()
-            //.antMatchers("/api/logout").permitAll() -> logout on front endis
-            .antMatchers("/api/register").permitAll()
-            .antMatchers("/api/**").authenticated();
+                .antMatchers("/api/posts").permitAll()
+                .antMatchers("/api/login").permitAll()
+                //.antMatchers("/api/logout").permitAll() -> logout on front endis
+                .antMatchers("/api/register").permitAll()
+                //.antMatchers("/api/user/**").hasAnyAuthority("ROLE_USER")
+                .antMatchers("/api/**").authenticated();
 
         http.addFilterAfter(new JWTAuthenticationFilter("/api/login", authenticationManager()),
                 BasicAuthenticationFilter.class)
-            .addFilter(new JWTAuthorizationFilter(authenticationManager()))
-            // this disables session creation on Spring Security -> some kind of security issue otherwise
-            .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+                .addFilter(new JWTAuthorizationFilter(authenticationManager()))
+                // this disables session creation on Spring Security -> some kind of security issue otherwise
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
         http.exceptionHandling()
-            .authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED));
+                .authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED));
     }
 
     @Override
