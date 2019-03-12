@@ -1,5 +1,6 @@
-package api.iti0208.entity;
+package api.iti0208.data.dto;
 
+import api.iti0208.data.entity.Post;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

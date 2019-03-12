@@ -1,35 +1,61 @@
 package api.iti0208.config;
 
-//import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import api.iti0208.security.JWTAuthenticationFilter;
+import api.iti0208.security.JWTAuthorizationFilter;
+import api.iti0208.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpStatus;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.HttpStatusEntryPoint;
+import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
-/*@EnableWebSecurity
-public class SecurityConfig{} extends WebSecurityConfigurerAdapter {
+@Configuration
+@EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true)
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
+    private UserService userService;
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+
+    @Autowired
+    public SecurityConfig(UserService userService, BCryptPasswordEncoder bCryptPasswordEncoder) {
+        this.userService = userService;
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
-         todo: remove later
         http.csrf().disable();
 
         http.authorizeRequests()
                 .antMatchers("/api/posts").permitAll()
                 .antMatchers("/api/login").permitAll()
-                .antMatchers("/api/logout").permitAll()
-                .antMatchers("/api/**").hasAnyRole("USER", "ADMIN");
+                //.antMatchers("/api/logout").permitAll() -> logout on front endis
+                .antMatchers("/api/register").permitAll()
+                //.antMatchers("/api/user/**").hasAnyAuthority("ROLE_USER")
+                .antMatchers("/api/**").authenticated();
 
-        http.formLogin();
+        http.addFilterAfter(new JWTAuthenticationFilter("/api/login", authenticationManager()),
+                BasicAuthenticationFilter.class)
+                .addFilter(new JWTAuthorizationFilter(authenticationManager()))
+                // this disables session creation on Spring Security -> some kind of security issue otherwise
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
-        http.logout().logoutUrl("/logout");
+        http.exceptionHandling()
+                .authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED));
     }
 
     @Override
-    protected void configure(AuthenticationManagerBuilder builder) throws Exception {
-
-        builder.inMemoryAuthentication()
-                .passwordEncoder(new BCryptPasswordEncoder())
-                .withUser("user")
-                .password("$2a$10$fEa7rRKbc21Tq/BvY3TvJOulMqezkVwqY6uPVby.pQiOq59eea8xG")
-                .roles("USER");
-
+    public void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(userService).passwordEncoder(bCryptPasswordEncoder);
     }
-}*/
+
+}

@@ -4,6 +4,7 @@ import Home from './views/Home.vue'
 import AddPost from './components/AddPost.vue'
 import ViewPost from './components/ViewPost.vue'
 import Registration from './components/Registration.vue'
+import Login from './components/Login.vue'
 
 
 Vue.use(Router);
@@ -59,8 +60,11 @@ export default new Router({
       path: '/registration/',
       name: 'registration',
       component: Registration
+    },
+    {
+      path: '/login/',
+      name: 'login',
+      component: Login
     }
-
-
   ]
 })
