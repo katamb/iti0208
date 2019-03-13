@@ -1,29 +1,40 @@
 package api.iti0208;
 
-import api.iti0208.entity.Post;
+import api.iti0208.data.entity.AppUser;
+import api.iti0208.data.entity.Post;
 import api.iti0208.repository.PostRepository;
+import api.iti0208.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import javax.transaction.Transactional;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.stream.Stream;
 
 @Component
 public class SampleData implements CommandLineRunner {
 
-    private final PostRepository repo;
+    private final PostRepository postRepository;
+    private final UserRepository userRepository;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
-    public SampleData(PostRepository repo) {
-        this.repo = repo;
+    public SampleData(PostRepository postRepository, UserRepository userRepository,
+                      BCryptPasswordEncoder bCryptPasswordEncoder) {
+        this.postRepository = postRepository;
+        this.userRepository = userRepository;
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
     @Override
     @Transactional
     public void run(String... args) throws Exception {
-        Stream.of(Arrays.asList("Mathematics", "Mathematics 1", "Mathematics"),
+        Stream.of(
+                Arrays.asList("Mathematics", "Mathematics 1", "Mathematics"),
                 Arrays.asList("Biology", "Biology  1 ", "Biology"),
                 Arrays.asList("Physics", "Phyysika 1", "Physics"),
                 Arrays.asList("Computer_Science", "Computer_Science 0", "Computer_Science"),
@@ -57,8 +68,24 @@ public class SampleData implements CommandLineRunner {
                 Arrays.asList("Physics", "Phyysika 10", "Physics"),
                 Arrays.asList("Mathematics", "Mathematics 6", "Mathematics"),
                 Arrays.asList("Mathematics", "Mathematics 7", "Mathematics"))
-                .forEach(title -> repo.save(new Post(title.get(0), title.get(1), title.get(2))));
+                .forEach(title -> postRepository.save(
+                        new Post(title.get(0), title.get(1), title.get(2))
+                ));
 
-        repo.findAll().forEach(System.out::println);
+        postRepository.findAll().forEach(System.out::println);
+
+        userRepository.save(
+                new AppUser("admin_test",
+                        bCryptPasswordEncoder.encode("admin_test"),
+                        Collections.singletonList(new SimpleGrantedAuthority("ROLE_ADMIN"))
+                )
+        );
+
+        userRepository.save(
+                new AppUser("user_test",
+                        bCryptPasswordEncoder.encode("user_test"),
+                        Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER"))
+                )
+        );
     }
 }

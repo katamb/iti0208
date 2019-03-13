@@ -1,6 +1,6 @@
 package api.iti0208.controller;
 
-import api.iti0208.response.UploadFileResponse;
+import api.iti0208.data.dto.UploadFileResponse;
 import api.iti0208.service.FileStorageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
@@ -24,7 +24,6 @@ public class FileController {
     }
 
     @PostMapping("/api/uploadFile")
-    @CrossOrigin(origins = "http://localhost:8080")
     public UploadFileResponse uploadFile(@RequestParam("file") MultipartFile file) {
         String fileName = fileStorageService.storeFile(file);
 
@@ -38,7 +37,6 @@ public class FileController {
 
     // changed the pathvariable, if something breaks, check original
     @GetMapping("/api/downloadFile/{fileName}")
-    @CrossOrigin(origins = "http://localhost:8080")
     public ResponseEntity<Resource> downloadFile(@PathVariable String fileName, HttpServletRequest request) {
         // Load file as Resource
         Resource resource = fileStorageService.loadFileAsResource(fileName);

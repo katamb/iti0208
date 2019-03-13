@@ -6,29 +6,34 @@
                 <legend class=""><h3>Register</h3></legend>
             </div>
 
-           <h4>Firstname:</h4><br>
+           <h4>Username:</h4><br>
+            <input type="text" name="username" placeholder="Username" v-model="username"
+                   v-validate="{ required: true, min: 4, max: 128 }"><br>
+            <div class="error" v-if="errors.has('username')">{{errors.first('username')}}</div>
+
+            <h4>First name:</h4><br>
             <input type="text" name="firstname" placeholder="Firstname" v-model="firstName"
-                   v-validate="{ required: true, min: 3, max: 128 }"><br>
+                   v-validate="{ required: true, min: 2, max: 128 }"><br>
             <div class="error" v-if="errors.has('firstname')">{{errors.first('firstname')}}</div>
 
-            <h4>Lastname:</h4><br>
+            <h4>Last name:</h4><br>
             <input type="text" name="lastname" placeholder="Lastname" v-model="lastName"
-                   v-validate="{ required: true, min: 5 }"><br>
+                   v-validate="{ required: true, min: 2 }"><br>
             <div class="error" v-if="errors.has('lastname')">{{errors.first('lastname')}}</div>
 
             <h4>Password:</h4><br>
-            <input type="text" name="password" placeholder="Password"
-                   v-model="password" v-validate="{ required: true, min: 5 }"><br>
+            <input type="password" name="password" placeholder="Password"
+                   v-model="password" v-validate="{ required: true, min: 6 }"><br>
             <div class="error" v-if="errors.has('password')">{{errors.first('password')}}</div>
 
-            <h4>Password confirmation:</h4><br>
-            <input type="text" name="matchingPassword" placeholder="Password again"
-                   v-model="matchingPassword" v-validate="{ required: true, min: 5 }"><br>
+            Password confirmation:<br>
+            <input type="password" name="matchingPassword" placeholder="Password again"
+                   v-model="matchingPassword" v-validate="{ required: true, min: 6, confirmed: password }"><br>
             <div class="error" v-if="errors.has('matchingPassword')">{{errors.first('matchingPassword')}}</div>
 
             <h4>Email:</h4><br>
             <input type="text" name="email" placeholder="Email"
-                   v-model="email" v-validate="{ required: true, min: 5 }"><br>
+                   v-model="email" v-validate="{ required: true, min: 4 }"><br>
             <div class="error" v-if="errors.has('email')">{{errors.first('email')}}</div>
 
             <br>
@@ -47,52 +52,48 @@
         name: 'registration',
         data() {
             return {
+                username: '',
                 firstName: '',
                 lastName: '',
                 password: '',
-                matchingPassword: '',
                 email: '',
+                matchingPassword: '',
                 return_msg: '',
             };
         },
-
         methods: {
             postInfo() {
                 axios
                     .post('http://localhost:8090/api/register', {
-
                         firstName: this.firstName,
                         lastName: this.lastName,
                         password: this.password,
-                        matchingPassword: this.matchingPassword,
-                        email: this.email,
-
+                        username: this.username,
+                        email: this.email
                     })
                     .then((response) => {
                         if (response.status === 200) {
-                            this.return_msg = "Post successfully uploaded!";
+                            this.return_msg = "Registered!";
                             this.resetFields();
                         } else {
-                            this.return_msg = "Sorry, there was a problem uploading Your post!";
+                            this.return_msg = "Sorry, there was a problem registering Your account!";
                         }
                     });
             },
-
             resetFields() {
-                this.firstName = '',
-                    this.lastName = '',
-                    this.password = '',
-                    this.matchingPassword = '',
-                    this.email = '',
-                    this.return_msg =''
-
+                this.username = '';
+                this.firstName = '';
+                this.lastName = '';
+                this.password = '';
+                this.matchingPassword = '';
+                this.email = '';
+                this.return_msg ='';
+                this.$nextTick(() => this.$validator.reset());
             },
-
             processForm() {
                 this.$validator.validate().then(valid => {
                     if (valid) {
                         this.postInfo();
-
                     } else {
                         alert("Failed to submit the form!");
                     }

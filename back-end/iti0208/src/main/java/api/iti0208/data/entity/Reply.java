@@ -1,4 +1,4 @@
-package api.iti0208.entity;
+package api.iti0208.data.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -26,6 +26,7 @@ public class Reply {
 
     private String fileLocation;
 
+    private String postedBy;
 
     public Reply(String reply, Long postId) {
         this.reply = reply;

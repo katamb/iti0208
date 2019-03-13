@@ -1,19 +1,11 @@
 package api.iti0208.repository;
 
-
-import api.iti0208.entity.User;
+import api.iti0208.data.entity.AppUser;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 
+public interface UserRepository extends JpaRepository<AppUser, Long> {
+    AppUser findByEmail(String email);
 
-
-public interface UserRepository extends JpaRepository<User, Long> {
-
-
-    User findByEmail(String email);
-
-
-
+    AppUser findByUsername(String username);
 }
