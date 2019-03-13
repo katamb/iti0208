@@ -3,7 +3,7 @@
     <h3> {{ return_msg }} </h3>
     <form id="post-form" @submit.prevent="processForm">
 
-      Email:<br>
+      Username:<br>
       <input type="text" name="username" placeholder="Username"
              v-model="username" v-validate="{ required: true, min: 4 }"><br>
       <div class="error" v-if="errors.has('username')">{{errors.first('username')}}</div>
@@ -37,12 +37,15 @@
         methods: {
             postInfo() {
                 axios
-                    .post('http://localhost:8090/login', {
+                    .post('http://localhost:8090/api/login',
+                        {
                         username: this.username,
                         password: this.password
                     })
                     .then((response) => {
                         if (response.status === 200) {
+                            localStorage.setItem("Authorization",
+                            response.headers.authorization);
                             this.return_msg = "Logged in!";
                             this.resetFields();
                         } else {

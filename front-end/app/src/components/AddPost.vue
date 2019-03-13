@@ -73,12 +73,18 @@
             },
             postInfo() {
                 axios
-                    .post('http://localhost:8090/api/add/post', {
+                    .post('http://localhost:8090/api/add/post',
+                    {
                         topic: this.topic,
                         title: this.title,
                         description: this.description,
                         rewardDescription: this.reward_description,
                         fileLocation: this.file_location
+                    },
+                    {
+                        headers: {
+                            "Authorization": localStorage.getItem("Authorization")
+                        }
                     })
                     .then((response) => {
                         if (response.status === 200) {
