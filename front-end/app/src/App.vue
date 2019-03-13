@@ -1,7 +1,16 @@
 <template>
   <div id="app">
+  <Login />
+  <!-- <nav class="navbar navbar-expand-lg navbar-light">
+      <ul class="navbar-nav mr-auto mt-2 mt-lg-0 ml-auto">
+        <router-link tag="button" class="btn btn-outline-success my-2 my-sm-0" to="/registration" exact> Register </router-link>
+        <router-link tag="button" class="btn btn-outline-success my-2 my-sm-0" to="/login" exact> Login </router-link>
 
-    <Login />
+      </ul>
+
+    </nav>
+    -->
+
     <Header />
 
     <div id="nav" >
@@ -51,6 +60,10 @@
     border:1px solid #333;
     border-radius: 4px;
 
+  }
+
+  .ml-auto {
+    margin-right: auto !important;
   }
   p.b {
     border: 3px solid #333;

@@ -1,34 +1,39 @@
 <template>
     <div>
         <h3> {{ return_msg }} </h3>
+
         <form id="post-form" @submit.prevent="processForm">
             <div id="legend">
                 <legend class=""><h3>Register</h3></legend>
             </div>
+            <h5>Username:</h5>
+            <input type="text" name="username" placeholder="Username" v-model="username"
+                   v-validate="{ required: true, min: 4, max: 128 }"><br>
+            <div class="error" v-if="errors.has('username')">{{errors.first('username')}}</div>
 
-           <h4>Firstname:</h4><br>
+            <h5>First name:</h5>
             <input type="text" name="firstname" placeholder="Firstname" v-model="firstName"
-                   v-validate="{ required: true, min: 3, max: 128 }"><br>
+                   v-validate="{ required: true, min: 2, max: 128 }"><br>
             <div class="error" v-if="errors.has('firstname')">{{errors.first('firstname')}}</div>
 
-            <h4>Lastname:</h4><br>
+            <h5> Last name:</h5>
             <input type="text" name="lastname" placeholder="Lastname" v-model="lastName"
-                   v-validate="{ required: true, min: 5 }"><br>
+                   v-validate="{ required: true, min: 2 }"><br>
             <div class="error" v-if="errors.has('lastname')">{{errors.first('lastname')}}</div>
 
-            <h4>Password:</h4><br>
-            <input type="text" name="password" placeholder="Password"
-                   v-model="password" v-validate="{ required: true, min: 5 }"><br>
+            <h5>Password:</h5>
+            <input type="password" name="password" placeholder="Password"
+                   v-model="password" v-validate="{ required: true, min: 6 }"><br>
             <div class="error" v-if="errors.has('password')">{{errors.first('password')}}</div>
 
-            <h4>Password confirmation:</h4><br>
-            <input type="text" name="matchingPassword" placeholder="Password again"
-                   v-model="matchingPassword" v-validate="{ required: true, min: 5 }"><br>
+            <h5>Password confirmation:</h5>
+            <input type="password" name="matchingPassword" placeholder="Password again"
+                   v-model="matchingPassword" v-validate="{ required: true, min: 6, confirmed: password }"><br>
             <div class="error" v-if="errors.has('matchingPassword')">{{errors.first('matchingPassword')}}</div>
 
-            <h4>Email:</h4><br>
+            <h5>Email:</h5>
             <input type="text" name="email" placeholder="Email"
-                   v-model="email" v-validate="{ required: true, min: 5 }"><br>
+                   v-model="email" v-validate="{ required: true, min: 4 }"><br>
             <div class="error" v-if="errors.has('email')">{{errors.first('email')}}</div>
 
             <br>
@@ -47,52 +52,48 @@
         name: 'registration',
         data() {
             return {
+                username: '',
                 firstName: '',
                 lastName: '',
                 password: '',
-                matchingPassword: '',
                 email: '',
+                matchingPassword: '',
                 return_msg: '',
             };
         },
-
         methods: {
             postInfo() {
                 axios
                     .post('http://localhost:8090/api/register', {
-
                         firstName: this.firstName,
                         lastName: this.lastName,
                         password: this.password,
-                        matchingPassword: this.matchingPassword,
-                        email: this.email,
-
+                        username: this.username,
+                        email: this.email
                     })
                     .then((response) => {
                         if (response.status === 200) {
-                            this.return_msg = "Post successfully uploaded!";
+                            this.return_msg = "Registered!";
                             this.resetFields();
                         } else {
-                            this.return_msg = "Sorry, there was a problem uploading Your post!";
+                            this.return_msg = "Sorry, there was a problem registering Your account!";
                         }
                     });
             },
-
             resetFields() {
-                this.firstName = '',
-                    this.lastName = '',
-                    this.password = '',
-                    this.matchingPassword = '',
-                    this.email = '',
-                    this.return_msg =''
-
+                this.username = '';
+                this.firstName = '';
+                this.lastName = '';
+                this.password = '';
+                this.matchingPassword = '';
+                this.email = '';
+                this.return_msg ='';
+                this.$nextTick(() => this.$validator.reset());
             },
-
             processForm() {
                 this.$validator.validate().then(valid => {
                     if (valid) {
                         this.postInfo();
-
                     } else {
                         alert("Failed to submit the form!");
                     }
@@ -143,6 +144,15 @@
     }
 
     input[type=text] {
+        width: 30%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+    input[type="password"] {
         width: 30%;
         padding: 12px 20px;
         margin: 8px 0;

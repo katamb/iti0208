@@ -5,8 +5,10 @@
             <div class="container">
 
                 <div class="collapse navbar-collapse" id="exCollapsingNavbar">
+
                     <ul class="nav navbar-nav" style="justify-content:space-between; margin-left: auto">
                         <router-link id="register" tag="button" to="/registration" exact>Register</router-link>
+
                         <li class="dropdown order-1">
                             <button type="button" id="dropdownMenu1" data-toggle="dropdown"
                                     class="btn btn-outline-success dropdown-toggle my-2 my-sm-0">Login
@@ -15,21 +17,19 @@
                             <ul class="dropdown-menu dropdown-menu-right mt-2">
                                 <li class="px-3 py-2">
                                     <form class="form" role="form">
+                                        <h3> {{ return_msg }} </h3>
                                         <div class="form-group">
-                                            <input id="emailInput" placeholder="Email"
-                                                   class="form-control form-control-sm" type="text" required="">
+                                            <input type="text" name="username" placeholder="Username"
+                                                   v-model="username" v-validate="{ required: true, min: 4 }"><br>
+                                            <div class="error" v-if="errors.has('username')">{{errors.first('username')}}</div>
                                         </div>
                                         <div class="form-group">
-                                            <input id="passwordInput" placeholder="Password"
-                                                   class="form-control form-control-sm" type="text" required="">
+                                            <input type="password" name="password" placeholder="Password"
+                                                   v-model="password" v-validate="{ required: true, min: 6 }"><br>
+                                            <div class="error" v-if="errors.has('password')">{{errors.first('password')}}</div>
                                         </div>
                                         <div class="form-group">
                                             <button type="submit" class="btn btn-primary btn-block">Login</button>
-                                        </div>
-                                        <div class="form-group text-center">
-                                            <small>
-                                                <a href="#" data-toggle="modal">Forgot password?</a>
-                                            </small>
                                         </div>
                                     </form>
                                 </li>
@@ -43,9 +43,55 @@
 </template>
 
 <script>
+    import axios from 'axios';
+
     export default {
-        name: "Login"
+        name: "Login",
+        data() {
+            return {
+                username: '',
+                password: '',
+                return_msg: '',
+            };
+        },
+        methods: {
+            postInfo() {
+                axios
+                    .post('http://localhost:8090/login', {
+                        username: this.username,
+                        password: this.password
+                    })
+                    .then((response) => {
+                        if (response.status === 200) {
+                            this.return_msg = "Logged in!";
+                            this.resetFields();
+                        } else {
+                            this.return_msg = "Error!";
+                        }
+                    });
+            },
+            resetFields() {
+                this.username = '';
+                this.password = '';
+                this.$nextTick(() => this.$validator.reset());
+            },
+            processForm() {
+                this.$validator.validate().then(valid => {
+                    if (valid) {
+                        this.postInfo();
+                    } else {
+                        alert("Failed to submit the form!");
+                    }
+                });
+            }
+
+
+        }
+
     }
+
+
+
 </script>
 
 <style scoped>

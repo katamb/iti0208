@@ -1,4 +1,4 @@
-package api.iti0208.entity;
+package api.iti0208.data.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -35,6 +35,8 @@ public class Post {
     private String rewardDescription;
 
     private String fileLocation;
+
+    private String postedBy;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "postId", cascade = CascadeType.ALL)
     private List<Reply> answers = new LinkedList<>();

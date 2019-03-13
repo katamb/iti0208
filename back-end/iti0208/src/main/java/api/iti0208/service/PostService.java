@@ -1,7 +1,7 @@
 package api.iti0208.service;
 
-import api.iti0208.entity.Post;
-import api.iti0208.entity.PostResponse;
+import api.iti0208.data.entity.Post;
+import api.iti0208.data.dto.PostResponse;
 import api.iti0208.exception.PageNotFoundException;
 import api.iti0208.repository.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,16 +10,27 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
 
+import static api.iti0208.service.UserService.getUsernameFromJwtToken;
 
 @Service
-public class PagingService {
+public class PostService {
 
     private final PostRepository postRepository;
 
     @Autowired
-    public PagingService(PostRepository postRepository) {
+    public PostService(PostRepository postRepository) {
         this.postRepository = postRepository;
+    }
+
+    public Post getPostItemById(Long id) {
+        Optional<Post> post = postRepository.findById(id);
+        if (post.isPresent()) {
+            return post.get();
+        } else {
+            throw new PageNotFoundException("Sorry, this page does not exist!");
+        }
     }
 
     private PostResponse getPosts(Page<Post> posts, int page) {
@@ -30,16 +41,15 @@ public class PagingService {
         return  new PostResponse(posts.getContent(), posts.getTotalPages());
     }
 
-    public PostResponse getPosts(int page, int size) {
-        Pageable pageableRequest = PageRequest.of(page, size);
-        Page<Post> posts = postRepository.findAll(pageableRequest);
-
-        return getPosts(posts, page);
-    }
-
     public PostResponse getPosts(int page, int size, String topic) {
         Pageable pageableRequest = PageRequest.of(page, size);
-        Page<Post> posts = postRepository.findAllByTopic(topic, pageableRequest);
+
+        Page<Post> posts;
+        if (topic.equals("all")) {
+            posts = postRepository.findAll(pageableRequest);
+        } else {
+            posts = postRepository.findAllByTopic(topic, pageableRequest);
+        }
 
         return getPosts(posts, page);
     }
@@ -50,5 +60,17 @@ public class PagingService {
 
         return getPosts(posts, page);
     }
+
+    public Post savePost(Post item, String header) {
+        String username = null;
+        if (header != null) {
+            username = getUsernameFromJwtToken(header);
+        }
+        if (username != null) {
+            item.setPostedBy(username);
+        }
+        return postRepository.save(item);
+    }
+
 
 }
