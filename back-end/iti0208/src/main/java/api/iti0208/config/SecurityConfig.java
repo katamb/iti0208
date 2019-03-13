@@ -1,12 +1,14 @@
 package api.iti0208.config;
 
-//@EnableWebSecurity
-public class SecurityConfig{}/* extends WebSecurityConfigurerAdapter {
+//import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+
+/*@EnableWebSecurity
+public class SecurityConfig{} extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
-        // todo: remove later
+         todo: remove later
         http.csrf().disable();
 
         http.authorizeRequests()
