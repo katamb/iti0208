@@ -2,6 +2,9 @@
     <div>
         <h3> {{ return_msg }} </h3>
         <form id="post-form" @submit.prevent="processForm">
+            <div id="legend">
+                <legend class=""><h3>Register</h3></legend>
+            </div>
 
            <h4>Firstname:</h4><br>
             <input type="text" name="firstname" placeholder="Firstname" v-model="firstName"
@@ -18,7 +21,7 @@
                    v-model="password" v-validate="{ required: true, min: 5 }"><br>
             <div class="error" v-if="errors.has('password')">{{errors.first('password')}}</div>
 
-            <h4>Password conformation:</h4><br>
+            <h4>Password confirmation:</h4><br>
             <input type="text" name="matchingPassword" placeholder="Password again"
                    v-model="matchingPassword" v-validate="{ required: true, min: 5 }"><br>
             <div class="error" v-if="errors.has('matchingPassword')">{{errors.first('matchingPassword')}}</div>

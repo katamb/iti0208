@@ -1,15 +1,7 @@
 <template>
   <div id="app">
 
-    <nav class="navbar navbar-expand-lg navbar-light">
-
-        <div class="text-right">
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Log in</button>
-        </div>
-
-    </nav>
-
-
+    <Login />
     <Header />
 
     <div id="nav" >
@@ -39,22 +31,26 @@
 
 <script>
   import Header from './components/layout/Header.vue';
+  import Login from './components/layout/Login.vue';
 
   export default {
     name: "app",
     components: {
-      Header
+      Header,
+      Login
     }
   }
 </script>
 
 <style>
-  #login {
+  #register {
+    background-color: #333;
+    height: 40px;
+    color: white;
+    text-align: center;
+    border:1px solid #333;
+    border-radius: 4px;
 
-  }
-
-  .ml-auto {
-    margin-right: auto !important;
   }
   p.b {
     border: 3px solid #333;

@@ -14,7 +14,7 @@
             </select><br>
             <div class="error" v-if="errors.has('topic')">{{errors.first('topic')}}</div>
 
-           <h4>Title:</h4><br>
+            <h4>Title:</h4><br>
             <input type="text" name="title" placeholder="Title" v-model="title"
                    v-validate="{ required: true, min: 3, max: 128 }"><br>
             <div class="error" v-if="errors.has('title')">{{errors.first('title')}}</div>
@@ -44,6 +44,7 @@
 
 <script>
     import axios from 'axios';
+    import Swal from 'sweetalert2';
 
     export default {
         name: 'addpost',
@@ -59,6 +60,7 @@
             };
         },
         methods: {
+
             loadTextFromFile(input) {
                 this.file = input.target.files[0];
             },
@@ -82,9 +84,20 @@
                     })
                     .then((response) => {
                         if (response.status === 200) {
+                            Swal.fire({
+                                position: 'center',
+                                type: 'success',
+                                title: "Post successfully uploaded!",
+                                showConfirmButton: false,
+                                timer: 1200
+                            });
                             this.return_msg = "Post successfully uploaded!";
                             this.resetFields();
                         } else {
+                            Swal.fire({
+                                type: 'error',
+                                title: "Sorry, there was a problem uploading Your post!",
+                            });
                             this.return_msg = "Sorry, there was a problem uploading Your post!";
                         }
                     });
@@ -109,7 +122,13 @@
                         }
 
                     } else {
-                        alert("Failed to submit the form!");
+                        Swal.fire({
+                            position: 'center',
+                            type: 'success',
+                            title: "Post successfully uploaded!",
+                            showConfirmButton: false,
+                            timer: 1200
+                        });
                     }
                 });
             },
