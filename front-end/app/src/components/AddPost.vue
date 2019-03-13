@@ -75,12 +75,18 @@
             },
             postInfo() {
                 axios
-                    .post('http://localhost:8090/api/add/post', {
+                    .post('http://localhost:8090/api/add/post',
+                    {
                         topic: this.topic,
                         title: this.title,
                         description: this.description,
                         rewardDescription: this.reward_description,
                         fileLocation: this.file_location
+                    },
+                    {
+                        headers: {
+                            "Authorization": localStorage.getItem("Authorization")
+                        }
                     })
                     .then((response) => {
                         if (response.status === 200) {
@@ -105,14 +111,18 @@
             processForm() {
                 this.$validator.validate().then(valid => {
                     if (valid) {
-
                         if (this.file === null) {
                             this.postInfo();
                         } else {
                             const formData = new FormData();
                             formData.append('file', this.file);
                             axios
-                                .post('http://localhost:8090/api/uploadFile', formData)
+                                .post('http://localhost:8090/api/uploadFile', formData,
+                                    {
+                                        headers: {
+                                            "Authorization": localStorage.getItem("Authorization")
+                                        }
+                                    })
                                 .then((response) => {
                                     if (response.status === 200) {
                                         this.file_location = response.data.fileDownloadUri;
@@ -120,14 +130,10 @@
                                     }
                                 });
                         }
-
                     } else {
                         Swal.fire({
-                            position: 'center',
-                            type: 'success',
-                            title: "Post successfully uploaded!",
-                            showConfirmButton: false,
-                            timer: 1200
+                            type: 'error',
+                            title: "Sorry, there was a problem uploading Your post!",
                         });
                     }
                 });

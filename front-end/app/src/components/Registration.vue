@@ -1,7 +1,6 @@
 <template>
     <div>
         <h3> {{ return_msg }} </h3>
-
         <form id="post-form" @submit.prevent="processForm">
             <div id="legend">
                 <legend class=""><h3>Register</h3></legend>
@@ -16,7 +15,11 @@
                    v-validate="{ required: true, min: 2, max: 128 }"><br>
             <div class="error" v-if="errors.has('firstname')">{{errors.first('firstname')}}</div>
 
-            <h5> Last name:</h5>
+<<<<<<<<< Temporary merge branch 1
+            Last name:<br>
+=========
+            <h5>Last name:</h5><br>
+>>>>>>>>> Temporary merge branch 2
             <input type="text" name="lastname" placeholder="Lastname" v-model="lastName"
                    v-validate="{ required: true, min: 2 }"><br>
             <div class="error" v-if="errors.has('lastname')">{{errors.first('lastname')}}</div>
@@ -40,8 +43,6 @@
             <input type="submit" value="Submit">
         </form>
     </div>
-
-
 
 </template>
 
@@ -143,16 +144,7 @@
         padding: 5px;
     }
 
-    input[type=text] {
-        width: 30%;
-        padding: 12px 20px;
-        margin: 8px 0;
-        display: inline-block;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        box-sizing: border-box;
-    }
-    input[type="password"] {
+    input[type=text], input[type=password] {
         width: 30%;
         padding: 12px 20px;
         margin: 8px 0;

@@ -85,11 +85,17 @@
             },
             postReply() {
                 axios
-                    .post('http://localhost:8090/api/add/reply', {
+                    .post('http://localhost:8090/api/add/reply',
+                        {
                         postId: this.$route.params.Pid,
                         reply: this.reply,
                         fileLocation: this.file_location
-                    })
+                        },
+                        {
+                            headers: {
+                                "Authorization": localStorage.getItem("Authorization")
+                            }
+                        })
                     .then((response) => {
                         if (response.status === 200) {
                             this.loadPost();
@@ -108,7 +114,12 @@
                             const formData = new FormData();
                             formData.append('file', this.file);
                             axios
-                                .post('http://localhost:8090/api/uploadFile', formData)
+                                .post('http://localhost:8090/api/uploadFile', formData,
+                                    {
+                                        headers: {
+                                            "Authorization": localStorage.getItem("Authorization")
+                                        }
+                                    })
                                 .then((response) => {
                                     if (response.status === 200) {
                                         this.file_location = response.data.fileDownloadUri;
