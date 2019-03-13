@@ -26,7 +26,7 @@
                    v-model="password" v-validate="{ required: true, min: 6 }"><br>
             <div class="error" v-if="errors.has('password')">{{errors.first('password')}}</div>
 
-            Password confirmation:<br>
+            <h4>Password confirmation:</h4><br>
             <input type="password" name="matchingPassword" placeholder="Password again"
                    v-model="matchingPassword" v-validate="{ required: true, min: 6, confirmed: password }"><br>
             <div class="error" v-if="errors.has('matchingPassword')">{{errors.first('matchingPassword')}}</div>
@@ -143,7 +143,7 @@
         padding: 5px;
     }
 
-    input[type=text] {
+    input[type=text], input[type=password] {
         width: 30%;
         padding: 12px 20px;
         margin: 8px 0;
