@@ -2,32 +2,36 @@
     <div>
         <div class="item">
 
-            <h3>{{response.title}}</h3>
+            <h1>{{response.title}}</h1>
             <div class="description">
-                <h5>Description: </h5>
+                <h3>Description: </h3>
                 <p>{{response.description}}</p>
                 <p>{{response.rewardDescription}}</p>
                 <a v-if="response.fileLocation" v-bind:href=response.fileLocation>Extra information</a>
             </div>
 
             <br>
-            <h3>Replies</h3>
+            <h1>Replies</h1>
             <div class="description">
+
                 <div v-for="answer in response.answers" :key='answer.id'>
-                    <h5>Reply :</h5><br>
+                    <div class="reply-description">
+
+                    <h3>Reply :</h3><br>
                     {{answer.reply}}<br>
                     <a v-if="answer.fileLocation" v-bind:href=answer.fileLocation>Extra information</a>
-                </div>
-
-
-                <h3> {{ return_msg }} </h3>
+                        <h3> {{ return_msg }} </h3>
+                    </div>
+                    <br>
+            </div>
                 <form id="reply-form" @submit.prevent="replyInfo">
-                    <h5>Your reply:</h5>
+
+                    <h3>Your reply:</h3>
                     <input type="text" name="reply" placeholder="Reply" v-model="reply"
                            v-validate="{ required: true, min: 5 }"><br>
                     <div class="error" v-if="errors.has('reply')">{{errors.first('reply')}}</div>
 
-                    <h5>File:</h5>
+                    <h3>File:</h3>
                     <div class="upload-btn-wrapper">
                         <button class="btn">Upload a file</button>
                         <input id="singleFileUploadInput" type="file" name="file" class="file-input"
@@ -40,6 +44,7 @@
 
 
                 </form>
+                <br>
             </div>
             <br>
         </div>
@@ -80,11 +85,17 @@
             },
             postReply() {
                 axios
-                    .post('http://localhost:8090/api/add/reply', {
+                    .post('http://localhost:8090/api/add/reply',
+                        {
                         postId: this.$route.params.Pid,
                         reply: this.reply,
                         fileLocation: this.file_location
-                    })
+                        },
+                        {
+                            headers: {
+                                "Authorization": localStorage.getItem("Authorization")
+                            }
+                        })
                     .then((response) => {
                         if (response.status === 200) {
                             this.loadPost();
@@ -103,7 +114,12 @@
                             const formData = new FormData();
                             formData.append('file', this.file);
                             axios
-                                .post('http://localhost:8090/api/uploadFile', formData)
+                                .post('http://localhost:8090/api/uploadFile', formData,
+                                    {
+                                        headers: {
+                                            "Authorization": localStorage.getItem("Authorization")
+                                        }
+                                    })
                                 .then((response) => {
                                     if (response.status === 200) {
                                         this.file_location = response.data.fileDownloadUri;
@@ -169,10 +185,23 @@
         font-size: medium;
         text-align: center;
         width: 80%;
-        height: 400px;
+        height: auto;
         margin: 0px auto;
         color: black;
         background-color: #fff;
+    }
+
+    .reply-description {
+        border-radius: 4px;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: medium;
+        text-align: center;
+        width: 100%;
+        height: auto;
+        margin: 0px auto;
+        color: black;
+        background-color: #fff;
+        border-style: groove;
     }
 
     input[type=text] {
