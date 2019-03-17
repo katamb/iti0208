@@ -1,8 +1,8 @@
 package api.iti0208.service;
 
-import api.iti0208.data.dto.PublicUserInfo;
+import api.iti0208.data.output.PublicUserInfo;
 import api.iti0208.data.entity.AppUser;
-import api.iti0208.data.dto.UserRegistrationInput;
+import api.iti0208.data.input.UserRegistrationInput;
 import api.iti0208.exception.BadRequestException;
 import api.iti0208.exception.PageNotFoundException;
 import api.iti0208.repository.UserRepository;

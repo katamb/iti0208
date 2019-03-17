@@ -1,8 +1,7 @@
 package api.iti0208.controller;
 
-import api.iti0208.data.dto.PublicUserInfo;
-import api.iti0208.data.dto.UserRegistrationInput;
-import api.iti0208.data.entity.AppUser;
+import api.iti0208.data.output.PublicUserInfo;
+import api.iti0208.data.input.UserRegistrationInput;
 import api.iti0208.data.entity.Post;
 import api.iti0208.data.entity.Reply;
 import api.iti0208.repository.UserRepository;
@@ -12,7 +11,6 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.List;
 import java.util.Set;
 
 import static api.iti0208.security.SecurityConstants.HEADER_STRING;
@@ -51,7 +49,7 @@ public class UserController {
 
     @GetMapping("api/usersReplies")
     //@PreAuthorize("#username == authentication.name || hasAuthority('ROLE_ADMIN')")
-    public Set<Reply> getRepleis(@RequestHeader(value = HEADER_STRING) String header) {
+    public Set<Reply> getReplies(@RequestHeader(value = HEADER_STRING) String header) {
         String username = getUsernameFromJwtToken(header);
         return userRepo.findByUsername(username).getUserReplies();
     }

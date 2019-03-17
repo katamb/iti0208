@@ -40,6 +40,7 @@
               </ul>
             </li>
           </ul>
+          <button @click="logOut">Logout</button>
         </div>
       </div>
     </nav>
@@ -90,9 +91,11 @@
                         alert("Failed to submit the form!");
                     }
                 });
+            },
+            logOut() {
+                localStorage.removeItem("Authorization");
+                location.reload();
             }
-
-
         }
     }
 </script>

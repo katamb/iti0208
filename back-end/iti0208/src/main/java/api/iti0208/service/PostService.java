@@ -1,7 +1,9 @@
 package api.iti0208.service;
 
 import api.iti0208.data.entity.Post;
-import api.iti0208.data.dto.PostResponse;
+import api.iti0208.data.output.PostResponse;
+import api.iti0208.data.input.PostPatchInput;
+import api.iti0208.exception.BadRequestException;
 import api.iti0208.exception.PageNotFoundException;
 import api.iti0208.repository.PostRepository;
 import api.iti0208.repository.UserRepository;
@@ -66,16 +68,43 @@ public class PostService {
 
     public Post savePost(Post item, String header) {
         String username = null;
+
         if (header != null) {
             username = getUsernameFromJwtToken(header);
-
-
         }
         if (username != null) {
             item.setPostedBy(username);
-            item.setUserId(userRepository.findByUsername(username).getId());
-
+            item.setUserId(userRepository.findIdByUsername(username));
         }
+
         return postRepository.save(item);
+    }
+
+    public Post patchPost(PostPatchInput obj, Long id) {
+        Optional<Post> post = postRepository.findById(id);
+
+        if (post.isPresent()) {
+            String newTitle = obj.getTitle();
+            String newDescription = obj.getDescription();
+
+            if (newTitle != null && newTitle.length() != 0) {
+                postRepository.updateTitle(id, newTitle);
+            }
+            if (newDescription != null && newDescription.length() != 0) {
+                postRepository.updateDescription(id, newDescription);
+            }
+
+            return getPostItemById(id);
+        }
+
+        throw new BadRequestException("Problem updating Your post!");
+    }
+
+    public void deleteById(Long id) {
+        postRepository.deleteById(id);
+    }
+
+    public String findUsernameOfPoster(Long id) {
+        return getPostItemById(id).getPostedBy();
     }
 }
