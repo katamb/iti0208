@@ -4,6 +4,7 @@ import api.iti0208.data.entity.Post;
 import api.iti0208.data.dto.PostResponse;
 import api.iti0208.exception.PageNotFoundException;
 import api.iti0208.repository.PostRepository;
+import api.iti0208.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -18,10 +19,12 @@ import static api.iti0208.service.UserService.getUsernameFromJwtToken;
 public class PostService {
 
     private final PostRepository postRepository;
+    private final UserRepository userRepository;
 
     @Autowired
-    public PostService(PostRepository postRepository) {
+    public PostService(PostRepository postRepository, UserRepository userRepository) {
         this.postRepository = postRepository;
+        this.userRepository = userRepository;
     }
 
     public Post getPostItemById(Long id) {
@@ -65,9 +68,13 @@ public class PostService {
         String username = null;
         if (header != null) {
             username = getUsernameFromJwtToken(header);
+
+
         }
         if (username != null) {
             item.setPostedBy(username);
+            item.setUserId(userRepository.findByUsername(username).getId());
+
         }
         return postRepository.save(item);
     }

@@ -26,6 +26,8 @@ public class Reply {
 
     private String fileLocation;
 
+    private long userId;
+
     private String postedBy;
 
     public Reply(String reply, Long postId) {
