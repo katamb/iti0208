@@ -5,6 +5,7 @@ import AddPost from './components/AddPost.vue'
 import ViewPost from './components/ViewPost.vue'
 import Registration from './components/Registration.vue'
 import Login from './components/unused/Login.vue'
+import UserActivities from './components/UserActivities.vue'
 
 
 Vue.use(Router);
@@ -65,6 +66,11 @@ export default new Router({
       path: '/login/',
       name: 'login',
       component: Login
+    },
+    {
+      path: '/userActivities',
+      name: 'userActivities',
+      component: UserActivities
     }
   ]
 })

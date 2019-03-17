@@ -81,7 +81,8 @@
                         title: this.title,
                         description: this.description,
                         rewardDescription: this.reward_description,
-                        fileLocation: this.file_location
+                        fileLocation: this.file_location,
+
                     },
                     {
                         headers: {

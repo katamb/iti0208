@@ -6,6 +6,7 @@
 
         <div class="collapse navbar-collapse" id="exCollapsingNavbar">
           <ul class="nav navbar-nav" style="justify-content:space-between; margin-left: auto">
+            <router-link id="myActivities" tag="button" to="/userActivities" exact>My Activities</router-link>
             <router-link id="register" tag="button" to="/registration" exact>Register</router-link>
             <li class="dropdown order-1">
               <button type="button" id="dropdownMenu1" data-toggle="dropdown"
