@@ -16,8 +16,8 @@ public interface PostRepository extends JpaRepository<Post, Long> {
     Page<Post> findAllByTopic(@Param("topic") String topic, Pageable pageable);
 
     @Query("SELECT p FROM Post p WHERE " +
-            "LOWER(p.title) LIKE LOWER(CONCAT('%', :searchTerm, '%')) OR " +
-            "LOWER(p.description) LIKE LOWER(CONCAT('%', :searchTerm, '%'))")
+           "LOWER(p.title) LIKE LOWER(CONCAT('%', :searchTerm, '%')) OR " +
+           "LOWER(p.description) LIKE LOWER(CONCAT('%', :searchTerm, '%'))")
     Page<Post> findBySearchTerm(@Param("searchTerm") String searchTerm, Pageable pageable);
 
     @Modifying
@@ -29,4 +29,5 @@ public interface PostRepository extends JpaRepository<Post, Long> {
     @Transactional
     @Query("update Post p set p.description =:description where p.id =:id")
     void updateDescription(@Param("id") Long id, @Param("description") String description);
+
 }

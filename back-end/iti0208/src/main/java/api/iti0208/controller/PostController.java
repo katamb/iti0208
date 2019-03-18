@@ -17,30 +17,35 @@ import static api.iti0208.security.SecurityConstants.*;
 @RestController
 public class PostController {
 
-    private final PostService postService;
-
     @Autowired
+    private PostService postService;
+
+    /*@Autowired
     public PostController(PostService postService) {
         this.postService = postService;
-    }
-
-    @GetMapping("api/posts")
-    public PostResponse getPosts(@RequestParam(value = "page", defaultValue = "0") int page,
-                                 @RequestParam(value = "size", defaultValue = "15") int size,
-                                 @RequestParam(value = "topic", defaultValue = "all") String topic) {
-        return postService.getPosts(page, size, topic);
-    }
+    }*/
 
     @GetMapping("api/posts/{id}")
     public Post getPostItemById(@PathVariable Long id) {
         return postService.getPostItemById(id);
     }
 
+    @GetMapping("api/posts")
+    public PostResponse getPosts(@RequestParam(value = "page", defaultValue = "0") int page,
+                                 @RequestParam(value = "size", defaultValue = "15") int size,
+                                 @RequestParam(value = "topic", defaultValue = "all") String topic,
+                                 @RequestParam(value = "order", defaultValue = "ascending") String order,
+                                 @RequestParam(value = "sortBy", defaultValue = "postedAt") String sortBy) {
+        return postService.getPosts(page, size, topic, order, sortBy);
+    }
+
     @GetMapping("api/posts/find")
     public PostResponse findPosts(@RequestParam(value = "page", defaultValue = "0") int page,
                                   @RequestParam(value = "size", defaultValue = "15") int size,
-                                  @RequestParam(value = "searchTerm", defaultValue = "") String searchTerm) {
-        return postService.findPosts(page, size, searchTerm);
+                                  @RequestParam(value = "searchTerm", defaultValue = "") String searchTerm,
+                                  @RequestParam(value = "order", defaultValue = "ascending") String order,
+                                  @RequestParam(value = "sortBy", defaultValue = "postedAt") String sortBy) {
+        return postService.findPosts(page, size, searchTerm, order, sortBy);
     }
 
     @PostMapping("api/add/post")
