@@ -6,8 +6,12 @@
 
         <div class="collapse navbar-collapse" id="exCollapsingNavbar">
           <ul class="nav navbar-nav" style="justify-content:space-between; margin-left: auto">
-            <router-link id="register" tag="button" to="/registration" exact>Register</router-link>
-            <li class="dropdown order-1">
+              <li style="background-color: #333">
+            <router-link id="register" tag="button" to="/registration" v-if="!isHidden" exact>Register</router-link>
+
+              <router-link id="logout" tag="button" to="/" v-if="isHidden" @click="logout">Logout</router-link>
+
+              <li class="dropdown order-1" v-if="!isHidden" style="background-color: #333">
               <button type="button" id="dropdownMenu1" data-toggle="dropdown"
                       class="btn btn-outline-success dropdown-toggle my-2 my-sm-0">Login
                 <span class="caret"></span>
@@ -47,6 +51,7 @@
 
 <script>
     import axios from 'axios';
+    import Swal from 'sweetalert2';
 
     export default {
         name: "Login",
@@ -71,11 +76,43 @@
                             localStorage.setItem("Authorization",
                                 response.headers.authorization);
                             this.return_msg = "Logged in!";
+                            this.username = response.username;
                             this.resetFields();
-                        } else {
+                            this.isHidden = true;
+                            Swal.fire({
+                                position: 'center',
+                                type: 'success',
+                                title: "You are logged in!",
+                                showConfirmButton: false,
+                                timer: 1000
+                            })
+                        }
+                        else {
+                            Swal.fire({
+                                position: 'center',
+                                type: 'error',
+                                title: "Wrong username or password, try again!",
+                                showConfirmButton: false,
+                                timer: 900
+                            });
+                            this.resetFields();
                             this.return_msg = "Error!";
                         }
-                    });
+                    })
+                    .catch(responce => {
+                        Swal.fire({
+                            position: 'center',
+                            type: 'error',
+                            title: "Wrong username or password, try again!",
+                            showConfirmButton: false,
+                            timer: 1200
+                        });
+                        this.resetFields();
+                        this.return_msg = responce;
+
+                        }
+
+                    );
             },
             resetFields() {
                 this.username = '';
@@ -90,6 +127,11 @@
                         alert("Failed to submit the form!");
                     }
                 });
+            },
+
+            logout() {
+                this.isHidden = false;
+                localStorage.removeItem("Authorization");
             }
 
 
@@ -131,9 +173,18 @@
     width: 200px;
   }
 
-  button[type="button"] {
+  button[type="button"], [tag="button"] {
     background-color: #333;
+      border: #333;
     color: white;
     cursor: pointer;
+      margin: 5px;
   }
+    #logout {
+        margin: 5px;
+        background-color: #333;
+        color: white;
+        cursor: pointer;
+        border: 1px solid #333;
+    }
 </style>
