@@ -6,6 +6,7 @@ import ViewPost from './components/ViewPost.vue'
 import Registration from './components/Registration.vue'
 import Login from './components/unused/Login.vue'
 import Search from './components/layout/Search.vue'
+import UserActivities from './components/UserActivities.vue'
 
 
 Vue.use(Router);
@@ -73,5 +74,11 @@ export default new Router({
           component: Search
       }
 
+    },
+    {
+      path: '/userActivities',
+      name: 'userActivities',
+      component: UserActivities
+    }
   ]
 })

@@ -36,30 +36,37 @@ public class Post {
 
     private String fileLocation;
 
+    @NotNull
+    private long userId;
+
     private String postedBy;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "postId", cascade = CascadeType.ALL)
     private List<Reply> answers = new LinkedList<>();
 
-    public Post(String title, String description, String topic) {
+    public Post(String title, String description, String topic, Long userId) {
         this.title = title;
         this.description = description;
         this.topic = topic;
+        this.userId = userId;
     }
 
-    public Post(String topic, String title, String description, String rewardDescription) {
+    public Post(String topic, String title, String description, String rewardDescription, Long userId) {
         this.title = title;
         this.description = description;
         this.topic = topic;
         this.rewardDescription = rewardDescription;
+        this.userId = userId;
     }
 
-    public Post(String topic, String title, String description, String rewardDescription, String fileLocation) {
+    public Post(String topic, String title, String description, String rewardDescription,
+                String fileLocation, Long userId) {
         this.title = title;
         this.description = description;
         this.topic = topic;
         this.rewardDescription = rewardDescription;
         this.fileLocation = fileLocation;
+        this.userId = userId;
     }
 
 }

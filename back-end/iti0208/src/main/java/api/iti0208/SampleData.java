@@ -33,6 +33,21 @@ public class SampleData implements CommandLineRunner {
     @Override
     @Transactional
     public void run(String... args) throws Exception {
+
+        userRepository.save(
+                new AppUser("admin_test",
+                        bCryptPasswordEncoder.encode("admin_test"),
+                        Collections.singletonList(new SimpleGrantedAuthority("ROLE_ADMIN"))
+                )
+        );
+
+        userRepository.save(
+                new AppUser("user_test",
+                        bCryptPasswordEncoder.encode("user_test"),
+                        Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER"))
+                )
+        );
+
         Stream.of(
                 Arrays.asList("Mathematics", "Mathematics 1", "Mathematics"),
                 Arrays.asList("Biology", "Biology  1 ", "Biology"),
@@ -69,23 +84,11 @@ public class SampleData implements CommandLineRunner {
                 Arrays.asList("Mathematics", "Mathematics 6", "Mathematics"),
                 Arrays.asList("Mathematics", "Mathematics 7", "Mathematics"))
                 .forEach(title -> postRepository.save(
-                        new Post(title.get(0), title.get(1), title.get(2))
+                        new Post(title.get(0), title.get(1), title.get(2), 2L)
                 ));
 
         postRepository.findAll().forEach(System.out::println);
 
-        userRepository.save(
-                new AppUser("admin_test",
-                        bCryptPasswordEncoder.encode("admin_test"),
-                        Collections.singletonList(new SimpleGrantedAuthority("ROLE_ADMIN"))
-                )
-        );
 
-        userRepository.save(
-                new AppUser("user_test",
-                        bCryptPasswordEncoder.encode("user_test"),
-                        Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER"))
-                )
-        );
     }
 }

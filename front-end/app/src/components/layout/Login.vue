@@ -12,6 +12,8 @@
               <router-link id="logout" tag="button" to="/" v-if="isHidden" @click="logout">Logout</router-link>
 
               <li class="dropdown order-1" v-if="!isHidden" style="background-color: #333">
+            <router-link id="myActivities" tag="button" to="/userActivities" exact>My Activities</router-link>
+            <li class="dropdown order-1">
               <button type="button" id="dropdownMenu1" data-toggle="dropdown"
                       class="btn btn-outline-success dropdown-toggle my-2 my-sm-0">Login
                 <span class="caret"></span>
