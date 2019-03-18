@@ -1,12 +1,10 @@
 <template>
     <div>
-        <h2 v-if="topic === 'all'">Last uploaded</h2>
-        <div class="items" v-for="data in response">
+        <h2 v-if="topic === 'all'">Search Result</h2>
+        <div class="items" v-for="data in response" :key='data.id' @click="goToDetail(data.id)">
             <h3> {{data.title}}</h3>
             <p>{{data.description}}</p>
 
-            <!--p>{{data.rewardDescription}}</p>
-            <a v-if="data.fileLocation" v-bind:href=data.fileLocation>Extra information</a-->
         </div>
 
         <br>
@@ -27,14 +25,14 @@
         name: 'Search',
         methods: {
 
-            goToDetail(searchTerm) {
-                this.$router.push({name: 'search', params: {searchTerm: searchTerm}})
+            goToDetail(proId) {
+                this.$router.push({name: 'viewpost', params: {Pid: proId}})
             },
             loadContent() {
                 this.currentPageNum = 0;
-                const searchTerm = this.$route.name;
+                const searchTerm = this.$route.params.item;
                 let url = '';
-                    url = 'http://localhost:8090/api/posts/find?searchTerm=Mat';
+                    url = 'http://localhost:8090/api/posts/find?searchTerm=' + searchTerm;
                     this.topic = searchTerm;
                 this.dataRequest(url);
             },
@@ -50,9 +48,9 @@
                     + '&page=' + this.currentPageNum;
                 this.dataRequest(url);
             },
-            dataRequest(url) {
+            dataRequest() {
                 axios
-                    .get(url)
+                    .get('http://localhost:8090/api/posts/find?searchTerm=' + this.topic)
                     .then((response) => {
                         this.response = response.data.posts;
 
