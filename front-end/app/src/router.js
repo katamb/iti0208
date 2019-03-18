@@ -68,12 +68,10 @@ export default new Router({
       name: 'login',
       component: Login
     },
-      {
-          path: '/search=:item',
-          name: 'search',
-          component: Search
-      }
-
+    {
+        path: '/search=:item',
+        name: 'search',
+        component: Search
     },
     {
       path: '/userActivities',
