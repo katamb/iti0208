@@ -15,11 +15,8 @@
                    v-validate="{ required: true, min: 2, max: 128 }"><br>
             <div class="error" v-if="errors.has('firstname')">{{errors.first('firstname')}}</div>
 
-<<<<<<<<< Temporary merge branch 1
-            Last name:<br>
-=========
+
             <h5>Last name:</h5><br>
->>>>>>>>> Temporary merge branch 2
             <input type="text" name="lastname" placeholder="Lastname" v-model="lastName"
                    v-validate="{ required: true, min: 2 }"><br>
             <div class="error" v-if="errors.has('lastname')">{{errors.first('lastname')}}</div>

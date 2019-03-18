@@ -1,17 +1,8 @@
 <template>
   <div id="app">
-  <Login />
-  <!-- <nav class="navbar navbar-expand-lg navbar-light">
-      <ul class="navbar-nav mr-auto mt-2 mt-lg-0 ml-auto">
-        <router-link tag="button" class="btn btn-outline-success my-2 my-sm-0" to="/registration" exact> Register </router-link>
-        <router-link tag="button" class="btn btn-outline-success my-2 my-sm-0" to="/login" exact> Login </router-link>
+      <Login />
 
-      </ul>
-
-    </nav>
-    -->
-
-    <Header />
+      <Header />
 
     <div id="nav" >
       <p class="b">
@@ -27,10 +18,11 @@
         <router-link tag="li" class="col" class-active="active" to="/addpost" exact> Add a Post </router-link>
 
         </ul>
-      <form class="form-inline my-2 my-lg-0">
+      <form class="form-inline my-2 my-lg-0" >
         <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
       </form>
+
       </nav>
       </p>
     </div>
@@ -41,13 +33,18 @@
 <script>
   import Header from './components/layout/Header.vue';
   import Login from './components/layout/Login.vue';
+  import Search from "./components/unused/Search";
 
   export default {
     name: "app",
     components: {
+        Search,
       Header,
       Login
-    }
+    },
+      methods : {
+
+      }
   }
 </script>
 

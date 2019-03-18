@@ -55,6 +55,7 @@
                 username: '',
                 password: '',
                 return_msg: '',
+                isHidden: false,
             };
         },
         methods: {

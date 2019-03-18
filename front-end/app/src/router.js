@@ -5,6 +5,7 @@ import AddPost from './components/AddPost.vue'
 import ViewPost from './components/ViewPost.vue'
 import Registration from './components/Registration.vue'
 import Login from './components/unused/Login.vue'
+import Search from './components/unused/Search.vue'
 
 
 Vue.use(Router);
@@ -54,7 +55,7 @@ export default new Router({
     {
       path: '/viewpost/:Pid',
       name: 'viewpost',
-      component: ViewPost
+        component: ViewPost
     },
     {
       path: '/registration/',
@@ -65,6 +66,12 @@ export default new Router({
       path: '/login/',
       name: 'login',
       component: Login
-    }
+    },
+      {
+          path: '/find?searchTerm=:searchTerm',
+          name: 'search',
+          component: Search
+      }
+
   ]
 })
