@@ -36,7 +36,7 @@
                        @change="loadTextFromFile"/>
             </div>
             <br>
-            <input type="submit" value="Submit">
+            <input type="submit" value="Submit" >
         </form>
     </div>
 </template>
@@ -100,14 +100,36 @@
                             });
                             this.return_msg = "Post successfully uploaded!";
                             this.resetFields();
-                        } else {
+                        }
+                        else if (response.status === 401 || response.status === 500) {
+                            Swal.fire({
+                                type: 'error',
+                                title: "Please log in to do post",
+                            });
+                            this.return_msg = "Please log in to do post!";
+                        }
+                        else {
                             Swal.fire({
                                 type: 'error',
                                 title: "Sorry, there was a problem uploading Your post!",
                             });
                             this.return_msg = "Sorry, there was a problem uploading Your post!";
                         }
-                    });
+                    })
+                    .catch((error) => {
+                            Swal.fire({
+                                position: 'center',
+                                type: 'error',
+                                title: "Wrong username or password, try again!",
+                                showConfirmButton: false,
+                                timer: 1200
+                            });
+                            this.resetFields();
+                            this.return_msg = error;
+
+                        }
+
+                    );
             },
             processForm() {
                 this.$validator.validate().then(valid => {
