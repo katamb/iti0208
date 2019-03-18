@@ -5,6 +5,7 @@ import AddPost from './components/AddPost.vue'
 import ViewPost from './components/ViewPost.vue'
 import Registration from './components/Registration.vue'
 import Login from './components/unused/Login.vue'
+import Search from './components/layout/Search.vue'
 import UserActivities from './components/UserActivities.vue'
 
 
@@ -55,7 +56,7 @@ export default new Router({
     {
       path: '/viewpost/:Pid',
       name: 'viewpost',
-      component: ViewPost
+        component: ViewPost
     },
     {
       path: '/registration/',
@@ -66,6 +67,13 @@ export default new Router({
       path: '/login/',
       name: 'login',
       component: Login
+    },
+      {
+          path: '/search=:item',
+          name: 'search',
+          component: Search
+      }
+
     },
     {
       path: '/userActivities',
