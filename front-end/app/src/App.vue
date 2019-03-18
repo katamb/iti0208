@@ -18,9 +18,9 @@
         <router-link tag="li" class="col" class-active="active" to="/addpost" exact> Add a Post </router-link>
 
         </ul>
-      <form class="form-inline my-2 my-lg-0" >
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      <form class="form-inline my-2 my-lg-0" @submit="searchFunction">
+        <input class="form-control mr-sm-2" id="searchTerm" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit" >Search</button>
       </form>
 
       </nav>
@@ -33,7 +33,7 @@
 <script>
   import Header from './components/layout/Header.vue';
   import Login from './components/layout/Login.vue';
-  import Search from "./components/unused/Search";
+  import Search from "./components/layout/Search";
 
   export default {
     name: "app",
@@ -42,8 +42,22 @@
       Header,
       Login
     },
+      data() {
+        return {
+            item: ''
+        }
+      },
       methods : {
 
+        searchFunction() {
+            this.item = document.getElementById("searchTerm").value;
+            this.$router.push({name: 'search', params: {item: this.item}});
+
+
+
+
+
+        }
       }
   }
 </script>
