@@ -92,14 +92,12 @@
             enableEditingReply(data){
                 this.tempValue = data.reply;
                 this.editing = data.id;
-                console.log(this.tempValue);
             },
             enableEditingPost(data){
                 this.newTitle = data.title;
                 this.newDescription = data.description;
                 this.newRewardDescription = data.rewardDescription;
                 this.editing1 = data.id;
-                console.log(this.newDescription);
             },
 
             disableEditingReply: function(){
