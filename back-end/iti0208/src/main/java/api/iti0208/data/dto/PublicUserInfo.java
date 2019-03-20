@@ -1,4 +1,4 @@
-package api.iti0208.data.output;
+package api.iti0208.data.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
