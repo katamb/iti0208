@@ -1,11 +1,9 @@
 <template>
-  <div class="main-div" style="margin-left: auto">
+  <div class="main-div">
     <nav class="navbar navbar-expand-lg navbar-light" role="navigation" style="justify-content: space-between">
 
       <div class="container">
-
-        <div class="collapse navbar-collapse" id="exCollapsingNavbar">
-          <ul class="nav navbar-nav" style="justify-content:space-between; margin-left: auto">
+          <ul class="nav navbar-nav" style="margin-left: auto">
               <li style="background-color: #333">
               <router-link id="register" tag="button" to="/registration" v-if="!isHidden" exact>Register</router-link>
               <router-link id="myActivities" tag="button" to="/userActivities" exact>My Activities</router-link>
@@ -44,7 +42,6 @@
               </ul>
             </li>
           </ul>
-        </div>
       </div>
     </nav>
   </div>
@@ -138,7 +135,9 @@
 </script>
 
 <style scoped>
-
+    .ml-auto {
+        margin-left: 0 !important;
+    }
   button:focus {
     outline: 0;
   }
