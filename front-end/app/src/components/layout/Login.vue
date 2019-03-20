@@ -7,13 +7,12 @@
         <div class="collapse navbar-collapse" id="exCollapsingNavbar">
           <ul class="nav navbar-nav" style="justify-content:space-between; margin-left: auto">
               <li style="background-color: #333">
-            <router-link id="register" tag="button" to="/registration" v-if="!isHidden" exact>Register</router-link>
+              <router-link id="register" tag="button" to="/registration" v-if="!isHidden" exact>Register</router-link>
+              <router-link id="myActivities" tag="button" to="/userActivities" exact>My Activities</router-link>
 
-              <router-link id="logout" tag="button" to="/" v-if="isHidden" @click="logout">Logout</router-link>
+              <router-link id="logout" tag="button" to="/" v-if="isHidden"  @click="logout">Logout</router-link>
 
-              <li class="dropdown order-1" v-if="!isHidden" style="background-color: #333">
-            <router-link id="myActivities" tag="button" to="/userActivities" exact>My Activities</router-link>
-            <li class="dropdown order-1">
+            <li class="dropdown order-1" v-if="!isHidden" style="background-color: #333">
               <button type="button" id="dropdownMenu1" data-toggle="dropdown"
                       class="btn btn-outline-success dropdown-toggle my-2 my-sm-0">Login
                 <span class="caret"></span>
@@ -88,8 +87,7 @@
                                 showConfirmButton: false,
                                 timer: 1000
                             })
-                        }
-                        else {
+                        } else {
                             Swal.fire({
                                 position: 'center',
                                 type: 'error',
@@ -102,18 +100,17 @@
                         }
                     })
                     .catch(responce => {
-                        Swal.fire({
-                            position: 'center',
-                            type: 'error',
-                            title: "Wrong username or password, try again!",
-                            showConfirmButton: false,
-                            timer: 1200
-                        });
-                        this.resetFields();
-                        this.return_msg = responce;
+                            Swal.fire({
+                                position: 'center',
+                                type: 'error',
+                                title: "Wrong username or password, try again!",
+                                showConfirmButton: false,
+                                timer: 1200
+                            });
+                            this.resetFields();
+                            this.return_msg = responce;
 
                         }
-
                     );
             },
             resetFields() {
@@ -130,16 +127,12 @@
                     }
                 });
             },
-
             logout() {
                 this.isHidden = false;
                 localStorage.removeItem("Authorization");
             }
-
-
         }
     }
-
 
 
 </script>
@@ -177,16 +170,19 @@
 
   button[type="button"], [tag="button"] {
     background-color: #333;
-      border: #333;
+    border: #333;
     color: white;
     cursor: pointer;
-      margin: 5px;
+    margin: 5px;
   }
-    #logout {
-        margin: 5px;
-        background-color: #333;
-        color: white;
-        cursor: pointer;
-        border: 1px solid #333;
-    }
+
+  #logout, #myActivities {
+    margin: 5px;
+    background-color: #333;
+    color: white;
+    cursor: pointer;
+    border: 1px solid #333;
+  }
+
+
 </style>
