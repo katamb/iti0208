@@ -1,4 +1,4 @@
-package api.iti0208.data.dto;
+package api.iti0208.data.output;
 
 import api.iti0208.data.entity.Post;
 import lombok.AllArgsConstructor;

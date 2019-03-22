@@ -1,6 +1,7 @@
 package api.iti0208.controller;
 
-import api.iti0208.data.dto.UploadFileResponse;
+import api.iti0208.data.output.UploadFileResponse;
+import api.iti0208.exception.BadRequestException;
 import api.iti0208.service.FileStorageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
@@ -46,6 +47,7 @@ public class FileController {
         try {
             contentType = request.getServletContext().getMimeType(resource.getFile().getAbsolutePath());
         } catch (IOException ex) {
+            throw new BadRequestException("Unknown file type!");
         }
 
         // Fallback to the default content type if type could not be determined
