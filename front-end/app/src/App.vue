@@ -33,10 +33,12 @@
 <script>
   import Header from './components/layout/Header.vue';
   import Login from './components/layout/Login.vue';
+  import Search from "./components/layout/Search";
 
   export default {
     name: "app",
     components: {
+        Search,
       Header,
       Login
     },
