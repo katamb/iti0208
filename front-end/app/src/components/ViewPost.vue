@@ -4,22 +4,20 @@
 
             <h1>{{response.title}}</h1>
             <div class="description">
-                <h3>Description: </h3>
-                <p>{{response.description}}</p>
+                <div class="post">
+                <h4>{{response.description}}</h4>
                 <p>{{response.rewardDescription}}</p>
                 <a v-if="response.fileLocation" v-bind:href=response.fileLocation>Extra information</a>
-            </div>
 
+                </div>
             <br>
-            <h1>Replies</h1>
-            <div class="description">
 
-                <div v-for="answer in response.answers" :key='answer.id'>
-                    <div class="reply-description">
+            <h2>Replies</h2>
+                <div v-for="answer in response.answers" :key='answer.id'>d                    <div class="reply-description">
 
-                    <h3>Reply :</h3><br>
+                    <h3>Reply:</h3><br>
                     {{answer.reply}}<br>
-                    <a v-if="answer.fileLocation" v-bind:href=answer.fileLocation>Extra information</a>
+                    <a class="a-button" v-if="answer.fileLocation" v-bind:href=answer.fileLocation>Extra information</a>
                         <h3> {{ return_msg }} </h3>
                     </div>
                     <br>
@@ -30,8 +28,7 @@
                     <input type="text" name="reply" placeholder="Reply" v-model="reply"
                            v-validate="{ required: true, min: 5 }"><br>
                     <div class="error" v-if="errors.has('reply')">{{errors.first('reply')}}</div>
-
-                    <h3>File:</h3>
+                    <br>
                     <div class="upload-btn-wrapper">
                         <button class="btn">Upload a file</button>
                         <input id="singleFileUploadInput" type="file" name="file" class="file-input"
@@ -181,6 +178,7 @@
 
     .description {
         border-radius: 4px;
+        padding-right: 30px;
         font-family: Arial, Helvetica, sans-serif;
         font-size: medium;
         text-align: center;
@@ -192,6 +190,7 @@
     }
 
     .reply-description {
+        padding-right: 30px;
         border-radius: 4px;
         font-family: Arial, Helvetica, sans-serif;
         font-size: medium;
@@ -206,7 +205,7 @@
 
     input[type=text] {
         color: black;
-        width: 20%;
+        width: 60%;
         height: auto;
         padding: 12px 20px;
         margin: 0px auto;
@@ -214,8 +213,9 @@
         border: 1px solid #ccc;
         border-radius: 4px;
         box-sizing: border-box;
-        background-color: #cccccc;
+
     }
+
 
     input[type="submit"] {
         display: inline-block;
@@ -228,5 +228,43 @@
         cursor: pointer;
     }
 
+    h2{
+        overflow:hidden;
+    }
+    h2:after {
+        content:'';
+        display:inline-block;
+        width:100%; height:100%;
+        margin-right:-100%;
+        border-bottom:1px solid #000;
+    }
+    h2:before {
+        content:'';
+        display:inline-block;
+        width:100%; height:100%;
+        margin-left:-100%;
+        border-bottom:1px solid #000;
+    }
 
+    #reply-form {
+        text-align: left;
+        padding: 30px;
+    }
+
+    .post {
+        text-align: left;
+        padding: 30px;
+    }
+
+    .a-button {
+        display: block;
+        width: 115px;
+        height: 25px;
+        background: #4E9CAF;
+        padding: 10px;
+        text-align: center;
+        border-radius: 5px;
+        color: white;
+        font-weight: bold;
+    }
 </style>
