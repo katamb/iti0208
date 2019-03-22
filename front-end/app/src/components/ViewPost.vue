@@ -13,7 +13,8 @@
             <br>
 
             <h2>Replies</h2>
-                <div v-for="answer in response.answers" :key='answer.id'>d                    <div class="reply-description">
+                <div v-for="answer in response.answers" :key='answer.id' style="padding-left: 30px">
+                    <div class="reply-description">
 
                     <h3>Reply:</h3><br>
                     {{answer.reply}}<br>
