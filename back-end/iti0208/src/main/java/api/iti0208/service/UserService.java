@@ -1,8 +1,10 @@
 package api.iti0208.service;
 
-import api.iti0208.data.dto.PublicUserInfo;
+import api.iti0208.data.entity.Post;
+import api.iti0208.data.entity.Reply;
+import api.iti0208.data.output.PublicUserInfo;
 import api.iti0208.data.entity.AppUser;
-import api.iti0208.data.dto.UserRegistrationInput;
+import api.iti0208.data.input.UserRegistrationInput;
 import api.iti0208.exception.BadRequestException;
 import api.iti0208.exception.PageNotFoundException;
 import api.iti0208.repository.UserRepository;
@@ -35,7 +37,6 @@ public class UserService implements UserDetailsService {
     }
 
     public void save(UserRegistrationInput registration) {
-
         if (registration == null) {
             throw new BadRequestException("Something went wrong!");
         }
@@ -51,7 +52,8 @@ public class UserService implements UserDetailsService {
         appUser.setUsername(registration.getUsername());
         appUser.setPassword(bCryptPasswordEncoder.encode(registration.getPassword()));
         appUser.setGrantedAuthorities(
-                Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER")));
+                Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER"))
+        );
 
         userRepository.save(appUser);
     }
@@ -70,6 +72,21 @@ public class UserService implements UserDetailsService {
 
             return publicInfo;
         }
+    }
+
+    public Set<Post> getUserPosts(String username) {
+        return userRepository.findByUsername(username).getUserPosts();
+    }
+
+    public Set<Reply> getUserReplies(String username) {
+        return userRepository.findByUsername(username).getUserReplies();
+    }
+
+    public String getUsernameFromJwt(String token) {
+        return JWT.require(Algorithm.HMAC512(SECRET.getBytes()))
+                .build()
+                .verify(token.replace(TOKEN_PREFIX, ""))
+                .getSubject().split(";")[0];
     }
 
     public static String getUsernameFromJwtToken(String token) {
