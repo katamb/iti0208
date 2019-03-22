@@ -7,9 +7,9 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
+
 
 @Data
 @NoArgsConstructor
@@ -36,42 +36,13 @@ public class Post {
 
     private String fileLocation;
 
+    @NotNull
     private long userId;
-
-    private Date postedAt;
 
     private String postedBy;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "postId", cascade = CascadeType.ALL)
     private List<Reply> answers = new LinkedList<>();
-
-    @PrePersist
-    protected void onCreate() {
-        postedAt = new Date();
-    }
-
-    public Post(String title, String description, String topic) {
-        this.title = title;
-        this.description = description;
-        this.topic = topic;
-    }
-
-
-    public Post(Long id, String title, String description, String topic, Long userId) {
-        this.id = id;
-        this.title = title;
-        this.description = description;
-        this.topic = topic;
-        this.userId = userId;
-    }
-
-    public Post(String title, String description, String topic, Long userId, String postedBy) {
-        this.title = title;
-        this.description = description;
-        this.topic = topic;
-        this.userId = userId;
-        this.postedBy = postedBy;
-    }
 
     public Post(String title, String description, String topic, Long userId) {
         this.title = title;

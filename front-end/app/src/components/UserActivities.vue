@@ -69,9 +69,11 @@
 
             deletePost(postId) {
                 axios.
-                    delete('http://localhost:8090/api/delete/post/' + postId,
-                    { headers: { "Authorization": localStorage.getItem("Authorization") } }
-                    );
+                    delete('http://localhost:8090/api/delete/post/' + postId,  {
+                    headers: {
+                        "Authorization": localStorage.getItem("Authorization")
+                    }
+                });
 
                 this.loadUserActivities();
             },
@@ -79,8 +81,11 @@
             deleteReply(replyId) {
                 axios.
                 delete('http://localhost:8090/api/delete/reply/' + replyId,
-                    { headers: { "Authorization": localStorage.getItem("Authorization") } }
-                    );
+                    {
+                        headers: {
+                            "Authorization": localStorage.getItem("Authorization")
+                        }
+                    });
                 this.loadUserActivities();
             },
 
@@ -109,12 +114,17 @@
 
                 this.response1[index].reply = this.tempValue;
                 axios
-                    .patch('http://localhost:8090/api/edit/reply/' + replyId,
+                    .post('http://localhost:8090/api/edit/reply/' + replyId,
+
                         {
                             reply : this.tempValue
+
                         },
-                        { headers: {"Authorization": localStorage.getItem("Authorization") } }
-                        );
+                        {
+                            headers: {
+                                "Authorization": localStorage.getItem("Authorization")
+                            }
+                        });
                 this.disableEditingReply();
             },
             saveEditPost(index, postId) {
@@ -122,10 +132,14 @@
                 this.response[index].description = this.newDescription;
                 this.response[index].rewardDescription = this.newRewardDescription;
                 axios
-                    .patch('http://localhost:8090/api/edit/post/' + postId,
+                    .post('http://localhost:8090/api/edit/post/' + postId,
+
                         {
                              title: this.newTitle,
-                             description: this.newDescription
+                             description: this.newDescription,
+                             rewardDescription: this.newRewardDescription
+
+
                         },
                         {
                             headers: {

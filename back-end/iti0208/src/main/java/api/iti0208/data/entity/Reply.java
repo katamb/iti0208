@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.util.Date;
 
 @Entity
 @Data
@@ -30,13 +29,6 @@ public class Reply {
     private long userId;
 
     private String postedBy;
-
-    private Date postedAt;
-
-    @PrePersist
-    protected void onCreate() {
-        postedAt = new Date();
-    }
 
     public Reply(String reply, Long postId) {
         this.reply = reply;

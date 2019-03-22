@@ -38,10 +38,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/api/posts").permitAll()
                 .antMatchers("/api/posts/**").permitAll()
-                .antMatchers("/api/downloadFile/**").permitAll()
                 .antMatchers("/api/login").permitAll()
+                //.antMatchers("/api/logout").permitAll() -> logout on front endis
                 .antMatchers("/api/register").permitAll()
-                //.antMatchers("/api/add/post").permitAll()
+                .antMatchers("/api/add/post").permitAll()
                 //.antMatchers("/api/user/**").hasAnyAuthority("ROLE_USER")
                 .antMatchers("/api/**").authenticated();
 
