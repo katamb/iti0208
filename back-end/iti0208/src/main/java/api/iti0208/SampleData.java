@@ -91,7 +91,7 @@ public class SampleData implements CommandLineRunner {
                 Arrays.asList("Mathematics", "Mathematics 6", "Mathematics"),
                 Arrays.asList("Mathematics", "Mathematics 7", "Mathematics"))
                 .forEach(title -> postRepository.save(
-                        new Post(title.get(0), title.get(1), title.get(2), 2L)
+                        new Post(title.get(0), title.get(1), title.get(2), 2L, "user_test")
                 ));
 
         postRepository.save(

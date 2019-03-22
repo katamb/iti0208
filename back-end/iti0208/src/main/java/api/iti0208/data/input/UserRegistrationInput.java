@@ -1,4 +1,4 @@
-package api.iti0208.data.dto;
+package api.iti0208.data.input;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

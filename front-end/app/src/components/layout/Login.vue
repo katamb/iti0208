@@ -1,54 +1,54 @@
 <template>
-    <div class="main-div">
-        <nav class="navbar navbar-expand-lg navbar-light" role="navigation" style="justify-content: space-between">
+  <div class="main-div" style="margin-left: auto">
+    <nav class="navbar navbar-expand-lg navbar-light" role="navigation" style="justify-content: space-between">
 
-            <div class="container">
-                <ul class="nav navbar-nav" style="margin-left: auto">
-                    <li style="background-color: #333">
-                        <router-link id="register" tag="button" to="/registration" v-if="!LoggedIn" exact>Register
-                        </router-link>
-                        <router-link id="myActivities" tag="button" to="/userActivities" v-if="LoggedIn" exact>My
-                            Activities
-                        </router-link>
+      <div class="container">
 
-                        <button id="logout" tag="button"  v-if="LoggedIn" @click="logout">Logout
-                        </button>
+        <div class="collapse navbar-collapse" id="exCollapsingNavbar">
+          <ul class="nav navbar-nav" style="justify-content:space-between; margin-left: auto">
+            <li style="background-color: #333">
+              <router-link id="register" tag="button" to="/registration" v-if="!isHidden" exact>Register</router-link>
 
-                    <li class="dropdown order-1" v-if="!LoggedIn" style="background-color: #333">
-                        <button type="button" id="dropdownMenu1" data-toggle="dropdown"
-                                class="btn btn-outline-success dropdown-toggle my-2 my-sm-0">Login
-                            <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu dropdown-menu-right mt-2">
-                            <li class="px-3 py-2">
-                                <form class="form" role="form" @submit="postInfo">
-                                    <div class="form-group">
-                                        <input id="usernameInput" placeholder="Username"
-                                               class="form-control form-control-sm" type="text" required=""
-                                               v-model="username">
-                                    </div>
-                                    <div class="form-group">
-                                        <input id="passwordInput" placeholder="Password"
-                                               class="form-control form-control-sm" type="password" required=""
-                                               v-model="password">
-                                    </div>
-                                    <div class="form-group">
-                                        <button type="submit" class="btn btn-primary btn-block">Login</button>
-                                    </div>
+              <router-link id="logout" tag="button" to="/" v-if="isHidden" @click="logout">Logout</router-link>
 
-                                    <div class="form-group text-center">
-                                        <small>
-                                            <a href="#" data-toggle="modal">Forgot password?</a>
-                                        </small>
-                                    </div>
-                                </form>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-    </div>
+            <li class="dropdown order-1" v-if="!isHidden" style="background-color: #333">
+              <router-link id="myActivities" tag="button" to="/userActivities" exact>My Activities</router-link>
+            <li class="dropdown order-1">
+              <button type="button" id="dropdownMenu1" data-toggle="dropdown"
+                      class="btn btn-outline-success dropdown-toggle my-2 my-sm-0">Login
+                <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu dropdown-menu-right mt-2">
+                <li class="px-3 py-2">
+                  <form class="form" role="form" @submit="postInfo">
+                    <div class="form-group">
+                      <input id="usernameInput" placeholder="Username"
+                             class="form-control form-control-sm" type="text" required=""
+                             v-model="username">
+                    </div>
+                    <div class="form-group">
+                      <input id="passwordInput" placeholder="Password"
+                             class="form-control form-control-sm" type="password" required=""
+                             v-model="password">
+                    </div>
+                    <div class="form-group">
+                      <button type="submit" class="btn btn-primary btn-block">Login</button>
+                    </div>
+
+                    <div class="form-group text-center">
+                      <small>
+                        <a href="#" data-toggle="modal">Forgot password?</a>
+                      </small>
+                    </div>
+                  </form>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </div>
 </template>
 
 <script>
@@ -62,7 +62,7 @@
                 username: '',
                 password: '',
                 return_msg: '',
-                LoggedIn: false,
+                isHidden: false,
             };
         },
         methods: {
@@ -80,7 +80,7 @@
                             this.return_msg = "Logged in!";
                             this.username = response.username;
                             this.resetFields();
-                            this.LoggedIn = true;
+                            this.isHidden = true;
                             Swal.fire({
                                 position: 'center',
                                 type: 'success',
@@ -129,9 +129,8 @@
                 });
             },
             logout() {
-                this.LoggedIn = false;
+                this.isHidden = false;
                 localStorage.removeItem("Authorization");
-                this.$router.push("/")
             }
         }
     }
@@ -140,54 +139,49 @@
 </script>
 
 <style scoped>
-    .ml-auto {
-        margin-left: 0 !important;
-    }
 
-    button:focus {
-        outline: 0;
-    }
+  button:focus {
+    outline: 0;
+  }
 
-    nav {
-        background-color: #D6BDF3;
-        margin: 0px auto;
-    }
+  nav {
+    background-color: #D6BDF3;
+    margin: 0px auto;
+  }
 
-    nav li {
-        background-color: white;
-        text-align: center;
-        border: 1px solid #333;
-        border-radius: 4px;
-    }
+  nav li {
+    background-color: white;
+    text-align: center;
+    border: 1px solid #333;
+    border-radius: 4px;
+  }
 
-    li.dropdown order-1 {
-        background-color: white;
-    }
+  li.dropdown order-1 {
+    background-color: white;
+  }
 
-    li {
-        list-style-type: none;
-    }
+  li {
+    list-style-type: none;
+  }
 
 
-    .navbar .dropdown-menu .form-control {
-        width: 200px;
-    }
+  .navbar .dropdown-menu .form-control {
+    width: 200px;
+  }
 
-    button[type="button"], [tag="button"] {
-        background-color: #333;
-        border: #333;
-        color: white;
-        cursor: pointer;
-        margin: 5px;
-    }
+  button[type="button"], [tag="button"] {
+    background-color: #333;
+    border: #333;
+    color: white;
+    cursor: pointer;
+    margin: 5px;
+  }
 
-    #logout, #myActivities {
-        margin: 5px;
-        background-color: #333;
-        color: white;
-        cursor: pointer;
-        border: 1px solid #333;
-    }
-
-
+  #logout {
+    margin: 5px;
+    background-color: #333;
+    color: white;
+    cursor: pointer;
+    border: 1px solid #333;
+  }
 </style>
