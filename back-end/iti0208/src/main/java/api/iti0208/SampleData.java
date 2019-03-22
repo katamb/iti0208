@@ -48,6 +48,13 @@ public class SampleData implements CommandLineRunner {
                 )
         );
 
+        userRepository.save(
+                new AppUser("user_hacks",
+                        bCryptPasswordEncoder.encode("user_hacks"),
+                        Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER"))
+                )
+        );
+
         Stream.of(
                 Arrays.asList("Mathematics", "Mathematics 1", "Mathematics"),
                 Arrays.asList("Biology", "Biology  1 ", "Biology"),
@@ -87,6 +94,9 @@ public class SampleData implements CommandLineRunner {
                         new Post(title.get(0), title.get(1), title.get(2), 2L, "user_test")
                 ));
 
+        postRepository.save(
+                new Post("Mathematics", "Mathematics 7", "Mathematics",
+                        3L, "user_hacks"));
         postRepository.findAll().forEach(System.out::println);
 
 
