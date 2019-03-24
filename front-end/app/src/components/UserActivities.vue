@@ -5,9 +5,8 @@
             <h3> {{data.title}}</h3>
             <p>{{data.description}}</p>
             <div v-if="editing1 == data.id">
-                <input v-model="newTitle">
-                <input v-model="newDescription">
-                <input v-model="newRewardDescription">
+                <input v-model="newTitle"><br/>
+                <input v-model="newDescription"><br/>
                 <button @click="disableEditingPost"> Cancel </button>
                 <button @click="saveEditPost(index, data.id)"> Save </button>
             </div>
@@ -91,7 +90,6 @@
             enableEditingPost(data){
                 this.newTitle = data.title;
                 this.newDescription = data.description;
-                this.newRewardDescription = data.rewardDescription;
                 this.editing1 = data.id;
             },
 
@@ -102,7 +100,6 @@
             disableEditingPost: function(){
                 this.newTitle = null;
                 this.newDescription = null;
-                this.newRewardDescription = null;
                 this.editing1 = false;
             },
             saveEditReply(index, replyId){
@@ -120,7 +117,6 @@
             saveEditPost(index, postId) {
                 this.response[index].title = this.newTitle;
                 this.response[index].description = this.newDescription;
-                this.response[index].rewardDescription = this.newRewardDescription;
                 axios
                     .patch('http://localhost:8090/api/edit/post/' + postId,
                         {
@@ -144,7 +140,6 @@
                 tempValue: null,
                 newTitle: null,
                 newDescription: null,
-                newRewardDescription: null,
                 editing: false,
                 editing1 : false
 

@@ -1,6 +1,7 @@
 package api.iti0208.service;
 
 import api.iti0208.config.FileStorageProperties;
+import api.iti0208.exception.BadRequestException;
 import api.iti0208.exception.FileStorageException;
 import api.iti0208.exception.PageNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,17 +17,21 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
-import java.util.Objects;
+import java.util.*;
 
 @Service
 public class FileStorageService {
 
     private final Path fileStorageLocation;
+    private final Set<String> whitelistedFileExtensions;
 
     @Autowired
     public FileStorageService(FileStorageProperties fileStorageProperties) {
         // Full path to uploads directory
         this.fileStorageLocation = Paths.get(fileStorageProperties.getUploadDir()).toAbsolutePath().normalize();
+        Set<String> whitelist = new HashSet<>(Arrays.asList("jpg", "png", "pdf", "txt",
+                "doc", "docx", "xls", "xlsx", "rtf", "jpeg", "tiff", "ppt"));
+        this.whitelistedFileExtensions = Collections.unmodifiableSet(whitelist);
 
         try {
             Files.createDirectories(this.fileStorageLocation);
@@ -45,6 +50,12 @@ public class FileStorageService {
             if (fileName.contains("..")) {
                 throw new FileStorageException("Sorry! Filename contains invalid path sequence " + fileName);
             }
+            // Check if file extension is whitelisted
+            String[] fileNameExtension = fileName.split("\\.");
+            if (!whitelistedFileExtensions.contains(
+                    fileNameExtension[fileNameExtension.length - 1].toLowerCase())) {
+                throw new BadRequestException("Unsupported file type!");
+            }
 
             Path targetLocation = this.fileStorageLocation.resolve(fileName);
 
@@ -53,7 +64,7 @@ public class FileStorageService {
             int randomNum = 0;
             while (Files.exists(targetLocation)) {
                 String[] fileNameParts = fileName.split("\\.");
-                newFileName = fileNameParts[0] + randomNum + "." + fileNameParts[1];
+                newFileName = fileNameParts[0] + randomNum + "." + fileNameParts[fileNameParts.length - 1];
                 randomNum += 1;
                 targetLocation = this.fileStorageLocation.resolve(newFileName);
             }
