@@ -5,7 +5,6 @@ import api.iti0208.data.input.ReplyPatchInput;
 import api.iti0208.exception.BadRequestException;
 import api.iti0208.repository.ReplyRepository;
 import api.iti0208.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -18,7 +17,6 @@ public class ReplyService {
     private final ReplyRepository replyRepo;
     private final UserRepository userRepo;
 
-    @Autowired
     public ReplyService(ReplyRepository replyRepo, UserRepository userRepo) {
         this.replyRepo = replyRepo;
         this.userRepo = userRepo;

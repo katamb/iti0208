@@ -25,7 +25,6 @@ public class FileStorageService {
     private final Path fileStorageLocation;
     private final Set<String> whitelistedFileExtensions;
 
-    @Autowired
     public FileStorageService(FileStorageProperties fileStorageProperties) {
         // Full path to uploads directory
         this.fileStorageLocation = Paths.get(fileStorageProperties.getUploadDir()).toAbsolutePath().normalize();

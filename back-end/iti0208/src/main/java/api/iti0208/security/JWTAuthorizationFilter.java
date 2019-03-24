@@ -52,19 +52,13 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
             // parse the token.
             String username = getUsernameFromJwtToken(token);
 
-            List<String> authorities = getAuthoritiesFromJwtToken(token);
-            List<SimpleGrantedAuthority> allAuthorities = new LinkedList<>();
-            for (String authority : authorities) {
-                allAuthorities.add(new SimpleGrantedAuthority(authority));
-            }
+            List<GrantedAuthority> authorities = getAuthoritiesFromJwtToken(token);
 
             if (username != null) {
-                return new UsernamePasswordAuthenticationToken(username, null, allAuthorities);
+                return new UsernamePasswordAuthenticationToken(username, null, authorities);
             }
         }
         return null;
     }
-
-
 
 }

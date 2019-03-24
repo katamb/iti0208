@@ -148,6 +148,7 @@
                             this.LoggedIn = true;
                         }
                     })
+                    .catch(() => {});
             } catch (e) {
                 this.LoggedIn = false;
             }

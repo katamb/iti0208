@@ -3,7 +3,6 @@ package api.iti0208.controller;
 import api.iti0208.data.output.UploadFileResponse;
 import api.iti0208.exception.BadRequestException;
 import api.iti0208.service.FileStorageService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -19,7 +18,6 @@ public class FileController {
 
     private final FileStorageService fileStorageService;
 
-    @Autowired
     public FileController(FileStorageService fileStorageService) {
         this.fileStorageService = fileStorageService;
     }

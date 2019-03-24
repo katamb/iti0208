@@ -10,7 +10,7 @@ import api.iti0208.exception.PageNotFoundException;
 import api.iti0208.repository.UserRepository;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -30,13 +30,12 @@ public class UserService implements UserDetailsService {
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    @Autowired
     public UserService(UserRepository userRepository, BCryptPasswordEncoder bCryptPasswordEncoder) {
         this.userRepository = userRepository;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
-    public void save(UserRegistrationInput registration) {
+    public AppUser save(UserRegistrationInput registration) {
         if (registration == null) {
             throw new BadRequestException("Something went wrong!");
         }
@@ -55,7 +54,7 @@ public class UserService implements UserDetailsService {
                 Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER"))
         );
 
-        userRepository.save(appUser);
+        return userRepository.save(appUser);
     }
 
     public PublicUserInfo getPublicInfo(String username) {
@@ -69,6 +68,7 @@ public class UserService implements UserDetailsService {
             publicInfo.setFirstName(user.getFirstName());
             publicInfo.setLastName(user.getLastName());
             publicInfo.setEmail(user.getEmail());
+            publicInfo.setGrantedAuthorities(user.getGrantedAuthorities());
 
             return publicInfo;
         }
@@ -82,11 +82,9 @@ public class UserService implements UserDetailsService {
         return userRepository.findByUsername(username).getUserReplies();
     }
 
+    // todo: made changes here, check if it works
     public String getUsernameFromJwt(String token) {
-        return JWT.require(Algorithm.HMAC512(SECRET.getBytes()))
-                .build()
-                .verify(token.replace(TOKEN_PREFIX, ""))
-                .getSubject().split(";")[0];
+        return getUsernameFromJwtToken(token);
     }
 
     public static String getUsernameFromJwtToken(String token) {
@@ -96,13 +94,22 @@ public class UserService implements UserDetailsService {
                 .getSubject().split(";")[0];
     }
 
-    public static List<String> getAuthoritiesFromJwtToken(String token) {
+    public static List<GrantedAuthority> getAuthoritiesFromJwtToken(String token) {
         String authoritiesString = JWT.require(Algorithm.HMAC512(SECRET.getBytes()))
                 .build()
                 .verify(token.replace(TOKEN_PREFIX, ""))
-                .getSubject().split(";")[1];
+                .getSubject()
+                .split(";")[1]
+                .split("\\[")[1]
+                .split("]")[0];
 
-        return new LinkedList<>(Arrays.asList(authoritiesString.split(",")));
+        List<GrantedAuthority> grantedAuthorities = new LinkedList<>();
+        String[] authorities = authoritiesString.split(",");
+        for (String authority : authorities) {
+            grantedAuthorities.add(new SimpleGrantedAuthority(authority));
+        }
+
+        return grantedAuthorities;
     }
 
     @Override

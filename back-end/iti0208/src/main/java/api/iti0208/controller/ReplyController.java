@@ -3,7 +3,6 @@ package api.iti0208.controller;
 import api.iti0208.data.entity.Reply;
 import api.iti0208.data.input.ReplyPatchInput;
 import api.iti0208.service.ReplyService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,7 +15,6 @@ public class ReplyController {
 
     private final ReplyService replyService;
 
-    @Autowired
     public ReplyController(ReplyService replyService) {
         this.replyService = replyService;
     }
