@@ -14,10 +14,6 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 public class UserRegistrationInput {
 
-    @Id
-    @GeneratedValue
-    private Long id;
-
     @NotNull
     @NotEmpty
     private String username;
@@ -38,7 +34,5 @@ public class UserRegistrationInput {
     @NotEmpty
     @Email
     private String email;
-
-    private String role;
 
 }

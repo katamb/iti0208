@@ -22,7 +22,6 @@ public class SampleData implements CommandLineRunner {
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    @Autowired
     public SampleData(PostRepository postRepository, UserRepository userRepository,
                       BCryptPasswordEncoder bCryptPasswordEncoder) {
         this.postRepository = postRepository;
@@ -36,21 +35,21 @@ public class SampleData implements CommandLineRunner {
 
         userRepository.save(
                 new AppUser("admin_test",
-                        bCryptPasswordEncoder.encode("admin_test"),
+                        "$2a$10$WRCO20EAIVmqpeTcvOp9he1z/PlMvHuz2/i733ULbKchN7yt54I/m",
                         Collections.singletonList(new SimpleGrantedAuthority("ROLE_ADMIN"))
                 )
         );
 
         userRepository.save(
                 new AppUser("user_test",
-                        bCryptPasswordEncoder.encode("user_test"),
+                        "$2a$10$05D4lwsoTRUR9lSDWkqkquPM56UZkiTPJ/cG5uK140GvYyqrGzr5u",
                         Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER"))
                 )
         );
 
         userRepository.save(
                 new AppUser("user_hacks",
-                        bCryptPasswordEncoder.encode("user_hacks"),
+                        "$2a$10$x8gop7p3ZXKeqMUQLh/i8OsMDcZz9iLw8Cmx/UEhCpkhpZgoDG0Cy",
                         Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER"))
                 )
         );
@@ -97,7 +96,7 @@ public class SampleData implements CommandLineRunner {
         postRepository.save(
                 new Post("Mathematics", "Mathematics 7", "Mathematics",
                         3L, "user_hacks"));
-        postRepository.findAll().forEach(System.out::println);
+        //postRepository.findAll().forEach(System.out::println);
 
 
     }

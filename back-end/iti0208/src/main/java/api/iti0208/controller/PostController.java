@@ -4,7 +4,6 @@ import api.iti0208.data.entity.Post;
 import api.iti0208.data.output.PostResponse;
 import api.iti0208.data.input.PostPatchInput;
 import api.iti0208.service.PostService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,13 +16,11 @@ import static api.iti0208.security.SecurityConstants.*;
 @RestController
 public class PostController {
 
-    @Autowired
-    private PostService postService;
+    private final PostService postService;
 
-    /*@Autowired
     public PostController(PostService postService) {
         this.postService = postService;
-    }*/
+    }
 
     @GetMapping("api/posts/{id}")
     public Post getPostItemById(@PathVariable Long id) {
