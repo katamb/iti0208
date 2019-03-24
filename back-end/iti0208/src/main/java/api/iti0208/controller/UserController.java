@@ -30,6 +30,10 @@ public class UserController {
         userService.save(userRegistrationInput);
     }
 
+    @GetMapping("api/check")
+    public void checkIfLoggedIn() {
+    }
+
     @GetMapping("api/user/{username}")
     @PreAuthorize("#username == authentication.name || hasAuthority('ROLE_ADMIN')")
     public PublicUserInfo getUser(@PathVariable("username") String username) {
