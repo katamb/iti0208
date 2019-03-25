@@ -1,6 +1,7 @@
 .gradle
 /build/
 /uploads/
+/src/test/resources/cache/
 !gradle/wrapper/gradle-wrapper.jar
 
 ### STS ###
