@@ -28,6 +28,7 @@ public class FileStorageService {
     public FileStorageService(FileStorageProperties fileStorageProperties) {
         // Full path to uploads directory
         this.fileStorageLocation = Paths.get(fileStorageProperties.getUploadDir()).toAbsolutePath().normalize();
+
         Set<String> whitelist = new HashSet<>(Arrays.asList("jpg", "png", "pdf", "txt",
                 "doc", "docx", "xls", "xlsx", "rtf", "jpeg", "tiff", "ppt"));
         this.whitelistedFileExtensions = Collections.unmodifiableSet(whitelist);

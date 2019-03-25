@@ -13,7 +13,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 import static api.iti0208.service.UserService.getUsernameFromJwtToken;
@@ -32,10 +31,6 @@ public class PostService {
     /**
      * Get methods to receive posts.
      */
-
-    public Optional<Post> getOptionalPostItemById(Long id) {
-        return postRepository.findById(id);
-    }
 
     public Post getPostItemById(Long id) {
         Optional<Post> post = postRepository.findById(id);
@@ -86,10 +81,6 @@ public class PostService {
         return pageableRequest;
     }
 
-    public List<Post> getPosts() {
-        return postRepository.findAll();
-    }
-
     /**
      * Save methods to save posts to DB.
      */
@@ -105,10 +96,6 @@ public class PostService {
             item.setUserId(userRepository.findIdByUsername(username));
         }
 
-        return postRepository.save(item);
-    }
-
-    public Post save(Post item) {
         return postRepository.save(item);
     }
 

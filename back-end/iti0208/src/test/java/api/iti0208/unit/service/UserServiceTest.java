@@ -1,4 +1,4 @@
-package api.iti0208.user;
+package api.iti0208.unit.service;
 
 import api.iti0208.data.entity.AppUser;
 import api.iti0208.data.entity.Post;
@@ -31,7 +31,6 @@ import java.util.Set;
 
 import static api.iti0208.security.SecurityConstants.EXPIRATION_TIME;
 import static api.iti0208.security.SecurityConstants.SECRET;
-import static api.iti0208.service.UserService.getAuthoritiesFromJwtToken;
 import static api.iti0208.service.UserService.getUsernameFromJwtToken;
 import static com.auth0.jwt.algorithms.Algorithm.HMAC512;
 import static junit.framework.TestCase.*;
@@ -45,6 +44,8 @@ public class UserServiceTest {
     @MockBean
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
+    // DON'T REMOVE postRepository and replyRepository beans, they seem unused,
+    // but are needed for the whole thing to compile
     @MockBean
     private PostRepository postRepository;
 
@@ -148,22 +149,11 @@ public class UserServiceTest {
     @Test
     public void testGetUsernameFromJWT() {
         String token = JWT.create()
-                .withSubject(testUser.getUsername() + ";" + testUser.getGrantedAuthorities().toString())
+                .withSubject(testUser.getUsername())
                 .withExpiresAt(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
                 .sign(HMAC512(SECRET.getBytes()));
 
         assertEquals("testUser", getUsernameFromJwtToken(token));
         assertEquals("testUser", userService.getUsernameFromJwt(token));
-    }
-
-    @Test
-    public void testGetRolesFromJWT() {
-        String token = JWT.create()
-                .withSubject(testUser.getUsername() + ";" + testUser.getGrantedAuthorities().toString())
-                .withExpiresAt(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
-                .sign(HMAC512(SECRET.getBytes()));
-
-        assertEquals(Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER")),
-                getAuthoritiesFromJwtToken(token));
     }
 }

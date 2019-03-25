@@ -1,7 +1,9 @@
-package api.iti0208.post;
+package api.iti0208.unit.repository;
 
 import api.iti0208.data.entity.Post;
-import api.iti0208.repository.PostRepository;
+import api.iti0208.data.entity.Reply;
+import api.iti0208.repository.ReplyRepository;
+import api.iti0208.repository.UserRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,26 +16,22 @@ import static org.assertj.core.api.Java6Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
-public class PostRepositoryTest {
+public class ReplyRepositoryTest {
 
     @Autowired
     private TestEntityManager entityManager;
 
     @Autowired
-    private PostRepository postRepository;
+    private ReplyRepository replyRepository;
 
     @Test
-    public void testToSeePosts() throws Exception {
-        // given
-        Post post = new Post("testpost", "testpost", "Varia",
-                2L, "user_test");
+    public void testToSeeReplies() {
+        Reply post = new Reply(2L, "testReply", "userTest");
         entityManager.persist(post);
 
-        // when
-        Post found = postRepository.findById(post.getId()).get();
+        Reply found = replyRepository.findById(post.getId()).get();
 
-        // then
-        assertThat(found.getTitle()).isEqualTo(post.getTitle());
+        assertThat(found.getReply()).isEqualTo(post.getReply());
     }
 
 }

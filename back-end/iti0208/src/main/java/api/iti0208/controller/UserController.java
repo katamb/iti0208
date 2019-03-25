@@ -12,7 +12,6 @@ import javax.validation.Valid;
 import java.util.Set;
 
 import static api.iti0208.security.SecurityConstants.HEADER_STRING;
-import static api.iti0208.service.UserService.getUsernameFromJwtToken;
 
 @RestController
 public class UserController {
@@ -41,14 +40,14 @@ public class UserController {
     @GetMapping("api/usersPosts")
     @PreAuthorize("@userService.getUsernameFromJwt(#header) == authentication.name || hasAuthority('ROLE_ADMIN')")
     public Set<Post> getUserPosts(@RequestHeader(value = HEADER_STRING) String header) {
-        String username = getUsernameFromJwtToken(header);
+        String username = userService.getUsernameFromJwt(header);
         return userService.getUserPosts(username);
     }
 
     @GetMapping("api/usersReplies")
     @PreAuthorize("@userService.getUsernameFromJwt(#header) == authentication.name || hasAuthority('ROLE_ADMIN')")
     public Set<Reply> getReplies(@RequestHeader(value = HEADER_STRING) String header) {
-        String username = getUsernameFromJwtToken(header);
+        String username = userService.getUsernameFromJwt(header);
         return userService.getUserReplies(username);
     }
 

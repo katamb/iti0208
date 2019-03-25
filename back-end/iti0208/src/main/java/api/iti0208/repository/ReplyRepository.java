@@ -8,8 +8,9 @@ import org.springframework.data.repository.query.Param;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
-@Transactional
+//@Transactional
 public interface ReplyRepository extends JpaRepository<Reply, Long> {
 
     @Modifying

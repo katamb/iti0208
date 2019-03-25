@@ -12,7 +12,7 @@ import javax.transaction.Transactional;
 
 public interface PostRepository extends JpaRepository<Post, Long> {
 
-    @Query("select p from Post p where p.topic =:topic")
+    @Query("select p from Post p where LOWER(p.topic) = LOWER(:topic)")
     Page<Post> findAllByTopic(@Param("topic") String topic, Pageable pageable);
 
     @Query("SELECT p FROM Post p WHERE " +

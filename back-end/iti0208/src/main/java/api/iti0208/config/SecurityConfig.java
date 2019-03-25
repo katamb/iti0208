@@ -40,13 +40,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/downloadFile/**").permitAll()
                 .antMatchers("/api/login").permitAll()
                 .antMatchers("/api/register").permitAll()
-                //.antMatchers("/api/add/post").permitAll()
-                //.antMatchers("/api/user/**").hasAnyAuthority("ROLE_USER")
                 .antMatchers("/api/**").authenticated();
 
         http.addFilterAfter(new JWTAuthenticationFilter("/api/login", authenticationManager()),
                 BasicAuthenticationFilter.class)
-                .addFilter(new JWTAuthorizationFilter(authenticationManager()))
+                .addFilter(new JWTAuthorizationFilter(authenticationManager(), userService))
                 // this disables session creation on Spring Security -> some kind of security issue otherwise
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
