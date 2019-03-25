@@ -1,14 +1,10 @@
 package api.iti0208.security;
 
 import api.iti0208.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
 import javax.servlet.FilterChain;
@@ -16,18 +12,18 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
-import static api.iti0208.security.SecurityConstants.*;
-import static api.iti0208.service.UserService.getAuthoritiesFromJwtToken;
-import static api.iti0208.service.UserService.getUsernameFromJwtToken;
+import static api.iti0208.security.SecurityConstants.HEADER_STRING;
+import static api.iti0208.security.SecurityConstants.TOKEN_PREFIX;
 
 public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
 
-    public JWTAuthorizationFilter(AuthenticationManager authManager) {
+    private final UserService userService;
+
+    public JWTAuthorizationFilter(AuthenticationManager authManager, UserService userService) {
         super(authManager);
+        this.userService = userService;
     }
 
     @Override
@@ -50,9 +46,9 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
         String token = request.getHeader(HEADER_STRING);
         if (token != null) {
             // parse the token.
-            String username = getUsernameFromJwtToken(token);
+            String username = userService.getUsernameFromJwt(token);
 
-            List<GrantedAuthority> authorities = getAuthoritiesFromJwtToken(token);
+            List<GrantedAuthority> authorities = userService.getPublicInfo(username).getGrantedAuthorities();
 
             if (username != null) {
                 return new UsernamePasswordAuthenticationToken(username, null, authorities);

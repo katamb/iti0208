@@ -10,7 +10,6 @@ import api.iti0208.exception.PageNotFoundException;
 import api.iti0208.repository.UserRepository;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -82,7 +81,6 @@ public class UserService implements UserDetailsService {
         return userRepository.findByUsername(username).getUserReplies();
     }
 
-    // todo: made changes here, check if it works
     public String getUsernameFromJwt(String token) {
         return getUsernameFromJwtToken(token);
     }
@@ -91,25 +89,7 @@ public class UserService implements UserDetailsService {
         return JWT.require(Algorithm.HMAC512(SECRET.getBytes()))
                 .build()
                 .verify(token.replace(TOKEN_PREFIX, ""))
-                .getSubject().split(";")[0];
-    }
-
-    public static List<GrantedAuthority> getAuthoritiesFromJwtToken(String token) {
-        String authoritiesString = JWT.require(Algorithm.HMAC512(SECRET.getBytes()))
-                .build()
-                .verify(token.replace(TOKEN_PREFIX, ""))
-                .getSubject()
-                .split(";")[1]
-                .split("\\[")[1]
-                .split("]")[0];
-
-        List<GrantedAuthority> grantedAuthorities = new LinkedList<>();
-        String[] authorities = authoritiesString.split(",");
-        for (String authority : authorities) {
-            grantedAuthorities.add(new SimpleGrantedAuthority(authority));
-        }
-
-        return grantedAuthorities;
+                .getSubject();
     }
 
     @Override
@@ -120,7 +100,5 @@ public class UserService implements UserDetailsService {
         }
 
         return new User(appUser.getUsername(), appUser.getPassword(), appUser.getGrantedAuthorities());
-
     }
-
 }

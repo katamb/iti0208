@@ -43,4 +43,10 @@ public class Reply {
         this.postId = postId;
     }
 
+    public Reply(Long postId, String reply, String postedBy) {
+        this.reply = reply;
+        this.postedBy = postedBy;
+        this.postId = postId;
+    }
+
 }

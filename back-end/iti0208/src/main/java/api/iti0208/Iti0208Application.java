@@ -42,7 +42,8 @@ public class Iti0208Application {
         bean.setOrder(Ordered.HIGHEST_PRECEDENCE);
 
         // This allow us to expose the headers
-        config.setExposedHeaders(Arrays.asList("Access-Control-Allow-Headers", "Authorization, x-xsrf-token, Access-Control-Allow-Headers, Origin, Accept, X-Requested-With, " +
+        config.setExposedHeaders(Arrays.asList("Access-Control-Allow-Headers",
+                "Authorization, x-xsrf-token, Access-Control-Allow-Headers, Origin, Accept, X-Requested-With, " +
                 "Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers"));
         return bean;
     }

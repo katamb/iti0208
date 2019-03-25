@@ -1,24 +1,19 @@
-package api.iti0208.post;
+package api.iti0208.unit.controller;
 
 import api.iti0208.controller.PostController;
 import api.iti0208.data.entity.Post;
-import api.iti0208.repository.PostRepository;
-import api.iti0208.repository.UserRepository;
+import api.iti0208.repository.ReplyRepository;
 import api.iti0208.service.PostService;
 import api.iti0208.service.UserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.context.annotation.Bean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.ResultMatcher;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -33,6 +28,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebMvcTest(PostController.class)
 public class PostControllerTest {
 
+    // TODO
+
     @Autowired
     private MockMvc mvc;
 
@@ -42,12 +39,15 @@ public class PostControllerTest {
     @MockBean
     private UserService userService;
 
+    @MockBean
+    private ReplyRepository replyRepository;
+
     @Test
     public void testFindAllPosts() throws Exception {
-
+/*
         Post post = new Post("testpost", "testpost", "Varia");
 
-        postService.save(post);
+        postService.savePost(post);
         List<Post> allPosts = Collections.singletonList(post);
 
 
