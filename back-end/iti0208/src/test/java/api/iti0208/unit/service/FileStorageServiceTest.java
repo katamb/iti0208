@@ -36,7 +36,7 @@ public class FileStorageServiceTest {
     @Before
     public void setUp() {
         Mockito.when(fsp.getUploadDir())
-               .thenReturn("./src/test/resources");
+               .thenReturn("./src/test/resources/cache");
 
         this.fss = new FileStorageService(fsp);
     }
