@@ -48,7 +48,7 @@
             <label class="custom-file-upload" for="fileUpload">
               Choose a file
             </label>
-            <input type="file" class="form-control-file" id="fileUpload">
+            <input type="file" class="form-control-file" id="fileUpload" @change="loadTextFromFile">
             <p>
               <small>
                 Max file size: 20MB <br/>
@@ -96,13 +96,12 @@
             },
             postFormData() {
                 apiRequests
-                    .postRequestToApiWithAuthorization('/api/uploadFile', {
+                    .postRequestToApiWithAuthorization('/api/add/post', {
                         topic: this.topic,
                         title: this.title,
                         description: this.description,
                         rewardDescription: this.reward_description,
                         fileLocation: this.file_location,
-
                     })
                     .then(() => {
                         errorHandling.successMsg("Post successfully uploaded!", 1200);

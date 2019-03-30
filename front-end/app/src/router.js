@@ -1,10 +1,10 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from './views/Home.vue'
 import AddPost from './components/AddPost.vue'
 import ViewPost from './components/ViewPost.vue'
 import Registration from './components/Registration.vue'
 import UserActivities from './components/UserActivities.vue'
+import ViewPosts from '@/components/ViewPosts.vue'
 
 
 Vue.use(Router);
@@ -14,37 +14,37 @@ export default new Router({
         {
             path: '/',
             name: 'home',
-            component: Home
+            component: ViewPosts
         },
         {
             path: '/mathematics',
             name: 'Mathematics',
-            component: Home
+            component: ViewPosts
         },
         {
             path: '/physics',
             name: 'Physics',
-            component: Home
+            component: ViewPosts
         },
         {
             path: '/chemistry',
             name: 'Chemistry',
-            component: Home
+            component: ViewPosts
         },
         {
             path: '/biology',
             name: 'Biology',
-            component: Home
+            component: ViewPosts
         },
         {
             path: '/cs',
             name: 'Computer_Science',
-            component: Home
+            component: ViewPosts
         },
         {
             path: '/varia',
             name: 'Varia',
-            component: Home
+            component: ViewPosts
         },
         {
             path: '/addpost',
@@ -64,7 +64,7 @@ export default new Router({
         {
             path: '/search=:searchTerm',
             name: 'search',
-            component: Home
+            component: ViewPosts
         },
         {
             path: '/userActivities',

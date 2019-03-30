@@ -6,7 +6,7 @@
         <div class="post-item text-left p-3 mb-3">
           <h3>{{response.title}}</h3>
           <p>{{response.description}}</p>
-          <p v-if="response.rewardDescription">{{response.rewardDescription}}</p>
+          <p v-if="response.rewardDescription">Reward for solving: {{response.rewardDescription}}</p>
           <a v-if="response.fileLocation" v-bind:href=response.fileLocation>Extra information</a>
           <p v-if="response.postedBy">
             <small>
@@ -33,7 +33,7 @@
             <label class="custom-file-upload" for="fileUpload">
               Choose a file
             </label>
-            <input type="file" class="form-control-file" id="fileUpload">
+            <input type="file" class="form-control-file" id="fileUpload" @change="loadTextFromFile">
             <p>
               <small>
                 Max file size: 20MB <br/>

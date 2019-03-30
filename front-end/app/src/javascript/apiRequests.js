@@ -31,6 +31,23 @@ async function postRequestWithAuthorization(url, data) {
     return response
 }
 
+async function patchRequestWithAuthorization(url, data) {
+    let response = await axios.patch(apiUrl + url,
+        data,
+        {headers: {"Authorization": localStorage.getItem("Authorization")}}
+    );
+
+    return response
+}
+
+async function deleteRequestWithAuthorization(url) {
+    let response = await axios.delete(apiUrl + url,
+        {headers: {"Authorization": localStorage.getItem("Authorization")}}
+    );
+
+    return response
+}
+
 export default {
     apiUrl,
     getRequestToApi(url) {
@@ -44,6 +61,11 @@ export default {
     },
     postRequestToApiWithAuthorization(url, data) {
         return postRequestWithAuthorization(url, data);
+    },
+    patchRequestWithAuthorization(url, data) {
+        return patchRequestWithAuthorization(url, data);
+    },
+    deleteRequestWithAuthorization(url, data) {
+        return deleteRequestWithAuthorization(url, data);
     }
-
 }
