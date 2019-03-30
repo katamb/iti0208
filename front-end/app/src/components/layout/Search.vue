@@ -1,5 +1,4 @@
 <template>
-  <div>
     <div class="input-group my-auto">
       <input type="search" class="form-control search-input" placeholder="Search" aria-label="Search"
              aria-describedby="basic-addon2" v-model="searchTerm">
@@ -7,7 +6,6 @@
         <button class="btn btn-dark" type="button" @click="searchFunction()">Search</button>
       </div>
     </div>
-  </div>
 </template>
 
 <script>
@@ -29,5 +27,13 @@
 <style scoped>
   .search-input {
     border: white;
+  }
+
+  input[type="search"]:focus {
+    background-color: #dddddd;
+  }
+
+  input[type="search"]:hover {
+    border: 1px solid #333;
   }
 </style>

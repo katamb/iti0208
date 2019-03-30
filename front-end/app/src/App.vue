@@ -3,8 +3,31 @@
     <Login/>
     <Header/>
 
+    <nav class="navbar navbar-expand-lg navbar-light mb-3">
+      <router-link tag="li" class="col my-auto font-weight-bolder order-lg-last" class-active="active" to="/addpost" exact>Post a problem</router-link>
+      <a class="navbar-brand" href="#">Topics</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+
+        <ul class="navbar-nav mr-auto my-auto">
+          <router-link tag="li" class="col my-auto font-weight-bolder" class-active="active" to="/" exact>All</router-link>
+          <router-link tag="li" class="col my-auto font-weight-bolder" class-active="active" to="/mathematics" exact> Mathematics</router-link>
+          <router-link tag="li" class="col my-auto font-weight-bolder" class-active="active" to="/physics" exact> Physics</router-link>
+          <router-link tag="li" class="col my-auto font-weight-bolder" class-active="active" to="/chemistry" exact> Chemistry</router-link>
+          <router-link tag="li" class="col my-auto font-weight-bolder" class-active="active" to="/biology" exact> Biology</router-link>
+          <router-link tag="li" class="col my-auto font-weight-bolder" class-active="active" to="/cs" exact> Computer Science</router-link>
+          <router-link tag="li" class="col my-auto font-weight-bolder" class-active="active" to="/varia" exact> Varia</router-link>
+          <Search />
+        </ul>
+
+      </div>
+    </nav>
+
+    <!-- old version
     <div id="nav">
-      <p class="b">
         <nav class="navbar navbar-expand-lg navbar-light">
           <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
             <router-link tag="li" class="col" class-active="active" to="/" exact> Home</router-link>
@@ -18,10 +41,8 @@
           </ul>
 
           <Search/>
-
         </nav>
-      </p>
-    </div>
+    </div-->
     <router-view/>
   </div>
 </template>
@@ -42,63 +63,32 @@
 </script>
 
 <style>
-  p.b {
-    border: 3px solid #333;
-    border-radius: 0;
-    background-color: #D6BDF3;
-  }
-
-  nav {
-    background-color: #D6BDF3;
-    margin: 0 auto;
-  }
-
-  /*input[type="search"]:hover {
-    background-color: #fff;
-    display: inline-block;
-    border: 1px solid #333;
-    border-radius: 4px;
-  }
-
-  input[type="search"]:focus {
-    background-color: #ccc;
-  }
-
-  button[type="submit"] {
-    background-color: #333;
-    color: white;
-    cursor: pointer;
-  }*/
-
   div {
     text-align: center;
   }
 
-  nav li {
-    background-color: #D6BDF3;
+  body {
+    font-family: Arial, Helvetica, sans-serif;
     text-align: center;
-    border: 1px solid #333;
-    border-radius: 4px;
   }
 
-  nav li:hover,
-  nav li.router-link-active,
-  nav li.router-link-exact-active {
-    text-align: center;
-    background-color: #fff;
-    cursor: pointer;
-    border: 1px solid #333;
-    border-radius: 4px;
+  nav {
+    background-color: #D6BDF3 !important;
   }
 
   li {
     list-style-type: none;
   }
 
-  body, a {
-    font-family: Arial, Helvetica, sans-serif;
-    line-height: 1.4;
-    text-align: center;
+  nav li:hover,
+  nav li.router-link-active,
+  nav li.router-link-exact-active {
+    text-decoration: underline;
+    /*text-align: center;
+    background-color: #fff;
+    cursor: pointer;
+    border: 1px solid #333;
+    border-radius: 4px;*/
   }
 
   .error {
