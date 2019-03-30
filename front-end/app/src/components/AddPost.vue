@@ -4,7 +4,6 @@
       <div class="col-xl-5 col-lg-6 col-md-8 col-sm-11">
 
         <h3>Create a task for others to solve!</h3>
-        <h3> {{ return_msg }} </h3>
 
         <form id="post-form" @submit.prevent="processForm">
 
@@ -50,8 +49,12 @@
               Choose a file
             </label>
             <input type="file" class="form-control-file" id="fileUpload">
-            <p><small>Max file size 20MB <br/>
-              Allowed file types: .txt, .pdf, .png, .jpg, .doc, .docx, .xls, .xlsx, .rtf, .jpeg, .tiff, .ppt</small></p>
+            <p>
+              <small>
+                Max file size: 20MB <br/>
+                Allowed file types: .txt, .pdf, .png, .jpg, .doc, .docx, .xls, .xlsx, .rtf, .jpeg, .tiff, .ppt
+              </small>
+            </p>
           </div>
 
           <input class="btn btn-lg btn-primary mb-3" type="submit" value="Submit">
@@ -65,8 +68,6 @@
 <script>
     import apiRequests from './../javascript/apiRequests.js';
     import errorHandling from './../javascript/errorHandling.js';
-    import axios from 'axios';
-    import Swal from 'sweetalert2';
 
     export default {
         name: 'addpost',
@@ -77,12 +78,10 @@
                 description: '',
                 reward_description: '',
                 file_location: '',
-                file: null,
-                return_msg: '',
+                file: null
             };
         },
         methods: {
-
             loadTextFromFile(input) {
                 this.file = input.target.files[0];
             },
@@ -96,69 +95,38 @@
                 this.$nextTick(() => this.$validator.reset())
             },
             postFormData() {
-                axios
-                    .post('http://localhost:8090/api/add/post',
-                        {
-                            topic: this.topic,
-                            title: this.title,
-                            description: this.description,
-                            rewardDescription: this.reward_description,
-                            fileLocation: this.file_location,
+                apiRequests
+                    .postRequestToApiWithAuthorization('/api/uploadFile', {
+                        topic: this.topic,
+                        title: this.title,
+                        description: this.description,
+                        rewardDescription: this.reward_description,
+                        fileLocation: this.file_location,
 
-                        },
-                        {
-                            headers: {
-                                "Authorization": localStorage.getItem("Authorization")
-                            }
-                        })
+                    })
                     .then((response) => {
                         if (response.status === 200) {
-                            Swal.fire({
-                                position: 'center',
-                                type: 'success',
-                                title: "Post successfully uploaded!",
-                                showConfirmButton: false,
-                                timer: 1200
-                            });
-                            this.return_msg = "Post successfully uploaded!";
+                            errorHandling.successMsg("Post successfully uploaded!", 1200);
                             this.resetFields();
-                        } else if (response.status === 401 || response.status === 500) {
-                            Swal.fire({
-                                type: 'error',
-                                title: "Please log in to do post",
-                            });
-                            this.return_msg = "Please log in to do post!";
-                        } else {
-                            Swal.fire({
-                                type: 'error',
-                                title: "Sorry, there was a problem uploading Your post!",
-                            });
-                            this.return_msg = "Sorry, there was a problem uploading Your post!";
                         }
                     })
                     .catch((error) => {
-                            Swal.fire({
-                                position: 'center',
-                                type: 'error',
-                                title: "Wrong username or password, try again!",
-                                showConfirmButton: false,
-                                timer: 1200
-                            });
-                            this.resetFields();
-                            this.return_msg = error;
-
+                        if (error.response.status === 401 || error.response.status === 403) {
+                            errorHandling.errorMsgWithButton("You need to be logged in to post!");
+                        } else {
+                            errorHandling.errorMsgWithButton("Sorry, " +
+                                "there was a problem and the post couldn't be uploaded!");
                         }
-                    );
+                    });
             },
             processForm() {
                 this.$validator.validate().then(valid => {
                     if (valid) {
-                        if (this.file === null) {
+                        if (this.file === null || this.file === undefined) {
                             this.postFormData();
                         } else {
                             const formData = new FormData();
                             formData.append('file', this.file);
-
                             apiRequests
                                 .postRequestToApiWithAuthorization('/api/uploadFile', formData)
                                 .then((response) => {
