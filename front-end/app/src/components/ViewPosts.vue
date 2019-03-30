@@ -1,71 +1,112 @@
 <template>
-    <div>
-        <h2 v-if="topic === 'all'">Last uploaded</h2>
-        <div class="items" v-for="data in response" :key='data.id' @click="goToDetail(data.id)">
-            <h3> {{data.title}}</h3>
-            <p>{{data.description}}</p>
+  <div>
+    <div class="container-fluid">
+      <div class="row justify-content-center">
 
-            <!--p>{{data.rewardDescription}}</p>
-            <a v-if="data.fileLocation" v-bind:href=data.fileLocation>Extra information</a-->
+        <div class="col-lg-9 col-md-10 col-sm-12 px-0 divider">
+          <div class="col-xl-4 col-lg-5 col-md-6 col-sm-8 input-group px-0 float-right order-by-form">
+            <select class="custom-select border-0" id="inputGroupSelect" v-model="sortBy">
+              <option disabled value="">Sort by...</option>
+              <option>Latest posts first</option>
+              <option>Earliest posts first</option>
+              <option>Alphabetically descending</option>
+              <option>Alphabetically ascending</option>
+            </select>
+            <div class="input-group-append border-0">
+              <button class="btn btn-secondary border-0" type="button" @click="sort()">Sort</button>
+            </div>
+          </div>
         </div>
 
-        <br>
-        <button v-if="currentPageNum > 0" type="button"
-                v-on:click="prevPage()">Previous!
-        </button>
-        <button v-if="currentPageNum < numOfPages" type="button"
-                v-on:click="nextPage()">Next!
-        </button>
-        <br>
+        <div class="col-lg-9 col-md-10 col-sm-12 px-0">
+          <ViewPostsItem v-for="data in response"
+                         :data="data"
+                         :key="data.id"/>
+        </div>
+      </div>
     </div>
+
+    <br>
+    <button class="mr-1 ml-1 mb-3 btn btn-lg btn-dark" v-if="currentPageNum > 0" v-on:click="prevPage()">
+      Previous
+    </button>
+    <button class="mr-1 ml-1 mb-3 btn btn-lg btn-dark" v-if="currentPageNum < numOfPages" v-on:click="nextPage()">
+      Next
+    </button>
+    <br>
+  </div>
 </template>
 
 <script>
-    import axios from 'axios';
+    import apiRequests from '../javascript/apiRequests.js';
+    import ViewPostsItem from './ViewPostsItem.vue'
 
     export default {
         name: 'ViewPosts',
+        components: {
+            ViewPostsItem
+        },
         methods: {
-
-            goToDetail(proId) {
-                this.$router.push({name: 'viewpost', params: {Pid: proId}})
-            },
             loadContent() {
                 this.currentPageNum = 0;
-                const routeName = this.$route.name;
-                let url = '';
-                if (routeName === 'home') {
-                    url = 'http://localhost:8090/api/posts';
-                    this.topic = 'all';
+
+                this.searchTerm = this.$route.params.searchTerm;
+                if (this.searchTerm !== null && this.searchTerm !== '' && this.searchTerm !== undefined) {
+                    this.baseUrl = '/api/posts/find?searchTerm=' + this.searchTerm;
                 } else {
-                    url = 'http://localhost:8090/api/posts?topic=' + routeName;
-                    this.topic = routeName;
+                    this.topic = this.$route.name;
+                    this.baseUrl = '/api/posts?topic=' + this.topic;
                 }
 
-                this.dataRequest(url);
+                this.dataRequest(this.baseUrl);
             },
             nextPage() {
                 this.currentPageNum += 1;
-                let url = 'http://localhost:8090/api/posts?topic=' + this.topic
-                    + '&page=' + this.currentPageNum;
+                let url = this.getUrl() + '&page=' + this.currentPageNum;
                 this.dataRequest(url);
             },
             prevPage() {
                 this.currentPageNum -= 1;
-                let url = 'http://localhost:8090/api/posts?topic=' + this.topic
-                    + '&page=' + this.currentPageNum;
+                let url = this.getUrl() + '&page=' + this.currentPageNum;
                 this.dataRequest(url);
             },
-            dataRequest(url) {
-                axios
-                    .get(url)
-                    .then((response) => {
-                        this.response = response.data.posts;
+            getUrl() {
+                let url = this.baseUrl;
 
-                        if (response.data.amountOfPages <= 0) {
+                if (this.sortBy !== '') {
+                    let sortKeyword;
+                    let sortDirection;
+
+                    if (this.sortBy === 'Latest posts first') {
+                        sortKeyword = 'postedAt';
+                        sortDirection = 'descending';
+                    } else if (this.sortBy === 'Earliest posts first') {
+                        sortKeyword = 'postedAt';
+                        sortDirection = 'ascending';
+                    } else if (this.sortBy === 'Alphabetically descending') {
+                        sortKeyword = 'topic';
+                        sortDirection = 'descending';
+                    } else if (this.sortBy === 'Alphabetically ascending') {
+                        sortKeyword = 'topic';
+                        sortDirection = 'ascending';
+                    }
+                    url += '&sortBy=' + sortKeyword + '&order=' + sortDirection;
+                }
+
+                return url
+            },
+            sort() {
+                this.dataRequest(this.getUrl());
+            },
+            dataRequest(url) {
+                apiRequests.getRequestToApi(url)
+                    .then(result => {
+                        this.response = result.posts;
+
+                        if (result.amountOfPages <= 0) {
                             this.numOfPages = 0;
                         } else {
-                            this.numOfPages = response.data.amountOfPages - 1;
+                            this.numOfPages = result.amountOfPages - 1;
                         }
                     });
             },
@@ -81,6 +122,9 @@
                 numOfPages: 0,
                 currentPageNum: 0,
                 topic: 'all',
+                sortBy: '',
+                searchTerm: null,
+                baseUrl: ''
             };
         },
         mounted() {
@@ -89,47 +133,6 @@
     }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-    h3 {
-        color: #333;
-    }
-
-    .items {
-        width: 80%;
-        margin: 0px auto;
-        background-color: lightgray;
-        color: black;
-        text-align: center;
-        border: 1px solid #333;
-        border-radius: 4px;
-    }
-
-    .items:hover {
-        background-color: #fff;
-        cursor: pointer;
-    }
-
-    .items:active {
-        background-color: #F1F1F1;
-        cursor: pointer;
-    }
-
-    button[type="button"] {
-        display: inline-block;
-        width: 100px;
-        height: 50px;
-        border: 1px solid #333;
-        border-radius: 4px;
-        background-color: #333;
-        color: white;
-        cursor: pointer;
-
-    }
-
-
-    body {
-        background-color: lightgray;
-    }
-
+  @import './../css/postsView.css';
 </style>

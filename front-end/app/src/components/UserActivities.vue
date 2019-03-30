@@ -1,7 +1,7 @@
 <template>
     <div>
         <h2>My Posts</h2>
-        <div class="items" v-for="(data, index) in response" :key='data.id'>
+        <div class="post-list-item" v-for="(data, index) in response" :key='data.id'>
             <h3> {{data.title}}</h3>
             <p>{{data.description}}</p>
             <div v-if="editing1 == data.id">
@@ -18,7 +18,7 @@
             <a v-if="data.fileLocation" v-bind:href=data.fileLocation>Extra information</a-->
 
         <h2>My Replies</h2>
-        <div class="items" v-for="(data, index) in response1" :key='data.id'>
+        <div class="post-list-item" v-for="(data, index) in response1" :key='data.id'>
             <h3> Reply:</h3>
             <p>{{data.reply}}</p>
             <!--p>{{data.rewardDescription}}</p>

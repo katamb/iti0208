@@ -5,6 +5,9 @@ import api.iti0208.data.input.UserRegistrationInput;
 import api.iti0208.data.entity.Post;
 import api.iti0208.data.entity.Reply;
 import api.iti0208.service.UserService;
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.JWTVerifier;
+import com.auth0.jwt.interfaces.DecodedJWT;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 

@@ -1,29 +1,28 @@
 <template>
   <div id="app">
-      <Login />
+    <Login/>
+    <Header/>
 
-      <Header />
-
-    <div id="nav" >
+    <div id="nav">
       <p class="b">
-      <nav class="navbar navbar-expand-lg navbar-light">
-        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-        <router-link tag="li" class="col" class-active="active" to="/" exact> Home </router-link>
-        <router-link tag="li" class="col" class-active="active" to="/mathematics" exact> Mathematics </router-link>
-        <router-link tag="li" class="col" class-active="active" to="/physics" exact> Physics </router-link>
-        <router-link tag="li" class="col" class-active="active" to="/chemistry" exact> Chemistry </router-link>
-        <router-link tag="li" class="col" class-active="active" to="/biology" exact> Biology </router-link>
-        <router-link tag="li" class="col" class-active="active" to="/cs" exact> Computer Science </router-link>
-        <router-link tag="li" class="col" class-active="active" to="/varia" exact> Varia </router-link>
-        <router-link tag="li" class="col" class-active="active" to="/addpost" exact> Add a Post </router-link>
+        <nav class="navbar navbar-expand-lg navbar-light">
+          <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+            <router-link tag="li" class="col" class-active="active" to="/" exact> Home</router-link>
+            <router-link tag="li" class="col" class-active="active" to="/mathematics" exact> Mathematics</router-link>
+            <router-link tag="li" class="col" class-active="active" to="/physics" exact> Physics</router-link>
+            <router-link tag="li" class="col" class-active="active" to="/chemistry" exact> Chemistry</router-link>
+            <router-link tag="li" class="col" class-active="active" to="/biology" exact> Biology</router-link>
+            <router-link tag="li" class="col" class-active="active" to="/cs" exact> Computer Science</router-link>
+            <router-link tag="li" class="col" class-active="active" to="/varia" exact> Varia</router-link>
+            <router-link tag="li" class="col" class-active="active" to="/addpost" exact> Add a Post</router-link>
+          </ul>
 
-        </ul>
-      <form class="form-inline my-2 my-lg-0" @submit="searchFunction">
-        <input class="form-control mr-sm-2" id="searchTerm" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit" >Search</button>
-      </form>
+          <form class="form-inline my-2 my-lg-0" @submit="searchFunction">
+            <input class="form-control mr-sm-2" id="searchTerm" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+          </form>
 
-      </nav>
+        </nav>
       </p>
     </div>
     <router-view/>
@@ -31,33 +30,27 @@
 </template>
 
 <script>
-  import Header from './components/layout/Header.vue';
-  import Login from './components/layout/Login.vue';
+    import Header from './components/layout/Header.vue';
+    import Login from './components/layout/Login.vue';
 
-  export default {
-    name: "app",
-    components: {
-      Header,
-      Login
-    },
-      data() {
-        return {
-            item: ''
+    export default {
+        name: "app",
+        components: {
+            Header,
+            Login
+        },
+        data() {
+            return {
+                searchTerm: ''
+            }
+        },
+        methods: {
+            searchFunction() {
+                this.searchTerm = document.getElementById("searchTerm").value;
+                this.$router.push({name: 'search', params: {searchTerm: this.searchTerm}});
+            }
         }
-      },
-      methods : {
-
-        searchFunction() {
-            this.item = document.getElementById("searchTerm").value;
-            this.$router.push({name: 'search', params: {item: this.item}});
-
-
-
-
-
-        }
-      }
-  }
+    }
 </script>
 
 <style>
@@ -66,7 +59,7 @@
     height: 40px;
     color: white;
     text-align: center;
-    border:1px solid #333;
+    border: 1px solid #333;
     border-radius: 4px;
 
   }
@@ -74,11 +67,13 @@
   .ml-auto {
     margin-right: auto !important;
   }
+
   p.b {
     border: 3px solid #333;
     border-radius: 0px;
     background-color: #D6BDF3;
   }
+
   nav {
     background-color: #D6BDF3;
     margin: 0px auto;
@@ -109,7 +104,7 @@
   nav li {
     background-color: #D6BDF3;
     text-align: center;
-    border:1px solid #333;
+    border: 1px solid #333;
     border-radius: 4px;
   }
 
@@ -119,7 +114,7 @@
     text-align: center;
     background-color: #fff;
     cursor: pointer;
-    border:1px solid #333;
+    border: 1px solid #333;
     border-radius: 4px;
   }
 

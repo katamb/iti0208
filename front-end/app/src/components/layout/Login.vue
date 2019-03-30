@@ -5,16 +5,16 @@
       <div class="container">
         <ul class="nav navbar-nav" style="margin-left: auto">
           <li style="background-color: #333">
-            <router-link id="register" tag="button" to="/registration" v-if="!LoggedIn" exact>Register
+            <router-link id="register" tag="button" to="/registration" v-if="!loggedIn" exact>Register
             </router-link>
-            <router-link id="myActivities" tag="button" to="/userActivities" v-if="LoggedIn" exact>My
+            <router-link id="myActivities" tag="button" to="/userActivities" v-if="loggedIn" exact>My
               Activities
             </router-link>
 
-            <button id="logout" tag="button" v-if="LoggedIn" @click="logout">Logout
+            <button id="logout" tag="button" v-if="loggedIn" @click="logout">Logout
             </button>
 
-          <li class="dropdown order-1" v-if="!LoggedIn" style="background-color: #333">
+          <li class="dropdown order-1" v-if="!loggedIn" style="background-color: #333">
             <button type="button" id="dropdownMenu1" data-toggle="dropdown"
                     class="btn btn-outline-success dropdown-toggle my-2 my-sm-0">Login
               <span class="caret"></span>
@@ -62,7 +62,7 @@
                 username: '',
                 password: '',
                 return_msg: '',
-                LoggedIn: false,
+                loggedIn: false,
             };
         },
         methods: {
@@ -80,7 +80,7 @@
                             this.return_msg = "Logged in!";
                             this.username = response.username;
                             this.resetFields();
-                            this.LoggedIn = true;
+                            this.loggedIn = true;
                             Swal.fire({
                                 position: 'center',
                                 type: 'success',
@@ -129,28 +129,26 @@
                 });
             },
             logout() {
-                this.LoggedIn = false;
+                this.loggedIn = false;
                 localStorage.removeItem("Authorization");
                 this.$router.push("/")
             }
         },
         mounted() {
-            try {
-                axios
-                    .get('http://localhost:8090/api/check',
-                        {
-                            headers: {
-                                "Authorization": localStorage.getItem("Authorization")
-                            }
-                        })
-                    .then((response) => {
-                        if (response.status === 200) {
-                            this.LoggedIn = true;
-                        }
-                    })
-                    .catch(() => {});
-            } catch (e) {
-                this.LoggedIn = false;
+            if (localStorage.getItem("Authorization") != null) {
+                  axios
+                      .get('http://localhost:8090/api/check',
+                          {headers: {"Authorization": localStorage.getItem("Authorization") } }
+                          )
+                      .then((response) => {
+                          if (response.status === 200) {
+                              this.loggedIn = true;
+                          } else {
+                              localStorage.removeItem("Authorization");
+                          }
+                      })
+                      .catch(() => {
+                      });
             }
         }
     }
