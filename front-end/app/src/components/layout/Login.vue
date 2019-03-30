@@ -1,59 +1,60 @@
 <template>
-  <div class="main-div">
-    <nav class="navbar navbar-expand-lg navbar-light" role="navigation" style="justify-content: space-between">
+  <nav class="p-2">
+    <div class="text-right">
 
-      <div class="container">
-        <ul class="nav navbar-nav" style="margin-left: auto">
-          <li style="background-color: #333">
-            <router-link id="register" tag="button" to="/registration" v-if="!loggedIn" exact>Register
-            </router-link>
-            <router-link id="myActivities" tag="button" to="/userActivities" v-if="loggedIn" exact>My
-              Activities
-            </router-link>
+      <router-link class="btn btn-dark mx-1" id="register" tag="button" to="/registration" v-if="!loggedIn" exact>
+        Register
+      </router-link>
 
-            <button id="logout" tag="button" v-if="loggedIn" @click="logout">Logout
-            </button>
+      <router-link class="btn btn-dark mx-1" id="myActivities" tag="button" to="/userActivities" v-if="loggedIn"
+                   exact>
+        My Activities
+      </router-link>
 
-          <li class="dropdown order-1" v-if="!loggedIn" style="background-color: #333">
-            <button type="button" id="dropdownMenu1" data-toggle="dropdown"
-                    class="btn btn-outline-success dropdown-toggle my-2 my-sm-0">Login
-              <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu dropdown-menu-right mt-2">
-              <li class="px-3 py-2">
-                <form class="form" role="form" @submit="postInfo">
-                  <div class="form-group">
-                    <input id="usernameInput" placeholder="Username"
-                           class="form-control form-control-sm" type="text" required=""
-                           v-model="username">
-                  </div>
-                  <div class="form-group">
-                    <input id="passwordInput" placeholder="Password"
-                           class="form-control form-control-sm" type="password" required=""
-                           v-model="password">
-                  </div>
-                  <div class="form-group">
-                    <button type="submit" class="btn btn-primary btn-block">Login</button>
-                  </div>
+      <button class="btn btn-dark mx-1" id="logout" v-if="loggedIn" @click="logout">Logout
+      </button>
 
-                  <div class="form-group text-center">
-                    <small>
-                      <a href="#" data-toggle="modal">Forgot password?</a>
-                    </small>
-                  </div>
-                </form>
-              </li>
-            </ul>
-          </li>
-        </ul>
+      <div class="dropdown" v-if="!loggedIn">
+        <button type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                class="btn btn-dark dropdown-toggle">Login
+        </button>
+        <div class="dropdown-menu dropdown-menu-right py-0">
+          <div class="px-3 pt-3 login-dropdown">
+
+            <div class="form-group">
+              <input id="usernameInput" placeholder="Username" name="username"
+                     class="form-control form-control-sm custom-input" type="text"
+                     v-model="username" v-validate="{ required: true, min: 4, max: 128 }">
+              <div class="error" v-if="errors.has('username')">{{errors.first('username')}}</div>
+            </div>
+
+            <div class="form-group">
+              <input id="passwordInput" placeholder="Password" name="password"
+                     class="form-control form-control-sm" type="password"
+                     v-model="password" v-validate="{ required: true, min: 6 }">
+              <div class="error" v-if="errors.has('password')">{{errors.first('password')}}</div>
+            </div>
+            <div class="form-group">
+              <button @click="logIn()" class="btn btn-primary btn-block">Login</button>
+            </div>
+
+            <div class="form-group text-center">
+              <small>
+                <a href="#" data-toggle="modal">Forgot password?</a>
+              </small>
+            </div>
+
+          </div>
+        </div>
       </div>
-    </nav>
-  </div>
+
+    </div>
+  </nav>
 </template>
 
 <script>
-    import axios from 'axios';
-    import Swal from 'sweetalert2';
+    import errorHandling from './../../javascript/errorHandling.js';
+    import apiRequests from './../../javascript/apiRequests.js';
 
     export default {
         name: "Login",
@@ -61,58 +62,29 @@
             return {
                 username: '',
                 password: '',
-                return_msg: '',
                 loggedIn: false,
             };
         },
         methods: {
-            postInfo() {
-                axios
-                    .post('http://localhost:8090/api/login',
-                        {
-                            username: this.username,
-                            password: this.password
-                        })
+            logIn() {
+                apiRequests
+                    .postRequestToApi('/api/login', {
+                        username: this.username,
+                        password: this.password
+                    })
                     .then((response) => {
                         if (response.status === 200) {
-                            localStorage.setItem("Authorization",
-                                response.headers.authorization);
-                            this.return_msg = "Logged in!";
-                            this.username = response.username;
-                            this.resetFields();
+                            localStorage.setItem("Authorization", response.headers.authorization);
                             this.loggedIn = true;
-                            Swal.fire({
-                                position: 'center',
-                                type: 'success',
-                                title: "You are logged in!",
-                                showConfirmButton: false,
-                                timer: 1000
-                            })
-                        } else {
-                            Swal.fire({
-                                position: 'center',
-                                type: 'error',
-                                title: "Wrong username or password, try again!",
-                                showConfirmButton: false,
-                                timer: 900
-                            });
                             this.resetFields();
-                            this.return_msg = "Error!";
+                            errorHandling.successMsg("You are logged in!", 1000);
+                        } else {
+                            errorHandling.errorMsg("Wrong username or password, try again!", 1000);
                         }
                     })
-                    .catch(responce => {
-                            Swal.fire({
-                                position: 'center',
-                                type: 'error',
-                                title: "Wrong username or password, try again!",
-                                showConfirmButton: false,
-                                timer: 1200
-                            });
-                            this.resetFields();
-                            this.return_msg = responce;
-
-                        }
-                    );
+                    .catch(() => {
+                        errorHandling.errorMsg("Wrong username or password, try again!", 1200);
+                    });
             },
             resetFields() {
                 this.username = '';
@@ -122,7 +94,7 @@
             processForm() {
                 this.$validator.validate().then(valid => {
                     if (valid) {
-                        this.postInfo();
+                        this.logIn();
                     } else {
                         alert("Failed to submit the form!");
                     }
@@ -135,20 +107,16 @@
             }
         },
         mounted() {
-            if (localStorage.getItem("Authorization") != null) {
-                  axios
-                      .get('http://localhost:8090/api/check',
-                          {headers: {"Authorization": localStorage.getItem("Authorization") } }
-                          )
-                      .then((response) => {
-                          if (response.status === 200) {
-                              this.loggedIn = true;
-                          } else {
-                              localStorage.removeItem("Authorization");
-                          }
-                      })
-                      .catch(() => {
-                      });
+            if (localStorage.getItem("Authorization") !== null) {
+                apiRequests.getRequestToApiWithAuthorization('/api/check')
+                    .then(response => {
+                        if (response.status === 200) {
+                            this.loggedIn = true;
+                        } else {
+                            this.loggedIn = false;
+                            this.logout();
+                        }
+                    });
             }
         }
     }
@@ -157,54 +125,21 @@
 </script>
 
 <style scoped>
-  .ml-auto {
-    margin-left: 0 !important;
-  }
-
-  button:focus {
-    outline: 0;
+  .dropdown {
+    display: inline-block !important;
   }
 
   nav {
     background-color: #D6BDF3;
-    margin: 0px auto;
   }
 
-  nav li {
+  .login-dropdown {
     background-color: white;
     text-align: center;
-    border: 1px solid #333;
-    border-radius: 4px;
   }
 
-  li.dropdown order-1 {
-    background-color: white;
-  }
-
-  li {
-    list-style-type: none;
-  }
-
-
-  .navbar .dropdown-menu .form-control {
+  .custom-input {
     width: 200px;
   }
-
-  button[type="button"], [tag="button"] {
-    background-color: #333;
-    border: #333;
-    color: white;
-    cursor: pointer;
-    margin: 5px;
-  }
-
-  #logout, #myActivities {
-    margin: 5px;
-    background-color: #333;
-    color: white;
-    cursor: pointer;
-    border: 1px solid #333;
-  }
-
 
 </style>

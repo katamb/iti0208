@@ -101,12 +101,12 @@
             dataRequest(url) {
                 apiRequests.getRequestToApi(url)
                     .then(result => {
-                        this.response = result.posts;
+                        this.response = result.data.posts;
 
-                        if (result.amountOfPages <= 0) {
+                        if (result.data.amountOfPages <= 0) {
                             this.numOfPages = 0;
                         } else {
-                            this.numOfPages = result.amountOfPages - 1;
+                            this.numOfPages = result.data.amountOfPages - 1;
                         }
                     });
             },
@@ -134,5 +134,21 @@
 </script>
 
 <style scoped>
-  @import './../css/postsView.css';
+  /*@import './../css/postsView.css';*/
+
+  .divider {
+    border-bottom: 4px solid #e5e5e5;
+  }
+
+  .order-by-form {
+    border-top: 4px solid #e5e5e5;
+    border-right: 4px solid #e5e5e5;
+    border-left: 4px solid #e5e5e5;
+    border-radius: 0;
+    background-color: #f6f6f6;
+  }
+
+  .border-0 {
+    border-radius: 0 !important;
+  }
 </style>

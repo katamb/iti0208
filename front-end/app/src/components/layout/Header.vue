@@ -19,9 +19,4 @@
         padding: 8px;
 
     }
-
-    .header a {
-        color: #fff;
-        padding-right: 5px;
-    }
 </style>

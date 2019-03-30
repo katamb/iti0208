@@ -17,10 +17,7 @@
             <router-link tag="li" class="col" class-active="active" to="/addpost" exact> Add a Post</router-link>
           </ul>
 
-          <form class="form-inline my-2 my-lg-0" @submit="searchFunction">
-            <input class="form-control mr-sm-2" id="searchTerm" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-          </form>
+          <Search/>
 
         </nav>
       </p>
@@ -32,54 +29,31 @@
 <script>
     import Header from './components/layout/Header.vue';
     import Login from './components/layout/Login.vue';
+    import Search from './components/layout/Search.vue';
 
     export default {
         name: "app",
         components: {
             Header,
-            Login
-        },
-        data() {
-            return {
-                searchTerm: ''
-            }
-        },
-        methods: {
-            searchFunction() {
-                this.searchTerm = document.getElementById("searchTerm").value;
-                this.$router.push({name: 'search', params: {searchTerm: this.searchTerm}});
-            }
+            Login,
+            Search
         }
     }
 </script>
 
 <style>
-  #register {
-    background-color: #333;
-    height: 40px;
-    color: white;
-    text-align: center;
-    border: 1px solid #333;
-    border-radius: 4px;
-
-  }
-
-  .ml-auto {
-    margin-right: auto !important;
-  }
-
   p.b {
     border: 3px solid #333;
-    border-radius: 0px;
+    border-radius: 0;
     background-color: #D6BDF3;
   }
 
   nav {
     background-color: #D6BDF3;
-    margin: 0px auto;
+    margin: 0 auto;
   }
 
-  input[type="search"]:hover {
+  /*input[type="search"]:hover {
     background-color: #fff;
     display: inline-block;
     border: 1px solid #333;
@@ -94,8 +68,7 @@
     background-color: #333;
     color: white;
     cursor: pointer;
-
-  }
+  }*/
 
   div {
     text-align: center;
@@ -128,11 +101,9 @@
     text-align: center;
   }
 
-
   .error {
-    margin-top: 0;
-    padding-top: 0;
     color: red;
-    font-weight: bold;
+    font-weight: bolder;
   }
+
 </style>
