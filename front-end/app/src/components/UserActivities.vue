@@ -10,8 +10,12 @@
           <h3>{{data.title}}</h3>
           <p>{{data.description}}</p>
           <div class="form-group mx-4 mb-2" v-if="editingPost === data.id">
-            <input class="form-control mb-2" v-model="newTitle">
-            <textarea class="form-control mb-2" rows="3" v-model="newDescription"></textarea>
+            <input class="form-control mb-2" name="newTitle"
+                   v-model="newTitle" v-validate="{ required: true, min: 3, max: 128 }">
+            <div class="error" v-if="errors.has('newTitle')">{{errors.first('newTitle')}}</div>
+            <textarea class="form-control mb-2" rows="3" name="newDescription"
+                      v-model="newDescription" v-validate="{ required: true, min: 5 }"></textarea>
+            <div class="error" v-if="errors.has('newDescription')">{{errors.first('newDescription')}}</div>
             <button class="btn btn-primary m-1" @click="saveEditPost(index, data.id)">Save</button>
             <button class="btn btn-secondary m-1" @click="disableEditingPost">Cancel</button>
           </div>
@@ -24,7 +28,9 @@
         <div class="post-list-item my-2 p-2 text-left" v-for="(data, index) in userReplies" :key='data.id'>
           <p>{{data.reply}}</p>
           <div class="form-group mx-4 mb-2" v-if="editingReply === data.id">
-            <textarea class="form-control mb-2" rows="3" v-model="tempValue"></textarea>
+            <textarea class="form-control mb-2" rows="3" name="newReply"
+                      v-model="tempValue" v-validate="{ required: true, min: 5 }"></textarea>
+            <div class="error" v-if="errors.has('newReply')">{{errors.first('newReply')}}</div>
             <button class="btn btn-primary m-1" @click="saveEditReply(index, data.id)"> Save</button>
             <button class="btn btn-secondary m-1" @click="disableEditingReply"> Cancel</button>
           </div>
@@ -93,30 +99,42 @@
                 this.editingPost = false;
             },
             saveEditReply(index, replyId) {
-                this.userReplies[index].reply = this.tempValue;
-                apiRequests
-                    .patchRequestWithAuthorization('/api/edit/reply/' + replyId, {
-                        reply: this.tempValue
-                    })
-                    .catch(() => {
-                            errorHandling.errorMsgWithButton("Failed to update this reply!")
-                        }
-                    );
-                this.disableEditingReply();
+                this.$validator.validate().then(valid => {
+                    if (!valid) {
+                        errorHandling.errorMsg("These changes are forbidden!", 1000);
+                    } else {
+                        this.userReplies[index].reply = this.tempValue;
+                        apiRequests
+                            .patchRequestWithAuthorization('/api/edit/reply/' + replyId, {
+                                reply: this.tempValue
+                            })
+                            .catch(() => {
+                                    errorHandling.errorMsgWithButton("Failed to update this reply!")
+                                }
+                            );
+                        this.disableEditingReply();
+                    }
+                });
             },
             saveEditPost(index, postId) {
-                this.userPosts[index].title = this.newTitle;
-                this.userPosts[index].description = this.newDescription;
-                apiRequests
-                    .patchRequestWithAuthorization('/api/edit/post/' + postId, {
-                        title: this.newTitle,
-                        description: this.newDescription
-                    })
-                    .catch(() => {
-                            errorHandling.errorMsgWithButton("Failed to update this post!")
-                        }
-                    );
-                this.disableEditingPost();
+                this.$validator.validate().then(valid => {
+                    if (!valid) {
+                        errorHandling.errorMsg("These changes are forbidden!", 1000);
+                    } else {
+                        this.userPosts[index].title = this.newTitle;
+                        this.userPosts[index].description = this.newDescription;
+                        apiRequests
+                            .patchRequestWithAuthorization('/api/edit/post/' + postId, {
+                                title: this.newTitle,
+                                description: this.newDescription
+                            })
+                            .catch(() => {
+                                    errorHandling.errorMsgWithButton("Failed to update this post!")
+                                }
+                            );
+                        this.disableEditingPost();
+                    }
+                });
             }
         },
         data() {
