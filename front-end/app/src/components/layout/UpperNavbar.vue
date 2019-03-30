@@ -2,6 +2,10 @@
   <nav class="p-2">
     <div class="text-right">
 
+      <router-link class="btn btn-dark mx-1" id="postProblems" tag="button" to="/addpost" v-if="loggedIn" exact>
+        Post a problem
+      </router-link>
+
       <router-link class="btn btn-dark mx-1" id="register" tag="button" to="/registration" v-if="!loggedIn" exact>
         Register
       </router-link>

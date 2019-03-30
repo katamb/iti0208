@@ -1,5 +1,5 @@
 <template>
-    <div class="input-group my-auto">
+    <div class="input-group justify-content-lg-end justify-content-center">
       <input type="search" class="form-control search-input" placeholder="Search" aria-label="Search"
              aria-describedby="basic-addon2" v-model="searchTerm">
       <div class="input-group-append">
@@ -27,6 +27,7 @@
 <style scoped>
   .search-input {
     border: white;
+    max-width: 300px;
   }
 
   input[type="search"]:focus {

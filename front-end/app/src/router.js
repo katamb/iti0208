@@ -4,7 +4,6 @@ import Home from './views/Home.vue'
 import AddPost from './components/AddPost.vue'
 import ViewPost from './components/ViewPost.vue'
 import Registration from './components/Registration.vue'
-import Login from './components/layout/Login.vue'
 import UserActivities from './components/UserActivities.vue'
 
 
@@ -61,11 +60,6 @@ export default new Router({
             path: '/registration/',
             name: 'registration',
             component: Registration
-        },
-        {
-            path: '/login/',
-            name: 'login',
-            component: Login
         },
         {
             path: '/search=:searchTerm',

@@ -88,17 +88,14 @@
                         username: this.username,
                         email: this.email
                     })
-                    .then((response) => {
-                        if (response.status === 200) {
-                            this.resetFields();
-                            errorHandling.successMsg("Registration successful!", 1000);
-                        } else {
-                            errorHandling.errorMsg("This username is in use, please pick another username!", 1100);
-                        }
+                    .then(() => {
+                        this.resetFields();
+                        errorHandling.successMsg("Registration successful!", 1000);
                     })
                     .catch(() => {
-                        errorHandling.errorMsg("False email address or username in use!", 1200);
-                    });
+                            errorHandling.errorMsg("False email address or username in use!", 1200)
+                        }
+                    );
             },
             resetFields() {
                 this.username = '';

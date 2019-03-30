@@ -104,11 +104,9 @@
                         fileLocation: this.file_location,
 
                     })
-                    .then((response) => {
-                        if (response.status === 200) {
-                            errorHandling.successMsg("Post successfully uploaded!", 1200);
-                            this.resetFields();
-                        }
+                    .then(() => {
+                        errorHandling.successMsg("Post successfully uploaded!", 1200);
+                        this.resetFields();
                     })
                     .catch((error) => {
                         if (error.response.status === 401 || error.response.status === 403) {
@@ -130,14 +128,14 @@
                             apiRequests
                                 .postRequestToApiWithAuthorization('/api/uploadFile', formData)
                                 .then((response) => {
-                                    if (response.status === 200) {
-                                        this.file_location = response.data.fileDownloadUri;
-                                        this.postFormData();
-                                    } else {
-                                        errorHandling.errorMsgWithButton("There was a problem uploading the file, " +
-                                            "it's either larger than 20MB or not an accepted file type!");
+                                    this.file_location = response.data.fileDownloadUri;
+                                    this.postFormData();
+                                })
+                                .catch(() => {
+                                        errorHandling.errorMsgWithButton("There was a problem uploading Your file!" +
+                                            "Check the limitations!")
                                     }
-                                });
+                                );
                         }
                     } else {
                         errorHandling.errorMsg("The form wasn't filled in properly!", 1000);

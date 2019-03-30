@@ -1,63 +1,25 @@
 <template>
   <div id="app">
-    <Login/>
+
+    <UpperNavbar/>
     <Header/>
-
-    <nav class="navbar navbar-expand-lg navbar-light mb-3">
-      <router-link tag="li" class="col my-auto font-weight-bolder order-lg-last" class-active="active" to="/addpost" exact>Post a problem</router-link>
-      <a class="navbar-brand" href="#">Topics</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-
-        <ul class="navbar-nav mr-auto my-auto">
-          <router-link tag="li" class="col my-auto font-weight-bolder" class-active="active" to="/" exact>All</router-link>
-          <router-link tag="li" class="col my-auto font-weight-bolder" class-active="active" to="/mathematics" exact> Mathematics</router-link>
-          <router-link tag="li" class="col my-auto font-weight-bolder" class-active="active" to="/physics" exact> Physics</router-link>
-          <router-link tag="li" class="col my-auto font-weight-bolder" class-active="active" to="/chemistry" exact> Chemistry</router-link>
-          <router-link tag="li" class="col my-auto font-weight-bolder" class-active="active" to="/biology" exact> Biology</router-link>
-          <router-link tag="li" class="col my-auto font-weight-bolder" class-active="active" to="/cs" exact> Computer Science</router-link>
-          <router-link tag="li" class="col my-auto font-weight-bolder" class-active="active" to="/varia" exact> Varia</router-link>
-          <Search />
-        </ul>
-
-      </div>
-    </nav>
-
-    <!-- old version
-    <div id="nav">
-        <nav class="navbar navbar-expand-lg navbar-light">
-          <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-            <router-link tag="li" class="col" class-active="active" to="/" exact> Home</router-link>
-            <router-link tag="li" class="col" class-active="active" to="/mathematics" exact> Mathematics</router-link>
-            <router-link tag="li" class="col" class-active="active" to="/physics" exact> Physics</router-link>
-            <router-link tag="li" class="col" class-active="active" to="/chemistry" exact> Chemistry</router-link>
-            <router-link tag="li" class="col" class-active="active" to="/biology" exact> Biology</router-link>
-            <router-link tag="li" class="col" class-active="active" to="/cs" exact> Computer Science</router-link>
-            <router-link tag="li" class="col" class-active="active" to="/varia" exact> Varia</router-link>
-            <router-link tag="li" class="col" class-active="active" to="/addpost" exact> Add a Post</router-link>
-          </ul>
-
-          <Search/>
-        </nav>
-    </div-->
+    <TopicNavbar />
     <router-view/>
+
   </div>
 </template>
 
 <script>
     import Header from './components/layout/Header.vue';
-    import Login from './components/layout/Login.vue';
-    import Search from './components/layout/Search.vue';
+    import UpperNavbar from './components/layout/UpperNavbar.vue';
+    import TopicNavbar from './components/layout/TopicNavbar.vue';
 
     export default {
         name: "app",
         components: {
             Header,
-            Login,
-            Search
+            UpperNavbar,
+            TopicNavbar
         }
     }
 </script>
