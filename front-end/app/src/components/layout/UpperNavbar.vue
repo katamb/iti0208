@@ -39,7 +39,7 @@
               <div class="error" v-if="errors.has('password')">{{errors.first('password')}}</div>
             </div>
             <div class="form-group">
-              <button @click="logIn()" class="btn btn-primary btn-block">Login</button>
+              <button @click="logIn()" class="btn btn-primary btn-block" name="login">Login</button>
             </div>
 
             <div class="form-group text-center">
