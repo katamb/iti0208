@@ -1,7 +1,7 @@
 <template>
     <div>
-        <h3> {{ return_msg }} </h3>
         <form id="post-form" @submit.prevent="processForm">
+            <label>{{ return_msg }}</label>
             <div id="legend">
                 <legend class=""><h3>Register</h3></legend>
             </div>
@@ -16,7 +16,7 @@
             <div class="error" v-if="errors.has('firstname')">{{errors.first('firstname')}}</div>
 
 
-            <h5>Last name:</h5><br>
+            <h5>Last name:</h5>
             <input type="text" name="lastname" placeholder="Lastname" v-model="lastName"
                    v-validate="{ required: true, min: 2 }"><br>
             <div class="error" v-if="errors.has('lastname')">{{errors.first('lastname')}}</div>

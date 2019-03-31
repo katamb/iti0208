@@ -101,13 +101,6 @@
                             this.return_msg = "Post successfully uploaded!";
                             this.resetFields();
                         }
-                        else if (response.status === 401 || response.status === 500) {
-                            Swal.fire({
-                                type: 'error',
-                                title: "Please log in to do post",
-                            });
-                            this.return_msg = "Please log in to do post!";
-                        }
                         else {
                             Swal.fire({
                                 type: 'error',
@@ -120,7 +113,7 @@
                             Swal.fire({
                                 position: 'center',
                                 type: 'error',
-                                title: "Wrong username or password, try again!",
+                                title: "Please, check if you are logged in!",
                                 showConfirmButton: false,
                                 timer: 1200
                             });

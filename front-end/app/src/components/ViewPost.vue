@@ -191,11 +191,11 @@
     }
 
     .reply-description {
-        padding-right: 30px;
+        padding-left: 10px;
         border-radius: 4px;
         font-family: Arial, Helvetica, sans-serif;
         font-size: medium;
-        text-align: center;
+        text-align: left;
         width: 100%;
         height: auto;
         margin: 0px auto;
