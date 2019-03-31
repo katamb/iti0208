@@ -195,6 +195,7 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\alvar\IdeaProjects\tarkvaratehnika_projekt\front-end\app\cypress\integration\e2eTests" />
       <recent name="C:\Users\URMAS\IdeaProjects\tarkvaratehnika_projekt1\front-end\app\src\components" />
     </key>
   </component>
@@ -250,7 +251,7 @@
       <workItem from="1552767669889" duration="23480000" />
       <workItem from="1554056102454" duration="705000" />
       <workItem from="1554057084206" duration="1606000" />
-      <workItem from="1554060073792" duration="14221000" />
+      <workItem from="1554060073792" duration="14742000" />
     </task>
     <task id="LOCAL-00001" summary="Post validation">
       <created>1550526494334</created>
@@ -268,10 +269,11 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="86829000" />
+    <option name="totallyTimeSpent" value="87350000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="878" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.19798657" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -290,7 +292,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.32841823" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="10" visible="true" weight="0.3163539" />
+      <window_info anchor="bottom" id="Terminal" order="10" weight="0.3163539" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
