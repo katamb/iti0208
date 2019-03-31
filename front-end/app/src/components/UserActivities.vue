@@ -1,150 +1,152 @@
 <template>
-    <div>
-        <h2>My Posts</h2>
-        <div class="items" v-for="(data, index) in response" :key='data.id'>
-            <h3> {{data.title}}</h3>
-            <p>{{data.description}}</p>
-            <div v-if="editing1 == data.id">
-                <input v-model="newTitle"><br/>
-                <input v-model="newDescription"><br/>
-                <button @click="disableEditingPost"> Cancel </button>
-                <button @click="saveEditPost(index, data.id)"> Save </button>
-            </div>
-            <input type="submit" value="Delete" @click="deletePost(data.id)">
-            <input type="submit" value="Edit" @click="enableEditingPost(data)">
 
+  <div class="container-fluid">
+    <div class="row justify-content-center">
+      <div class="col-xl-7 col-lg-8 col-md-9 col-sm-11">
+
+        <h2 class="my-2">My Posts</h2>
+
+        <div class="post-list-item my-2 p-2 text-left" v-for="(data, index) in userPosts" :key='data.id'>
+          <h3>{{data.title}}</h3>
+          <p>{{data.description}}</p>
+          <div class="form-group mx-4 mb-2" v-if="editingPost === data.id">
+            <input class="form-control mb-2" name="newTitle"
+                   v-model="newTitle" v-validate="{ required: true, min: 3, max: 128 }">
+            <div class="error" v-if="errors.has('newTitle')">{{errors.first('newTitle')}}</div>
+            <textarea class="form-control mb-2" rows="3" name="newDescription"
+                      v-model="newDescription" v-validate="{ required: true, min: 5 }"></textarea>
+            <div class="error" v-if="errors.has('newDescription')">{{errors.first('newDescription')}}</div>
+            <button class="btn btn-primary m-1" @click="saveEditPost(index, data.id)">Save</button>
+            <button class="btn btn-secondary m-1" @click="disableEditingPost">Cancel</button>
+          </div>
+          <input class="btn btn-danger m-1" type="submit" value="Delete" @click="deletePost(data.id)">
+          <input class="btn btn-warning m-1" type="submit" value="Edit" @click="enableEditingPost(data)">
         </div>
-            <!--p>{{data.rewardDescription}}</p>
-            <a v-if="data.fileLocation" v-bind:href=data.fileLocation>Extra information</a-->
 
-        <h2>My Replies</h2>
-        <div class="items" v-for="(data, index) in response1" :key='data.id'>
-            <h3> Reply:</h3>
-            <p>{{data.reply}}</p>
-            <!--p>{{data.rewardDescription}}</p>
-            <a v-if="data.fileLocation" v-bind:href=data.fileLocation>Extra information</a-->
-            <div v-if="editing == data.id">
-                <input v-model="tempValue">
-                <button @click="disableEditingReply"> Cancel </button>
-                <button @click="saveEditReply(index, data.id)"> Save </button>
-            </div>
-            <input type="submit" value="Delete" @click="deleteReply(data.id)">
-            <input type="submit" value="Edit" @click="enableEditingReply(data)">
+        <h2 class="my-2">My Replies</h2>
 
+        <div class="post-list-item my-2 p-2 text-left" v-for="(data, index) in userReplies" :key='data.id'>
+          <p>{{data.reply}}</p>
+          <div class="form-group mx-4 mb-2" v-if="editingReply === data.id">
+            <textarea class="form-control mb-2" rows="3" name="newReply"
+                      v-model="tempValue" v-validate="{ required: true, min: 5 }"></textarea>
+            <div class="error" v-if="errors.has('newReply')">{{errors.first('newReply')}}</div>
+            <button class="btn btn-primary m-1" @click="saveEditReply(index, data.id)"> Save</button>
+            <button class="btn btn-secondary m-1" @click="disableEditingReply"> Cancel</button>
+          </div>
+          <input class="btn btn-danger m-1" type="submit" value="Delete" @click="deleteReply(data.id)">
+          <input class="btn btn-warning m-1" type="submit" value="Edit" @click="enableEditingReply(data)">
         </div>
+
+      </div>
     </div>
+  </div>
 </template>
 
 <script>
-    import axios from 'axios';
+    import apiRequests from '../javascript/apiRequests.js';
+    import errorHandling from './../javascript/errorHandling.js';
+
     export default {
-
         name: "userActivities",
-        methods : {
+        methods: {
             loadUserActivities() {
-                axios
-                    .get('http://localhost:8090/api/usersPosts',
-                        {
-                            headers: {
-                                "Authorization": localStorage.getItem("Authorization")
-                            }
-                        })
-
+                apiRequests
+                    .getRequestToApiWithAuthorization('/api/usersPosts')
                     .then((response) => {
-                        this.response = response.data;
+                        this.userPosts = response.data;
                     });
-                axios
-                    .get('http://localhost:8090/api/usersReplies',
-                        {
-                            headers: {
-                                "Authorization": localStorage.getItem("Authorization")
-                            }
-                        })
-
+                apiRequests
+                    .getRequestToApiWithAuthorization('/api/usersReplies')
                     .then((response) => {
-                        this.response1 = response.data;
+                        this.userReplies = response.data;
                     });
             },
-
             deletePost(postId) {
-                axios.
-                    delete('http://localhost:8090/api/delete/post/' + postId,
-                    { headers: { "Authorization": localStorage.getItem("Authorization") } }
+                apiRequests
+                    .deleteRequestWithAuthorization('/api/delete/post/' + postId)
+                    .catch(() => {
+                            errorHandling.errorMsgWithButton("Failed to delete this post!")
+                        }
                     );
-
                 this.loadUserActivities();
             },
-
             deleteReply(replyId) {
-                axios.
-                delete('http://localhost:8090/api/delete/reply/' + replyId,
-                    { headers: { "Authorization": localStorage.getItem("Authorization") } }
+                apiRequests
+                    .deleteRequestWithAuthorization('/api/delete/reply/' + replyId)
+                    .catch(() => {
+                            errorHandling.errorMsgWithButton("Failed to delete this reply!")
+                        }
                     );
                 this.loadUserActivities();
             },
-
-            enableEditingReply(data){
+            enableEditingReply(data) {
                 this.tempValue = data.reply;
-                this.editing = data.id;
+                this.editingReply = data.id;
             },
-            enableEditingPost(data){
+            enableEditingPost(data) {
                 this.newTitle = data.title;
                 this.newDescription = data.description;
-                this.editing1 = data.id;
+                this.editingPost = data.id;
             },
-
-            disableEditingReply: function(){
+            disableEditingReply: function () {
                 this.tempValue = null;
-                this.editing = false;
+                this.editingReply = false;
             },
-            disableEditingPost: function(){
+            disableEditingPost: function () {
                 this.newTitle = null;
                 this.newDescription = null;
-                this.editing1 = false;
+                this.editingPost = false;
             },
-            saveEditReply(index, replyId){
-
-                this.response1[index].reply = this.tempValue;
-                axios
-                    .patch('http://localhost:8090/api/edit/reply/' + replyId,
-                        {
-                            reply : this.tempValue
-                        },
-                        { headers: {"Authorization": localStorage.getItem("Authorization") } }
-                        );
-                this.disableEditingReply();
+            saveEditReply(index, replyId) {
+                this.$validator.validate().then(valid => {
+                    if (!valid) {
+                        errorHandling.errorMsg("These changes are forbidden!", 1000);
+                    } else {
+                        this.userReplies[index].reply = this.tempValue;
+                        apiRequests
+                            .patchRequestWithAuthorization('/api/edit/reply/' + replyId, {
+                                reply: this.tempValue
+                            })
+                            .catch(() => {
+                                    errorHandling.errorMsgWithButton("Failed to update this reply!")
+                                }
+                            );
+                        this.disableEditingReply();
+                    }
+                });
             },
             saveEditPost(index, postId) {
-                this.response[index].title = this.newTitle;
-                this.response[index].description = this.newDescription;
-                axios
-                    .patch('http://localhost:8090/api/edit/post/' + postId,
-                        {
-                             title: this.newTitle,
-                             description: this.newDescription
-                        },
-                        {
-                            headers: {
-                                "Authorization": localStorage.getItem("Authorization")
-                            }
-                        });
-                this.disableEditingPost();
-
+                this.$validator.validate().then(valid => {
+                    if (!valid) {
+                        errorHandling.errorMsg("These changes are forbidden!", 1000);
+                    } else {
+                        this.userPosts[index].title = this.newTitle;
+                        this.userPosts[index].description = this.newDescription;
+                        apiRequests
+                            .patchRequestWithAuthorization('/api/edit/post/' + postId, {
+                                title: this.newTitle,
+                                description: this.newDescription
+                            })
+                            .catch(() => {
+                                    errorHandling.errorMsgWithButton("Failed to update this post!")
+                                }
+                            );
+                        this.disableEditingPost();
+                    }
+                });
             }
-
         },
         data() {
             return {
-                response: [],
-                response1: [],
+                userPosts: [],
+                userReplies: [],
                 tempValue: null,
                 newTitle: null,
                 newDescription: null,
-                editing: false,
-                editing1 : false
-
+                editingReply: false,
+                editingPost: false
             };
-
         },
         mounted() {
             this.loadUserActivities();
@@ -153,80 +155,9 @@
 </script>
 
 <style scoped>
-
-    .upload-btn-wrapper {
-        position: relative;
-        overflow: hidden;
-        display: inline-block;
-    }
-
-    .btn {
-        border: 2px solid gray;
-        color: gray;
-        background-color: white;
-        padding: 8px 20px;
-        border-radius: 8px;
-        font-size: 20px;
-        font-weight: bold;
-    }
-
-    .upload-btn-wrapper input[type=file] {
-        font-size: 100px;
-        position: absolute;
-        left: 0;
-        top: 0;
-        opacity: 0;
-    }
-
-    label {
-        text-align: right;
-    }
-
-    form {
-        display: compact;
-    }
-
-    input {
-        flex: 10;
-        padding: 5px;
-    }
-
-    input[type=text] {
-        width: 30%;
-        padding: 12px 20px;
-        margin: 8px 0;
-        display: inline-block;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        box-sizing: border-box;
-    }
-
-    select {
-        width: 30%;
-        padding: 12px 20px;
-        margin: 8px 0;
-        display: inline-block;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        box-sizing: border-box;
-    }
-
-    input[type=submit] {
-        width: 10%;
-        background-color: #333;
-        color: white;
-        padding: 14px 20px;
-        margin: 8px 0;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-    }
-
-    div {
-        border-radius: 5px;
-        background-color: #f2f2f2;
-        padding: 20px;
-    }
-
+  .post-list-item {
+    background-color: #f9f9f9;
+    border-left: 4px solid #e9e9e9;
+  }
 </style>
 

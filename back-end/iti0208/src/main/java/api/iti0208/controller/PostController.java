@@ -33,6 +33,9 @@ public class PostController {
                                  @RequestParam(value = "topic", defaultValue = "all") String topic,
                                  @RequestParam(value = "order", defaultValue = "ascending") String order,
                                  @RequestParam(value = "sortBy", defaultValue = "postedAt") String sortBy) {
+        if (topic.equals("home")) {
+            topic = "all";
+        }
         return postService.getPosts(page, size, topic, order, sortBy);
     }
 

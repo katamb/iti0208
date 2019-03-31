@@ -1,50 +1,73 @@
 <template>
-    <div>
-        <h3> {{ return_msg }} </h3>
+  <div class="container-fluid">
+    <div class="row justify-content-center">
+      <div class="col-xl-5 col-lg-6 col-md-8 col-sm-11">
+
+        <h3>Create a task for others to solve!</h3>
+
         <form id="post-form" @submit.prevent="processForm">
-            <h4>Topic:</h4><br>
-            <select name="topic" v-model="topic"
-                    v-validate="{ required: true }">
-                <option value="Mathematics">Mathematics</option>
-                <option value="Physics">Physics</option>
-                <option value="Chemistry">Chemistry</option>
-                <option value="Biology">Biology</option>
-                <option value="Computer_Science">Computer Science</option>
-                <option value="Varia" selected="selected">Varia</option>
-            </select><br>
+
+          <div class="form-group text-left">
+            <label for="topic">Topic:</label>
+            <select class="form-control" id="topic" name="topic" v-model="topic" v-validate="{ required: true }">
+              <option value="Mathematics">Mathematics</option>
+              <option value="Physics">Physics</option>
+              <option value="Chemistry">Chemistry</option>
+              <option value="Biology">Biology</option>
+              <option value="Computer_Science">Computer Science</option>
+              <option value="Varia" selected="selected">Varia</option>
+            </select>
             <div class="error" v-if="errors.has('topic')">{{errors.first('topic')}}</div>
+          </div>
 
-            <h4>Title:</h4><br>
-            <input type="text" name="title" placeholder="Title" v-model="title"
-                   v-validate="{ required: true, min: 3, max: 128 }"><br>
+          <div class="form-group text-left">
+            <label for="title">Title:</label>
+            <input id="title" class="form-control" type="text" name="title" placeholder="Title"
+                   v-model="title" v-validate="{ required: true, min: 3, max: 128 }">
             <div class="error" v-if="errors.has('title')">{{errors.first('title')}}</div>
+          </div>
 
-            <h4>Description:</h4><br>
-            <input type="text" name="description" placeholder="Description" v-model="description"
-                   v-validate="{ required: true, min: 5 }"><br>
+          <div class="form-group text-left">
+            <label for="description">Description:</label>
+            <textarea class="form-control" id="description" rows="3"
+                      name="description" placeholder="Description"
+                      v-model="description" v-validate="{ required: true, min: 5 }"
+            ></textarea>
             <div class="error" v-if="errors.has('description')">{{errors.first('description')}}</div>
+          </div>
 
-            <h4>Reward description:</h4><br>
-            <input type="text" name="reward_description" placeholder="Reward Description"
-                   v-model="reward_description"><br>
-            <div class="error" v-if="errors.has('reward_description')">{{errors.first('reward_description')}}</div>
+          <div class="form-group text-left">
+            <label for="reward_description">Reward description:</label>
+            <input id="reward_description" class="form-control" type="text" name="reward_description"
+                   placeholder="Reward description" v-model="reward_description">
+          </div>
 
-            <h4>File:</h4><br>
-            <div class="upload-btn-wrapper">
-                <button class="btn">Upload a file</button>
-                <input id="singleFileUploadInput" type="file" name="file" class="file-input"
-                       @change="loadTextFromFile"/>
-            </div>
-            <br>
-            <input type="submit" value="Submit" >
+
+          <div class="form-group text-left">
+            <label for="fileUpload">File:</label><br/>
+            <label class="custom-file-upload" for="fileUpload">
+              Choose a file
+            </label>
+            <input type="file" class="form-control-file" id="fileUpload" @change="loadTextFromFile">
+            <p>
+              <small>
+                Max file size: 20MB <br/>
+                Allowed file types: .txt, .pdf, .png, .jpg, .doc, .docx, .xls, .xlsx, .rtf, .jpeg, .tiff, .ppt
+              </small>
+            </p>
+          </div>
+
+          <input class="btn btn-lg btn-primary mb-3" type="submit" value="Submit">
         </form>
+      </div>
     </div>
+  </div>
 </template>
 
 
 <script>
-    import axios from 'axios';
-    import Swal from 'sweetalert2';
+    import apiRequests from './../javascript/apiRequests.js';
+    import errorHandling from './../javascript/errorHandling.js';
 
     export default {
         name: 'addpost',
@@ -55,12 +78,10 @@
                 description: '',
                 reward_description: '',
                 file_location: '',
-                file: null,
-                return_msg: '',
+                file: null
             };
         },
         methods: {
-
             loadTextFromFile(input) {
                 this.file = input.target.files[0];
             },
@@ -73,91 +94,50 @@
                 this.file = null;
                 this.$nextTick(() => this.$validator.reset())
             },
-            postInfo() {
-                axios
-                    .post('http://localhost:8090/api/add/post',
-                    {
+            postFormData() {
+                apiRequests
+                    .postRequestToApiWithAuthorization('/api/add/post', {
                         topic: this.topic,
                         title: this.title,
                         description: this.description,
                         rewardDescription: this.reward_description,
                         fileLocation: this.file_location,
-
-                    },
-                    {
-                        headers: {
-                            "Authorization": localStorage.getItem("Authorization")
-                        }
                     })
-                    .then((response) => {
-                        if (response.status === 200) {
-                            Swal.fire({
-                                position: 'center',
-                                type: 'success',
-                                title: "Post successfully uploaded!",
-                                showConfirmButton: false,
-                                timer: 1200
-                            });
-                            this.return_msg = "Post successfully uploaded!";
-                            this.resetFields();
-                        }
-                        else if (response.status === 401 || response.status === 500) {
-                            Swal.fire({
-                                type: 'error',
-                                title: "Please log in to do post",
-                            });
-                            this.return_msg = "Please log in to do post!";
-                        }
-                        else {
-                            Swal.fire({
-                                type: 'error',
-                                title: "Sorry, there was a problem uploading Your post!",
-                            });
-                            this.return_msg = "Sorry, there was a problem uploading Your post!";
-                        }
+                    .then(() => {
+                        errorHandling.successMsg("Post successfully uploaded!", 1200);
+                        this.resetFields();
                     })
                     .catch((error) => {
-                            Swal.fire({
-                                position: 'center',
-                                type: 'error',
-                                title: "Wrong username or password, try again!",
-                                showConfirmButton: false,
-                                timer: 1200
-                            });
-                            this.resetFields();
-                            this.return_msg = error;
-
+                        if (error.response.status === 401 || error.response.status === 403) {
+                            errorHandling.errorMsgWithButton("You need to be logged in to post!");
+                        } else {
+                            errorHandling.errorMsgWithButton("Sorry, " +
+                                "there was a problem and the post couldn't be uploaded!");
                         }
-
-                    );
+                    });
             },
             processForm() {
                 this.$validator.validate().then(valid => {
                     if (valid) {
-                        if (this.file === null) {
-                            this.postInfo();
+                        if (this.file === null || this.file === undefined) {
+                            this.postFormData();
                         } else {
                             const formData = new FormData();
                             formData.append('file', this.file);
-                            axios
-                                .post('http://localhost:8090/api/uploadFile', formData,
-                                    {
-                                        headers: {
-                                            "Authorization": localStorage.getItem("Authorization")
-                                        }
-                                    })
+                            apiRequests
+                                .postRequestToApiWithAuthorization('/api/uploadFile', formData)
                                 .then((response) => {
-                                    if (response.status === 200) {
-                                        this.file_location = response.data.fileDownloadUri;
-                                        this.postInfo();
+                                    this.file_location = response.data.fileDownloadUri;
+                                    this.postFormData();
+                                })
+                                .catch(() => {
+                                        errorHandling.errorMsgWithButton("There was a problem uploading Your file!" +
+                                            "Check the limitations!")
                                     }
-                                });
+                                );
                         }
                     } else {
-                        Swal.fire({
-                            type: 'error',
-                            title: "Sorry, there was a problem uploading Your post!",
-                        });
+                        errorHandling.errorMsg("The form wasn't filled in properly!", 1000);
                     }
                 });
             },
@@ -167,78 +147,17 @@
 
 
 <style scoped>
-    .upload-btn-wrapper {
-        position: relative;
-        overflow: hidden;
-        display: inline-block;
-    }
+  .custom-file-upload {
+    border: 2px solid gray;
+    color: gray;
+    background-color: white;
+    padding: 8px 20px;
+    border-radius: 8px;
+    font-size: 20px;
+    font-weight: bold;
+  }
 
-    .btn {
-        border: 2px solid gray;
-        color: gray;
-        background-color: white;
-        padding: 8px 20px;
-        border-radius: 8px;
-        font-size: 20px;
-        font-weight: bold;
-    }
-
-    .upload-btn-wrapper input[type=file] {
-        font-size: 100px;
-        position: absolute;
-        left: 0;
-        top: 0;
-        opacity: 0;
-    }
-
-    label {
-        text-align: right;
-    }
-
-    form {
-        display: compact;
-    }
-
-    input {
-        flex: 10;
-        padding: 5px;
-    }
-
-    input[type=text] {
-        width: 30%;
-        padding: 12px 20px;
-        margin: 8px 0;
-        display: inline-block;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        box-sizing: border-box;
-    }
-
-    select {
-        width: 30%;
-        padding: 12px 20px;
-        margin: 8px 0;
-        display: inline-block;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        box-sizing: border-box;
-    }
-
-    input[type=submit] {
-        width: 10%;
-        background-color: #333;
-        color: white;
-        padding: 14px 20px;
-        margin: 8px 0;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-    }
-
-    div {
-        border-radius: 5px;
-        background-color: #f2f2f2;
-        padding: 20px;
-    }
-
+  input[type=file] {
+    display: none;
+  }
 </style>
