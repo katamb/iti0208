@@ -40,6 +40,8 @@ public class Post {
 
     private Date postedAt;
 
+    private Date updatedAt;
+
     private String postedBy;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "postId", cascade = CascadeType.ALL)
@@ -48,6 +50,12 @@ public class Post {
     @PrePersist
     protected void onCreate() {
         postedAt = new Date();
+        updatedAt = new Date();
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        updatedAt = new Date();
     }
 
     public Post(String title, String description, String topic) {

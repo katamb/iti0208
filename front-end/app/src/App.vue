@@ -1,143 +1,61 @@
 <template>
   <div id="app">
-      <Login />
 
-      <Header />
-
-    <div id="nav" >
-      <p class="b">
-      <nav class="navbar navbar-expand-lg navbar-light">
-        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-        <router-link tag="li" class="col" class-active="active" to="/" exact> Home </router-link>
-        <router-link tag="li" class="col" class-active="active" to="/mathematics" exact> Mathematics </router-link>
-        <router-link tag="li" class="col" class-active="active" to="/physics" exact> Physics </router-link>
-        <router-link tag="li" class="col" class-active="active" to="/chemistry" exact> Chemistry </router-link>
-        <router-link tag="li" class="col" class-active="active" to="/biology" exact> Biology </router-link>
-        <router-link tag="li" class="col" class-active="active" to="/cs" exact> Computer Science </router-link>
-        <router-link tag="li" class="col" class-active="active" to="/varia" exact> Varia </router-link>
-        <router-link tag="li" class="col" class-active="active" to="/addpost" exact> Add a Post </router-link>
-
-        </ul>
-      <form class="form-inline my-2 my-lg-0" @submit="searchFunction">
-        <input class="form-control mr-sm-2" id="searchTerm" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit" >Search</button>
-      </form>
-
-      </nav>
-      </p>
-    </div>
+    <UpperNavbar/>
+    <Header/>
+    <TopicNavbar />
     <router-view/>
+
   </div>
 </template>
 
 <script>
-  import Header from './components/layout/Header.vue';
-  import Login from './components/layout/Login.vue';
+    import Header from './components/layout/Header.vue';
+    import UpperNavbar from './components/layout/UpperNavbar.vue';
+    import TopicNavbar from './components/layout/TopicNavbar.vue';
 
-  export default {
-    name: "app",
-    components: {
-      Header,
-      Login
-    },
-      data() {
-        return {
-            item: ''
+    export default {
+        name: "app",
+        components: {
+            Header,
+            UpperNavbar,
+            TopicNavbar
         }
-      },
-      methods : {
-
-        searchFunction() {
-            this.item = document.getElementById("searchTerm").value;
-            this.$router.push({name: 'search', params: {item: this.item}});
-
-
-
-
-
-        }
-      }
-  }
+    }
 </script>
 
 <style>
-  #register {
-    background-color: #333;
-    height: 40px;
-    color: white;
-    text-align: center;
-    border:1px solid #333;
-    border-radius: 4px;
-
-  }
-
-  .ml-auto {
-    margin-right: auto !important;
-  }
-  p.b {
-    border: 3px solid #333;
-    border-radius: 0px;
-    background-color: #D6BDF3;
-  }
-  nav {
-    background-color: #D6BDF3;
-    margin: 0px auto;
-  }
-
-  input[type="search"]:hover {
-    background-color: #fff;
-    display: inline-block;
-    border: 1px solid #333;
-    border-radius: 4px;
-  }
-
-  input[type="search"]:focus {
-    background-color: #ccc;
-  }
-
-  button[type="submit"] {
-    background-color: #333;
-    color: white;
-    cursor: pointer;
-
-  }
-
   div {
     text-align: center;
   }
 
-  nav li {
-    background-color: #D6BDF3;
+  body {
+    font-family: Arial, Helvetica, sans-serif;
     text-align: center;
-    border:1px solid #333;
-    border-radius: 4px;
   }
 
-  nav li:hover,
-  nav li.router-link-active,
-  nav li.router-link-exact-active {
-    text-align: center;
-    background-color: #fff;
-    cursor: pointer;
-    border:1px solid #333;
-    border-radius: 4px;
+  nav {
+    background-color: #D6BDF3 !important;
   }
 
   li {
     list-style-type: none;
   }
 
-  body, a {
-    font-family: Arial, Helvetica, sans-serif;
-    line-height: 1.4;
-    text-align: center;
+  nav li:hover,
+  nav li.router-link-active,
+  nav li.router-link-exact-active {
+    text-decoration: underline;
+    /*text-align: center;
+    background-color: #fff;
+    cursor: pointer;
+    border: 1px solid #333;
+    border-radius: 4px;*/
   }
-
 
   .error {
-    margin-top: 0;
-    padding-top: 0;
     color: red;
-    font-weight: bold;
+    font-weight: bolder;
   }
+
 </style>

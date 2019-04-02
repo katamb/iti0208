@@ -1,64 +1,64 @@
 <template>
-    <div>
-        <div class="item">
+  <div class="container-fluid">
+    <div class="row justify-content-center">
+      <div class="col-xl-7 col-lg-8 col-md-9 col-sm-11">
 
-            <h1>{{response.title}}</h1>
-            <div class="description">
-                <div class="post">
-                <h4>{{response.description}}</h4>
-                <p>{{response.rewardDescription}}</p>
-                <a v-if="response.fileLocation" v-bind:href=response.fileLocation>Extra information</a>
-
-                </div>
-            <br>
-
-            <h2>Replies</h2>
-                <div v-for="answer in response.answers" :key='answer.id' style="padding-left: 30px">
-                    <div class="reply-description">
-
-                    <h3>Reply:</h3><br>
-                    {{answer.reply}}<br>
-                    <a class="a-button" v-if="answer.fileLocation" v-bind:href=answer.fileLocation>Extra information</a>
-                        <h3> {{ return_msg }} </h3>
-                    </div>
-                    <br>
-            </div>
-                <form id="reply-form" @submit.prevent="replyInfo">
-
-                    <h3>Your reply:</h3>
-                    <input type="text" name="reply" placeholder="Reply" v-model="reply"
-                           v-validate="{ required: true, min: 5 }"><br>
-                    <div class="error" v-if="errors.has('reply')">{{errors.first('reply')}}</div>
-                    <br>
-                    <div class="upload-btn-wrapper">
-                        <button class="btn">Upload a file</button>
-                        <input id="singleFileUploadInput" type="file" name="file" class="file-input"
-                               @change="loadTextFromFile"/>
-                    </div>
-
-                    <br>
-
-                    <input type="submit" value="Submit">
-
-
-                </form>
-                <br>
-            </div>
-            <br>
+        <div class="post-item text-left p-3 mb-3">
+          <h3>{{response.title}}</h3>
+          <p>{{response.description}}</p>
+          <p v-if="response.rewardDescription">Reward for solving: {{response.rewardDescription}}</p>
+          <a v-if="response.fileLocation" v-bind:href=response.fileLocation>Extra information</a>
+          <p v-if="response.postedBy">
+            <small>
+              Posted by: {{response.postedBy}}
+            </small>
+          </p>
         </div>
-        <br>
+
+        <div class="post-item text-left p-2 mx-2 mb-2" v-for="answer in response.answers" :key='answer.id'>
+          <p class="font-weight-bolder" v-if="answer.postedBy">{{answer.postedBy}}:</p>
+          <p>{{answer.reply}}</p>
+          <a v-if="answer.fileLocation" v-bind:href=answer.fileLocation>Extra information</a>
+        </div>
+
+        <form class="my-3 p-2 reply-area" id="reply-form" @submit.prevent="replyInfo">
+          <div class="form-group text-left">
+            <label for="exampleFormControlTextarea1">Reply to this post:</label>
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="reply" placeholder="Reply"
+                      v-model="reply" v-validate="{ required: true, min: 5 }"></textarea>
+            <div class="error" v-if="errors.has('reply')">{{errors.first('reply')}}</div>
+          </div>
+          <div class="form-group text-left">
+            <label for="fileUpload">File:</label><br/>
+            <label class="custom-file-upload" for="fileUpload">
+              Choose a file
+            </label>
+            <input type="file" class="form-control-file" id="fileUpload" @change="loadTextFromFile">
+            <p>
+              <small>
+                Max file size: 20MB <br/>
+                Allowed file types: .txt, .pdf, .png, .jpg, .doc, .docx, .xls, .xlsx, .rtf, .jpeg, .tiff, .ppt
+              </small>
+            </p>
+          </div>
+          <input class="btn btn-lg btn-primary" type="submit" value="Submit reply">
+        </form>
+
+      </div>
+      <br>
     </div>
+  </div>
 </template>
 
 <script>
-    import axios from 'axios';
+    import apiRequests from '../javascript/apiRequests.js';
+    import errorHandling from './../javascript/errorHandling.js';
 
     export default {
         name: 'viewpost',
         data() {
             return {
                 response: [],
-                return_msg: '',
                 reply: '',
                 file_location: '',
                 file: null
@@ -75,56 +75,59 @@
                 this.$nextTick(() => this.$validator.reset())
             },
             loadPost() {
-                axios
-                    .get('http://localhost:8090/api/posts/' + this.$route.params.Pid)
+                apiRequests
+                    .getRequestToApi('/api/posts/' + this.$route.params.Pid)
                     .then((response) => {
                         this.response = response.data;
-                    });
+                    })
+                    .catch(() => {
+                            errorHandling.errorMsgWithButton("This post no longer exists!")
+                        }
+                    );
             },
             postReply() {
-                axios
-                    .post('http://localhost:8090/api/add/reply',
-                        {
-                        postId: this.$route.params.Pid,
-                        reply: this.reply,
-                        fileLocation: this.file_location
-                        },
-                        {
-                            headers: {
-                                "Authorization": localStorage.getItem("Authorization")
-                            }
-                        })
-                    .then((response) => {
-                        if (response.status === 200) {
-                            this.loadPost();
-                            this.resetFields();
+                apiRequests
+                    .postRequestToApiWithAuthorization('/api/add/reply', {
+                            postId: this.$route.params.Pid,
+                            reply: this.reply,
+                            fileLocation: this.file_location
+                        }
+                    )
+                    .then(() => {
+                        this.resetFields();
+                        this.loadPost();
+                    })
+                    .catch((error) => {
+                        if (error.response.status === 401 || error.response.status === 403) {
+                            errorHandling.errorMsgWithButton("You need to be logged in to reply!");
                         } else {
-                            this.return_msg = "Sorry, there was a problem uploading Your reply!";
+                            errorHandling.errorMsgWithButton("Sorry, " +
+                                "there was a problem and the post couldn't be uploaded!");
                         }
                     });
             },
             replyInfo() {
                 this.$validator.validate().then(valid => {
                     if (valid) {
-                        if (this.file === null) {
+                        if (this.file === null || this.file === undefined) {
                             this.postReply();
                         } else {
                             const formData = new FormData();
                             formData.append('file', this.file);
-                            axios
-                                .post('http://localhost:8090/api/uploadFile', formData,
-                                    {
-                                        headers: {
-                                            "Authorization": localStorage.getItem("Authorization")
-                                        }
-                                    })
+                            apiRequests
+                                .postRequestToApiWithAuthorization('/api/uploadFile', formData)
                                 .then((response) => {
-                                    if (response.status === 200) {
-                                        this.file_location = response.data.fileDownloadUri;
-                                        this.postReply();
+                                    this.file_location = response.data.fileDownloadUri;
+                                    this.postReply();
+                                })
+                                .catch(() => {
+                                        errorHandling.errorMsgWithButton("There was a problem uploading Your file!" +
+                                            "Check the limitations!")
                                     }
-                                });
+                                );
                         }
+                    } else {
+                        errorHandling.errorMsg("Form wasn't filled in properly!!", 1200)
                     }
                 })
             }
@@ -136,136 +139,26 @@
 </script>
 
 <style scoped>
+  .post-item {
+    background-color: #f9f9f9;
+    border-left: 4px solid #e9e9e9;
+  }
 
-    .upload-btn-wrapper {
-        position: relative;
-        overflow: hidden;
-        display: inline-block;
-    }
+  .reply-area {
+    background-color: #f9f9f9;
+  }
 
-    .btn {
-        border: 2px solid gray;
-        color: gray;
-        background-color: white;
-        padding: 8px 20px;
-        border-radius: 8px;
-        font-size: 20px;
-        font-weight: bold;
-    }
+  .custom-file-upload {
+    border: 2px solid gray;
+    color: gray;
+    background-color: white;
+    padding: 8px 20px;
+    border-radius: 8px;
+    font-size: 20px;
+    font-weight: bold;
+  }
 
-    .upload-btn-wrapper input[type=file] {
-        font-size: 100px;
-        position: absolute;
-        left: 0;
-        top: 0;
-        opacity: 0;
-    }
-
-
-    p {
-        color: #333;
-    }
-
-    .item {
-        width: 80%;
-        height: auto;
-        margin: 0px auto;
-        background-color: lightgray;
-        color: black;
-        text-align: center;
-        border: 1px solid #333;
-        border-radius: 4px;
-    }
-
-    .description {
-        border-radius: 4px;
-        padding-right: 30px;
-        font-family: Arial, Helvetica, sans-serif;
-        font-size: medium;
-        text-align: center;
-        width: 80%;
-        height: auto;
-        margin: 0px auto;
-        color: black;
-        background-color: #fff;
-    }
-
-    .reply-description {
-        padding-left: 10px;
-        border-radius: 4px;
-        font-family: Arial, Helvetica, sans-serif;
-        font-size: medium;
-        text-align: left;
-        width: 100%;
-        height: auto;
-        margin: 0px auto;
-        color: black;
-        background-color: #fff;
-        border-style: groove;
-    }
-
-    input[type=text] {
-        color: black;
-        width: 60%;
-        height: auto;
-        padding: 12px 20px;
-        margin: 0px auto;
-        display: inline-block;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        box-sizing: border-box;
-
-    }
-
-
-    input[type="submit"] {
-        display: inline-block;
-        width: 80px;
-        height: 30px;
-        border: 1px solid #333;
-        border-radius: 4px;
-        background-color: #333;
-        color: white;
-        cursor: pointer;
-    }
-
-    h2{
-        overflow:hidden;
-    }
-    h2:after {
-        content:'';
-        display:inline-block;
-        width:100%; height:100%;
-        margin-right:-100%;
-        border-bottom:1px solid #000;
-    }
-    h2:before {
-        content:'';
-        display:inline-block;
-        width:100%; height:100%;
-        margin-left:-100%;
-        border-bottom:1px solid #000;
-    }
-
-    #reply-form {
-        text-align: left;
-        padding: 30px;
-    }
-
-    .post {
-        text-align: left;
-        padding: 30px;
-    }
-
-    .a-button {
-        display: block;
-        width: 115px;
-        height: 25px;
-        background: #4E9CAF;
-        padding: 10px;
-        text-align: center;
-        border-radius: 5px;
-        color: white;
-        font-weight: bold;
-    }
+  input[type=file] {
+    display: none;
+  }
 </style>
