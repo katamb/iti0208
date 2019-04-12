@@ -68,20 +68,24 @@
             deletePost(postId) {
                 apiRequests
                     .deleteRequestWithAuthorization('/api/delete/post/' + postId)
+                    .then(() => {
+                        this.loadUserActivities();
+                    })
                     .catch(() => {
                             errorHandling.errorMsgWithButton("Failed to delete this post!")
                         }
                     );
-                this.loadUserActivities();
             },
             deleteReply(replyId) {
                 apiRequests
                     .deleteRequestWithAuthorization('/api/delete/reply/' + replyId)
+                    .then(() => {
+                        this.loadUserActivities();
+                    })
                     .catch(() => {
                             errorHandling.errorMsgWithButton("Failed to delete this reply!")
                         }
                     );
-                this.loadUserActivities();
             },
             enableEditingReply(data) {
                 this.tempValue = data.reply;
