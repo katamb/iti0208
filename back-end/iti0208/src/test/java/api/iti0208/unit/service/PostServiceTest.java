@@ -1,16 +1,14 @@
 package api.iti0208.unit.service;
 
-import api.iti0208.data.entity.AppUser;
 import api.iti0208.data.entity.Post;
 import api.iti0208.data.input.PostPatchInput;
-import api.iti0208.data.output.PostResponse;
+import api.iti0208.data.output.PostListResponse;
 import api.iti0208.exception.BadRequestException;
 import api.iti0208.exception.PageNotFoundException;
 import api.iti0208.repository.PostRepository;
 import api.iti0208.repository.ReplyRepository;
 import api.iti0208.repository.UserRepository;
 import api.iti0208.service.PostService;
-import api.iti0208.service.ReplyService;
 import com.auth0.jwt.JWT;
 import org.junit.Before;
 import org.junit.Test;
@@ -19,14 +17,10 @@ import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Date;
 import java.util.Optional;
 
@@ -106,7 +100,7 @@ public class PostServiceTest {
                         new Post("bcdef", "test", topic),
                         new Post("cdefg", "test", topic))
                 ));
-        PostResponse response = postService.getPosts(page, size, topic, order, sortBy);
+        PostListResponse response = postService.getPosts(page, size, topic, order, sortBy);
 
         assertEquals(1, response.getAmountOfPages());
         assertEquals("abcde", response.getPosts().get(0).getTitle());
@@ -126,7 +120,7 @@ public class PostServiceTest {
                         new Post("bcdef", "test", "Physics"),
                         new Post("cdefg", "test", "Mathematics"))
                 ));
-        PostResponse response = postService.getPosts(page, size, topic, order, sortBy);
+        PostListResponse response = postService.getPosts(page, size, topic, order, sortBy);
 
         assertEquals(1, response.getAmountOfPages());
         assertEquals("abcde", response.getPosts().get(0).getTitle());
@@ -146,7 +140,7 @@ public class PostServiceTest {
                         new Post("bcdef", "test", "Physics"),
                         new Post("cdefg", "test", "Mathematics"))
                 ));
-        PostResponse response = postService.findPosts(page, size, searchTerm, order, sortBy);
+        PostListResponse response = postService.findPosts(page, size, searchTerm, order, sortBy);
 
         assertEquals(1, response.getAmountOfPages());
         assertEquals("abcde", response.getPosts().get(0).getTitle());

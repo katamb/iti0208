@@ -25,7 +25,7 @@
         <div class="dropdown-menu dropdown-menu-right py-0">
           <div class="px-3 pt-3 login-dropdown">
 
-            <form>
+            <form @submit.prevent="logIn">
               <div class="form-group">
                 <input id="usernameInput" placeholder="Username" name="username"
                        class="form-control form-control-sm custom-input" type="text"
@@ -42,7 +42,7 @@
                 <div class="error" v-if="errors.has('password')">{{errors.first('password')}}</div>
               </div>
               <div class="form-group">
-                <button @click="logIn()" class="btn btn-primary btn-block" name="login">Login</button>
+                <button type="submit" class="btn btn-primary btn-block" name="login">Login</button>
               </div>
             </form>
 

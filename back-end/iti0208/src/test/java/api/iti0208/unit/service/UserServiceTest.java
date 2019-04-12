@@ -4,9 +4,7 @@ import api.iti0208.data.entity.AppUser;
 import api.iti0208.data.entity.Post;
 import api.iti0208.data.entity.Reply;
 import api.iti0208.data.input.UserRegistrationInput;
-import api.iti0208.data.output.PublicUserInfo;
 import api.iti0208.exception.BadRequestException;
-import api.iti0208.exception.PageNotFoundException;
 import api.iti0208.repository.PostRepository;
 import api.iti0208.repository.ReplyRepository;
 import api.iti0208.repository.UserRepository;
@@ -96,19 +94,6 @@ public class UserServiceTest {
         );
 
         userService.save(registrationInput);
-    }
-
-    @Test
-    public void testGetPublicInfo() {
-        PublicUserInfo user = userService.getPublicInfo("testUser");
-
-        assertEquals("testUser", user.getUsername());
-        assertNull(user.getEmail());
-    }
-
-    @Test(expected = PageNotFoundException.class)
-    public void testTryToGetPublicInfo() {
-        userService.getPublicInfo("tester");
     }
 
     @Test

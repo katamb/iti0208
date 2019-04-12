@@ -1,6 +1,7 @@
 package api.iti0208.controller;
 
 import api.iti0208.data.entity.Reply;
+import api.iti0208.data.input.ReplyInput;
 import api.iti0208.data.input.ReplyPatchInput;
 import api.iti0208.service.ReplyService;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -20,7 +21,7 @@ public class ReplyController {
     }
 
     @PostMapping("api/add/reply")
-    public Reply save(@RequestBody @Valid Reply item,
+    public Reply save(@RequestBody @Valid ReplyInput item,
                       @RequestHeader(value = HEADER_STRING) String header) {
         return replyService.save(item, header);
     }

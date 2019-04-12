@@ -4,10 +4,8 @@ import api.iti0208.data.entity.AppUser;
 import api.iti0208.data.entity.Post;
 import api.iti0208.repository.PostRepository;
 import api.iti0208.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import javax.transaction.Transactional;
@@ -15,18 +13,15 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.stream.Stream;
 
-/*@Component
+@Component
 public class SampleData implements CommandLineRunner {
 
     private final PostRepository postRepository;
     private final UserRepository userRepository;
-    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public SampleData(PostRepository postRepository, UserRepository userRepository,
-                      BCryptPasswordEncoder bCryptPasswordEncoder) {
+    public SampleData(PostRepository postRepository, UserRepository userRepository) {
         this.postRepository = postRepository;
         this.userRepository = userRepository;
-        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
     @Override
@@ -40,12 +35,11 @@ public class SampleData implements CommandLineRunner {
                 )
         );
 
-        userRepository.save(
-                new AppUser("user_test",
-                        "$2a$10$05D4lwsoTRUR9lSDWkqkquPM56UZkiTPJ/cG5uK140GvYyqrGzr5u",
-                        Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER"))
-                )
+        AppUser au = new AppUser("user_test",
+                "$2a$10$05D4lwsoTRUR9lSDWkqkquPM56UZkiTPJ/cG5uK140GvYyqrGzr5u",
+                Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER"))
         );
+        userRepository.save(au);
 
         userRepository.save(
                 new AppUser("user_hacks",
@@ -90,14 +84,10 @@ public class SampleData implements CommandLineRunner {
                 Arrays.asList("Mathematics", "Mathematics 6", "Mathematics"),
                 Arrays.asList("Mathematics", "Mathematics 7", "Mathematics"))
                 .forEach(title -> postRepository.save(
-                        new Post(title.get(0), title.get(1), title.get(2), 2L, "user_test")
+                        new Post(title.get(0), title.get(2), title.get(1), au)
                 ));
 
-        postRepository.save(
-                new Post("Mathematics", "Mathematics 7", "Mathematics",
-                        3L, "user_hacks"));
         //postRepository.findAll().forEach(System.out::println);
 
-
     }
-}*/
+}

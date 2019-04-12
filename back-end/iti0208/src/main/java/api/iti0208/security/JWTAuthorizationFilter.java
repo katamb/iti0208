@@ -47,8 +47,7 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
         if (token != null) {
             // parse the token.
             String username = userService.getUsernameFromJwt(token);
-
-            List<GrantedAuthority> authorities = userService.getPublicInfo(username).getGrantedAuthorities();
+            List<GrantedAuthority> authorities = userService.getGrantedAuthorities(username);
 
             if (username != null) {
                 return new UsernamePasswordAuthenticationToken(username, null, authorities);
