@@ -15,25 +15,25 @@ repositories {
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-jdbc'
     implementation 'org.springframework.boot:spring-boot-starter-data-rest'
     implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'com.auth0:java-jwt:3.4.0'
+    implementation 'com.zaxxer:HikariCP'
+
     //implementation 'org.springframework.boot:spring-boot-devtools'
     
     compileOnly 'org.springframework.boot:spring-boot-configuration-processor'
     compileOnly 'org.projectlombok:lombok'
 
-    //runtimeOnly 'org.hsqldb:hsqldb'
     runtimeOnly 'com.h2database:h2'
+    //runtimeOnly 'org.postgresql:postgresql'
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.security:spring-security-test'
     testImplementation 'org.assertj:assertj-core:3.4.1'
+    testImplementation 'com.h2database:h2'
     
     testCompile 'org.junit.jupiter:junit-jupiter-engine:5.2.0'
-    /*testCompile 'org.opentest4j:opentest4j:1.0.0'
-    testCompile 'org.junit.platform:junit-platform-commons:1.0.0'
-    testCompile 'org.mockito:mockito-junit-jupiter:2.23.0'*/
-    //testCompile 'io.rest-assured:rest-assured:3.0.3'
 }

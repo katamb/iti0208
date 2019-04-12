@@ -14,9 +14,5 @@ describe('Edit My Post', function() {
         cy.get("#Post4").click()
         cy.contains("123")
         cy.contains("Uus Description")
-
-
-
-
     })
-})
+});

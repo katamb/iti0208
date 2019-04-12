@@ -38,9 +38,11 @@ public class UserService implements UserDetailsService {
         if (registration == null) {
             throw new BadRequestException("Something went wrong!");
         }
-
         if (userRepository.findByUsername(registration.getUsername()) != null) {
             throw new BadRequestException("This username is already in use!");
+        }
+        if (userRepository.findByEmail(registration.getEmail()) != null) {
+            throw new BadRequestException("This email is already in use!");
         }
 
         AppUser appUser = new AppUser();

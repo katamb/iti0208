@@ -1,5 +1,6 @@
 import axios from 'axios';
 const apiUrl = 'http://localhost:8090';
+//const apiUrl = 'http://ec2-3-95-234-125.compute-1.amazonaws.com:8090';
 
 async function getRequest(url) {
     let response = await axios.get(apiUrl + url);

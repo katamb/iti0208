@@ -15,7 +15,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.stream.Stream;
 
-@Component
+/*@Component
 public class SampleData implements CommandLineRunner {
 
     private final PostRepository postRepository;
@@ -100,4 +100,4 @@ public class SampleData implements CommandLineRunner {
 
 
     }
-}
+}*/
