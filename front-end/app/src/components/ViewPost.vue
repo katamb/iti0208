@@ -15,7 +15,7 @@
           </p>
         </div>
 
-        <div class="post-item text-left p-2 mx-2 mb-2" v-for="answer in response.answers" :key='answer.id'>
+        <div class="post-item text-left p-2 mx-2 mb-2" v-for="answer in response.replies" :key='answer.id'>
           <p class="font-weight-bolder" v-if="answer.postedBy">{{answer.postedBy}}:</p>
           <p>{{answer.reply}}</p>
           <a v-if="answer.fileLocation" v-bind:href=answer.fileLocation>Extra information</a>
@@ -76,7 +76,7 @@
             },
             loadPost() {
                 apiRequests
-                    .getRequestToApi('/api/posts/' + this.$route.params.Pid)
+                    .getRequestToApiWithAuthorization('/api/posts/' + this.$route.params.Pid)
                     .then((response) => {
                         this.response = response.data;
                     })
@@ -84,6 +84,7 @@
                             errorHandling.errorMsgWithButton("This post no longer exists!")
                         }
                     );
+
             },
             postReply() {
                 apiRequests

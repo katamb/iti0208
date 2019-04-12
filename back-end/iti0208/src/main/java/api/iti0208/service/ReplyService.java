@@ -1,10 +1,13 @@
 package api.iti0208.service;
 
+import api.iti0208.data.entity.AppUser;
 import api.iti0208.data.entity.Post;
 import api.iti0208.data.entity.Reply;
 import api.iti0208.data.input.ReplyInput;
 import api.iti0208.data.input.ReplyPatchInput;
+import api.iti0208.data.output.ReplyDetails;
 import api.iti0208.exception.BadRequestException;
+import api.iti0208.mapper.EntityToOutputObjectMapper;
 import api.iti0208.repository.PostRepository;
 import api.iti0208.repository.ReplyRepository;
 import api.iti0208.repository.UserRepository;
@@ -20,15 +23,19 @@ public class ReplyService {
     private final ReplyRepository replyRepo;
     private final UserRepository userRepo;
     private final PostRepository postRepo;
+    private final EntityToOutputObjectMapper mapper;
 
-    public ReplyService(ReplyRepository replyRepo, UserRepository userRepo, PostRepository postRepo) {
+    public ReplyService(ReplyRepository replyRepo, UserRepository userRepo, PostRepository postRepo,
+                        EntityToOutputObjectMapper mapper) {
         this.replyRepo = replyRepo;
         this.userRepo = userRepo;
         this.postRepo = postRepo;
+        this.mapper = mapper;
     }
 
-    public Reply save(ReplyInput input, String header) {
+    public ReplyDetails save(ReplyInput input, String header) {
         Reply item = new Reply();
+        AppUser user = null;
         Optional<Post> relatedPost = postRepo.findById(input.getPostId());
 
         if (header != null) {
@@ -37,20 +44,19 @@ public class ReplyService {
                 item.setReply(input.getReply());
                 item.setFileLocation(input.getFileLocation());
                 item.setPost(relatedPost.get());
-                //item.setPostedBy(username);
-                //item.setUserId(userRepo.findIdByUsername(username));
-                item.setPostedBy(userRepo.findByUsername(username));
+                user = userRepo.findByUsername(username);
+                item.setPostedBy(user);
             }
         }
 
-        return replyRepo.save(item);
+        return mapper.replyToReplyDetails(replyRepo.save(item), user);
     }
 
     public void delete(Long id) {
         replyRepo.deleteById(id);
     }
 
-    public Reply patch(ReplyPatchInput obj, Long id) {
+    public ReplyDetails patch(ReplyPatchInput obj, Long id) {
         Optional<Reply> reply = replyRepo.findById(id);
 
         if (reply.isPresent()) {
@@ -60,7 +66,7 @@ public class ReplyService {
                 replyRepo.updateReply(id, newReply);
             }
 
-            return replyRepo.findById(id).get();
+            return mapper.replyToReplyDetails(replyRepo.findById(id).get(), null);
         }
 
         throw new BadRequestException("Problem updating Your reply!");

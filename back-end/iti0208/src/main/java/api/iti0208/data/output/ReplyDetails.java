@@ -5,20 +5,15 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
-import java.util.List;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class PostDetails {
+public class ReplyDetails {
     private long id;
-    private String title;
-    private String topic;
-    private String description;
-    private String rewardDescription;
+    private String reply;
     private String fileLocation;
     private Date postedAt;
     private String postedBy;
     private boolean canDelete;
-    private List<ReplyDetails> replies;
 }

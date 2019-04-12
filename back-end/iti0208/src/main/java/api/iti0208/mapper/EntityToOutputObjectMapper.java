@@ -2,8 +2,10 @@ package api.iti0208.mapper;
 
 import api.iti0208.data.entity.AppUser;
 import api.iti0208.data.entity.Post;
+import api.iti0208.data.entity.Reply;
 import api.iti0208.data.output.PostDetails;
 import api.iti0208.data.output.PostOverview;
+import api.iti0208.data.output.ReplyDetails;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Component;
 
@@ -50,6 +52,33 @@ public class EntityToOutputObjectMapper {
             postDetails.setCanDelete(false);
         }
 
+        List<ReplyDetails> replyDetails = post.getAnswers().stream()
+                .map(reply -> replyToReplyDetails(reply, currentUser)).collect(toList());
+        postDetails.setReplies(replyDetails);
+
         return postDetails;
+    }
+
+
+    public ReplyDetails replyToReplyDetails(Reply reply, AppUser currentUser) {
+        ReplyDetails replyDetails = new ReplyDetails();
+        replyDetails.setId(reply.getId());
+        replyDetails.setReply(reply.getReply());
+        replyDetails.setFileLocation(reply.getFileLocation());
+        replyDetails.setPostedAt(reply.getPostedAt());
+        replyDetails.setPostedBy(reply.getPostedBy().getUsername());
+
+        if (currentUser != null) {
+            if (currentUser.getUsername().equals(replyDetails.getPostedBy())) {
+                replyDetails.setCanDelete(true);
+            }
+            if (currentUser.getGrantedAuthorities().contains(new SimpleGrantedAuthority("ROLE_ADMIN"))) {
+                replyDetails.setCanDelete(true);
+            }
+        } else {
+            replyDetails.setCanDelete(false);
+        }
+
+        return replyDetails;
     }
 }

@@ -11,6 +11,7 @@ import api.iti0208.exception.PageNotFoundException;
 import api.iti0208.mapper.EntityToOutputObjectMapper;
 import api.iti0208.repository.PostRepository;
 import api.iti0208.repository.UserRepository;
+import com.auth0.jwt.exceptions.JWTDecodeException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -42,9 +43,13 @@ public class PostService {
         Post post = getPostItemById(id);
         AppUser user = null;
 
-        if (header != null && header.length() > 1) {
-            String username = getUsernameFromJwtToken(header);
-            user = userRepository.findByUsername(username);
+        try {
+            if (header != null && header.length() > 1) {
+                String username = getUsernameFromJwtToken(header);
+                user = userRepository.findByUsername(username);
+            }
+        } catch (JWTDecodeException e) {
+            user = null;
         }
 
         return mapper.postToPostDetails(post, user);
