@@ -14,4 +14,4 @@ describe('Test Posting', function() {
         cy.contains("Submit").click()
 
     })
-})
+});

@@ -13,4 +13,4 @@ describe('Test Login Component', function() {
         cy.get('[name="login"]').click()
 
     })
-})
+});

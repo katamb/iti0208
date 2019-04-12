@@ -15,6 +15,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Table(name = "post")
 public class Post {
 
     @Id
@@ -32,16 +33,22 @@ public class Post {
     @Size(min = 5)
     private String description;
 
+    @Column(name = "reward_description")
     private String rewardDescription;
 
+    @Column(name = "file_location")
     private String fileLocation;
 
+    @Column(name = "user_id")
     private long userId;
 
+    @Column(name = "posted_at")
     private Date postedAt;
 
+    @Column(name = "updated_at")
     private Date updatedAt;
 
+    @Column(name = "posted_by")
     private String postedBy;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "postId", cascade = CascadeType.ALL)

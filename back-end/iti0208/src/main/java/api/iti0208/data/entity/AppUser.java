@@ -6,15 +6,18 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
+import org.hibernate.annotations.LazyToOne;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.*;
 
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "app_user")
 public class AppUser {
 
     @Id
@@ -24,11 +27,14 @@ public class AppUser {
     @Column(unique = true)
     private String username;
 
+    @Column(unique = true)
+    private String email;
+
+    @Column(name = "first_name")
     private String firstName;
 
+    @Column(name = "last_name")
     private String lastName;
-
-    private String email;
 
     private String password;
 
