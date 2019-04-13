@@ -111,7 +111,7 @@
             logout() {
                 this.loggedIn = false;
                 localStorage.removeItem("Authorization");
-                this.$router.push("/")
+                this.$router.push("/");
             }
         },
         mounted() {
