@@ -65,4 +65,9 @@ public class Post {
         this.postedBy = postedBy;
     }
 
+    public Post(String title, String description, String topic) {
+        this.title = title;
+        this.topic = topic;
+        this.description = description;
+    }
 }

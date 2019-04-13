@@ -42,8 +42,6 @@ public class UserServiceTest {
     @MockBean
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    // DON'T REMOVE postRepository and replyRepository beans, they seem unused,
-    // but are needed for the whole thing to compile
     @MockBean
     private PostRepository postRepository;
 
@@ -55,11 +53,12 @@ public class UserServiceTest {
 
     private UserService userService;
 
-    private AppUser testUser = new AppUser("testUser", "password",
-            Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER")));
+    private AppUser testUser;
 
     @Before
     public void setUp() {
+        testUser = new AppUser("testUser", "password",
+                Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER")));
         userService = new UserService(userRepository, bCryptPasswordEncoder);
 
         Mockito.when(userRepository.save(any(AppUser.class))).then(returnsFirstArg());
@@ -110,7 +109,7 @@ public class UserServiceTest {
     @Test
     public void testGetUserReplies() {
         Set<Reply> myReplies = new HashSet<>();
-        Reply reply = new Reply("testReply", 1L);
+        Reply reply = new Reply(1L, "testReply", testUser);
         myReplies.add(reply);
         testUser.setUserReplies(myReplies);
 

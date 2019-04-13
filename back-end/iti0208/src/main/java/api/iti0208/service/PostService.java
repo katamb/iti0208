@@ -132,21 +132,22 @@ public class PostService {
      * Patch methods to change posts in DB.
      */
 
-    public PostDetails patchPost(PostPatchInput obj, Long id) {
-        Optional<Post> post = postRepository.findById(id);
+    public PostDetails patchPost(PostPatchInput obj, Long postId) {
+        Optional<Post> post = postRepository.findById(postId);
 
+        System.out.println(post.toString());
         if (post.isPresent()) {
             String newTitle = obj.getTitle();
             String newDescription = obj.getDescription();
 
             if (newTitle != null && newTitle.length() != 0) {
-                postRepository.updateTitle(id, newTitle);
+                postRepository.updateTitle(postId, newTitle);
             }
             if (newDescription != null && newDescription.length() != 0) {
-                postRepository.updateDescription(id, newDescription);
+                postRepository.updateDescription(postId, newDescription);
             }
 
-            return mapper.postToPostDetails(getPostItemById(id), null);
+            return mapper.postToPostDetails(getPostItemById(postId), null);
         }
 
         throw new BadRequestException("Problem updating Your post!");

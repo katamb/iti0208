@@ -47,4 +47,16 @@ public class Reply {
     protected void onUpdate() {
         updatedAt = new Date();
     }
+
+    public Reply(long id, String reply, AppUser postedBy) {
+        this.id = id;
+        this.reply = reply;
+        this.postedBy = postedBy;
+    }
+
+    public Reply(String reply, Post post, AppUser postedBy) {
+        this.reply = reply;
+        this.post = post;
+        this.postedBy = postedBy;
+    }
 }
