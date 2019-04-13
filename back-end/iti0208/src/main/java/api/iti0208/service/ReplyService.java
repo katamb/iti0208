@@ -53,7 +53,7 @@ public class ReplyService {
     }
 
     public void delete(Long id) {
-        replyRepo.deleteById(id);
+        replyRepo.deleteReply(id);
     }
 
     public ReplyDetails patch(ReplyPatchInput obj, Long id) {

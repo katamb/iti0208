@@ -43,7 +43,7 @@ public class Post {
     @ManyToOne(fetch = FetchType.EAGER)
     private AppUser postedBy;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "post", orphanRemoval = true, cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
     @Builder.Default
     private List<Reply> answers = new LinkedList<>();
 

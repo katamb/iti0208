@@ -10,12 +10,16 @@ import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
-//@Transactional
 public interface ReplyRepository extends JpaRepository<Reply, Long> {
 
     @Modifying
     @Transactional
-    @Query("update Reply r set r.reply =:reply where r.id =:id")
+    @Query("UPDATE Reply r SET r.reply =:reply WHERE r.id =:id")
     void updateReply(@Param("id") Long id, @Param("reply") String reply);
+
+    @Modifying
+    @Transactional
+    @Query("DELETE FROM Reply r WHERE r.id =:id")
+    void deleteReply(@Param("id") Long id);
 
 }
