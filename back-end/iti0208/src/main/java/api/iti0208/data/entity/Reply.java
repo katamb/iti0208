@@ -1,52 +1,62 @@
 package api.iti0208.data.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.util.Date;
 
 @Entity
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "reply")
 public class Reply {
+
     @Id
     @GeneratedValue
     private Long id;
 
-    @NotNull
-    @Size(min = 5)
     private String reply;
 
-    @NotNull
-    private Long postId;
-
+    @Column(name = "file_location")
     private String fileLocation;
 
-    private long userId;
-
-    private String postedBy;
-
+    @Column(name = "posted_at")
     private Date postedAt;
+
+    @Temporal(value=TemporalType.TIMESTAMP)
+    @Column(name = "updated_at")
+    private Date updatedAt;
+
+    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST})
+    @JsonIgnore
+    private Post post;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    private AppUser postedBy;
 
     @PrePersist
     protected void onCreate() {
         postedAt = new Date();
+        updatedAt = new Date();
     }
 
-    public Reply(String reply, Long postId) {
-        this.reply = reply;
-        this.postId = postId;
+    @PreUpdate
+    protected void onUpdate() {
+        updatedAt = new Date();
     }
 
-    public Reply(Long postId, String reply, String postedBy) {
+    public Reply(long id, String reply, AppUser postedBy) {
+        this.id = id;
         this.reply = reply;
         this.postedBy = postedBy;
-        this.postId = postId;
     }
 
+    public Reply(String reply, Post post, AppUser postedBy) {
+        this.reply = reply;
+        this.post = post;
+        this.postedBy = postedBy;
+    }
 }

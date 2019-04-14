@@ -4,34 +4,30 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserRegistrationInput {
+public class PostInput {
 
     @NotNull
     @NotEmpty
-    private String username;
+    @Size(min = 3)
+    private String title;
 
     @NotNull
     @NotEmpty
-    private String firstName;
+    private String topic;
 
     @NotNull
     @NotEmpty
-    private String lastName;
+    @Size(min = 5)
+    private String description;
 
-    @NotNull
-    @NotEmpty
-    private String password;
+    private String rewardDescription;
 
-    @NotNull
-    @NotEmpty
-    @Email
-    private String email;
-
+    private String fileLocation;
 }

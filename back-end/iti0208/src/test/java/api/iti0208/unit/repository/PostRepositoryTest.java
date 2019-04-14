@@ -4,7 +4,7 @@ import api.iti0208.data.entity.AppUser;
 import api.iti0208.data.entity.Post;
 import api.iti0208.repository.PostRepository;
 import api.iti0208.repository.UserRepository;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -14,14 +14,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import javax.transaction.Transactional;
 import java.util.Collections;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
-
-@RunWith(SpringRunner.class)
 @DataJpaTest
 public class PostRepositoryTest {
 
@@ -36,8 +32,9 @@ public class PostRepositoryTest {
 
     @Test
     public void testToSeePosts() {
-        Post post = new Post("testpost", "testpost", "Varia",
-                2L, "user_test");
+        AppUser user = new AppUser("testUser", "testUser",
+                Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER")));
+        Post post = new Post("testpost", "testpost", "Varia", user);
         entityManager.persist(post);
 
         Post found = postRepository.findById(post.getId()).get();
@@ -53,12 +50,10 @@ public class PostRepositoryTest {
         entityManager.flush();
         long userId = userRepository.findIdByUsername("user_test");
 
-        Post post = new Post("testpost", "testpost", "Varia",
-                userId, "user_test");
+        Post post = new Post("testpost", "testpost", "Varia", user);
         entityManager.persist(post);
         entityManager.flush();
-        post = new Post("testpost2", "testpost", "Varia",
-                userId, "user_test");
+        post = new Post("testpost2", "testpost", "Varia", user);
         entityManager.persist(post);
         entityManager.flush();
 

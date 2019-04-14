@@ -1,12 +1,17 @@
 package api.iti0208.service;
 
+import api.iti0208.data.entity.AppUser;
 import api.iti0208.data.entity.Post;
-import api.iti0208.data.output.PostResponse;
+import api.iti0208.data.input.PostInput;
+import api.iti0208.data.output.PostDetails;
+import api.iti0208.data.output.PostListResponse;
 import api.iti0208.data.input.PostPatchInput;
 import api.iti0208.exception.BadRequestException;
 import api.iti0208.exception.PageNotFoundException;
+import api.iti0208.mapper.EntityToOutputObjectMapper;
 import api.iti0208.repository.PostRepository;
 import api.iti0208.repository.UserRepository;
+import com.auth0.jwt.exceptions.JWTDecodeException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -22,15 +27,33 @@ public class PostService {
 
     private final PostRepository postRepository;
     private final UserRepository userRepository;
+    private final EntityToOutputObjectMapper mapper;
 
-    public PostService(PostRepository postRepository, UserRepository userRepository) {
+    public PostService(PostRepository postRepository, UserRepository userRepository, EntityToOutputObjectMapper mapper) {
         this.postRepository = postRepository;
         this.userRepository = userRepository;
+        this.mapper = mapper;
     }
 
     /**
      * Get methods to receive posts.
      */
+
+    public PostDetails getPostItemById(Long id, String header) {
+        Post post = getPostItemById(id);
+        AppUser user = null;
+
+        try {
+            if (header != null && header.length() > 1) {
+                String username = getUsernameFromJwtToken(header);
+                user = userRepository.findByUsername(username);
+            }
+        } catch (JWTDecodeException e) {
+            user = null;
+        }
+
+        return mapper.postToPostDetails(post, user);
+    }
 
     public Post getPostItemById(Long id) {
         Optional<Post> post = postRepository.findById(id);
@@ -41,7 +64,7 @@ public class PostService {
         }
     }
 
-    public PostResponse getPosts(int page, int size, String topic, String order, String sortBy) {
+    public PostListResponse getPosts(int page, int size, String topic, String order, String sortBy) {
         Pageable pageableRequest = getPageable(page, size, order, sortBy);
 
         Page<Post> posts;
@@ -54,19 +77,19 @@ public class PostService {
         return getPostsResponse(posts, page);
     }
 
-    public PostResponse findPosts(int page, int size, String searchTerm, String order, String sortBy) {
+    public PostListResponse findPosts(int page, int size, String searchTerm, String order, String sortBy) {
         Pageable pageableRequest = getPageable(page, size, order, sortBy);
         Page<Post> posts = postRepository.findBySearchTerm(searchTerm, pageableRequest);
 
         return getPostsResponse(posts, page);
     }
 
-    private PostResponse getPostsResponse(Page<Post> posts, int page) {
+    private PostListResponse getPostsResponse(Page<Post> posts, int page) {
         if (page > posts.getTotalPages()) {
             throw new PageNotFoundException("This page does not exist!");
         }
 
-        return new PostResponse(posts.getContent(), posts.getTotalPages());
+        return new PostListResponse(mapper.postListToPostOverviewList(posts.getContent()), posts.getTotalPages());
     }
 
     private Pageable getPageable(int page, int size, String order, String sortBy) {
@@ -85,39 +108,46 @@ public class PostService {
      * Save methods to save posts to DB.
      */
 
-    public Post savePost(Post item, String header) {
+    public PostDetails savePost(PostInput input, String header) {
         String username = null;
+        AppUser user = null;
+        Post item = new Post();
 
         if (header != null) {
             username = getUsernameFromJwtToken(header);
         }
         if (username != null) {
-            item.setPostedBy(username);
-            item.setUserId(userRepository.findIdByUsername(username));
+            item.setTopic(input.getTopic());
+            item.setTitle(input.getTitle());
+            item.setDescription(input.getDescription());
+            item.setRewardDescription(input.getRewardDescription());
+            item.setFileLocation(input.getFileLocation());
+            user = userRepository.findByUsername(username);
+            item.setPostedBy(user);
         }
-
-        return postRepository.save(item);
+        return mapper.postToPostDetails(postRepository.save(item), user);
     }
 
     /**
      * Patch methods to change posts in DB.
      */
 
-    public Post patchPost(PostPatchInput obj, Long id) {
-        Optional<Post> post = postRepository.findById(id);
+    public PostDetails patchPost(PostPatchInput obj, Long postId) {
+        Optional<Post> post = postRepository.findById(postId);
 
+        System.out.println(post.toString());
         if (post.isPresent()) {
             String newTitle = obj.getTitle();
             String newDescription = obj.getDescription();
 
             if (newTitle != null && newTitle.length() != 0) {
-                postRepository.updateTitle(id, newTitle);
+                postRepository.updateTitle(postId, newTitle);
             }
             if (newDescription != null && newDescription.length() != 0) {
-                postRepository.updateDescription(id, newDescription);
+                postRepository.updateDescription(postId, newDescription);
             }
 
-            return getPostItemById(id);
+            return mapper.postToPostDetails(getPostItemById(postId), null);
         }
 
         throw new BadRequestException("Problem updating Your post!");
@@ -136,6 +166,6 @@ public class PostService {
      */
 
     public String findUsernameOfPoster(Long id) {
-        return getPostItemById(id).getPostedBy();
+        return getPostItemById(id).getPostedBy().getUsername();
     }
 }

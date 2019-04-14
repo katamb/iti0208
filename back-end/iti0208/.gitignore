@@ -1,6 +1,7 @@
 .gradle
 /build/
 /uploads/
+/deploy/
 /src/test/resources/cache/
 !gradle/wrapper/gradle-wrapper.jar
 
@@ -19,6 +20,7 @@
 *.iml
 *.ipr
 /out/
+
 
 ### NetBeans ###
 /nbproject/private/

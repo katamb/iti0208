@@ -19,12 +19,5 @@ describe('Test Registration Component', function() {
         cy.get("#username").clear().type("Moosivaras")
         cy.contains("Submit").click()
         cy.contains("Submit").click()
-
-
-
-
-
     })
-})
-
-
+});

@@ -2,15 +2,17 @@ package api.iti0208.unit.service;
 
 import api.iti0208.data.entity.AppUser;
 import api.iti0208.data.entity.Post;
+import api.iti0208.data.input.PostInput;
 import api.iti0208.data.input.PostPatchInput;
-import api.iti0208.data.output.PostResponse;
+import api.iti0208.data.output.PostDetails;
+import api.iti0208.data.output.PostListResponse;
 import api.iti0208.exception.BadRequestException;
 import api.iti0208.exception.PageNotFoundException;
+import api.iti0208.mapper.EntityToOutputObjectMapper;
 import api.iti0208.repository.PostRepository;
 import api.iti0208.repository.ReplyRepository;
 import api.iti0208.repository.UserRepository;
 import api.iti0208.service.PostService;
-import api.iti0208.service.ReplyService;
 import com.auth0.jwt.JWT;
 import org.junit.Before;
 import org.junit.Test;
@@ -19,9 +21,7 @@ import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -35,7 +35,6 @@ import static api.iti0208.security.SecurityConstants.SECRET;
 import static com.auth0.jwt.algorithms.Algorithm.HMAC512;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
-import static org.mockito.AdditionalAnswers.returnsFirstArg;
 import static org.mockito.ArgumentMatchers.any;
 
 @RunWith(SpringRunner.class)
@@ -54,14 +53,36 @@ public class PostServiceTest {
     private PostService postService;
 
     private String authToken;
+    private String username;
+    private AppUser testUser;
+    private Post fullPost;
+    private Post fullPost2;
+    private long id_twelve;
+    private long id_thirteen;
 
     @Before
     public void setUp() {
-        postService = new PostService(postRepository, userRepository);
-        Mockito.when(postRepository.save(any(Post.class))).then(returnsFirstArg());
+        id_twelve = 12L;
+        id_thirteen = 13L;
+        username = "testUser";
+        testUser = new AppUser(username, "password",
+                Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER")));
+        postService = new PostService(postRepository, userRepository, new EntityToOutputObjectMapper());
+        fullPost = new Post(id_twelve, "Varia", "unittest", "unittest", "",
+                "", new Date(), new Date(), testUser, Collections.emptyList());
+        fullPost2 = new Post(id_thirteen, "Mathematics", "unitTtest", "unittest", "",
+                "", new Date(), new Date(), testUser, Collections.emptyList());
 
-        // only needed to add the person who posted to the post
-        String username = "testUser";
+        Mockito.when(userRepository.findByUsername(any(String.class))).thenReturn(testUser);
+        Mockito.when(postRepository.save(any(Post.class))).thenReturn(fullPost);
+        Mockito.when(postRepository.findById(id_twelve)).thenReturn(Optional.of(fullPost));
+        Mockito.when(postRepository.findAllByTopic(any(String.class), any(Pageable.class)))
+                .thenReturn(new PageImpl<>(Arrays.asList(fullPost)));
+        Mockito.when(postRepository.findAll(any(Pageable.class)))
+                .thenReturn(new PageImpl<>(Arrays.asList(fullPost, fullPost2)));
+        Mockito.when(postRepository.findBySearchTerm(any(String.class), any(Pageable.class)))
+                .thenReturn(new PageImpl<>(Collections.singletonList(fullPost2)));
+
         authToken = JWT.create()
                 .withSubject(username)
                 .withExpiresAt(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
@@ -70,8 +91,11 @@ public class PostServiceTest {
 
     @Test
     public void testSavePost() {
-        Post post = new Post("test", "test", "Varia");
-        Post savedPost = postService.savePost(post, authToken);
+        PostInput postInput = new PostInput();
+        postInput.setTopic("Varia");
+        postInput.setTitle("test");
+        postInput.setDescription("test");
+        PostDetails savedPost = postService.savePost(postInput, authToken);
 
         assertThat(savedPost.getTitle()).isNotNull();
         assertEquals("testUser", savedPost.getPostedBy());
@@ -84,12 +108,8 @@ public class PostServiceTest {
 
     @Test
     public void testFindPostByID() {
-        Mockito.when(postRepository.findById(1L)).thenReturn(
-                Optional.of(new Post("test", "test", "Varia"))
-        );
-
-        Post post = postService.getPostItemById(1L);
-        assertEquals("test", post.getTitle());
+        Post post = postService.getPostItemById(id_twelve);
+        assertEquals("unittest", post.getTitle());
     }
 
     @Test
@@ -100,16 +120,10 @@ public class PostServiceTest {
         String order = "ascending";
         String sortBy = "title";
 
-        Mockito.when(postRepository.findAllByTopic(any(String.class), any(Pageable.class)))
-                .thenReturn(new PageImpl<>(Arrays.asList(
-                        new Post("abcde", "test", topic),
-                        new Post("bcdef", "test", topic),
-                        new Post("cdefg", "test", topic))
-                ));
-        PostResponse response = postService.getPosts(page, size, topic, order, sortBy);
+        PostListResponse response = postService.getPosts(page, size, topic, order, sortBy);
 
         assertEquals(1, response.getAmountOfPages());
-        assertEquals("abcde", response.getPosts().get(0).getTitle());
+        assertEquals("unittest", response.getPosts().get(0).getTitle());
     }
 
     @Test
@@ -120,36 +134,24 @@ public class PostServiceTest {
         String order = "ascending";
         String sortBy = "title";
 
-        Mockito.when(postRepository.findAll(any(Pageable.class)))
-                .thenReturn(new PageImpl<>(Arrays.asList(
-                        new Post("abcde", "test", "Varia"),
-                        new Post("bcdef", "test", "Physics"),
-                        new Post("cdefg", "test", "Mathematics"))
-                ));
-        PostResponse response = postService.getPosts(page, size, topic, order, sortBy);
+        PostListResponse response = postService.getPosts(page, size, topic, order, sortBy);
 
         assertEquals(1, response.getAmountOfPages());
-        assertEquals("abcde", response.getPosts().get(0).getTitle());
+        assertEquals("unittest", response.getPosts().get(0).getTitle());
     }
 
     @Test
     public void testFindThroughSearch() {
         int page = 0;
         int size = 10;
-        String searchTerm = "cde";
+        String searchTerm = "ttt";
         String order = "ascending";
         String sortBy = "title";
 
-        Mockito.when(postRepository.findBySearchTerm(any(String.class), any(Pageable.class)))
-                .thenReturn(new PageImpl<>(Arrays.asList(
-                        new Post("abcde", "test", "Varia"),
-                        new Post("bcdef", "test", "Physics"),
-                        new Post("cdefg", "test", "Mathematics"))
-                ));
-        PostResponse response = postService.findPosts(page, size, searchTerm, order, sortBy);
+        PostListResponse response = postService.findPosts(page, size, searchTerm, order, sortBy);
 
         assertEquals(1, response.getAmountOfPages());
-        assertEquals("abcde", response.getPosts().get(0).getTitle());
+        assertEquals("unitTtest", response.getPosts().get(0).getTitle());
     }
 
     @Test(expected = BadRequestException.class)
@@ -160,28 +162,11 @@ public class PostServiceTest {
     @Test
     public void testPatchPost() {
         String newTitle = "newTitle";
-        String oldTitle = "oldTitle";
         String newDescription = "newDescripion";
-        String oldDescription = "oldDescription";
 
-        Mockito.when(postRepository.findById(1L))
-                .thenReturn(
-                        Optional.of(new Post(newTitle, oldDescription, "Varia"))
-                );
-        Post response = postService.patchPost(
-                new PostPatchInput(newTitle, oldDescription), 1L
+        PostDetails response = postService.patchPost(
+                new PostPatchInput(newTitle, newDescription), id_twelve
         );
-        assertEquals(oldDescription, response.getDescription());
-        assertEquals(newTitle, response.getTitle());
-
-        Mockito.when(postRepository.findById(2L))
-                .thenReturn(
-                        Optional.of(new Post(oldTitle, newDescription, "Varia"))
-                );
-        response = postService.patchPost(
-                new PostPatchInput(oldTitle, newDescription), 2L
-        );
-        assertEquals(newDescription, response.getDescription());
-        assertEquals(oldTitle, response.getTitle());
+        assertEquals("unittest", response.getTitle());
     }
 }

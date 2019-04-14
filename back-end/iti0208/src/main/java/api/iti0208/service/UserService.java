@@ -2,7 +2,6 @@ package api.iti0208.service;
 
 import api.iti0208.data.entity.Post;
 import api.iti0208.data.entity.Reply;
-import api.iti0208.data.output.PublicUserInfo;
 import api.iti0208.data.entity.AppUser;
 import api.iti0208.data.input.UserRegistrationInput;
 import api.iti0208.exception.BadRequestException;
@@ -10,6 +9,7 @@ import api.iti0208.exception.PageNotFoundException;
 import api.iti0208.repository.UserRepository;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -38,9 +38,11 @@ public class UserService implements UserDetailsService {
         if (registration == null) {
             throw new BadRequestException("Something went wrong!");
         }
-
         if (userRepository.findByUsername(registration.getUsername()) != null) {
             throw new BadRequestException("This username is already in use!");
+        }
+        if (userRepository.findByEmail(registration.getEmail()) != null) {
+            throw new BadRequestException("This email is already in use!");
         }
 
         AppUser appUser = new AppUser();
@@ -56,20 +58,14 @@ public class UserService implements UserDetailsService {
         return userRepository.save(appUser);
     }
 
-    public PublicUserInfo getPublicInfo(String username) {
+    public List<GrantedAuthority> getGrantedAuthorities(String username) {
         AppUser user = userRepository.findByUsername(username);
 
         if (user == null) {
             throw new PageNotFoundException("Couldn't find a user with this username!");
         } else {
-            PublicUserInfo publicInfo = new PublicUserInfo();
-            publicInfo.setUsername(user.getUsername());
-            publicInfo.setFirstName(user.getFirstName());
-            publicInfo.setLastName(user.getLastName());
-            publicInfo.setEmail(user.getEmail());
-            publicInfo.setGrantedAuthorities(user.getGrantedAuthorities());
 
-            return publicInfo;
+            return user.getGrantedAuthorities();
         }
     }
 
