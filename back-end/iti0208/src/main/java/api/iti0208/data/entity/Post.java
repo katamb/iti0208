@@ -1,20 +1,18 @@
 package api.iti0208.data.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Builder
 @Table(name = "post")
 public class Post {
 
@@ -22,15 +20,10 @@ public class Post {
     @GeneratedValue
     private Long id;
 
-    @NotNull
-    @Size(min = 3)
-    private String title;
-
-    @NotNull
     private String topic;
 
-    @NotNull
-    @Size(min = 5)
+    private String title;
+
     private String description;
 
     @Column(name = "reward_description")
@@ -39,19 +32,19 @@ public class Post {
     @Column(name = "file_location")
     private String fileLocation;
 
-    @Column(name = "user_id")
-    private long userId;
-
+    @Temporal(value=TemporalType.TIMESTAMP)
     @Column(name = "posted_at")
     private Date postedAt;
 
+    @Temporal(value=TemporalType.TIMESTAMP)
     @Column(name = "updated_at")
     private Date updatedAt;
 
-    @Column(name = "posted_by")
-    private String postedBy;
+    @ManyToOne(fetch = FetchType.EAGER)
+    private AppUser postedBy;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "postId", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Builder.Default
     private List<Reply> answers = new LinkedList<>();
 
     @PrePersist
@@ -65,58 +58,16 @@ public class Post {
         updatedAt = new Date();
     }
 
-    public Post(String title, String description, String topic) {
+    public Post(String title, String topic, String description, AppUser postedBy) {
         this.title = title;
-        this.description = description;
         this.topic = topic;
-    }
-
-    public Post(Long id, String title, String description, String topic) {
-        this.id = id;
-        this.title = title;
         this.description = description;
-        this.topic = topic;
-    }
-
-    public Post(Long id, String title, String description, String topic, Long userId) {
-        this.id = id;
-        this.title = title;
-        this.description = description;
-        this.topic = topic;
-        this.userId = userId;
-    }
-
-    public Post(String title, String description, String topic, Long userId, String postedBy) {
-        this.title = title;
-        this.description = description;
-        this.topic = topic;
-        this.userId = userId;
         this.postedBy = postedBy;
     }
 
-    public Post(String title, String description, String topic, Long userId) {
+    public Post(String title, String description, String topic) {
         this.title = title;
-        this.description = description;
         this.topic = topic;
-        this.userId = userId;
-    }
-
-    public Post(String topic, String title, String description, String rewardDescription, Long userId) {
-        this.title = title;
         this.description = description;
-        this.topic = topic;
-        this.rewardDescription = rewardDescription;
-        this.userId = userId;
     }
-
-    public Post(String topic, String title, String description, String rewardDescription,
-                String fileLocation, Long userId) {
-        this.title = title;
-        this.description = description;
-        this.topic = topic;
-        this.rewardDescription = rewardDescription;
-        this.fileLocation = fileLocation;
-        this.userId = userId;
-    }
-
 }
