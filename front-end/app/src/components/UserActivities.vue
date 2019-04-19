@@ -6,6 +6,7 @@
 
         <h2 class="my-2">My Posts</h2>
 
+        <ul v-if="userPosts.length">
         <div class="post-list-item my-2 p-2 text-left" v-for="(data, index) in userPosts" :key='data.id'>
           <h3>{{data.title}}</h3>
           <p>{{data.description}}</p>
@@ -22,6 +23,8 @@
           <input class="btn btn-danger m-1" type="submit" value="Delete" @click="deletePost(data.id)">
           <input class="btn btn-warning m-1" type="submit" value="Edit" @click="enableEditingPost(data)">
         </div>
+        </ul>
+        <p v-else>Empty List</p>
 
         <h2 class="my-2">My Replies</h2>
 
