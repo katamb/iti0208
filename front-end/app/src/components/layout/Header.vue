@@ -1,6 +1,6 @@
 <template>
     <header class="header">
-        <img width="10%" src="../../assets/logo.png">
+        <img width="10%" src="../../assets/logo.png" alt="">
         <h1>Find a solution to any problem</h1>
     </header>
 </template>

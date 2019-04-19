@@ -1,49 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="56afe0e0-f91a-4960-b51e-3ac0f76833cb" name="Default Changelist" comment="Tegin login disaini">
-      <change afterPath="$PROJECT_DIR$/back-end/iti0208/src/main/java/api/iti0208/controller/UserController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/back-end/iti0208/src/main/java/api/iti0208/data/dto/PublicUserInfo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/back-end/iti0208/src/main/java/api/iti0208/data/dto/UserRegistrationInput.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/back-end/iti0208/src/main/java/api/iti0208/data/entity/AppUser.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/back-end/iti0208/src/main/java/api/iti0208/data/entity/Role.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/back-end/iti0208/src/main/java/api/iti0208/exception/BadRequestException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/back-end/iti0208/src/main/java/api/iti0208/security/JWTAuthenticationFilter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/back-end/iti0208/src/main/java/api/iti0208/security/JWTAuthorizationFilter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/back-end/iti0208/src/main/java/api/iti0208/security/SecurityConstants.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/back-end/iti0208/src/main/java/api/iti0208/security/handler/ApiLogoutSuccessHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/front-end/app/src/components/Login.vue" afterDir="false" />
+    <list default="true" id="56afe0e0-f91a-4960-b51e-3ac0f76833cb" name="Default Changelist" comment="Merge branches 'master' and 'minu_osa' of https://github.com/katamb/tarkvaratehnika_projekt into minu_osa&#10;&#10;Vahetasin favicon pildi&#10;# Conflicts:&#10;#&#9;front-end/app/src/router.js">
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/iti0208/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/iti0208/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/iti0208/gradlew" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/iti0208/gradlew" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/iti0208/src/main/java/api/iti0208/Iti0208Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/iti0208/src/main/java/api/iti0208/Iti0208Application.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/iti0208/src/main/java/api/iti0208/SampleData.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/iti0208/src/main/java/api/iti0208/SampleData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/iti0208/src/main/java/api/iti0208/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/iti0208/src/main/java/api/iti0208/config/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/iti0208/src/main/java/api/iti0208/controller/FileController.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/iti0208/src/main/java/api/iti0208/controller/FileController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/iti0208/src/main/java/api/iti0208/controller/PostController.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/iti0208/src/main/java/api/iti0208/controller/PostController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/iti0208/src/main/java/api/iti0208/controller/RegistrationController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/iti0208/src/main/java/api/iti0208/controller/ReplyController.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/iti0208/src/main/java/api/iti0208/controller/ReplyController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/iti0208/src/main/java/api/iti0208/entity/Post.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/iti0208/src/main/java/api/iti0208/data/entity/Post.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/iti0208/src/main/java/api/iti0208/entity/PostResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/iti0208/src/main/java/api/iti0208/data/dto/PostResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/iti0208/src/main/java/api/iti0208/entity/Reply.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/iti0208/src/main/java/api/iti0208/data/entity/Reply.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/iti0208/src/main/java/api/iti0208/entity/Role.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/iti0208/src/main/java/api/iti0208/entity/User.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/iti0208/src/main/java/api/iti0208/entity/UserDto.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/iti0208/src/main/java/api/iti0208/exception/EmailExistsException.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/iti0208/src/main/java/api/iti0208/repository/PostRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/iti0208/src/main/java/api/iti0208/repository/PostRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/iti0208/src/main/java/api/iti0208/repository/ReplyRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/iti0208/src/main/java/api/iti0208/repository/ReplyRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/iti0208/src/main/java/api/iti0208/repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/iti0208/src/main/java/api/iti0208/repository/UserRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/iti0208/src/main/java/api/iti0208/response/UploadFileResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/iti0208/src/main/java/api/iti0208/data/dto/UploadFileResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/iti0208/src/main/java/api/iti0208/service/PagingService.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/iti0208/src/main/java/api/iti0208/service/PostService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/iti0208/src/main/java/api/iti0208/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/back-end/iti0208/src/main/java/api/iti0208/service/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/iti0208/src/main/java/api/iti0208/service/UserServiceImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/iti0208/src/main/java/api/iti0208/validation/PasswordMatches.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/back-end/iti0208/src/main/java/api/iti0208/validation/PasswordMatchesValidator.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/app/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/app/src/App.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/app/src/components/Registration.vue" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/app/src/components/Registration.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/app/src/components/layout/Login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/app/src/components/layout/Login.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front-end/app/src/router.js" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/app/src/router.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/app/src/components/UserActivities.vue" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/app/src/components/UserActivities.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/app/src/components/layout/Header.vue" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/app/src/components/layout/Header.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front-end/app/src/components/layout/TopicNavbar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/front-end/app/src/components/layout/TopicNavbar.vue" afterDir="false" />
     </list>
     <ignored path="output/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -66,67 +29,28 @@
     <expand />
     <select />
   </component>
+  <component name="FavoritesManager">
+    <favorites_list name="tarkvaratehnika_projekt" />
+  </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/front-end/app/src/App.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="8" column="11" lean-forward="true" selection-start-line="8" selection-start-column="11" selection-end-line="8" selection-end-column="11" />
+            <state relative-caret-position="204">
+              <caret line="12" column="11" selection-start-line="12" selection-start-column="11" selection-end-line="12" selection-end-column="11" />
               <folding>
-                <element signature="e#1806#1858#0" expanded="true" />
+                <element signature="e#137#189#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/front-end/app/src/components/layout/Login.vue">
+        <entry file="file://$PROJECT_DIR$/front-end/app/src/main.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-221">
-              <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
-              <folding>
-                <element signature="n#style#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/front-end/app/src/components/Login.vue">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-314">
-              <caret line="8" column="31" lean-forward="true" selection-start-line="8" selection-start-column="31" selection-end-line="8" selection-end-column="31" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/front-end/app/src/components/AddPost.vue">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1003">
-              <caret line="131" column="21" selection-start-line="131" selection-start-column="21" selection-end-line="131" selection-end-column="21" />
-              <folding>
-                <element signature="e#2059#2085#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/front-end/app/src/views/Home.vue">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="4" column="11" selection-start-line="4" selection-start-column="11" selection-end-line="4" selection-end-column="11" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/front-end/app/src/components/layout/Header.vue">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="7" column="8" selection-start-line="7" selection-start-column="8" selection-end-line="7" selection-end-column="8" />
+            <state relative-caret-position="34">
+              <caret line="2" column="29" lean-forward="true" selection-start-line="2" selection-start-column="29" selection-end-line="2" selection-end-column="29" />
             </state>
           </provider>
         </entry>
@@ -134,17 +58,20 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/front-end/app/src/router.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="67" column="5" selection-start-line="67" selection-start-column="5" selection-end-line="67" selection-end-column="5" />
+            <state relative-caret-position="187">
+              <caret line="11" column="27" selection-start-line="11" selection-start-column="27" selection-end-line="11" selection-end-column="27" />
+              <folding>
+                <element signature="e#0#21#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/front-end/app/src/components/ViewPosts.vue">
+        <entry file="file://$PROJECT_DIR$/front-end/app/src/components/layout/TopicNavbar.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-765">
-              <caret line="12" column="55" selection-start-line="12" selection-start-column="55" selection-end-line="12" selection-end-column="55" />
+            <state relative-caret-position="1015">
+              <caret line="60" selection-start-line="60" selection-end-line="60" />
             </state>
           </provider>
         </entry>
@@ -152,17 +79,55 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/front-end/app/src/components/ViewPost.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3179">
-              <caret line="187" column="20" selection-start-line="187" selection-start-column="20" selection-end-line="187" selection-end-column="20" />
+            <state relative-caret-position="2737">
+              <caret line="162" selection-start-line="162" selection-end-line="162" />
+              <folding>
+                <element signature="e#2236#2291#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/front-end/app/src/components/UserActivities.vue">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="352">
+              <caret line="26" column="28" selection-start-line="26" selection-start-column="28" selection-end-line="26" selection-end-column="28" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/front-end/app/src/components/Registration.vue">
+        <entry file="file://$PROJECT_DIR$/front-end/app/src/components/layout/Header.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-721">
-              <caret line="33" column="27" lean-forward="true" selection-start-line="33" selection-start-column="27" selection-end-line="33" selection-end-column="27" />
+            <state relative-caret-position="17">
+              <caret line="2" column="58" selection-start-line="2" selection-start-column="58" selection-end-line="2" selection-end-column="58" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/front-end/app/src/components/layout/UpperNavbar.vue">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1122">
+              <caret line="67" column="29" selection-start-line="67" selection-start-column="29" selection-end-line="67" selection-end-column="29" />
+              <folding>
+                <element signature="e#2234#2298#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/front-end/app/src/javascript/apiRequests.js">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/front-end/app/node_modules/vue-router/types/router.d.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2006">
+              <caret line="118" column="2" selection-start-line="118" selection-start-column="2" selection-end-line="118" selection-end-column="2" />
             </state>
           </provider>
         </entry>
@@ -172,6 +137,7 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>setting</find>
+      <find>isHi</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -181,16 +147,22 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/front-end/app/src/components/layout/Header.vue" />
-        <option value="$PROJECT_DIR$/front-end/app/src/components/ViewPost.vue" />
         <option value="$PROJECT_DIR$/back-end/iti0208/src/main/java/api/iti0208/entity/Reply.java" />
         <option value="$PROJECT_DIR$/front-end/.idea/workspace.xml" />
-        <option value="$PROJECT_DIR$/front-end/app/src/components/ViewPosts.vue" />
         <option value="$PROJECT_DIR$/front-end/app/src/main.js" />
-        <option value="$PROJECT_DIR$/front-end/app/src/components/AddPost.vue" />
-        <option value="$PROJECT_DIR$/front-end/app/src/components/Registration.vue" />
+        <option value="$PROJECT_DIR$/front-end/app/src/components/unused/Search.vue" />
+        <option value="$PROJECT_DIR$/front-end/app/src/components/layout/Search.vue" />
+        <option value="$PROJECT_DIR$/front-end/app/src/router.js" />
+        <option value="$PROJECT_DIR$/front-end/app/public/index.html" />
         <option value="$PROJECT_DIR$/front-end/app/src/App.vue" />
         <option value="$PROJECT_DIR$/front-end/app/src/components/layout/Login.vue" />
+        <option value="$PROJECT_DIR$/front-end/app/src/components/ViewPost.vue" />
+        <option value="$PROJECT_DIR$/front-end/app/src/components/AddPost.vue" />
+        <option value="$PROJECT_DIR$/front-end/app/src/components/Registration.vue" />
+        <option value="$PROJECT_DIR$/front-end/app/src/components/layout/TopicNavbar.vue" />
+        <option value="$PROJECT_DIR$/front-end/app/src/components/UserActivities.vue" />
+        <option value="$PROJECT_DIR$/front-end/app/src/components/ViewPosts.vue" />
+        <option value="$PROJECT_DIR$/front-end/app/src/components/layout/Header.vue" />
       </list>
     </option>
   </component>
@@ -201,10 +173,10 @@
     </treeState>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="450" />
-    <option name="y" value="9" />
-    <option name="width" value="852" />
-    <option name="height" value="963" />
+    <option name="x" value="-3" />
+    <option name="y" value="6" />
+    <option name="width" value="1014" />
+    <option name="height" value="1032" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -212,7 +184,6 @@
     </navigator>
     <panes>
       <pane id="Scope" />
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -236,7 +207,22 @@
               <item name="tarkvaratehnika_projekt" type="462c0819:PsiDirectoryNode" />
               <item name="front-end" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="public" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="tarkvaratehnika_projekt" type="b2602c69:ProjectViewProjectNode" />
+              <item name="tarkvaratehnika_projekt" type="462c0819:PsiDirectoryNode" />
+              <item name="front-end" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="tarkvaratehnika_projekt" type="b2602c69:ProjectViewProjectNode" />
+              <item name="tarkvaratehnika_projekt" type="462c0819:PsiDirectoryNode" />
+              <item name="front-end" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="assets" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="tarkvaratehnika_projekt" type="b2602c69:ProjectViewProjectNode" />
@@ -261,20 +247,27 @@
               <item name="front-end" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
+              <item name="javascript" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1552494984777" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1555662545785" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/back-end/iti0208" />
     <property name="nodejs_package_manager_path" value="npm" />
+    <property name="ts.external.directory.path" value="C:\Program Files\JetBrains\IntelliJ IDEA 2018.3.1\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\marin\IdeaProjects\tarkvaratehnika_projekt\front-end\app\src\components\layout" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -303,7 +296,21 @@
       <workItem from="1551715879245" duration="26886000" />
       <workItem from="1552054447891" duration="599000" />
       <workItem from="1552122335985" duration="422000" />
-      <workItem from="1552305210695" duration="8354000" />
+      <workItem from="1552305210695" duration="10325000" />
+      <workItem from="1552542038679" duration="818000" />
+      <workItem from="1552726896831" duration="51022000" />
+      <workItem from="1553278631154" duration="2614000" />
+      <workItem from="1553688076007" duration="8387000" />
+      <workItem from="1554189933719" duration="294000" />
+      <workItem from="1554190629611" duration="48000" />
+      <workItem from="1554201895692" duration="1962000" />
+      <workItem from="1554796584386" duration="174000" />
+      <workItem from="1554796889936" duration="35000" />
+      <workItem from="1554806656389" duration="12000" />
+      <workItem from="1554806867609" duration="664000" />
+      <workItem from="1554836309510" duration="288000" />
+      <workItem from="1555046513751" duration="1871000" />
+      <workItem from="1555401500350" duration="1362000" />
     </task>
     <task id="LOCAL-00001" summary="Merge branch 'master' into minu_osa&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;front-end/app/src/App.vue&#10;#&#9;front-end/app/src/components/ViewPost.vue&#10;#&#9;front-end/app/src/components/ViewPosts.vue&#10;#&#9;front-end/app/src/router.js">
       <created>1551209176507</created>
@@ -368,23 +375,156 @@
       <option name="project" value="LOCAL" />
       <updated>1552466586698</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Tegin login disaini">
+      <created>1552495028186</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1552495028186</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Merge branches 'master' and 'minu_osa' of https://github.com/katamb/tarkvaratehnika_projekt into minu_osa&#10;&#10;# Conflicts:&#10;#&#9;front-end/app/src/App.vue&#10;#&#9;front-end/app/src/components/Registration.vue&#10;#&#9;front-end/app/src/components/layout/Login.vue">
+      <created>1552495612507</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1552495612507</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Merge branches 'master' and 'minu_osa' of https://github.com/katamb/tarkvaratehnika_projekt into minu_osa&#10;&#10;&#10;Tegin login ja logouti nuppud + unauthorized errori ja üldse need popupid, nyyd kõik on ilusam :)&#10;# Conflicts:&#10;#&#9;front-end/app/src/App.vue&#10;#&#9;front-end/app/src/components/Registration.vue&#10;#&#9;front-end/app/src/components/layout/Login.vue">
+      <created>1552898204550</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1552898204550</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Merge branches 'master' and 'minu_osa' of https://github.com/katamb/tarkvaratehnika_projekt into minu_osa&#10;&#10;&#10;Tegin login ja logouti nuppud + unauthorized errori ja üldse need popupid, nyyd kõik on ilusam :)&#10;# Conflicts:&#10;#&#9;front-end/app/src/App.vue&#10;#&#9;front-end/app/src/components/Registration.vue&#10;#&#9;front-end/app/src/components/layout/Login.vue">
+      <created>1552936052634</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1552936052634</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Merge branches 'master' and 'minu_osa' of https://github.com/katamb/tarkvaratehnika_projekt into minu_osa&#10;&#10;&#10;Tegin searchi valmis&#10;# Conflicts:&#10;#&#9;front-end/app/src/App.vue&#10;#&#9;front-end/app/src/components/Registration.vue&#10;#&#9;front-end/app/src/components/layout/Login.vue">
+      <created>1552936132359</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1552936132359</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Merge branches 'master' and 'minu_osa' of https://github.com/katamb/tarkvaratehnika_projekt into minu_osa&#10;&#10;&#10;Tegin searchi valmis&#10;# Conflicts:&#10;#&#9;front-end/app/src/App.vue&#10;#&#9;front-end/app/src/components/Registration.vue&#10;#&#9;front-end/app/src/components/layout/Login.vue">
+      <created>1552936249531</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1552936249531</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Merge branches 'master' and 'minu_osa' of https://github.com/katamb/tarkvaratehnika_projekt into minu_osa&#10;&#10;# Conflicts:&#10;#&#9;front-end/app/src/components/layout/Login.vue&#10;#&#9;front-end/app/src/router.js">
+      <created>1552938014505</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1552938014505</updated>
+    </task>
+    <task id="LOCAL-00017" summary="Merge branches 'master' and 'minu_osa' of https://github.com/katamb/tarkvaratehnika_projekt into minu_osa&#10;&#10;# Conflicts:&#10;#&#9;front-end/app/src/components/layout/Login.vue&#10;#&#9;front-end/app/src/router.js">
+      <created>1553025531395</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1553025531396</updated>
+    </task>
+    <task id="LOCAL-00018" summary="Merge branches 'master' and 'minu_osa' of https://github.com/katamb/tarkvaratehnika_projekt into minu_osa&#10;&#10;Tegin seda login nuppu ja myActivities ilusamini&#10;# Conflicts:&#10;#&#9;front-end/app/src/router.js">
+      <created>1553069837576</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1553069837576</updated>
+    </task>
+    <task id="LOCAL-00019" summary="Merge branches 'master' and 'minu_osa' of https://github.com/katamb/tarkvaratehnika_projekt into minu_osa&#10;&#10;Vahetasin favicon pildi&#10;# Conflicts:&#10;#&#9;front-end/app/src/router.js">
+      <created>1553072587692</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1553072587692</updated>
+    </task>
+    <task id="LOCAL-00020" summary="Merge branches 'master' and 'minu_osa' of https://github.com/katamb/tarkvaratehnika_projekt into minu_osa&#10;&#10;Natuke parandasin login nuppu, nüüd kui logout tehakse, siis viskab kliendi esilehele&#10;&#10;# Conflicts:&#10;#&#9;front-end/app/src/router.js">
+      <created>1553086607504</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1553086607505</updated>
+    </task>
+    <task id="LOCAL-00021" summary="Merge branches 'master' and 'minu_osa' of https://github.com/katamb/tarkvaratehnika_projekt into minu_osa&#10;&#10;Tegin muudatusi viewpostis, nüüd see näeb natuke ilusamini.">
+      <created>1553233010988</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1553233010988</updated>
+    </task>
+    <task id="LOCAL-00022" summary="Merge branches 'master' and 'minu_osa' of https://github.com/katamb/tarkvaratehnika_projekt into minu_osa&#10;&#10;Vahetasin favicon pildi&#10;# Conflicts:&#10;#&#9;front-end/app/src/router.js">
+      <created>1553279573736</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1553279573741</updated>
+    </task>
+    <task id="LOCAL-00023" summary="Merge branches 'master' and 'minu_osa' of https://github.com/katamb/tarkvaratehnika_projekt into minu_osa&#10;&#10;Vahetasin favicon pildi&#10;# Conflicts:&#10;#&#9;front-end/app/src/router.js">
+      <created>1553279638175</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1553279638175</updated>
+    </task>
+    <task id="LOCAL-00024" summary="Merge branches 'master' and 'minu_osa' of https://github.com/katamb/tarkvaratehnika_projekt into minu_osa&#10;&#10;Vahetasin favicon pildi&#10;# Conflicts:&#10;#&#9;front-end/app/src/router.js">
+      <created>1553279696460</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1553279696460</updated>
+    </task>
+    <task id="LOCAL-00025" summary="Merge branches 'master' and 'minu_osa' of https://github.com/katamb/tarkvaratehnika_projekt into minu_osa&#10;&#10;Vahetasin favicon pildi&#10;# Conflicts:&#10;#&#9;front-end/app/src/router.js">
+      <created>1553279772450</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1553279772450</updated>
+    </task>
+    <task id="LOCAL-00026" summary="Merge branches 'master' and 'minu_osa' of https://github.com/katamb/tarkvaratehnika_projekt into minu_osa&#10;&#10;Vahetasin favicon pildi&#10;# Conflicts:&#10;#&#9;front-end/app/src/router.js">
+      <created>1553280479048</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1553280479048</updated>
+    </task>
+    <task id="LOCAL-00027" summary="Merge branches 'master' and 'minu_osa' of https://github.com/katamb/tarkvaratehnika_projekt into minu_osa&#10;&#10;Vahetasin favicon pildi&#10;# Conflicts:&#10;#&#9;front-end/app/src/router.js">
+      <created>1554019973094</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1554019973094</updated>
+    </task>
+    <task id="LOCAL-00028" summary="Merge branches 'master' and 'minu_osa' of https://github.com/katamb/tarkvaratehnika_projekt into minu_osa&#10;&#10;Vahetasin favicon pildi&#10;# Conflicts:&#10;#&#9;front-end/app/src/router.js">
+      <created>1554033529399</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1554033529399</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="49894000" />
+    <option name="totallyTimeSpent" value="121416000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.7777778" visible="true" weight="0.26153848" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.6017699" visible="true" weight="0.29959515" />
+      <window_info id="Structure" order="1" sideWeight="0.39823008" side_tool="true" weight="0.27854252" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Image Layers" order="3" />
       <window_info id="Designer" order="4" />
       <window_info id="UI Designer" order="5" />
-      <window_info id="Favorites" order="6" side_tool="true" />
+      <window_info id="Favorites" order="6" sideWeight="0.39271256" side_tool="true" weight="0.26882592" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.20071048" />
@@ -395,49 +535,51 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" />
       <window_info anchor="bottom" id="Terminal" order="9" />
-      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info anchor="bottom" id="Version Control" order="11" visible="true" weight="0.110124335" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50364375" side_tool="true" weight="0.59857905" />
+      <window_info anchor="bottom" id="Version Control" order="11" sideWeight="0.49635628" visible="true" weight="0.22912966" />
       <window_info anchor="bottom" id="Messages" order="12" weight="0.3285968" />
+      <window_info anchor="bottom" id="TypeScript" order="13" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.034817815" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="Palette" order="3" />
-      <window_info anchor="right" id="Theme Preview" order="4" />
-      <window_info anchor="right" id="Capture Analysis" order="5" />
-      <window_info anchor="right" id="Palette&#9;" order="6" />
-      <window_info anchor="right" id="Maven" order="7" weight="0.20161943" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="1" weight="0.25" />
+      <window_info anchor="right" id="Palette" order="2" />
+      <window_info anchor="right" id="Theme Preview" order="3" />
+      <window_info anchor="right" id="Capture Analysis" order="4" />
+      <window_info anchor="right" id="Palette&#9;" order="5" />
+      <window_info anchor="right" id="Maven" order="6" weight="0.20161943" />
+      <window_info anchor="right" id="Ant Build" order="7" weight="0.04777328" />
       <window_info anchor="right" id="Database" order="8" />
       <window_info anchor="right" id="Preview" order="9" />
     </layout>
     <layout-to-restore>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.7777778" weight="0.35222673" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.6017699" visible="true" weight="0.27854252" />
+      <window_info id="Structure" order="1" sideWeight="0.39823008" side_tool="true" visible="true" weight="0.27854252" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Image Layers" order="3" />
       <window_info id="Designer" order="4" />
       <window_info id="UI Designer" order="5" />
-      <window_info id="Favorites" order="6" side_tool="true" />
-      <window_info anchor="bottom" id="Messages" order="0" />
-      <window_info anchor="bottom" id="Message" order="1" />
-      <window_info anchor="bottom" id="Find" order="2" />
-      <window_info active="true" anchor="bottom" id="Run" order="3" visible="true" weight="0.103019536" />
-      <window_info anchor="bottom" id="Debug" order="4" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="5" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="6" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="7" />
-      <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Database Changes" order="9" />
-      <window_info anchor="bottom" id="Terminal" order="10" />
-      <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
-      <window_info anchor="bottom" id="Version Control" order="12" weight="0.110124335" />
+      <window_info id="Favorites" order="6" sideWeight="0.39271256" side_tool="true" weight="0.26882592" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.20071048" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Database Changes" order="8" />
+      <window_info anchor="bottom" id="Terminal" order="9" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50364375" side_tool="true" visible="true" weight="0.59857905" />
+      <window_info active="true" anchor="bottom" id="Version Control" order="11" sideWeight="0.49635628" visible="true" weight="0.59857905" />
+      <window_info anchor="bottom" id="Messages" order="12" weight="0.3285968" />
+      <window_info anchor="bottom" id="TypeScript" order="13" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" visible="true" weight="0.034817815" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="Palette" order="3" />
-      <window_info anchor="right" id="Theme Preview" order="4" />
-      <window_info anchor="right" id="Capture Analysis" order="5" />
-      <window_info anchor="right" id="Palette&#9;" order="6" />
-      <window_info anchor="right" id="Maven" order="7" weight="0.20161943" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="1" weight="0.25" />
+      <window_info anchor="right" id="Palette" order="2" />
+      <window_info anchor="right" id="Theme Preview" order="3" />
+      <window_info anchor="right" id="Capture Analysis" order="4" />
+      <window_info anchor="right" id="Palette&#9;" order="5" />
+      <window_info anchor="right" id="Maven" order="6" weight="0.20161943" />
+      <window_info anchor="right" id="Ant Build" order="7" visible="true" weight="0.04777328" />
       <window_info anchor="right" id="Database" order="8" />
       <window_info anchor="right" id="Preview" order="9" />
     </layout-to-restore>
@@ -489,16 +631,22 @@
     <MESSAGE value="Merge branch 'master' into minu_osa&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;front-end/app/src/App.vue&#10;#&#9;front-end/app/src/components/ViewPost.vue&#10;#&#9;front-end/app/src/components/ViewPosts.vue&#10;#&#9;front-end/app/src/router.js" />
     <MESSAGE value="Merge branch 'master' into minu_osa&#10;Tegin postituse disaini + muutsin upkoad file disaini ka" />
     <MESSAGE value="Tegin login disaini" />
-    <option name="LAST_COMMIT_MESSAGE" value="Tegin login disaini" />
+    <MESSAGE value="Merge branches 'master' and 'minu_osa' of https://github.com/katamb/tarkvaratehnika_projekt into minu_osa&#10;&#10;# Conflicts:&#10;#&#9;front-end/app/src/App.vue&#10;#&#9;front-end/app/src/components/Registration.vue&#10;#&#9;front-end/app/src/components/layout/Login.vue" />
+    <MESSAGE value="Merge branches 'master' and 'minu_osa' of https://github.com/katamb/tarkvaratehnika_projekt into minu_osa&#10;&#10;&#10;Tegin login ja logouti nuppud + unauthorized errori ja üldse need popupid, nyyd kõik on ilusam :)&#10;# Conflicts:&#10;#&#9;front-end/app/src/App.vue&#10;#&#9;front-end/app/src/components/Registration.vue&#10;#&#9;front-end/app/src/components/layout/Login.vue" />
+    <MESSAGE value="Merge branches 'master' and 'minu_osa' of https://github.com/katamb/tarkvaratehnika_projekt into minu_osa&#10;&#10;&#10;Tegin searchi valmis&#10;# Conflicts:&#10;#&#9;front-end/app/src/App.vue&#10;#&#9;front-end/app/src/components/Registration.vue&#10;#&#9;front-end/app/src/components/layout/Login.vue" />
+    <MESSAGE value="Merge branches 'master' and 'minu_osa' of https://github.com/katamb/tarkvaratehnika_projekt into minu_osa&#10;&#10;# Conflicts:&#10;#&#9;front-end/app/src/components/layout/Login.vue&#10;#&#9;front-end/app/src/router.js" />
+    <MESSAGE value="Merge branches 'master' and 'minu_osa' of https://github.com/katamb/tarkvaratehnika_projekt into minu_osa&#10;&#10;# Conflicts:&#10;#&#9;front-end/app/src/router.js" />
+    <MESSAGE value="Merge branches 'master' and 'minu_osa' of https://github.com/katamb/tarkvaratehnika_projekt into minu_osa&#10;&#10;Tegin seda login nuppu ja myActivities ilusamini&#10;# Conflicts:&#10;#&#9;front-end/app/src/router.js" />
+    <MESSAGE value="Merge branches 'master' and 'minu_osa' of https://github.com/katamb/tarkvaratehnika_projekt into minu_osa&#10;&#10;Natuke parandasin login nuppu, nüüd kui logout tehakse, siis viskab kliendi esilehele&#10;&#10;# Conflicts:&#10;#&#9;front-end/app/src/router.js" />
+    <MESSAGE value="Merge branches 'master' and 'minu_osa' of https://github.com/katamb/tarkvaratehnika_projekt into minu_osa&#10;&#10;Tegin muudatusi viewpostis, nüüd see näeb natuke ilusamini." />
+    <MESSAGE value="Merge branches 'master' and 'minu_osa' of https://github.com/katamb/tarkvaratehnika_projekt into minu_osa&#10;&#10;Vahetasin favicon pildi&#10;# Conflicts:&#10;#&#9;front-end/app/src/router.js" />
+    <option name="LAST_COMMIT_MESSAGE" value="Merge branches 'master' and 'minu_osa' of https://github.com/katamb/tarkvaratehnika_projekt into minu_osa&#10;&#10;Vahetasin favicon pildi&#10;# Conflicts:&#10;#&#9;front-end/app/src/router.js" />
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/front-end/app/public/index.html">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/back-end/iti0208/src/main/java/api/iti0208/controller/PostController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -509,104 +657,134 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/back-end/iti0208/src/main/java/api/iti0208/entity/Post.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-812" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/back-end/iti0208/src/main/java/api/iti0208/entity/Reply.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="27" selection-start-line="27" selection-end-line="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/back-end/iti0208/src/main/java/api/iti0208/entity/User.java">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/front-end/app/src/main.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="38" selection-start-line="5" selection-start-column="38" selection-end-line="5" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/front-end/app/src/components/layout/Header.vue">
+    <entry file="file://$PROJECT_DIR$/back-end/iti0208/src/main/java/api/iti0208/entity/Post.java" />
+    <entry file="file://$PROJECT_DIR$/back-end/iti0208/src/main/java/api/iti0208/entity/Reply.java" />
+    <entry file="file://$PROJECT_DIR$/back-end/iti0208/src/main/java/api/iti0208/entity/User.java" />
+    <entry file="file://$PROJECT_DIR$/front-end/app/src/components/Login.vue" />
+    <entry file="file://$PROJECT_DIR$/front-end/app/src/views/Home.vue" />
+    <entry file="file://$PROJECT_DIR$/front-end/app/src/components/layout/Logout.vue" />
+    <entry file="file://$PROJECT_DIR$/front-end/app/src/components/layout/Login.vue" />
+    <entry file="file://$PROJECT_DIR$/front-end/app/src/components/layout/Search.vue">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
-          <caret line="7" column="8" selection-start-line="7" selection-start-column="8" selection-end-line="7" selection-end-column="8" />
+          <caret line="7" column="10" selection-start-line="7" selection-start-column="10" selection-end-line="7" selection-end-column="10" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/front-end/app/src/components/ViewPost.vue">
+    <entry file="file://$PROJECT_DIR$/front-end/app/public/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3179">
-          <caret line="187" column="20" selection-start-line="187" selection-start-column="20" selection-end-line="187" selection-end-column="20" />
+        <state relative-caret-position="102">
+          <caret line="6" column="49" selection-start-line="6" selection-start-column="49" selection-end-line="6" selection-end-column="49" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/front-end/app/src/components/ViewPosts.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-765">
-          <caret line="12" column="55" selection-start-line="12" selection-start-column="55" selection-end-line="12" selection-end-column="55" />
-        </state>
-      </provider>
+    <entry file="file://$PROJECT_DIR$/front-end/app/public/favicon.ico" />
+    <entry file="file://$PROJECT_DIR$/front-end/app/src/components/unused/Login.vue" />
+    <entry file="file://$PROJECT_DIR$/front-end/app/public/logo.png">
+      <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/front-end/app/src/router.js">
+    <entry file="file://$PROJECT_DIR$/front-end/app/src/components/AddPost.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="67" column="5" selection-start-line="67" selection-start-column="5" selection-end-line="67" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/front-end/app/src/views/Home.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="11" selection-start-line="4" selection-start-column="11" selection-end-line="4" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/front-end/app/src/App.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="11" lean-forward="true" selection-start-line="8" selection-start-column="11" selection-end-line="8" selection-end-column="11" />
-          <folding>
-            <element signature="e#1806#1858#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="1156">
+          <caret line="68" column="35" selection-start-line="68" selection-start-column="35" selection-end-line="68" selection-end-column="35" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/front-end/app/src/components/Registration.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-721">
-          <caret line="33" column="27" lean-forward="true" selection-start-line="33" selection-start-column="27" selection-end-line="33" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/front-end/app/src/components/Login.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-314">
-          <caret line="8" column="31" lean-forward="true" selection-start-line="8" selection-start-column="31" selection-end-line="8" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/front-end/app/src/components/layout/Login.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-221">
-          <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
+        <state relative-caret-position="510">
+          <caret line="30" column="28" selection-start-line="30" selection-start-column="28" selection-end-line="30" selection-end-column="28" />
           <folding>
-            <element signature="n#style#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="e#2952#3009#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/front-end/app/src/components/AddPost.vue">
+    <entry file="file://$PROJECT_DIR$/front-end/app/src/components/ViewPosts.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1003">
-          <caret line="131" column="21" selection-start-line="131" selection-start-column="21" selection-end-line="131" selection-end-column="21" />
+        <state relative-caret-position="-1672">
+          <caret line="40" column="11" lean-forward="true" selection-start-line="40" selection-start-column="11" selection-end-line="40" selection-end-column="11" />
           <folding>
-            <element signature="e#2059#2085#0" expanded="true" />
+            <element signature="e#1417#1472#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/front-end/app/src/components/ViewPost.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2737">
+          <caret line="162" selection-start-line="162" selection-end-line="162" />
+          <folding>
+            <element signature="e#2236#2291#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/front-end/app/src/components/layout/UpperNavbar.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1122">
+          <caret line="67" column="29" selection-start-line="67" selection-start-column="29" selection-end-line="67" selection-end-column="29" />
+          <folding>
+            <element signature="e#2234#2298#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/front-end/app/src/javascript/apiRequests.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/front-end/app/node_modules/vue-router/types/router.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2006">
+          <caret line="118" column="2" selection-start-line="118" selection-start-column="2" selection-end-line="118" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/front-end/app/src/components/layout/Header.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="2" column="58" selection-start-line="2" selection-start-column="58" selection-end-line="2" selection-end-column="58" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/front-end/app/src/App.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" column="11" selection-start-line="12" selection-start-column="11" selection-end-line="12" selection-end-column="11" />
+          <folding>
+            <element signature="e#137#189#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/front-end/app/src/components/layout/TopicNavbar.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1015">
+          <caret line="60" selection-start-line="60" selection-end-line="60" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/front-end/app/src/main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="29" lean-forward="true" selection-start-line="2" selection-start-column="29" selection-end-line="2" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/front-end/app/src/router.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="27" selection-start-line="11" selection-start-column="27" selection-end-line="11" selection-end-column="27" />
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/front-end/app/src/components/UserActivities.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="352">
+          <caret line="26" column="28" selection-start-line="26" selection-start-column="28" selection-end-line="26" selection-end-column="28" />
         </state>
       </provider>
     </entry>

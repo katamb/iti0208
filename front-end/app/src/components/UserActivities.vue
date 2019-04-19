@@ -1,49 +1,50 @@
 <template>
 
-  <div class="container-fluid">
-    <div class="row justify-content-center">
-      <div class="col-xl-7 col-lg-8 col-md-9 col-sm-11">
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-xl-7 col-lg-8 col-md-9 col-sm-11">
 
-        <h2 class="my-2">My Posts</h2>
+                <h2 class="my-2">My Posts</h2>
 
-        <ul v-if="userPosts.length">
-        <div class="post-list-item my-2 p-2 text-left" v-for="(data, index) in userPosts" :key='data.id'>
-          <h3>{{data.title}}</h3>
-          <p>{{data.description}}</p>
-          <div class="form-group mx-4 mb-2" v-if="editingPost === data.id">
-            <input class="form-control mb-2" name="newTitle"
-                   v-model="newTitle" v-validate="{ required: true, min: 3, max: 128 }">
-            <div class="error" v-if="errors.has('newTitle')">{{errors.first('newTitle')}}</div>
-            <textarea class="form-control mb-2" rows="3" name="newDescription"
-                      v-model="newDescription" v-validate="{ required: true, min: 5 }"></textarea>
-            <div class="error" v-if="errors.has('newDescription')">{{errors.first('newDescription')}}</div>
-            <button class="btn btn-primary m-1" @click="saveEditPost(index, data.id)">Save</button>
-            <button class="btn btn-secondary m-1" @click="disableEditingPost">Cancel</button>
-          </div>
-          <input class="btn btn-danger m-1" type="submit" value="Delete" @click="deletePost(data.id)">
-          <input class="btn btn-warning m-1" type="submit" value="Edit" @click="enableEditingPost(data)">
-        </div>
-        </ul>
-        <p v-else>Empty List</p>
+                <ul v-if="userPosts.length">
+                    <div class="post-list-item my-2 p-2 text-left" v-for="(data, index) in userPosts" :key='data.id'>
+                        <h3>{{data.title}}</h3>
+                        <p>{{data.description}}</p>
+                        <div class="form-group mx-4 mb-2" v-if="editingPost === data.id">
+                            <input class="form-control mb-2" name="newTitle"
+                                   v-model="newTitle" v-validate="{ required: true, min: 3, max: 128 }">
+                            <div class="error" v-if="errors.has('newTitle')">{{errors.first('newTitle')}}</div>
+                            <textarea class="form-control mb-2" rows="3" name="newDescription"
+                                      v-model="newDescription" v-validate="{ required: true, min: 5 }"></textarea>
+                            <div class="error" v-if="errors.has('newDescription')">{{errors.first('newDescription')}}
+                            </div>
+                            <button class="btn btn-primary m-1" @click="saveEditPost(index, data.id)">Save</button>
+                            <button class="btn btn-secondary m-1" @click="disableEditingPost">Cancel</button>
+                        </div>
+                        <input class="btn btn-danger m-1" type="submit" value="Delete" @click="deletePost(data.id)">
+                        <input class="btn btn-warning m-1" type="submit" value="Edit" @click="enableEditingPost(data)">
+                    </div>
+                </ul>
+                <p v-else>Empty List</p>
 
-        <h2 class="my-2">My Replies</h2>
+                <h2 class="my-2">My Replies</h2>
 
-        <div class="post-list-item my-2 p-2 text-left" v-for="(data, index) in userReplies" :key='data.id'>
-          <p>{{data.reply}}</p>
-          <div class="form-group mx-4 mb-2" v-if="editingReply === data.id">
+                <div class="post-list-item my-2 p-2 text-left" v-for="(data, index) in userReplies" :key='data.id'>
+                    <p>{{data.reply}}</p>
+                    <div class="form-group mx-4 mb-2" v-if="editingReply === data.id">
             <textarea class="form-control mb-2" rows="3" name="newReply"
                       v-model="tempValue" v-validate="{ required: true, min: 5 }"></textarea>
-            <div class="error" v-if="errors.has('newReply')">{{errors.first('newReply')}}</div>
-            <button class="btn btn-primary m-1" @click="saveEditReply(index, data.id)"> Save</button>
-            <button class="btn btn-secondary m-1" @click="disableEditingReply"> Cancel</button>
-          </div>
-          <input class="btn btn-danger m-1" type="submit" value="Delete" @click="deleteReply(data.id)">
-          <input class="btn btn-warning m-1" type="submit" value="Edit" @click="enableEditingReply(data)">
-        </div>
+                        <div class="error" v-if="errors.has('newReply')">{{errors.first('newReply')}}</div>
+                        <button class="btn btn-primary m-1" @click="saveEditReply(index, data.id)"> Save</button>
+                        <button class="btn btn-secondary m-1" @click="disableEditingReply"> Cancel</button>
+                    </div>
+                    <input class="btn btn-danger m-1" type="submit" value="Delete" @click="deleteReply(data.id)">
+                    <input class="btn btn-warning m-1" type="submit" value="Edit" @click="enableEditingReply(data)">
+                </div>
 
-      </div>
+            </div>
+        </div>
     </div>
-  </div>
 </template>
 
 <script>
@@ -158,9 +159,9 @@
 </script>
 
 <style scoped>
-  .post-list-item {
-    background-color: #f9f9f9;
-    border-left: 4px solid #e9e9e9;
-  }
+    .post-list-item {
+        background-color: #f9f9f9;
+        border-left: 4px solid #e9e9e9;
+    }
 </style>
 

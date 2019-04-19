@@ -52,5 +52,12 @@
 </script>
 
 <style scoped>
+  nav li:hover,
+  nav li.router-link-active,
+  nav li.router-link-exact-active {
+    text-decoration: underline;
+    text-align: center;
+    cursor: pointer;
 
+  }
 </style>
