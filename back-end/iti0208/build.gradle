@@ -15,15 +15,13 @@ repositories {
 }
 
 dependencies {
-    //classpath 'org.hidetake:gradle-ssh-plugin:1.1.4'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-jdbc'
     implementation 'org.springframework.boot:spring-boot-starter-data-rest'
     implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'com.auth0:java-jwt:3.4.0'
-    //implementation 'com.zaxxer:HikariCP'
-    //implementation 'org.springframework.boot:spring-boot-devtools'
+    implementation 'org.springframework.boot:spring-boot-starter-mail'
 
     compileOnly 'org.springframework.boot:spring-boot-configuration-processor'
     compileOnly 'org.projectlombok:lombok'
@@ -41,28 +39,30 @@ dependencies {
 }
 
 
+/*
 remotes {
     aws {
-        // todo change
-        host = '34.239.123.91' //'ec2-34-239-123-91.compute-1.amazonaws.com'
+        // Instance location!!!
+        host = '54.144.233.71' //'ec2-54-144-233-71.compute-1.amazonaws.com'
         user = 'ec2-user'
         identity = file("$rootDir/deploy/iti-0208-backend.pem")
     }
 }
-/*
+
+
 task copyToDeployFolder(type: Copy) {
     from "$buildDir/libs/iti0208-0.0.1-SNAPSHOT.jar"
     into "$rootDir/deploy"
 }
 
 task copyToAws(type: Exec) {
-    // todo change
+    // Instance location!!!
     commandLine "cmd", "/c", "scp -i $rootDir/deploy/iti-0208-backend.pem " +
             "$rootDir/deploy/iti0208-0.0.1-SNAPSHOT.jar " +
-            "ec2-user@ec2-34-239-123-91.compute-1.amazonaws.com:~/."
+            "ec2-user@ec2-54-144-233-71.compute-1.amazonaws.com:~/."
 }
 
-task deployInAws {
+task deployInAws() {
     ssh.run {
         session(remotes.aws) {
             execute 'nohup java -jar iti0208-0.0.1-SNAPSHOT.jar &'
