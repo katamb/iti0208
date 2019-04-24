@@ -3,7 +3,6 @@ package api.iti0208.config;
 import api.iti0208.security.JWTAuthenticationFilter;
 import api.iti0208.security.JWTAuthorizationFilter;
 import api.iti0208.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -40,6 +39,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/downloadFile/**").permitAll()
                 .antMatchers("/api/login").permitAll()
                 .antMatchers("/api/register").permitAll()
+                .antMatchers("/api/check").permitAll()
                 .antMatchers("/api/**").authenticated();
 
         http.addFilterAfter(new JWTAuthenticationFilter("/api/login", authenticationManager()),

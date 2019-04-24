@@ -1,20 +1,21 @@
 package api.iti0208.data.entity;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import javax.persistence.*;
 import java.util.*;
 
 @Entity
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
+@Table(name = "app_user")
 public class AppUser {
 
     @Id
@@ -24,23 +25,30 @@ public class AppUser {
     @Column(unique = true)
     private String username;
 
+    @Column(unique = true)
+    private String email;
+
+    @Column(name = "first_name")
     private String firstName;
 
+    @Column(name = "last_name")
     private String lastName;
-
-    private String email;
 
     private String password;
 
     @ElementCollection(fetch = FetchType.EAGER)
-    private List<GrantedAuthority> grantedAuthorities;
+    @Builder.Default
+    private List<GrantedAuthority> grantedAuthorities =
+            Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER"));
 
-    @OneToMany(mappedBy = "userId", cascade = CascadeType.ALL)
-    @LazyCollection(LazyCollectionOption.FALSE)
+    @OneToMany(mappedBy = "postedBy", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @Builder.Default
+    @JsonIgnore
     private Set<Post> userPosts = new HashSet<>();
 
-    @OneToMany(mappedBy = "userId", cascade = CascadeType.ALL)
-    @LazyCollection(LazyCollectionOption.FALSE)
+    @OneToMany(mappedBy = "postedBy", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @Builder.Default
+    @JsonIgnore
     private Set<Reply> userReplies = new HashSet<>();
 
     public AppUser(String username, String password, List<GrantedAuthority> grantedAuthorities) {

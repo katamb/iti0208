@@ -2,7 +2,7 @@ package api.iti0208.unit.repository;
 
 import api.iti0208.data.entity.AppUser;
 import api.iti0208.repository.UserRepository;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -14,7 +14,6 @@ import java.util.Collections;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
-@RunWith(SpringRunner.class)
 @DataJpaTest
 public class UserRepositoryTest {
 

@@ -25,22 +25,26 @@
         <div class="dropdown-menu dropdown-menu-right py-0">
           <div class="px-3 pt-3 login-dropdown">
 
-            <div class="form-group">
-              <input id="usernameInput" placeholder="Username" name="username"
-                     class="form-control form-control-sm custom-input" type="text"
-                     v-model="username" v-validate="{ required: true, min: 4, max: 128 }">
-              <div class="error" v-if="errors.has('username')">{{errors.first('username')}}</div>
-            </div>
+            <form @submit.prevent="logIn">
+              <div class="form-group">
+                <input id="usernameInput" placeholder="Username" name="username"
+                       class="form-control form-control-sm custom-input" type="text"
+                       v-model="username" v-validate="{ required: true, min: 4, max: 128 }"
+                       autocomplete="username">
+                <div class="error" v-if="errors.has('username')">{{errors.first('username')}}</div>
+              </div>
 
-            <div class="form-group">
-              <input id="passwordInput" placeholder="Password" name="password"
-                     class="form-control form-control-sm" type="password"
-                     v-model="password" v-validate="{ required: true, min: 6 }">
-              <div class="error" v-if="errors.has('password')">{{errors.first('password')}}</div>
-            </div>
-            <div class="form-group">
-              <button @click="logIn()" class="btn btn-primary btn-block">Login</button>
-            </div>
+              <div class="form-group">
+                <input id="passwordInput" placeholder="Password" name="password"
+                       class="form-control form-control-sm" type="password"
+                       v-model="password" v-validate="{ required: true, min: 6 }"
+                       autocomplete="new-password">
+                <div class="error" v-if="errors.has('password')">{{errors.first('password')}}</div>
+              </div>
+              <div class="form-group">
+                <button type="submit" class="btn btn-primary btn-block" name="login">Login</button>
+              </div>
+            </form>
 
             <div class="form-group text-center">
               <small>
@@ -107,7 +111,7 @@
             logout() {
                 this.loggedIn = false;
                 localStorage.removeItem("Authorization");
-                this.$router.push("/")
+                this.$router.push("/");
             }
         },
         mounted() {
@@ -116,10 +120,11 @@
                     .then(response => {
                         if (response.status === 200) {
                             this.loggedIn = true;
-                        } else {
-                            this.loggedIn = false;
-                            this.logout();
                         }
+                    })
+                    .catch(() => {
+                        this.loggedIn = false;
+                        this.logout();
                     });
             }
         }

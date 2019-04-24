@@ -4,9 +4,7 @@ import api.iti0208.data.entity.AppUser;
 import api.iti0208.data.entity.Post;
 import api.iti0208.data.entity.Reply;
 import api.iti0208.data.input.UserRegistrationInput;
-import api.iti0208.data.output.PublicUserInfo;
 import api.iti0208.exception.BadRequestException;
-import api.iti0208.exception.PageNotFoundException;
 import api.iti0208.repository.PostRepository;
 import api.iti0208.repository.ReplyRepository;
 import api.iti0208.repository.UserRepository;
@@ -44,8 +42,6 @@ public class UserServiceTest {
     @MockBean
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    // DON'T REMOVE postRepository and replyRepository beans, they seem unused,
-    // but are needed for the whole thing to compile
     @MockBean
     private PostRepository postRepository;
 
@@ -57,11 +53,12 @@ public class UserServiceTest {
 
     private UserService userService;
 
-    private AppUser testUser = new AppUser("testUser", "password",
-            Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER")));
+    private AppUser testUser;
 
     @Before
     public void setUp() {
+        testUser = new AppUser("testUser", "password",
+                Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER")));
         userService = new UserService(userRepository, bCryptPasswordEncoder);
 
         Mockito.when(userRepository.save(any(AppUser.class))).then(returnsFirstArg());
@@ -99,19 +96,6 @@ public class UserServiceTest {
     }
 
     @Test
-    public void testGetPublicInfo() {
-        PublicUserInfo user = userService.getPublicInfo("testUser");
-
-        assertEquals("testUser", user.getUsername());
-        assertNull(user.getEmail());
-    }
-
-    @Test(expected = PageNotFoundException.class)
-    public void testTryToGetPublicInfo() {
-        userService.getPublicInfo("tester");
-    }
-
-    @Test
     public void testGetUserPosts() {
         Set<Post> myPosts = new HashSet<>();
         Post post = new Post("testTitle", "test", "Varia");
@@ -125,7 +109,7 @@ public class UserServiceTest {
     @Test
     public void testGetUserReplies() {
         Set<Reply> myReplies = new HashSet<>();
-        Reply reply = new Reply("testReply", 1L);
+        Reply reply = new Reply(1L, "testReply", testUser);
         myReplies.add(reply);
         testUser.setUserReplies(myReplies);
 

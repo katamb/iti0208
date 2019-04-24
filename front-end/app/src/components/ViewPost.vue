@@ -4,21 +4,31 @@
       <div class="col-xl-7 col-lg-8 col-md-9 col-sm-11">
 
         <div class="post-item text-left p-3 mb-3">
-          <h3>{{response.title}}</h3>
-          <p>{{response.description}}</p>
-          <p v-if="response.rewardDescription">Reward for solving: {{response.rewardDescription}}</p>
-          <a v-if="response.fileLocation" v-bind:href=response.fileLocation>Extra information</a>
-          <p v-if="response.postedBy">
-            <small>
-              Posted by: {{response.postedBy}}
-            </small>
-          </p>
+          <div class="text-left">
+            <h3>{{response.title}}</h3>
+            <p>{{response.description}}</p>
+            <a v-if="response.fileLocation" v-bind:href=response.fileLocation>Download file with extra information</a>
+            <p v-if="response.rewardDescription" class="mt-2">Reward for solving: {{response.rewardDescription}}</p>
+            <p class="mt-2 mb-1">
+              <small>
+                Posted by: {{response.postedBy}}
+              </small>
+            </p>
+          </div>
+          <div v-if="response.canDelete" class="text-right">
+            <button class="btn btn-danger" @click="deletePost(response.id)">Delete post</button>
+          </div>
         </div>
 
-        <div class="post-item text-left p-2 mx-2 mb-2" v-for="answer in response.answers" :key='answer.id'>
-          <p class="font-weight-bolder" v-if="answer.postedBy">{{answer.postedBy}}:</p>
-          <p>{{answer.reply}}</p>
-          <a v-if="answer.fileLocation" v-bind:href=answer.fileLocation>Extra information</a>
+        <div class="post-item text-left p-2 mx-2 mb-2" v-for="answer in response.replies" :key='answer.id'>
+          <div class="text-left">
+            <p class="font-weight-bolder" v-if="answer.postedBy">{{answer.postedBy}}:</p>
+            <p class="mb-1">{{answer.reply}}</p>
+            <a v-if="answer.fileLocation" v-bind:href=answer.fileLocation>Extra information</a>
+          </div>
+          <div v-if="answer.canDelete" class="text-right">
+            <button class="btn btn-danger" @click="deleteReply(answer.id)">Delete reply</button>
+          </div>
         </div>
 
         <form class="my-3 p-2 reply-area" id="reply-form" @submit.prevent="replyInfo">
@@ -76,12 +86,34 @@
             },
             loadPost() {
                 apiRequests
-                    .getRequestToApi('/api/posts/' + this.$route.params.Pid)
+                    .getRequestToApiWithAuthorization('/api/posts/' + this.$route.params.Pid)
                     .then((response) => {
                         this.response = response.data;
                     })
                     .catch(() => {
                             errorHandling.errorMsgWithButton("This post no longer exists!")
+                        }
+                    );
+            },
+            deletePost(postId) {
+                apiRequests
+                    .deleteRequestWithAuthorization('/api/delete/post/' + postId)
+                    .then(() => {
+                        this.$router.push("/");
+                    })
+                    .catch(() => {
+                            errorHandling.errorMsgWithButton("Failed to delete this post!");
+                        }
+                    );
+            },
+            deleteReply(replyId) {
+                apiRequests
+                    .deleteRequestWithAuthorization('/api/delete/reply/' + replyId)
+                    .then(() => {
+                        this.loadPost();
+                    })
+                    .catch(() => {
+                            errorHandling.errorMsgWithButton("Failed to delete this reply!");
                         }
                     );
             },
