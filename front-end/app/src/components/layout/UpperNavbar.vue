@@ -2,11 +2,13 @@
   <nav class="p-2">
     <div class="text-right">
 
-      <router-link class="btn btn-dark mx-1" id="postProblems" tag="button" to="/addpost" v-if="loggedIn" exact>
+      <router-link class="btn btn-dark mx-1" id="postProblems" tag="button" to="/addpost" @click="checkToken"
+                   v-if="loggedIn" exact>
         Post a problem
       </router-link>
 
-      <router-link class="btn btn-dark mx-1" id="register" tag="button" to="/registration" v-if="!loggedIn" exact>
+      <router-link class="btn btn-dark mx-1" id="register" tag="button" to="/registration" @click="checkToken"
+                   v-if="!loggedIn" exact>
         Register
       </router-link>
 
@@ -19,7 +21,8 @@
       </button>
 
       <div class="dropdown" v-if="!loggedIn">
-        <button type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+        <button type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                aria-expanded="false"
                 class="btn btn-dark dropdown-toggle">Login
         </button>
         <div class="dropdown-menu dropdown-menu-right py-0">
@@ -56,6 +59,7 @@
 
           </div>
         </div>
+
       </div>
 
     </div>
@@ -65,6 +69,7 @@
 <script>
     import errorHandling from './../../javascript/errorHandling.js';
     import apiRequests from './../../javascript/apiRequests.js';
+    import VueJwtDecode from 'vue-jwt-decode';
 
     export default {
         name: "Login",
@@ -114,8 +119,39 @@
                 this.loggedIn = false;
                 localStorage.removeItem("Authorization");
                 this.$router.push("/");
+            },
+            checkToken() {
+                let token = localStorage.getItem('Authorization');
+                try {
+                    if (token === null) {
+                        this.loggedIn = false;
+                        this.$router.push("/");
+                    }
+                } catch (err) {
+                    this.loggedIn = false;
+                    this.$router.push("/");
+                }
             }
-        },
+
+        }
+        ,
+        beforeMount() {
+            let token = localStorage.getItem('Authorization');
+            if (token != null) {
+                try {
+                    let exp = (VueJwtDecode.decode(token)).get("exp");
+                    if (Date.now() / 1000 > exp - 259200000) {
+                        this.loggedIn = false;
+                        localStorage.removeItem("Authorization");
+                        this.$router.push("/");
+                    }
+                } catch (err) {
+                    this.loggedIn = false;
+                    this.$router.push("/");
+                }
+            }
+        }
+        ,
         mounted() {
             if (localStorage.getItem("Authorization") !== null) {
                 apiRequests.getRequestToApiWithAuthorization('/api/check')

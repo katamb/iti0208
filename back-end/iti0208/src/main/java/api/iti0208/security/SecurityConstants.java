@@ -7,3 +7,4 @@ public class SecurityConstants {
     public static final String HEADER_STRING = "Authorization";
     public static final long PASSWORD_RESET_TOKEN_EXPIRATION_TIME = 7_200_000; // 2 hours
 }
+
