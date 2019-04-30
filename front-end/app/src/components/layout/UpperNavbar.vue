@@ -32,7 +32,7 @@
               <div class="form-group">
                 <input id="usernameInput" placeholder="Username" name="username"
                        class="form-control form-control-sm custom-input" type="text"
-                       v-model="username" v-validate="{ required: true, min: 4, max: 128 }"
+                       v-model="username" data-vv-name="username" v-validate="{ required: true, min: 4, max: 128 }"
                        autocomplete="username">
                 <div class="error" v-if="errors.has('username')">{{errors.first('username')}}</div>
               </div>
@@ -40,7 +40,7 @@
               <div class="form-group">
                 <input id="passwordInput" placeholder="Password" name="password"
                        class="form-control form-control-sm" type="password"
-                       v-model="password" v-validate="{ required: true, min: 6 }"
+                       v-model="password" data-vv-name="password" v-validate="{ required: true, min: 6 }"
                        autocomplete="new-password">
                 <div class="error" v-if="errors.has('password')">{{errors.first('password')}}</div>
               </div>
