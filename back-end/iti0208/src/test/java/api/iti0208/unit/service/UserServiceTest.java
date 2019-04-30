@@ -8,14 +8,17 @@ import api.iti0208.exception.BadRequestException;
 import api.iti0208.repository.PostRepository;
 import api.iti0208.repository.ReplyRepository;
 import api.iti0208.repository.UserRepository;
+import api.iti0208.service.EmailService;
 import api.iti0208.service.UserService;
 import com.auth0.jwt.JWT;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -54,12 +57,14 @@ public class UserServiceTest {
     private UserService userService;
 
     private AppUser testUser;
+    @Autowired
+    private JavaMailSenderImpl mailSender;
 
     @Before
     public void setUp() {
         testUser = new AppUser("testUser", "password",
                 Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER")));
-        userService = new UserService(userRepository, bCryptPasswordEncoder);
+        userService = new UserService(userRepository, new EmailService(mailSender), bCryptPasswordEncoder);
 
         Mockito.when(userRepository.save(any(AppUser.class))).then(returnsFirstArg());
         Mockito.when(userRepository.findByUsername("testUser")).thenReturn(testUser);
