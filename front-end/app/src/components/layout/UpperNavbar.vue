@@ -1,5 +1,4 @@
 <template>
-<<<<<<< HEAD
     <nav class="p-2">
         <div class="text-right">
 
