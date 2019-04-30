@@ -1,4 +1,5 @@
 <template>
+<<<<<<< HEAD
     <nav class="p-2">
         <div class="text-right">
 
@@ -51,12 +52,15 @@
 
                         <div class="form-group text-center">
                             <small>
-                                <a href="#" data-toggle="modal">Forgot password?</a>
+                              <router-link id="forgotPassword" tag="a" to="/forgotPassword" exact>
+                                Forgot password?
+                              </router-link>
                             </small>
                         </div>
 
                     </div>
                 </div>
+
             </div>
 
         </div>

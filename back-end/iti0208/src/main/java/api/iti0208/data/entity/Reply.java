@@ -18,6 +18,7 @@ public class Reply {
     @GeneratedValue
     private Long id;
 
+    @Column(columnDefinition = "TEXT")
     private String reply;
 
     @Column(name = "file_location")

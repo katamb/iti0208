@@ -3,6 +3,8 @@ package api.iti0208.service;
 import api.iti0208.data.entity.Post;
 import api.iti0208.data.entity.Reply;
 import api.iti0208.data.entity.AppUser;
+import api.iti0208.data.input.ForgotPasswordInput;
+import api.iti0208.data.input.ResetPasswordInput;
 import api.iti0208.data.input.UserRegistrationInput;
 import api.iti0208.exception.BadRequestException;
 import api.iti0208.exception.PageNotFoundException;
@@ -20,17 +22,19 @@ import org.springframework.stereotype.Service;
 
 import java.util.*;
 
-import static api.iti0208.security.SecurityConstants.SECRET;
-import static api.iti0208.security.SecurityConstants.TOKEN_PREFIX;
+import static api.iti0208.security.SecurityConstants.*;
 
 @Service
 public class UserService implements UserDetailsService {
 
     private final UserRepository userRepository;
+    private final EmailService emailService;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public UserService(UserRepository userRepository, BCryptPasswordEncoder bCryptPasswordEncoder) {
+    public UserService(UserRepository userRepository,
+                       EmailService emailService, BCryptPasswordEncoder bCryptPasswordEncoder) {
         this.userRepository = userRepository;
+        this.emailService = emailService;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
@@ -96,5 +100,53 @@ public class UserService implements UserDetailsService {
         }
 
         return new User(appUser.getUsername(), appUser.getPassword(), appUser.getGrantedAuthorities());
+    }
+
+    public AppUser getUserByResetToken(String resetToken) {
+        Optional<AppUser> user = userRepository.findByResetToken(resetToken);
+        if (user.isPresent()) {
+            return user.get();
+
+        }
+        throw new BadRequestException("This token is not valid anymore!");
+    }
+
+    public void forgotPassword(ForgotPasswordInput forgotPasswordInput, String frontEndAddress) {
+        AppUser user = userRepository.findByUsername(forgotPasswordInput.getUsername());
+        if (user == null) {
+            throw new BadRequestException("User with this username does not exist!");
+        }
+        if (user.getEmail() == null) {
+            throw new BadRequestException("This user has no email registered!");
+        }
+        String token = createPasswordResetTokenForUser(user);
+        emailService.sendResetTokenEmail(frontEndAddress, token, user);
+    }
+
+    private String createPasswordResetTokenForUser(AppUser user) {
+        String token = UUID.randomUUID().toString();
+        userRepository.addPasswordResetTokenAndDate(user.getId(), token, new Date());
+        return token;
+    }
+
+    public void resetPassword(ResetPasswordInput forgotPasswordInput) {
+        String token = forgotPasswordInput.getToken();
+        if (token == null || token.length() == 0) {
+            throw new BadRequestException("This token is not valid!");
+        }
+        Optional<AppUser> userOptional = userRepository.findByResetToken(token);
+        if (!userOptional.isPresent()) {
+            throw new BadRequestException("This token is not valid!");
+        }
+        AppUser user = userOptional.get();
+
+        // Valid for two hours
+        Calendar cal = Calendar.getInstance();
+        if (((user.getResetTokenCreationDate().getTime() + PASSWORD_RESET_TOKEN_EXPIRATION_TIME) -
+                cal.getTime().getTime()) <= 0) {
+            throw new BadRequestException("This token is not valid!");
+        }
+
+        userRepository.changePassword(user.getId(), bCryptPasswordEncoder.encode(forgotPasswordInput.getNewPassword()));
     }
 }
