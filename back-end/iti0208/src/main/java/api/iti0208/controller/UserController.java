@@ -38,6 +38,7 @@ public class UserController {
         try {
             if (header != null) {
                 userService.getUsernameFromJwt(header);
+
             }
         } catch (JWTVerificationException decodeException) {
             throw new BadRequestException("User is not logged in!");
