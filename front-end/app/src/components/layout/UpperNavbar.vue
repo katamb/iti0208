@@ -22,27 +22,24 @@
 
       <div class="dropdown" v-if="!loggedIn">
         <button type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
-                aria-expanded="false"
-                class="btn btn-dark dropdown-toggle">Login
+                aria-expanded="false" class="btn btn-dark dropdown-toggle">Login
         </button>
         <div class="dropdown-menu dropdown-menu-right py-0">
           <div class="px-3 pt-3 login-dropdown">
 
             <form @submit.prevent="logIn">
               <div class="form-group">
-                <input id="usernameInput" placeholder="Username" name="username"
+                <input id="usernameInput" placeholder="Username" name="loginUsername"
                        class="form-control form-control-sm custom-input" type="text"
-                       v-model="username" data-vv-name="username" v-validate="{ required: true, min: 4, max: 128 }"
+                       v-model="loginUsername"
                        autocomplete="username">
-                <div class="error" v-if="errors.has('username')">{{errors.first('username')}}</div>
               </div>
 
               <div class="form-group">
-                <input id="passwordInput" placeholder="Password" name="password"
+                <input id="passwordInput" placeholder="Password" name="loginPassword"
                        class="form-control form-control-sm" type="password"
-                       v-model="password" data-vv-name="password" v-validate="{ required: true, min: 6 }"
+                       v-model="loginPassword"
                        autocomplete="new-password">
-                <div class="error" v-if="errors.has('password')">{{errors.first('password')}}</div>
               </div>
               <div class="form-group">
                 <button type="submit" class="btn btn-primary btn-block" name="login">Login</button>
@@ -59,9 +56,7 @@
 
           </div>
         </div>
-
       </div>
-
     </div>
   </nav>
 </template>
@@ -75,8 +70,8 @@
         name: "Login",
         data() {
             return {
-                username: '',
-                password: '',
+                loginUsername: '',
+                loginPassword: '',
                 loggedIn: false,
             };
         },
@@ -84,36 +79,22 @@
             logIn() {
                 apiRequests
                     .postRequestToApi('/api/login', {
-                        username: this.username,
-                        password: this.password
+                        username: this.loginUsername,
+                        password: this.loginPassword
                     })
                     .then((response) => {
-                        if (response.status === 200) {
-                            localStorage.setItem("Authorization", response.headers.authorization);
-                            this.loggedIn = true;
-                            this.resetFields();
-                            errorHandling.successMsg("You are logged in!", 1000);
-                        } else {
-                            errorHandling.errorMsg("Wrong username or password, try again!", 1000);
-                        }
+                        localStorage.setItem("Authorization", response.headers.authorization);
+                        this.resetFields();
+                        this.loggedIn = true;
+                        errorHandling.successMsg("You are logged in!", 1000);
                     })
                     .catch(() => {
                         errorHandling.errorMsg("Wrong username or password, try again!", 1200);
                     });
             },
             resetFields() {
-                this.username = '';
-                this.password = '';
-                this.$nextTick(() => this.$validator.reset());
-            },
-            processForm() {
-                this.$validator.validate().then(valid => {
-                    if (valid) {
-                        this.logIn();
-                    } else {
-                        alert("Failed to submit the form!");
-                    }
-                });
+                this.loginUsername = '';
+                this.loginPassword = '';
             },
             logout() {
                 this.loggedIn = false;
@@ -133,8 +114,7 @@
                 }
             }
 
-        }
-        ,
+        },
         beforeMount() {
             let token = localStorage.getItem('Authorization');
             if (token != null) {
@@ -150,8 +130,7 @@
                     this.$router.push("/");
                 }
             }
-        }
-        ,
+        },
         mounted() {
             if (localStorage.getItem("Authorization") !== null) {
                 apiRequests.getRequestToApiWithAuthorization('/api/check')
