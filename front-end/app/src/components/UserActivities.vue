@@ -61,7 +61,6 @@
                     })
                     .catch(() => {
                             localStorage.removeItem("Authorization");
-                            alert(localStorage.removeItem("Authorization"));
                         this.$router.push("/");
                         }
                     );
@@ -72,7 +71,6 @@
                     })
                     .catch(() => {
                             localStorage.removeItem("Authorization");
-                            alert(localStorage.removeItem("Authorization"));
                         this.$router.push("/");
                         }
                     );
@@ -86,7 +84,6 @@
                     .catch(() => {
                             errorHandling.errorMsgWithButton("Failed to delete this post!");
                             localStorage.removeItem("Authorization");
-                            alert(localStorage.removeItem("Authorization"));
                         this.$router.push("/");
                         }
                     );
