@@ -4,7 +4,7 @@
     <div class="row justify-content-center">
       <div class="col-xl-7 col-lg-8 col-md-9 col-sm-11">
 
-                <h2 class="my-2">My Posts</h2>
+        <h2 class="my-2">My Posts</h2>
 
         <div class="post-list-item my-2 p-2 text-left" v-for="(data, index) in userPosts" :key='data.id'>
           <h3>{{data.title}}</h3>
@@ -21,16 +21,18 @@
             <button class="btn btn-secondary m-1" @click="disableEditingPost" v-bind:id="data.title + 5">Cancel</button>
           </div>
           <button class="btn btn-danger m-1" type="submit" v-bind:id="data.title + 1"
-                  @click="deletePost(data.id)">Delete</button>
+                  @click="deletePost(data.id)">Delete
+          </button>
           <button class="btn btn-warning m-1" type="submit" v-bind:id="data.title"
-                  @click="enableEditingPost(data)">Edit</button>
+                  @click="enableEditingPost(data)">Edit
+          </button>
         </div>
 
-                <h2 class="my-2">My Replies</h2>
+        <h2 class="my-2">My Replies</h2>
 
-                <div class="post-list-item my-2 p-2 text-left" v-for="(data, index) in userReplies" :key='data.id'>
-                    <p>{{data.reply}}</p>
-                    <div class="form-group mx-4 mb-2" v-if="editingReply === data.id">
+        <div class="post-list-item my-2 p-2 text-left" v-for="(data, index) in userReplies" :key='data.id'>
+          <p>{{data.reply}}</p>
+          <div class="form-group mx-4 mb-2" v-if="editingReply === data.id">
             <textarea class="form-control mb-2" rows="3" name="newReply"
                       v-model="tempValue" v-validate="{ required: true, min: 5 }"></textarea>
             <div class="error" v-if="errors.has('newReply')">{{errors.first('newReply')}}</div>
@@ -41,9 +43,9 @@
           <button class="btn btn-warning m-1" type="submit" @click="enableEditingReply(data)">Edit</button>
         </div>
 
-            </div>
-        </div>
+      </div>
     </div>
+  </div>
 </template>
 
 <script>
@@ -61,7 +63,7 @@
                     })
                     .catch(() => {
                             localStorage.removeItem("Authorization");
-                        this.$router.push("/");
+                            this.$router.push("/");
                         }
                     );
                 apiRequests
@@ -71,7 +73,7 @@
                     })
                     .catch(() => {
                             localStorage.removeItem("Authorization");
-                        this.$router.push("/");
+                            this.$router.push("/");
                         }
                     );
             },
@@ -84,7 +86,7 @@
                     .catch(() => {
                             errorHandling.errorMsgWithButton("Failed to delete this post!");
                             localStorage.removeItem("Authorization");
-                        this.$router.push("/");
+                            this.$router.push("/");
                         }
                     );
             },
@@ -176,9 +178,9 @@
 </script>
 
 <style scoped>
-    .post-list-item {
-        background-color: #f9f9f9;
-        border-left: 4px solid #e9e9e9;
-    }
+  .post-list-item {
+    background-color: #f9f9f9;
+    border-left: 4px solid #e9e9e9;
+  }
 </style>
 
