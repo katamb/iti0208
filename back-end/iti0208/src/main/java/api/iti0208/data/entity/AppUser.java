@@ -36,6 +36,12 @@ public class AppUser {
 
     private String password;
 
+    @Column(name = "reset_token")
+    private String resetToken;
+
+    @Column(name = "reset_token_creation_date")
+    private Date resetTokenCreationDate;
+
     @ElementCollection(fetch = FetchType.EAGER)
     @Builder.Default
     private List<GrantedAuthority> grantedAuthorities =

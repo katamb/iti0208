@@ -5,6 +5,8 @@ import ViewPost from './components/ViewPost.vue'
 import Registration from './components/Registration.vue'
 import UserActivities from './components/UserActivities.vue'
 import ViewPosts from '@/components/ViewPosts.vue'
+import ForgotPassword from '@/components/ForgotPassword.vue'
+import ResetPassword from '@/components/ResetPassword.vue'
 
 
 Vue.use(Router);
@@ -70,6 +72,16 @@ export default new Router({
             path: '/userActivities',
             name: 'userActivities',
             component: UserActivities
+        },
+        {
+            path: '/forgotPassword',
+            name: 'forgotPassword',
+            component: ForgotPassword
+        },
+        {
+            path: '/resetPassword',
+            name: 'resetPassword',
+            component: ResetPassword
         }
     ]
 })
