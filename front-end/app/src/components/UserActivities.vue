@@ -58,12 +58,24 @@
                     .getRequestToApiWithAuthorization('/api/usersPosts')
                     .then((response) => {
                         this.userPosts = response.data;
-                    });
+                    })
+                    .catch(() => {
+                            localStorage.removeItem("Authorization");
+                            alert(localStorage.removeItem("Authorization"));
+                        this.$router.push("/");
+                        }
+                    );
                 apiRequests
                     .getRequestToApiWithAuthorization('/api/usersReplies')
                     .then((response) => {
                         this.userReplies = response.data;
-                    });
+                    })
+                    .catch(() => {
+                            localStorage.removeItem("Authorization");
+                            alert(localStorage.removeItem("Authorization"));
+                        this.$router.push("/");
+                        }
+                    );
             },
             deletePost(postId) {
                 apiRequests
@@ -72,7 +84,10 @@
                         this.loadUserActivities();
                     })
                     .catch(() => {
-                            errorHandling.errorMsgWithButton("Failed to delete this post!")
+                            errorHandling.errorMsgWithButton("Failed to delete this post!");
+                            localStorage.removeItem("Authorization");
+                            alert(localStorage.removeItem("Authorization"));
+                        this.$router.push("/");
                         }
                     );
             },
@@ -156,7 +171,9 @@
             };
         },
         mounted() {
+
             this.loadUserActivities();
+
         }
     }
 </script>
