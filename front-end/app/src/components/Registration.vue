@@ -58,7 +58,7 @@
             <div class="error" v-if="errors.has('matchingPassword')">{{errors.first('matchingPassword')}}</div>
           </div>
 
-          <input class="btn btn-primary mb-3" type="submit" value="Submit">
+          <input class="btn btn-dark mb-3" type="submit" value="Submit">
         </form>
       </div>
     </div>

@@ -45,15 +45,17 @@
                                 <div class="error" v-if="errors.has('password')">{{errors.first('password')}}</div>
                             </div>
                             <div class="form-group">
-                                <button type="submit" class="btn btn-primary btn-block" name="login">Login</button>
+                                <button type="submit" class="btn btn-dark btn-block" name="login">Login</button>
                             </div>
                         </form>
 
-                        <div class="form-group text-center">
-                            <small>
-                                <a href="#" data-toggle="modal">Forgot password?</a>
-                            </small>
-                        </div>
+            <div class="form-group text-center">
+              <small>
+                <router-link id="forgotPassword" tag="a" to="/forgotPassword" exact>
+                  Forgot password?
+                </router-link>
+              </small>
+            </div>
 
                     </div>
                 </div>
