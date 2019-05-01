@@ -14,7 +14,6 @@ import org.springframework.web.filter.CorsFilter;
 
 import java.util.Arrays;
 import java.util.Collections;
-
 @SpringBootApplication
 @EnableConfigurationProperties({ FileStorageProperties.class })
 public class Iti0208Application {
@@ -22,6 +21,7 @@ public class Iti0208Application {
     public static void main(String[] args) {
         SpringApplication.run(Iti0208Application.class, args);
     }
+
 
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
@@ -46,7 +46,7 @@ public class Iti0208Application {
         // This allows us to expose the headers
         config.setExposedHeaders(Arrays.asList("Access-Control-Allow-Headers",
                 "Authorization, x-xsrf-token, Access-Control-Allow-Headers, Origin, Accept, X-Requested-With, " +
-                "Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers"));
+                        "Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers"));
         return bean;
     }
 }

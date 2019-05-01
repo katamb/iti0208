@@ -47,6 +47,7 @@ public class Post {
     @Builder.Default
     private List<Reply> answers = new LinkedList<>();
 
+
     @PrePersist
     protected void onCreate() {
         postedAt = new Date();
@@ -70,4 +71,6 @@ public class Post {
         this.topic = topic;
         this.description = description;
     }
+
+
 }

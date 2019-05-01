@@ -51,6 +51,9 @@ public class AppUser {
     @JsonIgnore
     private Set<Reply> userReplies = new HashSet<>();
 
+    @ManyToMany(mappedBy = "upVoters")
+    List<Reply> likes;
+
     public AppUser(String username, String password, List<GrantedAuthority> grantedAuthorities) {
         this.username = username;
         this.password = password;

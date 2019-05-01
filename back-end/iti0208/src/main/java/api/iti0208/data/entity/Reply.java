@@ -5,6 +5,8 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -37,6 +39,13 @@ public class Reply {
     @ManyToOne(fetch = FetchType.EAGER)
     private AppUser postedBy;
 
+    @ManyToMany(fetch = FetchType.LAZY,
+            cascade = {
+                    CascadeType.PERSIST,
+                    CascadeType.MERGE
+            })
+    private List<AppUser> upVoters = new LinkedList<>();
+
     @PrePersist
     protected void onCreate() {
         postedAt = new Date();
@@ -58,5 +67,14 @@ public class Reply {
         this.reply = reply;
         this.post = post;
         this.postedBy = postedBy;
+    }
+
+    public boolean addUpVoter(AppUser user) {
+
+        if (!upVoters.contains(user)) {
+            return upVoters.add(user);
+        }
+
+        return false;
     }
 }

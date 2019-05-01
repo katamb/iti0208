@@ -72,6 +72,23 @@ public class ReplyService {
         throw new BadRequestException("Problem updating Your reply!");
     }
 
+    public ReplyDetails upvote(Long id, String header) {
+
+        String username = getUsernameFromJwtToken(header);
+        Optional<Reply> reply = replyRepo.findById(id);
+        if (reply.isPresent() && username != null) {
+            AppUser user = userRepo.findByUsername(username);
+            Reply upVotedReply = reply.get();
+            upVotedReply.addUpVoter(user);
+            replyRepo.save(upVotedReply);
+            return mapper.replyToReplyDetails(replyRepo.findById(id).get(), user);
+
+        }
+
+        throw new BadRequestException("Problem upvoting this reply!");
+
+    }
+
     public String findUsernameOfReplier(Long id) {
         Optional<Reply> reply = replyRepo.findById(id);
         if (reply.isPresent()) {

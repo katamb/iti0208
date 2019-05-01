@@ -26,6 +26,12 @@ public class ReplyController {
         return replyService.save(item, header);
     }
 
+    @PostMapping("api/upvote/{id}")
+    public ReplyDetails upvote(@PathVariable Long id, @RequestHeader(value = HEADER_STRING) String header) {
+        System.out.println("UPVOTING!");
+        return replyService.upvote(id, header);
+    }
+
     @DeleteMapping("api/delete/reply/{id}")
     @PreAuthorize("@replyService.findUsernameOfReplier(#id) == authentication.name || hasAuthority('ROLE_ADMIN')")
     public void delete(@PathVariable Long id) {

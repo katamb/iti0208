@@ -67,6 +67,7 @@ public class EntityToOutputObjectMapper {
         replyDetails.setFileLocation(reply.getFileLocation());
         replyDetails.setPostedAt(reply.getPostedAt());
         replyDetails.setPostedBy(reply.getPostedBy().getUsername());
+        replyDetails.setUpVoters(reply.getUpVoters());
 
         if (currentUser != null) {
             if (currentUser.getUsername().equals(replyDetails.getPostedBy())) {
@@ -74,6 +75,10 @@ public class EntityToOutputObjectMapper {
             }
             if (currentUser.getGrantedAuthorities().contains(new SimpleGrantedAuthority("ROLE_ADMIN"))) {
                 replyDetails.setCanDelete(true);
+            }
+            if (!replyDetails.getUpVoters().contains(currentUser)) {
+                replyDetails.setCanUpVote(true);
+
             }
         } else {
             replyDetails.setCanDelete(false);

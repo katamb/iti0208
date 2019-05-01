@@ -24,10 +24,14 @@
           <div class="text-left">
             <p class="font-weight-bolder" v-if="answer.postedBy">{{answer.postedBy}}:</p>
             <p class="mb-1">{{answer.reply}}</p>
+
             <a v-if="answer.fileLocation" v-bind:href=answer.fileLocation>Extra information</a>
           </div>
           <div v-if="answer.canDelete" class="text-right">
             <button class="btn btn-danger" @click="deleteReply(answer.id)">Delete reply</button>
+          </div>
+          <div v-if="answer.canUpVote" class="text-right">
+          <button class="btn btn-danger" @click="upvoteReply(answer.id)">Upvote</button>
           </div>
         </div>
 
@@ -117,6 +121,19 @@
                         }
                     );
             },
+          upvoteReply(replyId) {
+            apiRequests
+                    .postRequestToApiWithAuthorization('/api/upvote/' + replyId)
+                    .then(() => {
+                      this.loadPost();
+                    })
+                            .catch(() => {
+                                      errorHandling.errorMsgWithButton("Failed to upvote this post!");
+                                    }
+                            );
+
+          },
+
             postReply() {
                 apiRequests
                     .postRequestToApiWithAuthorization('/api/add/reply', {
@@ -162,8 +179,10 @@
                         errorHandling.errorMsg("Form wasn't filled in properly!!", 1200)
                     }
                 })
-            }
+            },
+
         },
+
         mounted() {
             this.loadPost();
         }
