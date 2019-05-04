@@ -60,12 +60,8 @@ public class ReplyServiceTest {
                 Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER")));
 
         replyService = new ReplyService(replyRepository, userRepository, postRepository, new EntityToOutputObjectMapper());
-        Reply fullReply = new Reply(12L, "test", "", new Date(), new Date(),
-                null, testUser, null);
-
-
-
-
+        Reply fullReply = new Reply(12L, "test", "", false, new Date(), new Date(),
+                null, testUser);
 
         Mockito.when(replyRepository.save(any(Reply.class))).thenReturn(fullReply);
         Mockito.when(userRepository.findByUsername(any(String.class))).thenReturn(testUser);

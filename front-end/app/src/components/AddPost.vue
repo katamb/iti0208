@@ -30,9 +30,9 @@
           <div class="form-group text-left">
             <label for="description">Description:</label>
             <textarea class="form-control" id="description" rows="3"
-                      name="description" placeholder="Description"
-                      v-model="description" v-validate="{ required: true, min: 5 }"
-            ></textarea>
+                      name="description" placeholder="Description" onkeydown="{if(event.keyCode === 13) return false;}"
+                      v-model="description" v-validate="{ required: true, min: 5 }">
+            </textarea>
             <div class="error" v-if="errors.has('description')">{{errors.first('description')}}</div>
           </div>
 

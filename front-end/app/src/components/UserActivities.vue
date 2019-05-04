@@ -1,5 +1,4 @@
 <template>
-
   <div class="container-fluid">
     <div class="row justify-content-center">
       <div class="col-xl-7 col-lg-8 col-md-9 col-sm-11">
@@ -62,8 +61,8 @@
                         this.userPosts = response.data;
                     })
                     .catch(() => {
-                            localStorage.removeItem("Authorization");
-                            this.$router.push("/");
+                            //localStorage.removeItem("Authorization");
+                            //this.$router.push("/");
                         }
                     );
                 apiRequests
@@ -72,8 +71,8 @@
                         this.userReplies = response.data;
                     })
                     .catch(() => {
-                            localStorage.removeItem("Authorization");
-                            this.$router.push("/");
+                            //localStorage.removeItem("Authorization");
+                            //this.$router.push("/");
                         }
                     );
             },
@@ -84,9 +83,9 @@
                         this.loadUserActivities();
                     })
                     .catch(() => {
-                            errorHandling.errorMsgWithButton("Failed to delete this post!");
-                            localStorage.removeItem("Authorization");
-                            this.$router.push("/");
+                            //errorHandling.errorMsgWithButton("Failed to delete this post!");
+                            //localStorage.removeItem("Authorization");
+                            //this.$router.push("/");
                         }
                     );
             },
@@ -170,9 +169,7 @@
             };
         },
         mounted() {
-
             this.loadUserActivities();
-
         }
     }
 </script>

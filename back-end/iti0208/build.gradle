@@ -22,6 +22,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'com.auth0:java-jwt:3.4.0'
     implementation 'org.springframework.boot:spring-boot-starter-mail'
+    implementation 'com.zaxxer:HikariCP'
 
     compileOnly 'org.springframework.boot:spring-boot-configuration-processor'
     compileOnly 'org.projectlombok:lombok'
@@ -43,7 +44,7 @@ dependencies {
 remotes {
     aws {
         // Instance location!!!
-        host = '54.144.233.71' //'ec2-54-144-233-71.compute-1.amazonaws.com'
+        host = '54.165.247.85' //'ec2-54-144-233-71.compute-1.amazonaws.com'
         user = 'ec2-user'
         identity = file("$rootDir/deploy/iti-0208-backend.pem")
     }
@@ -59,7 +60,7 @@ task copyToAws(type: Exec) {
     // Instance location!!!
     commandLine "cmd", "/c", "scp -i $rootDir/deploy/iti-0208-backend.pem " +
             "$rootDir/deploy/iti0208-0.0.1-SNAPSHOT.jar " +
-            "ec2-user@ec2-54-144-233-71.compute-1.amazonaws.com:~/."
+            "ec2-user@ec2-54-165-247-85.compute-1.amazonaws.com:~/."
 }
 
 task deployInAws() {

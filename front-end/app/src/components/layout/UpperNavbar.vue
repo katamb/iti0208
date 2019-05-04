@@ -103,30 +103,20 @@
             },
             checkToken() {
                 let token = localStorage.getItem('Authorization');
-                try {
-                    if (token === null) {
-                        this.loggedIn = false;
-                        this.$router.push("/");
-                    }
-                } catch (err) {
+                if (token === null || token === undefined) {
                     this.loggedIn = false;
                     this.$router.push("/");
                 }
             }
-
         },
         beforeMount() {
             let token = localStorage.getItem('Authorization');
-            if (token != null) {
-                try {
-                    let exp = (VueJwtDecode.decode(token)).get("exp");
-                    if (Date.now() / 1000 > exp - 259200000) {
-                        this.loggedIn = false;
-                        localStorage.removeItem("Authorization");
-                        this.$router.push("/");
-                    }
-                } catch (err) {
+            if (token !== null && token !== undefined) {
+                let tokenString = token.split("Bearer ")[1];
+                let exp = (VueJwtDecode.decode(tokenString))["exp"];
+                if (Date.now() / 1000 > exp - 86400) {
                     this.loggedIn = false;
+                    localStorage.removeItem("Authorization");
                     this.$router.push("/");
                 }
             }

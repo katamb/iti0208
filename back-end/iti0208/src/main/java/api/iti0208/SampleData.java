@@ -41,13 +41,6 @@ public class SampleData implements CommandLineRunner {
         );
         userRepository.save(au);
 
-        userRepository.save(
-                new AppUser("user_hacks",
-                        "$2a$10$x8gop7p3ZXKeqMUQLh/i8OsMDcZz9iLw8Cmx/UEhCpkhpZgoDG0Cy",
-                        Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER"))
-                )
-        );
-
         String filler = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has " +
                 "been the industry's standard dummy text ever since the 1500s, when an unknown printer took a";
 
@@ -89,8 +82,6 @@ public class SampleData implements CommandLineRunner {
                 .forEach(title -> postRepository.save(
                         new Post(title.get(0), title.get(2), title.get(1), au)
                 ));
-
-        //postRepository.findAll().forEach(System.out::println);
 
     }
 }
