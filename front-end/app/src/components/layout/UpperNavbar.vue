@@ -2,11 +2,13 @@
   <nav class="p-2">
     <div class="text-right">
 
-      <router-link class="btn btn-dark mx-1" id="postProblems" tag="button" to="/addpost" v-if="loggedIn" exact>
+      <router-link class="btn btn-dark mx-1" id="postProblems" tag="button" to="/addpost" @click="checkToken"
+                   v-if="loggedIn" exact>
         Post a problem
       </router-link>
 
-      <router-link class="btn btn-dark mx-1" id="register" tag="button" to="/registration" v-if="!loggedIn" exact>
+      <router-link class="btn btn-dark mx-1" id="register" tag="button" to="/registration" @click="checkToken"
+                   v-if="!loggedIn" exact>
         Register
       </router-link>
 
@@ -19,27 +21,25 @@
       </button>
 
       <div class="dropdown" v-if="!loggedIn">
-        <button type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                class="btn btn-dark dropdown-toggle">Login
+        <button type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                aria-expanded="false" class="btn btn-dark dropdown-toggle">Login
         </button>
         <div class="dropdown-menu dropdown-menu-right py-0">
           <div class="px-3 pt-3 login-dropdown">
 
             <form @submit.prevent="logIn">
               <div class="form-group">
-                <input id="usernameInput" placeholder="Username" name="username"
+                <input id="usernameInput" placeholder="Username" name="loginUsername"
                        class="form-control form-control-sm custom-input" type="text"
-                       v-model="username" v-validate="{ required: true, min: 4, max: 128 }"
+                       v-model="loginUsername"
                        autocomplete="username">
-                <div class="error" v-if="errors.has('username')">{{errors.first('username')}}</div>
               </div>
 
               <div class="form-group">
-                <input id="passwordInput" placeholder="Password" name="password"
+                <input id="passwordInput" placeholder="Password" name="loginPassword"
                        class="form-control form-control-sm" type="password"
-                       v-model="password" v-validate="{ required: true, min: 6 }"
+                       v-model="loginPassword"
                        autocomplete="new-password">
-                <div class="error" v-if="errors.has('password')">{{errors.first('password')}}</div>
               </div>
               <div class="form-group">
                 <button type="submit" class="btn btn-primary btn-block" name="login">Login</button>
@@ -48,14 +48,15 @@
 
             <div class="form-group text-center">
               <small>
-                <a href="#" data-toggle="modal">Forgot password?</a>
+                <router-link id="forgotPassword" tag="a" to="/forgotPassword" exact>
+                  Forgot password?
+                </router-link>
               </small>
             </div>
 
           </div>
         </div>
       </div>
-
     </div>
   </nav>
 </template>
@@ -63,13 +64,14 @@
 <script>
     import errorHandling from './../../javascript/errorHandling.js';
     import apiRequests from './../../javascript/apiRequests.js';
+    import VueJwtDecode from 'vue-jwt-decode';
 
     export default {
         name: "Login",
         data() {
             return {
-                username: '',
-                password: '',
+                loginUsername: '',
+                loginPassword: '',
                 loggedIn: false,
             };
         },
@@ -77,41 +79,56 @@
             logIn() {
                 apiRequests
                     .postRequestToApi('/api/login', {
-                        username: this.username,
-                        password: this.password
+                        username: this.loginUsername,
+                        password: this.loginPassword
                     })
                     .then((response) => {
-                        if (response.status === 200) {
-                            localStorage.setItem("Authorization", response.headers.authorization);
-                            this.loggedIn = true;
-                            this.resetFields();
-                            errorHandling.successMsg("You are logged in!", 1000);
-                        } else {
-                            errorHandling.errorMsg("Wrong username or password, try again!", 1000);
-                        }
+                        localStorage.setItem("Authorization", response.headers.authorization);
+                        this.resetFields();
+                        this.loggedIn = true;
+                        errorHandling.successMsg("You are logged in!", 1000);
                     })
                     .catch(() => {
                         errorHandling.errorMsg("Wrong username or password, try again!", 1200);
                     });
             },
             resetFields() {
-                this.username = '';
-                this.password = '';
-                this.$nextTick(() => this.$validator.reset());
-            },
-            processForm() {
-                this.$validator.validate().then(valid => {
-                    if (valid) {
-                        this.logIn();
-                    } else {
-                        alert("Failed to submit the form!");
-                    }
-                });
+                this.loginUsername = '';
+                this.loginPassword = '';
             },
             logout() {
                 this.loggedIn = false;
                 localStorage.removeItem("Authorization");
                 this.$router.push("/");
+            },
+            checkToken() {
+                let token = localStorage.getItem('Authorization');
+                try {
+                    if (token === null) {
+                        this.loggedIn = false;
+                        this.$router.push("/");
+                    }
+                } catch (err) {
+                    this.loggedIn = false;
+                    this.$router.push("/");
+                }
+            }
+
+        },
+        beforeMount() {
+            let token = localStorage.getItem('Authorization');
+            if (token != null) {
+                try {
+                    let exp = (VueJwtDecode.decode(token)).get("exp");
+                    if (Date.now() / 1000 > exp - 259200000) {
+                        this.loggedIn = false;
+                        localStorage.removeItem("Authorization");
+                        this.$router.push("/");
+                    }
+                } catch (err) {
+                    this.loggedIn = false;
+                    this.$router.push("/");
+                }
             }
         },
         mounted() {

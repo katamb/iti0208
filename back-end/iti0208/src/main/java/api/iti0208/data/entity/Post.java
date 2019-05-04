@@ -24,10 +24,14 @@ public class Post {
 
     private String title;
 
+    @Column(columnDefinition = "TEXT")
     private String description;
 
     @Column(name = "reward_description")
     private String rewardDescription;
+
+    @Column(name = "best_reply")
+    private Long bestReplyId;
 
     @Column(name = "file_location")
     private String fileLocation;

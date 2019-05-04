@@ -1,15 +1,17 @@
 package api.iti0208.controller;
 
+import api.iti0208.data.input.ForgotPasswordInput;
+import api.iti0208.data.input.ResetPasswordInput;
 import api.iti0208.data.input.UserRegistrationInput;
 import api.iti0208.data.entity.Post;
 import api.iti0208.data.entity.Reply;
 import api.iti0208.exception.BadRequestException;
 import api.iti0208.service.UserService;
-import com.auth0.jwt.exceptions.JWTDecodeException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.Comparator;
 import java.util.List;
@@ -36,10 +38,22 @@ public class UserController {
         try {
             if (header != null) {
                 userService.getUsernameFromJwt(header);
+
             }
         } catch (JWTVerificationException decodeException) {
             throw new BadRequestException("User is not logged in!");
         }
+    }
+
+    @PostMapping("api/forgotPassword")
+    public void forgotPassword(@RequestBody @Valid ForgotPasswordInput forgotPasswordInput,
+                               HttpServletRequest request) {
+        userService.forgotPassword(forgotPasswordInput, request.getHeader("referer"));
+    }
+
+    @PostMapping("api/resetPassword")
+    public void resetPassword(@RequestBody @Valid ResetPasswordInput forgotPasswordInput) {
+        userService.resetPassword(forgotPasswordInput);
     }
 
     @GetMapping("api/usersPosts")

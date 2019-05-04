@@ -19,6 +19,8 @@ public class PostDetails {
     private String fileLocation;
     private Date postedAt;
     private String postedBy;
+    private Long bestReplyId;
     private boolean canDelete;
+    private boolean canUnlock;
     private List<ReplyDetails> replies;
 }

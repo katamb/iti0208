@@ -56,6 +56,15 @@ public class PostController {
         return postService.savePost(item, header);
     }
 
+    @PostMapping("api/unlock/{id}")
+    @PreAuthorize("@postService.findUsernameOfPoster(#id) == authentication.name || hasAuthority('ROLE_ADMIN')")
+    public void unlock(@PathVariable Long id, @RequestHeader(value = HEADER_STRING) String header) {
+
+        postService.unlockPost(id, header);
+    }
+
+
+
     @DeleteMapping("api/delete/post/{id}")
     @PreAuthorize("@postService.findUsernameOfPoster(#id) == authentication.name || hasAuthority('ROLE_ADMIN')")
     public void delete(@PathVariable Long id) {

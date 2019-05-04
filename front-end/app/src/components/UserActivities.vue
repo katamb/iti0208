@@ -21,9 +21,11 @@
             <button class="btn btn-secondary m-1" @click="disableEditingPost" v-bind:id="data.title + 5">Cancel</button>
           </div>
           <button class="btn btn-danger m-1" type="submit" v-bind:id="data.title + 1"
-                  @click="deletePost(data.id)">Delete</button>
+                  @click="deletePost(data.id)">Delete
+          </button>
           <button class="btn btn-warning m-1" type="submit" v-bind:id="data.title"
-                  @click="enableEditingPost(data)">Edit</button>
+                  @click="enableEditingPost(data)">Edit
+          </button>
         </div>
 
         <h2 class="my-2">My Replies</h2>
@@ -58,12 +60,22 @@
                     .getRequestToApiWithAuthorization('/api/usersPosts')
                     .then((response) => {
                         this.userPosts = response.data;
-                    });
+                    })
+                    .catch(() => {
+                            localStorage.removeItem("Authorization");
+                            this.$router.push("/");
+                        }
+                    );
                 apiRequests
                     .getRequestToApiWithAuthorization('/api/usersReplies')
                     .then((response) => {
                         this.userReplies = response.data;
-                    });
+                    })
+                    .catch(() => {
+                            localStorage.removeItem("Authorization");
+                            this.$router.push("/");
+                        }
+                    );
             },
             deletePost(postId) {
                 apiRequests
@@ -72,7 +84,9 @@
                         this.loadUserActivities();
                     })
                     .catch(() => {
-                            errorHandling.errorMsgWithButton("Failed to delete this post!")
+                            errorHandling.errorMsgWithButton("Failed to delete this post!");
+                            localStorage.removeItem("Authorization");
+                            this.$router.push("/");
                         }
                     );
             },
@@ -156,7 +170,9 @@
             };
         },
         mounted() {
+
             this.loadUserActivities();
+
         }
     }
 </script>

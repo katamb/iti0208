@@ -17,7 +17,8 @@ public class ReplyDetails {
     private String fileLocation;
     private Date postedAt;
     private String postedBy;
-    private List<AppUser> upVoters;
+    private boolean bestAnswer;
     private boolean canDelete;
-    private boolean canUpVote;
+    private boolean canMarkAsBest;
+
 }

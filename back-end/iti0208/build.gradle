@@ -1,6 +1,7 @@
 plugins {
     id 'org.springframework.boot' version '2.1.2.RELEASE'
     id 'java'
+    id 'org.hidetake.ssh' version "2.10.1"
 }
 
 apply plugin: 'io.spring.dependency-management'
@@ -13,13 +14,6 @@ repositories {
     mavenCentral()
 }
 
-task cleanAndBuild{
-   dependsOn 'clean'
-    dependsOn 'build'
-}
-
-
-
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-jdbc'
@@ -27,11 +21,8 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'com.auth0:java-jwt:3.4.0'
-    //implementation 'com.zaxxer:HikariCP'
+    implementation 'org.springframework.boot:spring-boot-starter-mail'
 
-    //implementation 'org.springframework.boot:spring-boot-devtools'
-    
-    
     compileOnly 'org.springframework.boot:spring-boot-configuration-processor'
     compileOnly 'org.projectlombok:lombok'
 
@@ -46,3 +37,48 @@ dependencies {
     testCompile 'org.junit.jupiter:junit-jupiter-engine:5.2.0'
     testRuntime 'org.junit.jupiter:junit-jupiter-engine:5.2.0'
 }
+
+
+/*
+remotes {
+    aws {
+        // Instance location!!!
+        host = '54.144.233.71' //'ec2-54-144-233-71.compute-1.amazonaws.com'
+        user = 'ec2-user'
+        identity = file("$rootDir/deploy/iti-0208-backend.pem")
+    }
+}
+
+
+task copyToDeployFolder(type: Copy) {
+    from "$buildDir/libs/iti0208-0.0.1-SNAPSHOT.jar"
+    into "$rootDir/deploy"
+}
+
+task copyToAws(type: Exec) {
+    // Instance location!!!
+    commandLine "cmd", "/c", "scp -i $rootDir/deploy/iti-0208-backend.pem " +
+            "$rootDir/deploy/iti0208-0.0.1-SNAPSHOT.jar " +
+            "ec2-user@ec2-54-144-233-71.compute-1.amazonaws.com:~/."
+}
+
+task deployInAws() {
+    ssh.run {
+        session(remotes.aws) {
+            execute 'nohup java -jar iti0208-0.0.1-SNAPSHOT.jar &'
+        }
+    }
+}
+
+task deployBackend() {
+    dependsOn 'clean'
+    dependsOn 'build'
+    dependsOn 'copyToDeployFolder'
+    dependsOn 'copyToAws'
+    dependsOn 'deployInAws'
+    tasks.findByName('build').mustRunAfter 'clean'
+    tasks.findByName('copyToDeployFolder').mustRunAfter 'build'
+    tasks.findByName('copyToAws').mustRunAfter 'copyToDeployFolder'
+    tasks.findByName('deployInAws').mustRunAfter 'copyToAws'
+}
+*/

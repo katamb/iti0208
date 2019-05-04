@@ -7,6 +7,8 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.Ordered;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -14,6 +16,8 @@ import org.springframework.web.filter.CorsFilter;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Properties;
+
 @SpringBootApplication
 @EnableConfigurationProperties({ FileStorageProperties.class })
 public class Iti0208Application {
@@ -21,7 +25,6 @@ public class Iti0208Application {
     public static void main(String[] args) {
         SpringApplication.run(Iti0208Application.class, args);
     }
-
 
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
@@ -46,8 +49,26 @@ public class Iti0208Application {
         // This allows us to expose the headers
         config.setExposedHeaders(Arrays.asList("Access-Control-Allow-Headers",
                 "Authorization, x-xsrf-token, Access-Control-Allow-Headers, Origin, Accept, X-Requested-With, " +
-                        "Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers"));
+                "Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers"));
         return bean;
+    }
+
+    @Bean
+    public JavaMailSenderImpl getJavaMailSender() {
+        JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
+        mailSender.setHost("smtp.gmail.com");
+        mailSender.setPort(587);
+
+        mailSender.setUsername("teadust00d@gmail.com");
+        mailSender.setPassword("teadustoodegmail");     // FIXME: not a place to keep passwords
+
+        Properties props = mailSender.getJavaMailProperties();
+        props.put("mail.transport.protocol", "smtp");
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.starttls.enable", "true");
+        // props.put("mail.debug", "true");
+
+        return mailSender;
     }
 }
 

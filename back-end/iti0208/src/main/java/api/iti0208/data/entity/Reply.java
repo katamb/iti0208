@@ -20,10 +20,14 @@ public class Reply {
     @GeneratedValue
     private Long id;
 
+    @Column(columnDefinition = "TEXT")
     private String reply;
 
     @Column(name = "file_location")
     private String fileLocation;
+
+    @Column(name = "best_answer")
+    private boolean bestAnswer = false;
 
     @Column(name = "posted_at")
     private Date postedAt;
@@ -69,12 +73,5 @@ public class Reply {
         this.postedBy = postedBy;
     }
 
-    public boolean addUpVoter(AppUser user) {
 
-        if (!upVoters.contains(user)) {
-            return upVoters.add(user);
-        }
-
-        return false;
-    }
 }

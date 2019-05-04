@@ -2,6 +2,7 @@ package api.iti0208.service;
 
 import api.iti0208.data.entity.AppUser;
 import api.iti0208.data.entity.Post;
+import api.iti0208.data.entity.Reply;
 import api.iti0208.data.input.PostInput;
 import api.iti0208.data.output.PostDetails;
 import api.iti0208.data.output.PostListResponse;
@@ -10,6 +11,7 @@ import api.iti0208.exception.BadRequestException;
 import api.iti0208.exception.PageNotFoundException;
 import api.iti0208.mapper.EntityToOutputObjectMapper;
 import api.iti0208.repository.PostRepository;
+import api.iti0208.repository.ReplyRepository;
 import api.iti0208.repository.UserRepository;
 import com.auth0.jwt.exceptions.JWTDecodeException;
 import org.springframework.data.domain.Page;
@@ -28,10 +30,13 @@ public class PostService {
     private final PostRepository postRepository;
     private final UserRepository userRepository;
     private final EntityToOutputObjectMapper mapper;
+    private final ReplyRepository replyRepository;
 
-    public PostService(PostRepository postRepository, UserRepository userRepository, EntityToOutputObjectMapper mapper) {
+    public PostService(PostRepository postRepository, UserRepository userRepository, ReplyRepository replyRepository,
+                       EntityToOutputObjectMapper mapper) {
         this.postRepository = postRepository;
         this.userRepository = userRepository;
+        this.replyRepository = replyRepository;
         this.mapper = mapper;
     }
 
@@ -164,6 +169,36 @@ public class PostService {
     /**
      * Methods for authorization.
      */
+    public void unlockPost(Long id, String header) {
+
+        Optional<Post> postToUnlock = postRepository.findById(id);
+        String username = null;
+
+        if (header != null) {
+            username = getUsernameFromJwtToken(header);
+        }
+        if (username != null && postToUnlock.isPresent()) {
+
+            Post toBeUnlcoked = postToUnlock.get();
+
+            if (toBeUnlcoked.getPostedBy().getUsername().equals(username)) {
+
+                if (toBeUnlcoked.getBestReplyId() != null) {
+
+                  Optional<Reply> bestReply = replyRepository.findById(toBeUnlcoked.getBestReplyId());
+                  if (bestReply.isPresent()) {
+
+                      Reply oldBestReply = bestReply.get();
+                      oldBestReply.setBestAnswer(false);
+                      replyRepository.save(oldBestReply);
+                  }
+                }
+
+                toBeUnlcoked.setBestReplyId(null);
+                postRepository.save(toBeUnlcoked);
+            }
+        }
+    }
 
     public String findUsernameOfPoster(Long id) {
         return getPostItemById(id).getPostedBy().getUsername();

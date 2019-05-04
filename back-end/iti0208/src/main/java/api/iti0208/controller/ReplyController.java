@@ -26,10 +26,10 @@ public class ReplyController {
         return replyService.save(item, header);
     }
 
-    @PostMapping("api/upvote/{id}")
-    public ReplyDetails upvote(@PathVariable Long id, @RequestHeader(value = HEADER_STRING) String header) {
-        System.out.println("UPVOTING!");
-        return replyService.upvote(id, header);
+    @PostMapping("api/best_answer/{id}")
+    public ReplyDetails markAsBest(@PathVariable Long id, @RequestHeader(value = HEADER_STRING) String header) {
+        //System.out.println("Best Answer!");
+        return replyService.markAsBest(id, header);
     }
 
     @DeleteMapping("api/delete/reply/{id}")
