@@ -12,13 +12,16 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.util.List;
 
 @RestController
 public class FileController {
 
     private final FileStorageService fileStorageService;
 
+
     public FileController(FileStorageService fileStorageService) {
+
         this.fileStorageService = fileStorageService;
     }
 
@@ -32,6 +35,7 @@ public class FileController {
                 .toUriString();
 
         return new UploadFileResponse(fileName, fileDownloadUri, file.getContentType(), file.getSize());
+
     }
 
     @GetMapping("/api/downloadFile/{fileName}")
@@ -58,4 +62,6 @@ public class FileController {
                         "attachment; filename=\"" + resource.getFilename() + "\"")
                 .body(resource);
     }
+
+
 }

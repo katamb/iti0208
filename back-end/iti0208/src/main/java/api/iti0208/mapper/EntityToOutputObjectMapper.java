@@ -42,14 +42,22 @@ public class EntityToOutputObjectMapper {
         postDetails.setFileLocation(post.getFileLocation());
         postDetails.setPostedAt(post.getPostedAt());
         postDetails.setPostedBy(post.getPostedBy().getUsername());
+        postDetails.setBestReplyId(post.getBestReplyId());
+
 
         if (currentUser != null) {
             if (currentUser.getUsername().equals(postDetails.getPostedBy()) ||
                     currentUser.getGrantedAuthorities().contains(new SimpleGrantedAuthority("ROLE_ADMIN"))) {
                 postDetails.setCanDelete(true);
             }
-        } else {
+            if (currentUser.getUsername().equals(postDetails.getPostedBy())) {
+
+                postDetails.setCanUnlock(true);
+            }
+        }
+        else {
             postDetails.setCanDelete(false);
+            postDetails.setCanUnlock(false);
         }
 
         List<ReplyDetails> replyDetails = post.getAnswers().stream()
@@ -67,16 +75,25 @@ public class EntityToOutputObjectMapper {
         replyDetails.setFileLocation(reply.getFileLocation());
         replyDetails.setPostedAt(reply.getPostedAt());
         replyDetails.setPostedBy(reply.getPostedBy().getUsername());
+        replyDetails.setBestAnswer(reply.isBestAnswer());
 
         if (currentUser != null) {
             if (currentUser.getUsername().equals(replyDetails.getPostedBy())) {
                 replyDetails.setCanDelete(true);
+
             }
             if (currentUser.getGrantedAuthorities().contains(new SimpleGrantedAuthority("ROLE_ADMIN"))) {
                 replyDetails.setCanDelete(true);
             }
+
+            if (currentUser.getUsername().equals(reply.getPost().getPostedBy().getUsername())) {
+
+                replyDetails.setCanMarkAsBest(true);
+            }
+
         } else {
             replyDetails.setCanDelete(false);
+            replyDetails.setCanMarkAsBest(false);
         }
 
         return replyDetails;

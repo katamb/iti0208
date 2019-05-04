@@ -5,6 +5,8 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -24,6 +26,9 @@ public class Reply {
     @Column(name = "file_location")
     private String fileLocation;
 
+    @Column(name = "best_answer")
+    private boolean bestAnswer = false;
+
     @Column(name = "posted_at")
     private Date postedAt;
 
@@ -37,6 +42,13 @@ public class Reply {
 
     @ManyToOne(fetch = FetchType.EAGER)
     private AppUser postedBy;
+
+    @ManyToMany(fetch = FetchType.LAZY,
+            cascade = {
+                    CascadeType.PERSIST,
+                    CascadeType.MERGE
+            })
+    private List<AppUser> upVoters = new LinkedList<>();
 
     @PrePersist
     protected void onCreate() {
@@ -60,4 +72,6 @@ public class Reply {
         this.post = post;
         this.postedBy = postedBy;
     }
+
+
 }

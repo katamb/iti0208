@@ -72,6 +72,35 @@ public class ReplyService {
         throw new BadRequestException("Problem updating Your reply!");
     }
 
+    public ReplyDetails markAsBest(Long id, String header) {
+
+        String username = getUsernameFromJwtToken(header);
+        Optional<Reply> reply = replyRepo.findById(id);
+        if (reply.isPresent() && username != null) {
+            AppUser user = userRepo.findByUsername(username);
+            Reply bestReply = reply.get();
+            bestReply.setBestAnswer(true);
+            Post post = bestReply.getPost();
+
+            if (post.getBestReplyId() != null) {
+               Optional<Reply> oldBest = replyRepo.findById(post.getBestReplyId());
+               if (oldBest.isPresent()) {
+                   oldBest.get().setBestAnswer(false);
+                   replyRepo.save(oldBest.get());
+               }
+
+            }
+            post.setBestReplyId(id);
+            replyRepo.save(bestReply);
+            postRepo.save(post);
+            return mapper.replyToReplyDetails(replyRepo.findById(id).get(), user);
+
+        }
+
+        throw new BadRequestException("You cant mark this reply!");
+
+    }
+
     public String findUsernameOfReplier(Long id) {
         Optional<Reply> reply = replyRepo.findById(id);
         if (reply.isPresent()) {

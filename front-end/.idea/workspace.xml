@@ -2,7 +2,49 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4f666b65-6f46-4ee5-815d-2b6d945d32c4" name="Default Changelist" comment="Post validation">
+      <change afterPath="$PROJECT_DIR$/../back-end/iti0208/src/main/java/api/iti0208/data/input/ForgotPasswordInput.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../back-end/iti0208/src/main/java/api/iti0208/data/input/ResetPasswordInput.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../back-end/iti0208/src/main/java/api/iti0208/service/EmailService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../back-end/iti0208/src/main/resources/application-live.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/components/ForgotPassword.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/components/ResetPassword.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/iti0208/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../back-end/iti0208/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/iti0208/src/main/java/api/iti0208/Iti0208Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/../back-end/iti0208/src/main/java/api/iti0208/Iti0208Application.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/iti0208/src/main/java/api/iti0208/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/../back-end/iti0208/src/main/java/api/iti0208/config/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/iti0208/src/main/java/api/iti0208/controller/PostController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../back-end/iti0208/src/main/java/api/iti0208/controller/PostController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/iti0208/src/main/java/api/iti0208/controller/ReplyController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../back-end/iti0208/src/main/java/api/iti0208/controller/ReplyController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/iti0208/src/main/java/api/iti0208/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../back-end/iti0208/src/main/java/api/iti0208/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/iti0208/src/main/java/api/iti0208/data/entity/AppUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/../back-end/iti0208/src/main/java/api/iti0208/data/entity/AppUser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/iti0208/src/main/java/api/iti0208/data/entity/Post.java" beforeDir="false" afterPath="$PROJECT_DIR$/../back-end/iti0208/src/main/java/api/iti0208/data/entity/Post.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/iti0208/src/main/java/api/iti0208/data/entity/Reply.java" beforeDir="false" afterPath="$PROJECT_DIR$/../back-end/iti0208/src/main/java/api/iti0208/data/entity/Reply.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/iti0208/src/main/java/api/iti0208/data/input/UserRegistrationInput.java" beforeDir="false" afterPath="$PROJECT_DIR$/../back-end/iti0208/src/main/java/api/iti0208/data/input/UserRegistrationInput.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/iti0208/src/main/java/api/iti0208/data/output/PostDetails.java" beforeDir="false" afterPath="$PROJECT_DIR$/../back-end/iti0208/src/main/java/api/iti0208/data/output/PostDetails.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/iti0208/src/main/java/api/iti0208/data/output/ReplyDetails.java" beforeDir="false" afterPath="$PROJECT_DIR$/../back-end/iti0208/src/main/java/api/iti0208/data/output/ReplyDetails.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/iti0208/src/main/java/api/iti0208/mapper/EntityToOutputObjectMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/../back-end/iti0208/src/main/java/api/iti0208/mapper/EntityToOutputObjectMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/iti0208/src/main/java/api/iti0208/repository/PostRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../back-end/iti0208/src/main/java/api/iti0208/repository/PostRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/iti0208/src/main/java/api/iti0208/repository/ReplyRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../back-end/iti0208/src/main/java/api/iti0208/repository/ReplyRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/iti0208/src/main/java/api/iti0208/repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../back-end/iti0208/src/main/java/api/iti0208/repository/UserRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/iti0208/src/main/java/api/iti0208/security/JWTAuthenticationFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/../back-end/iti0208/src/main/java/api/iti0208/security/JWTAuthenticationFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/iti0208/src/main/java/api/iti0208/security/SecurityConstants.java" beforeDir="false" afterPath="$PROJECT_DIR$/../back-end/iti0208/src/main/java/api/iti0208/security/SecurityConstants.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/iti0208/src/main/java/api/iti0208/service/PostService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../back-end/iti0208/src/main/java/api/iti0208/service/PostService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/iti0208/src/main/java/api/iti0208/service/ReplyService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../back-end/iti0208/src/main/java/api/iti0208/service/ReplyService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/iti0208/src/main/java/api/iti0208/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../back-end/iti0208/src/main/java/api/iti0208/service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/iti0208/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../back-end/iti0208/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../back-end/iti0208/src/test/java/api/iti0208/unit/service/UserServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../back-end/iti0208/src/test/java/api/iti0208/unit/service/UserServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/app/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/package-lock.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/public/favicon.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/public/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/components/UserActivities.vue" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/components/UserActivities.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/components/ViewPost.vue" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/components/ViewPost.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/components/layout/Header.vue" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/components/layout/Header.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/components/layout/TopicNavbar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/components/layout/TopicNavbar.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/components/layout/UpperNavbar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/components/layout/UpperNavbar.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/router.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/router.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -27,46 +69,63 @@
   <component name="DefaultGradleProjectSettings">
     <option name="isMigrated" value="true" />
   </component>
+  <component name="FavoritesManager">
+    <favorites_list name="front-end" />
+  </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/components/AddPost.vue">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="13" column="54" selection-start-line="13" selection-start-column="54" selection-end-line="13" selection-end-column="54" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/components/UserActivities.vue">
+        <entry file="file://$PROJECT_DIR$/app/src/components/ViewPost.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="4" selection-start-line="4" selection-end-line="4" />
+            <state relative-caret-position="17">
+              <caret line="1" column="36" lean-forward="true" selection-start-line="1" selection-start-column="36" selection-end-line="1" selection-end-column="36" />
               <folding>
-                <element signature="e#2593#2648#0" expanded="true" />
+                <element signature="n#style#0;n#h5#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/components/Registration.vue">
+        <entry file="file://$PROJECT_DIR$/app/src/components/layout/Header.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="425">
-              <caret line="25" selection-start-line="25" selection-end-line="25" />
+            <state relative-caret-position="187">
+              <caret line="11" column="9" selection-start-line="11" selection-start-column="9" selection-end-line="11" selection-end-column="9" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/router.js">
+        <entry file="file://$PROJECT_DIR$/app/src/components/layout/Search.vue">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/App.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1190">
-              <caret line="70" column="28" selection-start-line="70" selection-start-column="28" selection-end-line="70" selection-end-column="28" />
+            <state relative-caret-position="102">
+              <caret line="6" column="10" selection-start-line="6" selection-start-column="10" selection-end-line="6" selection-end-column="10" />
               <folding>
-                <element signature="e#0#21#0" expanded="true" />
+                <element signature="e#137#189#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/components/layout/TopicNavbar.vue">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="10">
+              <caret line="3" column="53" selection-start-line="3" selection-start-column="53" selection-end-line="3" selection-end-column="53" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/components/layout/UpperNavbar.vue">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="119">
+              <caret line="7" column="20" selection-start-line="7" selection-start-column="20" selection-end-line="7" selection-end-column="20" />
             </state>
           </provider>
         </entry>
@@ -81,6 +140,11 @@
       </list>
     </option>
   </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>this.reply</find>
+    </findStrings>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
@@ -91,7 +155,6 @@
         <option value="$PROJECT_DIR$/app/package.json" />
         <option value="$PROJECT_DIR$/app/src/components/layout/Registration.vue" />
         <option value="$PROJECT_DIR$/app/src/components/Registration.vue" />
-        <option value="$PROJECT_DIR$/app/src/components/AddPost.vue" />
         <option value="$PROJECT_DIR$/app/src/components/unused/UserActivities.vue" />
         <option value="$PROJECT_DIR$/app/src/router.js" />
         <option value="$PROJECT_DIR$/app/src/components/layout/Login.vue" />
@@ -103,14 +166,24 @@
         <option value="$PROJECT_DIR$/app/cypress/integration/examples/testPosting.spec.js" />
         <option value="$PROJECT_DIR$/app/src/components/UserActivities.vue" />
         <option value="$PROJECT_DIR$/app/cypress/integration/examples/editMyPost.spec.js" />
+        <option value="$PROJECT_DIR$/app/src/App.vue" />
+        <option value="$PROJECT_DIR$/app/src/components/AddPost.vue" />
+        <option value="$PROJECT_DIR$/app/src/components/layout/TopicNavbar.vue" />
+        <option value="$PROJECT_DIR$/app/src/components/ViewPost.vue" />
       </list>
     </option>
   </component>
+  <component name="MavenProjectNavigator">
+    <treeState>
+      <expand />
+      <select />
+    </treeState>
+  </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="6" />
-    <option name="y" value="60" />
-    <option name="width" value="1349" />
-    <option name="height" value="730" />
+    <option name="x" value="680" />
+    <option name="y" value="32" />
+    <option name="width" value="1100" />
+    <option name="height" value="944" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -130,12 +203,60 @@
               <item name="front-end" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="front-end" type="b2602c69:ProjectViewProjectNode" />
+              <item name="front-end" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="public" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="front-end" type="b2602c69:ProjectViewProjectNode" />
+              <item name="front-end" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="front-end" type="b2602c69:ProjectViewProjectNode" />
+              <item name="front-end" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="assets" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="front-end" type="b2602c69:ProjectViewProjectNode" />
+              <item name="front-end" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="front-end" type="b2602c69:ProjectViewProjectNode" />
+              <item name="front-end" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+              <item name="layout" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="front-end" type="b2602c69:ProjectViewProjectNode" />
+              <item name="front-end" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="css" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="front-end" type="b2602c69:ProjectViewProjectNode" />
+              <item name="front-end" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="javascript" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -143,7 +264,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1552830135202" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../iti0202-2019" />
     <property name="nodejs.jest.jest_package" value="$PROJECT_DIR$/app/node_modules/@vue/cli-service" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -207,6 +328,22 @@
       <workItem from="1554056102454" duration="705000" />
       <workItem from="1554057084206" duration="1606000" />
       <workItem from="1554060073792" duration="14742000" />
+      <workItem from="1554726094106" duration="619000" />
+      <workItem from="1554796078940" duration="577000" />
+      <workItem from="1554815426732" duration="589000" />
+      <workItem from="1555239454566" duration="8833000" />
+      <workItem from="1555500000560" duration="595000" />
+      <workItem from="1555506021890" duration="272000" />
+      <workItem from="1555686370333" duration="805000" />
+      <workItem from="1555689683892" duration="911000" />
+      <workItem from="1555691980828" duration="11515000" />
+      <workItem from="1555711657524" duration="5276000" />
+      <workItem from="1555794962598" duration="582000" />
+      <workItem from="1555850482404" duration="727000" />
+      <workItem from="1556375473576" duration="7916000" />
+      <workItem from="1556388748132" duration="5866000" />
+      <workItem from="1556462991413" duration="15537000" />
+      <workItem from="1556647792468" duration="14349000" />
     </task>
     <task id="LOCAL-00001" summary="Post validation">
       <created>1550526494334</created>
@@ -224,18 +361,19 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="88170000" />
+    <option name="totallyTimeSpent" value="166245000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="878" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.20067114" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49905482" visible="true" weight="0.24563758" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
       <window_info id="UI Designer" order="4" />
       <window_info id="Capture Tool" order="5" />
-      <window_info id="Favorites" order="6" side_tool="true" />
+      <window_info id="Favorites" order="6" sideWeight="0.50094515" side_tool="true" weight="0.23154363" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.3297587" />
@@ -246,18 +384,19 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.32841823" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
-      <window_info anchor="bottom" id="Terminal" order="10" weight="0.3163539" />
-      <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="10" sideWeight="0.49932885" visible="true" weight="0.29088473" />
+      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.50067115" side_tool="true" weight="0.29088473" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="right" id="Theme Preview" order="4" />
-      <window_info anchor="right" id="Maven" order="5" />
+      <window_info anchor="right" id="Maven" order="5" weight="0.3295302" />
       <window_info anchor="right" id="Capture Analysis" order="6" />
       <window_info anchor="right" id="Palette&#9;" order="7" />
       <window_info anchor="right" id="Preview" order="8" weight="0.3295302" />
       <window_info anchor="right" id="Database" order="9" weight="0.3295302" />
+      <window_info anchor="right" id="SciView" order="10" />
     </layout>
     <layout-to-restore>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.19798657" />
@@ -339,106 +478,12 @@
     <option name="LAST_COMMIT_MESSAGE" value="Post validation" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/package-lock.json">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="51">
-            <caret line="3" column="3" selection-start-line="3" selection-start-column="3" selection-end-line="3" selection-end-column="3" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/babel.config.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/views/Home.vue" />
-    <entry file="file://$PROJECT_DIR$/app/public/index.html">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="21" selection-start-line="10" selection-start-column="21" selection-end-line="10" selection-end-column="21" />
-          <folding>
-            <element signature="e#0#21#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/package.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="4" selection-start-line="8" selection-start-column="4" selection-end-line="8" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/components/layout/Login.vue" />
-    <entry file="file://$PROJECT_DIR$/app/src/App.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="10" selection-start-line="6" selection-start-column="10" selection-end-line="6" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/router.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1190">
-          <caret line="70" column="28" selection-start-line="70" selection-start-column="28" selection-end-line="70" selection-end-column="28" />
-          <folding>
-            <element signature="e#0#21#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/components/ViewPosts.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="46" selection-start-line="3" selection-start-column="46" selection-end-line="3" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/components/ViewPost.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1054">
-          <caret line="63" column="25" selection-start-line="63" selection-start-column="15" selection-end-line="63" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/components/layout/Header.vue">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/components/layout/TopicNavbar.vue">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/components/Registration.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="25" selection-start-line="25" selection-end-line="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/components/layout/UpperNavbar.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="697">
-          <caret line="41" column="100" lean-forward="true" selection-start-line="41" selection-start-column="100" selection-end-line="41" selection-end-column="100" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/cypress/integration/e2eTests/loginTests.spec.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
           <caret line="7" column="34" selection-start-line="7" selection-start-column="15" selection-end-line="7" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/components/AddPost.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="13" column="54" selection-start-line="13" selection-start-column="54" selection-end-line="13" selection-end-column="54" />
         </state>
       </provider>
     </entry>
@@ -466,12 +511,176 @@
     <entry file="file://$PROJECT_DIR$/app/cypress/integration/e2eTests/logoutTests.spec.js">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="21" selection-start-line="21" selection-end-line="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/public/favicon.ico">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package-lock.json">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="51">
+            <caret line="3" column="3" selection-start-line="3" selection-start-column="3" selection-end-line="3" selection-end-column="3" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/package-lock.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-212717" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/components/Registration.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="595">
+          <caret line="35" selection-start-line="35" selection-end-line="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/javascript/apiRequests.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="748">
+          <caret line="44" column="28" selection-start-line="44" selection-start-column="28" selection-end-line="44" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/babel.config.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="3" selection-start-line="3" selection-start-column="3" selection-end-line="3" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/css/postsView.css">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/components/UserActivities.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" selection-start-line="4" selection-end-line="4" />
+        <state relative-caret-position="221">
+          <caret line="13" column="26" lean-forward="true" selection-start-line="13" selection-start-column="26" selection-end-line="13" selection-end-column="26" />
           <folding>
-            <element signature="e#2593#2648#0" expanded="true" />
+            <element signature="e#2643#2698#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/components/AddPost.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2278">
+          <caret line="135" column="12" selection-start-line="135" selection-start-column="12" selection-end-line="135" selection-end-column="12" />
+          <folding>
+            <element signature="e#2862#2919#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/components/ViewPostsItem.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="13" column="29" selection-start-line="13" selection-start-column="29" selection-end-line="13" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="22" column="4" selection-start-line="22" selection-start-column="4" selection-end-line="22" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/components/ViewPosts.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="447">
+          <caret line="112" column="8" selection-start-line="112" selection-start-column="8" selection-end-line="112" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/javascript/errorHandling.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="2" selection-start-column="2" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/components/layout/Search.vue">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/App.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="10" selection-start-line="6" selection-start-column="10" selection-end-line="6" selection-end-column="10" />
+          <folding>
+            <element signature="e#137#189#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="16" selection-start-line="16" selection-end-line="16" />
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/router.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="470">
+          <caret line="49" column="10" selection-start-line="49" selection-start-column="10" selection-end-line="49" selection-end-column="10" />
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/public/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="17" selection-start-line="17" selection-end-line="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/public/logo.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/components/layout/Header.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="9" selection-start-line="11" selection-start-column="9" selection-end-line="11" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/components/layout/UpperNavbar.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="20" selection-start-line="7" selection-start-column="20" selection-end-line="7" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/components/layout/TopicNavbar.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="10">
+          <caret line="3" column="53" selection-start-line="3" selection-start-column="53" selection-end-line="3" selection-end-column="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/components/ViewPost.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" column="36" lean-forward="true" selection-start-line="1" selection-start-column="36" selection-end-line="1" selection-end-column="36" />
+          <folding>
+            <element signature="n#style#0;n#h5#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>

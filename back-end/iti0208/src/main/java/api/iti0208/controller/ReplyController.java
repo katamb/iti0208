@@ -26,6 +26,12 @@ public class ReplyController {
         return replyService.save(item, header);
     }
 
+    @PostMapping("api/best_answer/{id}")
+    public ReplyDetails markAsBest(@PathVariable Long id, @RequestHeader(value = HEADER_STRING) String header) {
+        //System.out.println("Best Answer!");
+        return replyService.markAsBest(id, header);
+    }
+
     @DeleteMapping("api/delete/reply/{id}")
     @PreAuthorize("@replyService.findUsernameOfReplier(#id) == authentication.name || hasAuthority('ROLE_ADMIN')")
     public void delete(@PathVariable Long id) {

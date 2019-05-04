@@ -1,5 +1,5 @@
 <template>
-  <div class="container-fluid">
+  <div class="container-fluid pb-5">
     <div class="row justify-content-center">
       <div class="col-xl-7 col-lg-8 col-md-9 col-sm-11">
 
@@ -15,23 +15,51 @@
               </small>
             </p>
           </div>
-          <div v-if="response.canDelete" class="text-right">
+            <div v-if="response.canDelete" class="text-right">
             <button class="btn btn-danger" @click="deletePost(response.id)">Delete post</button>
           </div>
+            <div v-if="response.bestReplyId && response.canUnlock == true" class="text-right pt-3">
+                <button class="btn btn-success" @click="unlockPost(response.id)">Unlock topic</button>
+            </div>
         </div>
+          <div v-for="bestreply in bestReply" class="post-item text-left border-5 border-success p-2 mx-2 mb-2">
+              <div class="text-left">
+                  <h5 class="font-weight-bolder" style="color: gold">  Best answer</h5>
+                  <p class="font-weight-bolder" v-if="bestreply.postedBy">{{bestreply.postedBy}}:</p>
+                  <p class="mb-1">{{bestreply.reply}}</p>
 
-        <div class="post-item text-left p-2 mx-2 mb-2" v-for="answer in response.replies" :key='answer.id'>
+                  <a v-if="bestreply.fileLocation" v-bind:href=bestreply.fileLocation>Extra information</a>
+              </div>
+              <div v-if="bestreply.canDelete" class="text-right">
+                  <button class="btn btn-danger" @click="deleteReply(bestreply.id)">Delete reply</button>
+              </div>
+              <div v-if="bestreply.canMarkAsBest && !response.bestReplyId" class="text-right pt-3">
+                  <button class="btn btn-success" @click="markAsBest(bestreply.id)">Mark as best reply</button>
+              </div>
+              <div v-if="bestreply.canMarkAsBest && response.bestReplyId && !bestreply.bestAnswer" class="text-right pt-3">
+                  <button class="btn btn-success" @click="markAsBest(bestreply.id)">Change best reply</button>
+              </div>
+          </div>
+        <div class="post-item text-left p-2 mx-2 mb-2" :class="{ 'border-5 border-success' : answer.bestAnswer == true}"
+             v-for="answer in response.replies" :key='answer.id'>
           <div class="text-left">
             <p class="font-weight-bolder" v-if="answer.postedBy">{{answer.postedBy}}:</p>
             <p class="mb-1">{{answer.reply}}</p>
+
             <a v-if="answer.fileLocation" v-bind:href=answer.fileLocation>Extra information</a>
           </div>
           <div v-if="answer.canDelete" class="text-right">
             <button class="btn btn-danger" @click="deleteReply(answer.id)">Delete reply</button>
           </div>
+          <div v-if="answer.canMarkAsBest && !response.bestReplyId" class="text-right pt-3">
+          <button class="btn btn-success" @click="markAsBest(answer.id)">Mark as best reply</button>
+          </div>
+            <div v-if="answer.canMarkAsBest && response.bestReplyId && !answer.bestAnswer" class="text-right pt-3">
+                <button class="btn btn-success" @click="markAsBest(answer.id)">Change best reply</button>
+            </div>
         </div>
 
-        <form class="my-3 p-2 reply-area" id="reply-form" @submit.prevent="replyInfo">
+        <form class="my-3 p-2 reply-area" id="reply-form" v-if="!response.bestReplyId" @submit.prevent="replyInfo">
           <div class="form-group text-left">
             <label for="exampleFormControlTextarea1">Reply to this post:</label>
             <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="reply" placeholder="Reply"
@@ -71,7 +99,8 @@
                 response: [],
                 reply: '',
                 file_location: '',
-                file: null
+                file: null,
+                bestReply: []
             };
         },
         methods: {
@@ -89,11 +118,25 @@
                     .getRequestToApiWithAuthorization('/api/posts/' + this.$route.params.Pid)
                     .then((response) => {
                         this.response = response.data;
+                        this.bestReply = [];
+                        for (var i = 0; i < this.response.replies.length; i++) {
+                            if (this.response.replies[i].bestAnswer == true) {
+                                this.bestReply.unshift(this.response.replies[i]);
+                                this.response.replies.splice(i, 1)
+                                console.log(this.bestReply)
+
+                            }
+                        }
+
+
+
                     })
                     .catch(() => {
                             errorHandling.errorMsgWithButton("This post no longer exists!")
                         }
                     );
+
+
             },
             deletePost(postId) {
                 apiRequests
@@ -106,6 +149,20 @@
                         }
                     );
             },
+            unlockPost(postId) {
+                apiRequests
+                    .postRequestToApiWithAuthorization('/api/unlock/' + postId)
+                    .then(() => {
+                        errorHandling.successMsg("Topic unlocked!", 1000);
+                        this.loadPost();
+                    })
+                    .catch(() => {
+                            errorHandling.errorMsgWithButton("Failed to unlock topic!");
+                        }
+                    );
+
+            },
+
             deleteReply(replyId) {
                 apiRequests
                     .deleteRequestWithAuthorization('/api/delete/reply/' + replyId)
@@ -117,6 +174,25 @@
                         }
                     );
             },
+          markAsBest(replyId) {
+            apiRequests
+                    .postRequestToApiWithAuthorization('/api/best_answer/' + replyId)
+                    .then(() => {
+                      errorHandling.successMsg("Marked as best!", 1000);
+                        this.loadPost();
+
+
+
+                    })
+                            .catch(() => {
+                                      errorHandling.errorMsgWithButton("Failed to mark as best!");
+                                    }
+                            );
+
+
+
+              },
+
             postReply() {
                 apiRequests
                     .postRequestToApiWithAuthorization('/api/add/reply', {
@@ -162,8 +238,10 @@
                         errorHandling.errorMsg("Form wasn't filled in properly!!", 1200)
                     }
                 })
-            }
+            },
+
         },
+
         mounted() {
             this.loadPost();
         }
@@ -173,7 +251,7 @@
 <style scoped>
   .post-item {
     background-color: #f9f9f9;
-    border-left: 4px solid #e9e9e9;
+    border: 4px solid #e9e9e9;
   }
 
   .reply-area {

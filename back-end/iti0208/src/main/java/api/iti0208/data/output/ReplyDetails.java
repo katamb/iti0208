@@ -1,10 +1,12 @@
 package api.iti0208.data.output;
 
+import api.iti0208.data.entity.AppUser;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -15,5 +17,8 @@ public class ReplyDetails {
     private String fileLocation;
     private Date postedAt;
     private String postedBy;
+    private boolean bestAnswer;
     private boolean canDelete;
+    private boolean canMarkAsBest;
+
 }

@@ -30,6 +30,9 @@ public class Post {
     @Column(name = "reward_description")
     private String rewardDescription;
 
+    @Column(name = "best_reply")
+    private Long bestReplyId;
+
     @Column(name = "file_location")
     private String fileLocation;
 
@@ -47,6 +50,7 @@ public class Post {
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
     @Builder.Default
     private List<Reply> answers = new LinkedList<>();
+
 
     @PrePersist
     protected void onCreate() {
@@ -71,4 +75,6 @@ public class Post {
         this.topic = topic;
         this.description = description;
     }
+
+
 }
