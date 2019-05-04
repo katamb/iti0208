@@ -2,49 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4f666b65-6f46-4ee5-815d-2b6d945d32c4" name="Default Changelist" comment="Post validation">
-      <change afterPath="$PROJECT_DIR$/../back-end/iti0208/src/main/java/api/iti0208/data/input/ForgotPasswordInput.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../back-end/iti0208/src/main/java/api/iti0208/data/input/ResetPasswordInput.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../back-end/iti0208/src/main/java/api/iti0208/service/EmailService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../back-end/iti0208/src/main/resources/application-live.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/components/ForgotPassword.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/components/ResetPassword.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../back-end/iti0208/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../back-end/iti0208/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../back-end/iti0208/src/main/java/api/iti0208/Iti0208Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/../back-end/iti0208/src/main/java/api/iti0208/Iti0208Application.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../back-end/iti0208/src/main/java/api/iti0208/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/../back-end/iti0208/src/main/java/api/iti0208/config/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../back-end/iti0208/src/main/java/api/iti0208/controller/PostController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../back-end/iti0208/src/main/java/api/iti0208/controller/PostController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../back-end/iti0208/src/main/java/api/iti0208/controller/ReplyController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../back-end/iti0208/src/main/java/api/iti0208/controller/ReplyController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../back-end/iti0208/src/main/java/api/iti0208/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../back-end/iti0208/src/main/java/api/iti0208/controller/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../back-end/iti0208/src/main/java/api/iti0208/data/entity/AppUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/../back-end/iti0208/src/main/java/api/iti0208/data/entity/AppUser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../back-end/iti0208/src/main/java/api/iti0208/data/entity/Post.java" beforeDir="false" afterPath="$PROJECT_DIR$/../back-end/iti0208/src/main/java/api/iti0208/data/entity/Post.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../back-end/iti0208/src/main/java/api/iti0208/data/entity/Reply.java" beforeDir="false" afterPath="$PROJECT_DIR$/../back-end/iti0208/src/main/java/api/iti0208/data/entity/Reply.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../back-end/iti0208/src/main/java/api/iti0208/data/input/UserRegistrationInput.java" beforeDir="false" afterPath="$PROJECT_DIR$/../back-end/iti0208/src/main/java/api/iti0208/data/input/UserRegistrationInput.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../back-end/iti0208/src/main/java/api/iti0208/data/output/PostDetails.java" beforeDir="false" afterPath="$PROJECT_DIR$/../back-end/iti0208/src/main/java/api/iti0208/data/output/PostDetails.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../back-end/iti0208/src/main/java/api/iti0208/data/output/ReplyDetails.java" beforeDir="false" afterPath="$PROJECT_DIR$/../back-end/iti0208/src/main/java/api/iti0208/data/output/ReplyDetails.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../back-end/iti0208/src/main/java/api/iti0208/mapper/EntityToOutputObjectMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/../back-end/iti0208/src/main/java/api/iti0208/mapper/EntityToOutputObjectMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../back-end/iti0208/src/main/java/api/iti0208/repository/PostRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../back-end/iti0208/src/main/java/api/iti0208/repository/PostRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../back-end/iti0208/src/main/java/api/iti0208/repository/ReplyRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../back-end/iti0208/src/main/java/api/iti0208/repository/ReplyRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../back-end/iti0208/src/main/java/api/iti0208/repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../back-end/iti0208/src/main/java/api/iti0208/repository/UserRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../back-end/iti0208/src/main/java/api/iti0208/security/JWTAuthenticationFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/../back-end/iti0208/src/main/java/api/iti0208/security/JWTAuthenticationFilter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../back-end/iti0208/src/main/java/api/iti0208/security/SecurityConstants.java" beforeDir="false" afterPath="$PROJECT_DIR$/../back-end/iti0208/src/main/java/api/iti0208/security/SecurityConstants.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../back-end/iti0208/src/main/java/api/iti0208/service/PostService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../back-end/iti0208/src/main/java/api/iti0208/service/PostService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../back-end/iti0208/src/main/java/api/iti0208/service/ReplyService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../back-end/iti0208/src/main/java/api/iti0208/service/ReplyService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../back-end/iti0208/src/main/java/api/iti0208/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../back-end/iti0208/src/main/java/api/iti0208/service/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../back-end/iti0208/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../back-end/iti0208/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../back-end/iti0208/src/test/java/api/iti0208/unit/service/UserServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../back-end/iti0208/src/test/java/api/iti0208/unit/service/UserServiceTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/app/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/package-lock.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/public/favicon.ico" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/app/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/public/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/components/UserActivities.vue" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/components/UserActivities.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/components/ViewPost.vue" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/components/ViewPost.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/components/layout/Header.vue" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/components/layout/Header.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/components/layout/TopicNavbar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/components/layout/TopicNavbar.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/components/layout/UpperNavbar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/components/layout/UpperNavbar.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/router.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/router.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -74,7 +32,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/components/ViewPost.vue">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="17">
@@ -82,6 +40,15 @@
               <folding>
                 <element signature="n#style#0;n#h5#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/public/index.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="136">
+              <caret line="8" column="4" selection-start-line="8" selection-start-column="4" selection-end-line="8" selection-end-column="4" />
             </state>
           </provider>
         </entry>
@@ -170,6 +137,7 @@
         <option value="$PROJECT_DIR$/app/src/components/AddPost.vue" />
         <option value="$PROJECT_DIR$/app/src/components/layout/TopicNavbar.vue" />
         <option value="$PROJECT_DIR$/app/src/components/ViewPost.vue" />
+        <option value="$PROJECT_DIR$/app/public/index.html" />
       </list>
     </option>
   </component>
@@ -343,7 +311,7 @@
       <workItem from="1556375473576" duration="7916000" />
       <workItem from="1556388748132" duration="5866000" />
       <workItem from="1556462991413" duration="15537000" />
-      <workItem from="1556647792468" duration="14349000" />
+      <workItem from="1556647792468" duration="15092000" />
     </task>
     <task id="LOCAL-00001" summary="Post validation">
       <created>1550526494334</created>
@@ -361,13 +329,13 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="166245000" />
+    <option name="totallyTimeSpent" value="166988000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="878" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49905482" visible="true" weight="0.24563758" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49905482" visible="true" weight="0.24563758" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -384,7 +352,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.32841823" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="10" sideWeight="0.49932885" visible="true" weight="0.29088473" />
+      <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.49932885" weight="0.29088473" />
       <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.50067115" side_tool="true" weight="0.29088473" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -644,13 +612,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/public/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="17" selection-start-line="17" selection-end-line="17" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/public/logo.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
@@ -682,6 +643,13 @@
           <folding>
             <element signature="n#style#0;n#h5#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#template#0;n#!!top" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/public/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="4" selection-start-line="8" selection-start-column="4" selection-end-line="8" selection-end-column="4" />
         </state>
       </provider>
     </entry>
