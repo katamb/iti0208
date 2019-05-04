@@ -169,7 +169,7 @@
             },
           markAsBest(replyId) {
             apiRequests
-                    .postRequestToApiWithAuthorization('/api/best_answer/' + replyId)
+                    .postRequestToApiWithAuthorization('/api/bestAnswer/' + replyId)
                     .then(() => {
                       errorHandling.successMsg("Marked as best!", 1000);
                         this.loadPost();

@@ -5,14 +5,13 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.LinkedList;
-import java.util.List;
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 @Table(name = "reply")
 public class Reply {
 
@@ -27,6 +26,7 @@ public class Reply {
     private String fileLocation;
 
     @Column(name = "best_answer")
+    @Builder.Default
     private boolean bestAnswer = false;
 
     @Column(name = "posted_at")

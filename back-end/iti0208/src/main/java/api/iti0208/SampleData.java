@@ -27,7 +27,7 @@ public class SampleData implements CommandLineRunner {
     @Override
     @Transactional
     public void run(String... args) throws Exception {
-        /*
+
         userRepository.save(
                 new AppUser("admin_test",
                         "$2a$10$WRCO20EAIVmqpeTcvOp9he1z/PlMvHuz2/i733ULbKchN7yt54I/m",
@@ -82,6 +82,6 @@ public class SampleData implements CommandLineRunner {
                 .forEach(title -> postRepository.save(
                         new Post(title.get(0), title.get(2), title.get(1), au)
                 ));
-        */
+
     }
 }
