@@ -43,13 +43,6 @@ public class Reply {
     @ManyToOne(fetch = FetchType.EAGER)
     private AppUser postedBy;
 
-    @ManyToMany(fetch = FetchType.LAZY,
-            cascade = {
-                    CascadeType.PERSIST,
-                    CascadeType.MERGE
-            })
-    private List<AppUser> upVoters = new LinkedList<>();
-
     @PrePersist
     protected void onCreate() {
         postedAt = new Date();

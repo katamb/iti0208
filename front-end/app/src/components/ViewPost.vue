@@ -22,7 +22,8 @@
                 <button class="btn btn-success" @click="unlockPost(response.id)">Unlock topic</button>
             </div>
         </div>
-          <div v-for="bestreply in bestReply" class="post-item text-left border-5 border-success p-2 mx-2 mb-2">
+          <div v-for="bestreply in bestReply" :key='bestreply.id'
+               class="post-item text-left border-5 border-success p-2 mx-2 mb-2">
               <div class="text-left">
                   <h5 class="font-weight-bolder" style="color: gold">  Best answer</h5>
                   <p class="font-weight-bolder" v-if="bestreply.postedBy">{{bestreply.postedBy}}:</p>
@@ -120,23 +121,16 @@
                         this.response = response.data;
                         this.bestReply = [];
                         for (var i = 0; i < this.response.replies.length; i++) {
-                            if (this.response.replies[i].bestAnswer == true) {
+                            if (this.response.replies[i].bestAnswer === true) {
                                 this.bestReply.unshift(this.response.replies[i]);
                                 this.response.replies.splice(i, 1)
-                                console.log(this.bestReply)
-
                             }
                         }
-
-
-
                     })
                     .catch(() => {
                             errorHandling.errorMsgWithButton("This post no longer exists!")
                         }
                     );
-
-
             },
             deletePost(postId) {
                 apiRequests
@@ -162,7 +156,6 @@
                     );
 
             },
-
             deleteReply(replyId) {
                 apiRequests
                     .deleteRequestWithAuthorization('/api/delete/reply/' + replyId)
@@ -180,19 +173,12 @@
                     .then(() => {
                       errorHandling.successMsg("Marked as best!", 1000);
                         this.loadPost();
-
-
-
                     })
                             .catch(() => {
                                       errorHandling.errorMsgWithButton("Failed to mark as best!");
                                     }
                             );
-
-
-
               },
-
             postReply() {
                 apiRequests
                     .postRequestToApiWithAuthorization('/api/add/reply', {
@@ -239,9 +225,7 @@
                     }
                 })
             },
-
         },
-
         mounted() {
             this.loadPost();
         }

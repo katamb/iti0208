@@ -8,7 +8,7 @@
 
           <div class="form-group text-left">
             <label for="password">New password:</label>
-            <input id="password" class="form-control" type="password" name="password" placeholder="Password"
+            <input id="password" class="form-control" type="password" name="newPassword" placeholder="Password"
                    v-model="newPassword" v-validate="{ required: true, min: 6 }"
                    autocomplete="new-password">
             <div class="error" v-if="errors.has('newPassword')">{{errors.first('newPassword')}}</div>

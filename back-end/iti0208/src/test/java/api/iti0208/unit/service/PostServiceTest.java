@@ -67,10 +67,10 @@ public class PostServiceTest {
         username = "testUser";
         testUser = new AppUser(username, "password",
                 Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER")));
-        postService = new PostService(postRepository, userRepository, new EntityToOutputObjectMapper());
-        fullPost = new Post(id_twelve, "Varia", "unittest", "unittest", "",
+        postService = new PostService(postRepository, userRepository, replyRepository, new EntityToOutputObjectMapper());
+        fullPost = new Post(id_twelve, "Varia", "unittest", "unittest", "", 6L,
                 "", new Date(), new Date(), testUser, Collections.emptyList());
-        fullPost2 = new Post(id_thirteen, "Mathematics", "unitTtest", "unittest", "",
+        fullPost2 = new Post(id_thirteen, "Mathematics", "unitTtest", "unittest", "", 6L,
                 "", new Date(), new Date(), testUser, Collections.emptyList());
 
         Mockito.when(userRepository.findByUsername(any(String.class))).thenReturn(testUser);
